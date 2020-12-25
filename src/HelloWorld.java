@@ -1,10 +1,17 @@
 public class HelloWorld {
     public static void main(String[] args) {
-        byte byteNumber = 20;
-        short ShortNumber = 30;
-        int no = 10;
-        long var = 50000 + (10 * (byteNumber + ShortNumber + no));
-        short num = (short)(1000+10*(byteNumber + ShortNumber + no));
-        System.out.println(var);
+        double doublevar = 22.85;
+        double doublevar2 = 80.00;
+        double p = (doublevar+doublevar2)*100.00;
+        double rem = p % (40.00);
+
+        boolean val = (rem == 0) ? true : false;
+
+        System.out.println(val);
+        if(val != true){
+            System.out.println("Got some Reminder");
+        }
     }
 }
+
+

@@ -2,12 +2,23 @@ public class ControlFlowStat {
 
     public static void main(String[] args){
 
+
     }
 
-    //Number In Word
+    //Number of Days In Month
+//    public static boolean isLeapYear(int year){
+//        if ( year<1 && year>9999 ){
+//            return false;
+//        }else {
+//            if(){
+//                return
+//            }
+//        }
+//    }
 
+    //Number In Word
     public static void printNumberInWord(int no){
-    switch (no){
+        switch (no){
         case 0:
             System.out.println("ZERO");
             break;
@@ -43,6 +54,9 @@ public class ControlFlowStat {
             break;
     }
     }
+
+
+
 
 
 

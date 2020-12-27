@@ -25,19 +25,19 @@ public Point(int x,int y){
     public void setY(int y) {
         this.y = y;
     }
-public double distance(){
-    return (Math.sqrt((getX()*getX())+(getY()^2)));
-    }
-public double distance(int a,int b){
-
-    double dis = Math.sqrt((getX()-(a))*(getX()-(a))+(getY()-(b))*(getY()-(b)));
-    return dis;
-    }
-public double distance(){
-    Point kri = new Point();
-    Point vis = new Point();
-
-    double dis = Math.sqrt( ((kri.getX()- vis.getX())*(kri.getX()- vis.getX()))+((kri.getY()- vis.getY())*(kri.getY()- vis.getY())) );
-    return dis;
-}
+//public double distance(){
+//    return (Math.sqrt((getX()*getX())+(getY()^2)));
+//    }
+//public double distance(int a,int b){
+//
+//    double dis = Math.sqrt((getX()-(a))*(getX()-(a))+(getY()-(b))*(getY()-(b)));
+//    return dis;
+//    }
+//public double distance(){
+//    Point kri = new Point();
+//    Point vis = new Point();
+//
+//    double dis = Math.sqrt( ((kri.getX()- vis.getX())*(kri.getX()- vis.getX()))+((kri.getY()- vis.getY())*(kri.getY()- vis.getY())) );
+//    return dis;
+//}
 }

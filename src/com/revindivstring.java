@@ -44,6 +44,7 @@ public class revindivstring {
     }
         return lsc;
     }
+    //trial check
 
     public boolean canMakeArithmeticProgression(int[] arr) {
         for (int n = arr.length; n > 0; n--) {

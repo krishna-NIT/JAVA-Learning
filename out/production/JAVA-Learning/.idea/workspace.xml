@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="53c666aa-674e-4493-b720-1d4d8c683dc2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Average.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Circle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Cuboid.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Cylinder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Reactangle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SumAverage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SumOddRange.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/JAVA-Learning/BankAcc.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/JAVA-Learning/Calculator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/JAVA-Learning/Carpet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/JAVA-Learning/ComplexNo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/JAVA-Learning/ComplexNumber.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/JAVA-Learning/ControlFlowStat.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/JAVA-Learning/Floor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/JAVA-Learning/HelloWorld.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/JAVA-Learning/NoofDays.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/JAVA-Learning/Oop1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/JAVA-Learning/Person.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/JAVA-Learning/Point.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/JAVA-Learning/SimpleCalculator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/JAVA-Learning/VipCustomer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/JAVA-Learning/Wall.class" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1nSEhT9oGe0ifnl8TeTXqOFhGdw" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.appearance" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="53c666aa-674e-4493-b720-1d4d8c683dc2" name="Default Changelist" comment="" />
+      <created>1611375210759</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1611375210759</updated>
+      <workItem from="1611375212115" duration="25000" />
+      <workItem from="1611375259023" duration="15000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1611375271983">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1611375271983" />
+  </component>
+</project>

@@ -1,5 +1,4 @@
 package com.revision.ArrayList;
-
 import java.util.ArrayList;
 
 public class MobilePhoneChallenge extends Contact {
@@ -45,7 +44,7 @@ public class MobilePhoneChallenge extends Contact {
         if (myContacts.contains(search)){
            ////what next???
             int position = findContact(search);
-            return (this.myContacts.get(position));
+
         }
         return null;
 
@@ -54,9 +53,8 @@ public class MobilePhoneChallenge extends Contact {
         System.out.println("Contact List:");
         System.out.println("Contact List");
         for(int i=0; i<this.myContacts.size(); i++) {
-            System.out.println((i+1) + "." +
-                    this.myContacts.get(i).getName() + " -> " +
-                    this.myContacts.get(i).getPhoneNumber());
+
+
         }
 
     }

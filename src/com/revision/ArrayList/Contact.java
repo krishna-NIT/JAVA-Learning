@@ -10,6 +10,6 @@ public class Contact {
         return this.phoneNumber;
     }
     public static Contact createContact(String a, String b){
-        return new Contact(a,b);
+        return createContact(a, b);
     }
 }

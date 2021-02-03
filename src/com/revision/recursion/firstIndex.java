@@ -1,18 +1,19 @@
 package com.revision.recursion;
+
 import java.util.Scanner;
 
-public class NoOfDigits {
+public class firstIndex {
     static int count=0;
-    static int maxindex=-1;
-    public static int lastIndex(int input[], int x) {
-        if (input[count]==x){
-            maxindex=count;
+    static int firindex=-1;
+    public static int firIndex(int input[], int x) {
+        if (input[count]==x && count<input.length){
+            firindex=count;
+            return firindex;
+        }else {
+            count++;
+            firIndex(input, x);
         }
-        count++;
-        if (count<input.length){
-            lastIndex(input,x);
-        }
-        return maxindex;
+        return firindex;
     }
     public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
@@ -22,8 +23,7 @@ public class NoOfDigits {
             arr[j]=scan.nextInt();
         }
         int y= scan.nextInt();
-        int temp = lastIndex(arr,y);
+        int temp = firIndex(arr,y);
         System.out.println(temp);
     }
-
 }

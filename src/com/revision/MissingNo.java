@@ -1,20 +1,19 @@
-package com.revision.linkedls;
+package com.revision;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Student {
+public class MissingNo {
     static int[] missingNumbers(int[] arr, int[] brr) {
         int[] farr = new int[brr.length-1];
-
         for (int i =0;i<brr.length;i++){
             int count = 0;
             int k =0;
             int countiindex =0;
             for (int j =0;j<arr.length;j++){
-                if (brr[i]==arr[j]){
+                if (brr[i]!=arr[j]){
                     count++;
                     countiindex =j;
                 }
@@ -73,44 +72,4 @@ public class Student {
 
         scanner.close();
     }
-
-//
-//    private static final Scanner scanner = new Scanner(System.in);
-//    static int[] missingNumbers(int[] arr, int[] brr) {
-//        Object ak;
-//        ArrayList farlist = new ArrayList();
-//        farlist.add(10);
-//        for (int i =0;i<brr.length;i++){
-//            int count = 0;
-//            int k =0;
-//            int countiindex =0;
-//            for (int j =0;j<arr.length;j++){
-//                if (brr[i]!=arr[j]){
-//                    count++;
-//                    countiindex =j;
-//                }
-//            }
-//        }
-//        ak = farlist.toArray();
-//        return ak;
-//    }
-//
-//
-//    public static void main(String[] args) {
-//        int n = scanner.nextInt();
-//        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-//        int[] arr = new int[n];
-//        String[] arrItems = scanner.nextLine().split(" ");
-//        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-//
-//        for (int i = 0; i < n; i++) {
-//            int arrItem = Integer.parseInt(arrItems[i]);
-//            arr[i] = arrItem;
-//        }
-//        for (int i = arr.length-1;i>=0;i--){
-//            System.out.print(arr[i]+" ");
-//        }
-//
-//        scanner.close();
-//    }
 }

@@ -1,59 +1,46 @@
 package com.revision;
 
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
-import java.util.Scanner;
 
 public class MissingNo {
-    static int[] missingNumbers(int[] arr, int[] brr) {
-        LinkedList<Integer> lfina = new LinkedList<Integer>();
-        for (int i =0;i<brr.length;i++){
-            int count = 0;
-            int k =0;
-            for (int j =0;j<arr.length;j++){
-                if (brr[i]!=arr[j]){
-                    count++;
-                    arr[j]=-1;
-                }
-            }
-            if (count==arr.length){
-               lfina.add(brr[i]);
-            }
-        }
+   public static void main(String[] args){
+    int ans = minimumNumber(3,"Ab1");
+       System.out.println(ans);
+   }
 
-        System.out.println(lfina);
-        int[] farr = new int[lfina.size()];
-            for (int i = 0;i<lfina.size();i++){
-                farr[i] = lfina.get(i);
-            }
-        return farr;
+    static int minimumNumber(int n, String password) {
+        System.out.println("Method Called");
+       int min =0;
+       int d=0,uc=0,lc=0,sc=0;
+
+      for (int i= 0;i<password.length();i++){
+          char temp = password.charAt(i);
+            if (Character.isDigit(temp)){ d=1;
+                System.out.println("contains no"); }
+            if (Character.isLowerCase(temp)){ lc=1;
+                System.out.println("contains Lower Case");}
+            if (Character.isUpperCase(temp)){ uc=1;
+                System.out.println("contains Upper Case");}
+            if (Character.isAlphabetic(temp)== false && Character.isDigit(temp)==false){ sc=1;
+                System.out.println("contains Special Char");}
+      }
+       if (lc!=1){ min++;}
+       if (uc!=1){ min++;}
+       if (d!=1){ min++;}
+       if (sc!=1){ min++;}
+
+       if (password.length()+min<6){
+           min+=(6-(password.length()+min));
+       }
+       return min;
     }
-    public static void main(String[] args){
-//        int[] arr = {203,204,205,206,207,208,203,204,205,206};
-//        int[] brr = {203,204,204,205,206,207,205,208,203,206,205,206,204};
-//        int[] result = missingNumbers(arr,brr);
-            Scanner in = new Scanner(System.in);
-            int n = in.nextInt();
-        Map<String,Integer> phonels = new HashMap<String, Integer>();
-            for(int i = 0; i < n; i++){
-                String name = in.next();
-                int phone = in.nextInt();
-                // Write code here
-                in.nextLine();
-                phonels.put(name,phone);
-            }
-            int i = phonels.size();
-            while (i>0){
-                String s = in.next();
-                // Write code here
-                if (phonels.get(s)!=null) {
-                    System.out.println(s + "=" + phonels.get(s));
-                }else {
-                    System.out.println("Not found");
-                }
-                i--;
-            }
-            in.close();
-    }
+   static void separateNumbers(String s){
+       LinkedList linklist = new LinkedList();
+       for (int i = 1;i<=(s.length()/2);i++){
+           linklist.add(s.substring(0,i));
+       }
+
+   }
+
+
 }

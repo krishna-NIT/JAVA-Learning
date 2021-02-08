@@ -40,6 +40,7 @@ public class MissingNo {
                 String name = in.next();
                 int phone = in.nextInt();
                 // Write code here
+                in.nextLine();
                 phonels.put(name,phone);
             }
             int i = phonels.size();

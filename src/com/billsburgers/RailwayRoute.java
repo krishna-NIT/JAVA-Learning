@@ -57,10 +57,15 @@ public class RailwayRoute {
     public static LinkedList<String> create(int n){
         LinkedList<String> citname = new LinkedList<String>();
         ListIterator<String> slIterator = citname.listIterator();
-        while (slIterator.hasNext()){
-            citname.add(scan.next());
-            slIterator.add(scan.next());
+        int k =1;
+        for (int i = 0;i<n;i++){
+            System.out.println("Enter " + k+"st City" );
+            k++;
+            String temp = scan.next();
+            slIterator.add(temp);
         }
+        System.out.println();
         return citname;
+
     }
 }

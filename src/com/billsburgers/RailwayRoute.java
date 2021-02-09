@@ -1,5 +1,6 @@
 package com.billsburgers;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Scanner;
@@ -15,6 +16,7 @@ public class RailwayRoute {
         for (int i =0;i<5;i++) {
             inp(newls);
         }
+
     }
     public static void inp(LinkedList<String> newls){
         System.out.println("Select from Below Options");
@@ -22,6 +24,8 @@ public class RailwayRoute {
         System.out.println("2.  To Know Next City");
         System.out.println("3.  To know Previous City");
         System.out.println("4.  To Print Complete Route of Cities");
+        System.out.println("5.  To Insert New City");
+        System.out.println("6.  To Delete Certain City");
         int inp = scan.nextInt();
         switch (inp){
             case 2:
@@ -36,9 +40,11 @@ public class RailwayRoute {
         }
     }
     public static void pri(LinkedList<String> newls){
-        ListIterator<String> slIterator = newls.listIterator();
-        if (slIterator.hasNext()){
-            System.out.print(slIterator.next()+" ");
+        Iterator<String> bh = newls.iterator();
+
+        //ListIterator<String> slIterator = newls.listIterator();
+        if (bh.hasNext()){
+            System.out.print(" ");
         }
     }
     public static void prev(LinkedList<String> newsls){
@@ -51,6 +57,7 @@ public class RailwayRoute {
     public static void nx(LinkedList<String> newsls){
         ListIterator<String> slIterator = newsls.listIterator();
         if (slIterator.hasNext()){
+            System.out.println("nx called");
             System.out.println(slIterator.next());
         }
     }
@@ -66,6 +73,5 @@ public class RailwayRoute {
         }
         System.out.println();
         return citname;
-
     }
 }

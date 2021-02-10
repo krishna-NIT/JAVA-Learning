@@ -7,14 +7,14 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         int n = scan.nextInt();
         int[] arr = new int[n];
-        int f =scan.nextInt();
-        for (int i=0;i< arr.length;i++){
-            arr[i]=scan.nextInt();
+        int f = scan.nextInt();
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = scan.nextInt();
         }
-        System.out.println(binarySearch(arr,f));
-
+        System.out.println(binarySearch(arr, f));
 
     }
+
 
     public static int binarySearch(int[] arr, int x) {
         int s =0;

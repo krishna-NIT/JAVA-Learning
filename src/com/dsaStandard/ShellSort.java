@@ -21,12 +21,9 @@ public class ShellSort {
         b = tem;
     }
 
+    //M1
+// Lamba hai Solution tumhara
     public static int[] shellsort(int[] arr){
-        int a=20;
-        int b=30;
-        //System.out.println(a+" "+b);
-        swap(a,b);
-        //System.out.println(a+" "+b);
         for (int gap = (arr.length/2);gap>=1;gap/=2) {
             for (int i = 0; (i + gap) < arr.length; i++) {
                 if (arr[i] > arr[i + gap]) {

@@ -1,13 +1,15 @@
 public class Main {
-    public static void main(String[] args){
-        System.out.println("Ok Testing");
-        Addition set1 = new Addition();
-
-        int p = set1.getA();
-        int q = set1.getB();
-        int r = set1.getC();
-
-        System.out.println(set1.addm(p,q,r)+" "+set1.mulm(p,q,r));
-    }
+        public int[] twoSum(int[] nums, int target) {
+            int[] ans = new int[2];
+            for(int i=0;i<nums.length;i++){
+                for(int j=0;j<nums.length;j++){
+                    if(nums[i]+nums[j]==target && i!=j){
+                        ans[0]=i;
+                        ans[1]=j;
+                    }
+                }
+            }
+            return ans;
+        }
 
 }

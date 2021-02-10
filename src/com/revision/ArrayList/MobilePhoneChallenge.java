@@ -5,9 +5,11 @@ public class MobilePhoneChallenge extends Contact {
      String  myNumber;
      ArrayList myContacts = new ArrayList();
 
+
     public void MobilePhoneChallenge(String myNumber){
         this.myNumber=myNumber;
         this.myContacts = new ArrayList<Contact>();
+        //myContacts.
 
     }
     public  boolean addNewContact(Contact a){

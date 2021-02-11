@@ -22,48 +22,24 @@ public class trial {
     }
 
     public static boolean checkForPalindrome(String abc) {
+        System.out.println(abc);
         String string = abc.toLowerCase();
-        System.out.println(string);
+        LinkedlistStackChar stack = new LinkedlistStackChar();
+        StringBuilder temp1 = new StringBuilder(string.length());
 
-        LinkedlistStackChar<char> stack = new LinkedlistStackChar<char>();
-        for (int i=0;i<string.length();i++) {
-            if (Character.isUpperCase(string.charAt(i)) ||
-                    Character.isDigit(string.charAt(i)) ||
-                    Character.isLowerCase(string.charAt(i))) {
+        for (int i =0;i<string.length();i++){
+            char c= string.charAt(i);
+            if (c >= 'a' && c<='z') {
+                temp1.append(string.charAt(i));
                 stack.push(string.charAt(i));
             }
         }
-        int n =stack.size()-1;
-        LinkedlistStackChar temp = new LinkedlistStackChar();
-        for (int i=0;i<string.length();i++) {
-            if (Character.isUpperCase(string.charAt(i)) ||
-                    Character.isDigit(string.charAt(i)) ||
-                    Character.isLowerCase(string.charAt(i))) {
-                temp.push(string.charAt(i));
-            }
+        StringBuilder rev = new StringBuilder();
+        while (!stack.isEmpty()){
+            rev.append(stack.pop());
         }
-
-        LinkedlistStackChar stackrev = new LinkedlistStackChar();
-        for (int i = n;i>=0;i--){
-            stackrev.push(stack.pop());
-        }
-        temp.printaa();
-        stackrev.printaa();
-
-
-        int count=0;
-        int len = stackrev.size();
-        for (int i =len;i>1;i++){
-            if (Character.compare(stackrev.pop(),temp.pop())){
-                count++;
-            }
-        }
-//        System.out.println(count);
-//        if (count==(len)){
-//            return true;
-//        }else {
-//            return false;
-//        }
-    return false;
+        System.out.println(temp1.toString());
+        System.out.println(rev.toString());
+        return false;
     }
 }

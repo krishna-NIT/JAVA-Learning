@@ -40,6 +40,10 @@ public class trial {
         }
         System.out.println(temp1.toString());
         System.out.println(rev.toString());
-        return false;
+        if (temp1.toString().equals(rev.toString())){
+            return true;
+        }else {
+            return false;
+        }
     }
 }

@@ -4,11 +4,20 @@ import java.util.EmptyStackException;
 
 public class ArrayStack {
     int[] stack;
-    int top=-1;
+    int top;
+    public static void main(String[] args){
+        ArrayStack a1 = new ArrayStack(5);
+        a1.push(5);
+        a1.push(8);
+        a1.push(9);
+        a1.priintStack();
+        System.out.println(a1.peek());
+
+    }
     public ArrayStack(int capacity){
         stack = new int[capacity];
     }
-    public void add(int a){
+    public void push(int a){
         if (top == stack.length){
             //Resize Array
             int[] newarr = new int[2*stack.length];
@@ -43,7 +52,5 @@ public class ArrayStack {
             System.out.print(stack[i]+" ");
         }
     }
-    public static void main(String[] args){
 
-    }
 }

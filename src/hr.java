@@ -3,11 +3,17 @@ import java.util.Stack;
 
 public class hr {
     public static void main(String []argh)
-    {
+    {int a =Integer.MIN_VALUE;
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String input=sc.next();
             System.out.println(met(input));
+        }
+
+    }
+    public boolean hasGroupsSizeX(int[] deck) {
+        if(deck.length%2!=0){
+            return false;
         }
 
     }

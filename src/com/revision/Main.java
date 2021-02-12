@@ -1,5 +1,6 @@
 package com.revision;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Main {
@@ -20,6 +21,7 @@ public class Main {
         int s =0;
         int e =arr.length-1;
         int mid = 0;
+
         while (s<=e){
             mid = (s+e)/2;
             if (arr[mid]>x){
@@ -33,6 +35,10 @@ public class Main {
             }
         }
         return -1;
+    }
+
+    public class MinStack{
+    public MinStack()
     }
 }
 

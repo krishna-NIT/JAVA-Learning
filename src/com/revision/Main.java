@@ -1,6 +1,5 @@
 package com.revision;
 
-import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Main {
@@ -38,7 +37,7 @@ public class Main {
     }
 
     public class MinStack{
-    public MinStack()
+
     }
 }
 

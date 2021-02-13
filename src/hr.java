@@ -6,10 +6,24 @@ import java.util.Stack;
 public class hr {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String a = sc.nextLine();
-        String b = sc.nextLine();
-        System.out.println(backspaceCompare(a,b));
 
+    }
+    public double[] medianSlidingWindow(int[] nums, int k) {
+        int len = nums.length-k+1;
+        double[] arr = new double[len];
+        if (k%2!=0){
+            ////////////////zol hai yaha pegit
+            for (int b =0;b<len;b++){
+                arr[b]= nums[b+(k/2)];
+            }
+        }else {
+            for (int b =0;b<len;b++){
+                int mid1 = (b+(k/2));
+                int mid2 = (b+(k/2)-1);
+                arr[b] = ( mid1+mid2 )/2;
+            }
+        }
+        return arr;
     }
     public static boolean backspaceCompare(String S, String T) {
         LinkedList<Character> stack1 = new LinkedList<Character>();

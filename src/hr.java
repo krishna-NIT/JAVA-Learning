@@ -5,10 +5,27 @@ import java.util.Stack;
 public class hr {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int[] arr = {0,0,0,1,1,1,2,2,2};
-        System.out.println(hasGroupsSizeX(arr));
+        int[] arr = {1};
+        System.out.println(searchInsert(arr,0));
     }
+    public static int searchInsert(int[] nums, int target) {
+        int val=0;
+        for(int i =0;i<nums.length;i++){
+            if(nums[i]==target){
+                return i;
+            }
+            if (((i+1)<(nums.length))) {
+                if (target >= nums[i] && target <= nums[i + 1]) {
+                    val = i + 1;
+                }
+            }
 
+        }
+        if (target>=nums[nums.length-1]){
+            return nums.length;
+        }
+        return val;
+    }
 
     public static boolean hasGroupsSizeX(int[] deck) {
         LinkedList<Integer> factor = new LinkedList<Integer>();

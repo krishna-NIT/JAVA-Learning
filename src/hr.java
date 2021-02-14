@@ -8,13 +8,35 @@ public class hr {
         Scanner sc = new Scanner(System.in);
 
     }
+    public int[] runningSum(int[] nums) {
+    int[] ret = new int[nums.length];
+    int sum = 0;
+    for (int i = 0;i<nums.length;i++){
+        sum+=nums[i];
+        ret[i]=sum;
+    }
+    return ret;
+    }
+    public String defangIPaddr(String address) {
+    String fin="";
+    for (int i = 0;i<address.length();i++){
+        if (Character.isDigit(address.charAt(i))){
+            fin+=address.charAt(i);
+        }else {
+            fin+="[";
+            fin+=address.charAt(i);
+            fin+="]";
+        }
+    }
+    return fin;
+    }
     public double[] medianSlidingWindow(int[] nums, int k) {
         int len = nums.length-k+1;
         double[] arr = new double[len];
         if (k%2!=0){
             ////////////////zol hai yaha pegit
             for (int b =0;b<len;b++){
-                arr[b]= nums[b+(k/2)];
+                arr[b] = median(nums,b,(b+((k+1)/2)));
             }
         }else {
             for (int b =0;b<len;b++){
@@ -25,6 +47,38 @@ public class hr {
         }
         return arr;
     }
+    public int median(int[] brr,int sindex, int eindex){
+        int[] arr = brr;
+        int minindex=0;
+        for (int i=sindex;i<eindex-1;i++){
+            int min = Integer.MAX_VALUE;
+            for (int j = i;j<arr.length;j++){
+                if (min>arr[j]){
+                    min = arr[j];
+                    minindex=j;
+                }
+            }
+            //Swap
+            arr[minindex]=arr[i];
+            arr[i]=min;
+        }
+        int median = arr[(sindex+eindex)/2];
+        return median;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public static boolean backspaceCompare(String S, String T) {
         LinkedList<Character> stack1 = new LinkedList<Character>();
         LinkedList<Character> stack2 = new LinkedList<Character>();
@@ -178,5 +232,74 @@ public class hr {
             }
         }
         return stack.isEmpty();
+    }
+
+    class Difference {
+        private int[] elements;
+        LinkedList<Integer> ls = new LinkedList<Integer>();
+        public int maximumDifference = Integer.MIN_VALUE;
+        public Difference(int[] arr){
+            this.elements = arr;
+        }
+
+        LinkedList<Integer> lsls = new LinkedList<Integer>();
+        // Add your code here
+        public void computeDifference(){
+            for (int i=0;i<elements.length-1;i++){
+                for(int j = i+1;j<elements.length;j++){
+                    int temp = elements[i]-elements[j];
+                    if (temp>=0){
+                        ls.add(temp);
+                    }else {
+                        ls.add(-1*temp);
+                    }
+                }
+            }
+            int temp = elements[0]-elements[elements.length-1];
+            if (temp>=0){
+                ls.add(temp);
+            }else {
+                ls.add(-1*temp);
+            }
+            System.out.println(ls);
+        }
+        //   Correct it
+        public int maximumDifference(){
+            maximumDifference = Integer.MIN_VALUE;
+            while (!ls.isEmpty()){
+                if (ls.getLast()>maximumDifference){
+                    maximumDifference = ls.pop();
+                }else {
+                    ls.pop();
+                }
+            }
+//
+//            for (int i =0;i<ls.size();i++){
+//                if (ls.get(i)>maximumDifference){
+//                    maximumDifference=ls.get(i);
+//                }
+//            }
+            System.out.println(maximumDifference);
+            return maximumDifference;
+        }
+    } // End of Difference class
+
+    public class Solution {
+
+//        public static void main(String[] args) {
+//            Scanner sc = new Scanner(System.in);
+//            int n = sc.nextInt();
+//            int[] a = new int[n];
+//            for (int i = 0; i < n; i++) {
+//                a[i] = sc.nextInt();
+//            }
+//            sc.close();
+//
+//          //  Difference difference = new Difference(a);
+//
+//          //  difference.computeDifference();
+//
+//          //  System.out.print(difference.maximumDifference);
+//        }
     }
 }

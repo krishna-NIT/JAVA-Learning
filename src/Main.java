@@ -1,49 +1,54 @@
-public class Main {
-    public static void main(String[] args){
-        System.out.println(Math.pow(2,31));
+// Write your code here. DO NOT use an access modifier in your class declaration.
+class SampleDemo implements Runnable{
+    private Thread t;
+    private String threadName;
+    SampleDemo(String threadName){
+        this.threadName = threadName;
+    }
+    public void run(){
+        while (true){
+            System.out.println("threadName");
+        }
+    }
+    public void start(){
+        if (t==null){
+            t = new Thread(this,threadName);
+            t.start();
+        }
     }
 }
-//        public int[] twoSum(int[] nums, int target) {
-//            int[] ans = new int[2];
-//            for(int i=0;i<nums.length;i++){
-//                for(int j=0;j<nums.length;j++){
-//                    if(nums[i]+nums[j]==target && i!=j){
-//                        ans[0]=i;
-//                        ans[1]=j;
-//                    }
-//                }
-//            }
-//            return ans;
-//        }
+public class Main{
+    public static void main(String[] args){
+        SampleDemo A = new SampleDemo("A");
+        SampleDemo B = new SampleDemo("B");
+        B.start();
+        A.start();
+    }
+}
+//interface  BaseI { void method();}
+//class BaseC{
+//    public void method(){
+//        System.out.println("Inside BaseC::method");
+//    }
+//}
+//class ImpIC extends BaseC implements BaseI {
+//    public static void main(String []s){
+//        (new ImpIC()).method();
+//    }
+//}
 ////
-////    public List<List<Integer>> threeSum(int[] nums) {
-////        List<List<Integer>> ls = new List<List<Integer>>();
-//
-//
-//            for (int i=0;i<nums.length;i++){
-//                for (int b=i+1;b<nums.length;b++){
-//                     for (int k=b+1;k<nums.length;k++){
-//                            if (nums[i]+nums[b]+nums[k]==0){
-//
-//                    }
-//                }
-//            }
+////public class Main{
+////
+////    interface  BaseI { void method();}
+//    class BaseC{
+//        public void method(){
+//            System.out.println("Inside BaseC::method");
 //        }
 //    }
-//
-//    public int reverse(int x) {
-//    int ans =0;
-//    if (x<(Math.pow(2,31)-1) && x>=-(Math.pow(2,31))){
-//        return ans;
-//    }else {
-//        return 0;
-//    }
-//    while (x!=0){
-//        int rem = x%10;
-//        ans=(ans*10)+rem;
-//        x/=10;
-//    }
-//    return ans;
+//    class ImpIC extends BaseC implements BaseI{
+//        public static void main(String []s){
+//            (new ImpIC()).method();
+//        }
 //    }
 //}
 //

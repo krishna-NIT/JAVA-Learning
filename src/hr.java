@@ -1,13 +1,80 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
 
 public class hr {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    static long arrayManipulation(int n, int[][] queries) {
+
 
     }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String[] nm = scanner.nextLine().split(" ");
+
+        int n = Integer.parseInt(nm[0]);
+
+        int m = Integer.parseInt(nm[1]);
+
+        int[][] queries = new int[m][3];
+
+        for (int i = 0; i < m; i++) {
+            String[] queriesRowItems = scanner.nextLine().split(" ");
+            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+            for (int j = 0; j < 3; j++) {
+                int queriesItem = Integer.parseInt(queriesRowItems[j]);
+                queries[i][j] = queriesItem;
+            }
+        }
+
+        long result = arrayManipulation(n, queries);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+//
+//    public static void enque(int value){
+//        que1.add(value);
+//    }
+//    public static int deque(){
+//        if (que1.size()!=0){
+//            int j=0;
+//            for (int i = 1;i<que1.size();i++){
+//                int bha = que1.get(i);
+//               // System.out.println(bha);
+//                que2.push(bha);
+//            }
+//            //System.out.println(que2);
+//            int re = que1.get(0);
+//            que1=que2;
+//            que2.clear();
+//            return re;
+//        }else {
+//            return -1;
+//        }
+//    }
+//
+//    public static void printque(){
+//        System.out.println(que1.get(0));
+//    }
+//
+//
+//
+
+
+
     public int[] runningSum(int[] nums) {
     int[] ret = new int[nums.length];
     int sum = 0;

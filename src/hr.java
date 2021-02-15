@@ -8,8 +8,27 @@ import java.util.Stack;
 
 public class hr {
     static long arrayManipulation(int n, int[][] queries) {
-
-
+        int[] arr = new int[n];
+        for (int i =0;i<arr.length;i++){
+            arr[i]=0;
+        }
+        //check start
+        for (int i=0;i<queries.length;i++){
+            int start = queries[i][0]-1;
+            int end = queries[i][1]-1;
+            int what = queries[i][2];
+            for (int j=start;i<=end;j++){
+                arr[j]+=what;
+            }
+        }
+        //check end
+        long max = Integer.MIN_VALUE;
+        for (int i = 0;i<arr.length;i++){
+            if (max<arr[i]){
+                max = arr[i];
+            }
+        }
+        return max;
     }
 
     private static final Scanner scanner = new Scanner(System.in);

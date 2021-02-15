@@ -1,98 +1,162 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
 
+
 public class hr {
-    static long arrayManipulation(int n, int[][] queries) {
-        int[] arr = new int[n];
-        for (int i =0;i<arr.length;i++){
-            arr[i]=0;
+    /*
+     * Complete the 'rotateLeft' function below.
+     *
+     * The function is expected to return an INTEGER_ARRAY.
+     * The function accepts following parameters:
+     *  1. INTEGER d
+     *  2. INTEGER_ARRAY arr
+     */
+
+    static int temp;
+    static String del;
+    static int len;
+    static String string = "";
+    static Stack<Integer> stack = new Stack<Integer>();
+    static Stack<String> delstack = new Stack<String>();
+    static Stack<Integer> lenstack = new Stack<Integer>();
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        int n = scan.nextInt();
+
+        for (int i=0;i<n;i++){
+            int opt = scan.nextInt();
+            switch (opt){
+                case 1:
+                    String a = scan.next();
+                    one(a);
+                    stack.push(1);
+                    len = a.length();
+                    break;
+                case 2:
+                    int b = scan.nextInt();
+                    two(b);
+                    stack.push(2);
+                    break;
+                case 3:
+                    int c = scan.nextInt();
+                    three(c);
+                   // stack.push(3);
+                    break;
+                case 4:
+                    four();
+                    break;
+            }
+        //    System.out.println(string);
         }
+    }
+    public static void one(String a){
+        string+=a;
+        lenstack.push(a.length());
+    }
+    public static void two(int b){
+        delstack.push(string.substring(string.length()-b,string.length()-1));
+        string = string.substring(0,string.length()-b);
+    }
+    public static void three(int c){
+        System.out.println(string.charAt(c-1));
+    }
+    public static void four(){
+        //System.out.println(string);
+        //System.out.println(stack);
+        int val = stack.pop();
+        //System.out.println(val);
+        //System.out.println(stack);
+        if (val == 1){
+            string=string.substring(0,string.length()-lenstack.pop());
+        }else if (val ==2){
+            string += delstack.pop();
+        }
+        //System.out.println(string);
+    }
+
+
+
+
+
+
+
+
+    public static List<Integer> rotateLeft(int d, List<Integer> arr) {
+        List<Integer> fls = new LinkedList<Integer>();
+        for (int i =(d) ;i<arr.size();i++){
+            fls.add(arr.get(i));
+        }
+        for (int i = 0;i<d;i++){
+            fls.add(arr.get(i));
+        }
+        return fls;
+    }
+
+//    static Stack<Integer> stack = new Stack<Integer>();
+//    public static void main(String[] args){
+//        Scanner scan = new Scanner(System.in);
+//        int que = scan.nextInt();
+//        for (int i=0;i<que;i++){
+//            int opt = scan.nextInt();
+//            switch (opt){
+//                case 1:
+//                    int bh = scan.nextInt();
+//                    ins(bh);
+//                    break;
+//                case 2:
+//                    de();
+//                    break;
+//                case 3:
+//                    pri();
+//                    break;
+//            }
+//
+//        }
+//    }
+    public static void ins(int a){
+        stack.push(a);
+        System.out.println(stack);
+    }
+    public static void de(){
+        stack.pop();
+        System.out.println(stack);
+    }
+    public static void pri(){
+        System.out.println(stack);
+        int max = Integer.MIN_VALUE;
+     for (int i =0;i<stack.size();i++){
+         if (max <stack.get(i)){
+             max = stack.get(i);
+         }
+     }
+        System.out.println(max);
+    }
+
+    static int arrayManipulation(int n, int[][] queries) {
+        int[] arr = new int[n];
+        LinkedList<Integer> ls = new LinkedList<Integer>();
+        // for (int i =0;i<n;i++){
+        //     arr[i]=0;
+        // }
         //check start
+        int max = Integer.MIN_VALUE;
+
         for (int i=0;i<queries.length;i++){
             int start = queries[i][0]-1;
             int end = queries[i][1]-1;
             int what = queries[i][2];
-            for (int j=start;i<=end;j++){
+
+            for (int j=start;j<=end;j++){
                 arr[j]+=what;
-            }
-        }
-        //check end
-        long max = Integer.MIN_VALUE;
-        for (int i = 0;i<arr.length;i++){
-            if (max<arr[i]){
-                max = arr[i];
+                if(arr[j]>max){
+                    max = arr[j];
+                }
             }
         }
         return max;
     }
-
-    private static final Scanner scanner = new Scanner(System.in);
-
-    public static void main(String[] args) throws IOException {
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
-
-        String[] nm = scanner.nextLine().split(" ");
-
-        int n = Integer.parseInt(nm[0]);
-
-        int m = Integer.parseInt(nm[1]);
-
-        int[][] queries = new int[m][3];
-
-        for (int i = 0; i < m; i++) {
-            String[] queriesRowItems = scanner.nextLine().split(" ");
-            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
-            for (int j = 0; j < 3; j++) {
-                int queriesItem = Integer.parseInt(queriesRowItems[j]);
-                queries[i][j] = queriesItem;
-            }
-        }
-
-        long result = arrayManipulation(n, queries);
-
-        bufferedWriter.write(String.valueOf(result));
-        bufferedWriter.newLine();
-
-        bufferedWriter.close();
-
-        scanner.close();
-    }
-//
-//    public static void enque(int value){
-//        que1.add(value);
-//    }
-//    public static int deque(){
-//        if (que1.size()!=0){
-//            int j=0;
-//            for (int i = 1;i<que1.size();i++){
-//                int bha = que1.get(i);
-//               // System.out.println(bha);
-//                que2.push(bha);
-//            }
-//            //System.out.println(que2);
-//            int re = que1.get(0);
-//            que1=que2;
-//            que2.clear();
-//            return re;
-//        }else {
-//            return -1;
-//        }
-//    }
-//
-//    public static void printque(){
-//        System.out.println(que1.get(0));
-//    }
-//
-//
-//
-
-
 
     public int[] runningSum(int[] nums) {
     int[] ret = new int[nums.length];

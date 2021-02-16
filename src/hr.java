@@ -13,6 +13,172 @@ public class hr {
      *  1. INTEGER d
      *  2. INTEGER_ARRAY arr
      */
+    public int sumOddLengthSubarrays(int[] arr) {
+    int sum =0;
+
+    for (int j=1;j<=arr.length;j+=2){
+        int d=0;
+        for (int k=0;k<=arr.length-j;k++) {
+            for (int i = k; i < arr.length && d <= j; i++) {
+                sum += arr[i];
+                d++;
+            }
+        }
+    }
+    return sum;
+    }
+   public int maximumWealth(int[][] accounts) {
+        int row = accounts.length;
+        int col = accounts[0].length;
+        int max =0;
+        int[] totweal = new int[row];
+    for (int i=0;i<row;i++){
+        for (int j=0;j<col;j++){
+            totweal[i]+=accounts[i][j];
+        }
+        if (totweal[i]>max){
+             max = totweal[i];
+        }
+    }
+    return max;
+    }
+    public int largestAltitude(int[] gain) {
+        int[] altitudes = new int[gain.length+1];
+        altitudes[0]=0;
+        int max = altitudes[0];
+        for (int i=1;i<altitudes.length;i++){
+            altitudes[i]=altitudes[i-1]+gain[i-1];
+            if (max<altitudes[i]){
+                max=altitudes[i];
+            }
+        }
+        return max;
+
+    }
+    public int subtractProductAndSum(int n) {
+        int sum =0;
+        int pro = 1;
+        while (n!=0){
+            int digit = n%10;
+            sum+=digit;
+            pro*=digit;
+            n = n/10;
+        }
+
+        int ans = pro-sum;
+        return ans;
+    }
+    public int balancedStringSplit(String s) {
+        int finans=0;
+        for (int i=0;i<s.length()-1;i++){
+            String newone="";
+            for (int j=i+1;j<s.length();j++){
+                if (i!=j) {
+                    newone = s.substring(i, j);
+                }
+                int noL=0;
+                int noR=0;
+
+                for (int k =0;k<newone.length();k++){
+                    if (newone.charAt(k)=='L'){
+                        noL++;
+                    }else if (newone.charAt(k)=='R'){
+                        noR++;
+                    }
+                }
+                if (noL==noR){
+                    finans++;
+                }
+
+            }
+        }
+        return finans;
+    }
+
+    public int numberOfMatches(int n) {
+        int fin = 0;
+        int temp;
+        while (n!=1){
+            temp=n/2;
+            fin+=temp;
+            n=n-temp;
+        }
+        return fin;
+    }
+    public int numJewelsInStones(String jewels, String stones) {
+        int count=0;
+        for (int i = 0;i<jewels.length();i++){
+            int ch = jewels.charAt(i);
+            for (int j = 0 ;j<stones.length();j++){
+                if (ch == stones.charAt(j)){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+    public int numIdenticalPairs(int[] nums) {
+        int count = 0;
+        for (int i =0;i<nums.length;i++){
+            for (int j =0;j<nums.length;j++){
+                if (nums[i]==nums[j] && i<j){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+    public int[] smallerNumbersThanCurrent(int[] nums) {
+        int[] fin = new int[nums.length];
+        for (int i=0;i<nums.length;i++){
+            int q = nums[i];
+            int count =0;
+            for (int j=0;j<nums.length;j++){
+                if (q>nums[j]){
+                    count++;
+                }
+            }
+            fin[i]=count;
+        }
+        return fin;
+}
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        ArrayList arrls = new ArrayList();
+        Scanner scan = new Scanner(System.in);
+        int q = scan.nextInt();
+        for (int i=0;i<q;i++){
+            int opt = scan.nextInt();
+            switch (opt){
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+            }
+        }
+        for (int j =0;j<;j++){
+
+        }
+
+
+    }
+    static int[] matchingStrings(String[] strings, String[] queries) {
+        int[] finalarr = new int[queries.length];
+        for (int i=0;i<queries.length;i++){
+        int count = 0;
+            for (int j=0;j<strings.length;j++){
+                String a = strings[j];
+                String b = strings[i];
+                if (a.equals(b) && a.length()==b.length()){
+                    count++;
+                }
+            }
+            finalarr[i]=count;
+        }
+        return finalarr;
+    }
 
     static int temp;
     static String del;
@@ -21,7 +187,7 @@ public class hr {
     static Stack<Integer> stack = new Stack<Integer>();
     static Stack<String> delstack = new Stack<String>();
     static Stack<Integer> lenstack = new Stack<Integer>();
-    public static void main(String[] args){
+    public static void ne(){
         Scanner scan = new Scanner(System.in);
         int n = scan.nextInt();
 

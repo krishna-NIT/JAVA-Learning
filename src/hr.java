@@ -133,16 +133,72 @@ public static void main(String[] args) {
         arr[i]=scan.nextInt();
     }
     //sort
-    for (int n = arr.length; n > 0; n--) {
-        for (int i = 0; i < (n - 1); i++) {
-            if (arr[i] > arr[i + 1]) {
-                swap2(arr, i, (i + 1));
+    LinkedList<Integer> rem1 = new LinkedList<Integer>();
+    LinkedList<Integer> rem2 = new LinkedList<Integer>();
+    int maxsum=0;
+    for (int i=0;i<arr.length;i++){
+        int nu = arr[i];
+        if (nu%3==0){
+            maxsum+=nu;
+        }else if (nu%3==1){
+            rem1.push(nu);
+        }else if (nu%3==2){
+            rem2.push(nu);
+        }
+    }
+    System.out.println(rem1);
+    System.out.println(rem2);
+
+    //sort descending order
+    InsertSort(rem1);
+    InsertSort(rem2);
+
+
+    System.out.println(rem2);
+    int maxoftwo =0;
+    int bha2 = rem2.size()-(rem2.size()%3);
+    System.out.println(bha2);
+    for (int i=0;i<bha2;i++){
+        maxsum+=rem2.get(i);
+    }
+    int bha1 = rem1.size()-(rem1.size()%3);
+    System.out.println(bha1);
+    for (int i =0;i<bha1;i++){
+        maxsum+=rem1.get(i);
+    }
+
+    while (bha1<rem1.size() && bha2<rem2.size()){
+        maxsum+=rem1.get(bha1)+rem2.get(bha2);
+        bha1++;
+        bha2++;
+    }
+    System.out.println(maxsum+maxoftwo);
+    }
+    public static void swap2(LinkedList<Integer> rem,int i, int j) {
+        if (i==j){
+            return;
+        }
+        int temp = rem.get(i);
+        rem.add(i,rem.get(i+1));
+        rem.add(i+1,temp);
+    }
+
+    public static void InsertSort(LinkedList<Integer> ls) {
+        for (int i =0;i<ls.size();i++){
+            for (int j=i;j>=0;j--) {
+                if (ls.get(j) < ls.get(j+1)) {
+                    swap(ls.get(j), ls.get(j+1));
+                }
             }
         }
     }
-    int a = ans(arr);
-    System.out.println(a);
-}
+
+    public static void swap(int a,int b){
+        int temp = a;
+        a=b;
+        b = temp;
+    }
+
 
 
 
@@ -258,14 +314,7 @@ public static void main(String[] args) {
         }
         return as;
     }
-    public static void swap2(int[] array, int i, int j) {
-        if (i == j) {
-            return;
-        }
-        int temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
+
 
 
 

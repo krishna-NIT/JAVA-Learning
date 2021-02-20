@@ -13,6 +13,333 @@ public class hr {
      *  1. INTEGER d
      *  2. INTEGER_ARRAY arr
      */
+//    public static void main(String[] args) {
+//        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+//        Scanner scan = new Scanner(System.in);
+//        String s = scan.nextLine();
+//        int m = scan.nextInt();
+//        for (int i=0;i<m;i++){
+//            int l = scan.nextInt();
+//            int r = scan.nextInt();
+//            metho(s.substring(1-l,r-1));
+//        }
+//
+//      }
+//      public static void metho(String s){
+//        for (int i=0;i<=s.length()-3;i++){
+//            String temp = s.substring(i,i+2);
+//
+//        }
+//      }
+//      public static void queans(int[] arr){
+////
+//    }
+//    public static void main(String[] args) {
+//        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+//    Scanner scan = new Scanner(System.in);
+//    int n = scan.nextInt();
+//    for (int i=0;i<n;i++){
+//        ans(scan.nextDouble());
+//    }
+//    }
+//    public static void ans(double n){
+//        double temp= n;
+//        for (int i =1;i<=16;i++){
+//            if (n<Math.pow(i+1,3)&&n>=Math.pow(i,3)){
+//                temp=temp-(Math.pow(i,3));
+//                break;
+//            }
+//        }
+//        int kb =1;
+//        int bhagwat =0;
+//        while (temp>0){
+//            double te = temp;
+//            temp-=Math.pow(kb,3);
+//            if (temp>=0) {
+//                kb++;
+//            }else {
+//                temp=te;
+//                kb++;
+//                bhagwat++;
+//            }
+//
+//            if (bhagwat==16){
+//                break;
+//            }
+//        }
+//        if (temp==0){
+//            System.out.println("YES");
+//        }else {
+//            System.out.println("NO");
+//        }
+//    }
+//
+
+
+//    public static void main(String[] args) {
+//        Scanner scan = new Scanner(System.in);
+//        int n = scan.nextInt();
+//        String[] arrstr = new String[n];
+//        for (int i=0;i<n;i++){
+//            arrstr[i]=scan.next();
+//        }
+//        for (int i=0;i<n;i++){
+//           ans(arrstr[i]);
+//        }
+//    }
+//    public static void ans(String que){
+//        int i=0;
+//        int j=0;
+//        int k=0;
+//        for (int ju=0;ju<que.length();ju++){
+//            char temp = que.charAt(ju);
+//            temp = Character.toLowerCase(temp);
+//            if (temp =='q' ||temp =='a'|| temp =='z' ||temp =='w' ||temp =='s'|| temp =='x'||temp =='e' ||temp =='d'|| temp =='c' ){
+//                i++;
+//            }
+//            if (temp =='r' ||temp =='f'|| temp =='v' ||temp =='t' ||temp =='g'|| temp =='b'||temp =='y' ||temp =='h'|| temp =='n'|| temp =='m'|| temp =='j'|| temp =='u' ){
+//                j++;
+//            }
+//            if (temp =='i' ||temp =='k'|| temp =='l' ||temp =='o' ||temp =='p' ){
+//                k++;
+//            }
+//        }
+//        System.out.println(i+" "+j+" "+k);
+//        if (i==que.length() || k==que.length() || j==que.length()){
+//            System.out.print(que+" ");
+//        }
+//    }
+//    public int balancedStringSplit(String s) {
+//        int count=0;
+//        for (int i=0;i<s.length()-1;i++){
+//            for (int j=i+1;j<s.length();j++){
+//                if (isBal(s.substring(i,j))){
+//                    count++;
+//                }
+//            }
+//        }
+//        return count;
+//    }
+public static void main(String[] args) {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+    Scanner scan = new Scanner(System.in);
+    int len = scan.nextInt();
+    if (len==1||len==2){
+        System.out.println(0);
+        return;
+    }
+    int[] arr = new int[len];
+    for (int i=0;i<arr.length;i++){
+        arr[i]=scan.nextInt();
+    }
+    //sort
+    for (int n = arr.length; n > 0; n--) {
+        for (int i = 0; i < (n - 1); i++) {
+            if (arr[i] > arr[i + 1]) {
+                swap2(arr, i, (i + 1));
+            }
+        }
+    }
+    int a = ans(arr);
+    System.out.println(a);
+}
+
+
+
+
+
+
+
+  public static boolean isBal(String a){
+        int noL=0;
+        int noR=0;
+        int noO=0;
+        for (int i =0;i<a.length();i++){
+            char temp = a.charAt(i);
+            if (temp=='L'){
+                noL++;
+            }else if (temp=='R'){
+                noR++;
+            }else {
+                noO++;
+            }
+        }
+
+        if (noL==noR && noO==0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public int countConsistentStrings(String allowed, String[] words) {
+    int ans = 0;
+    char[] chararr = allowed.toCharArray();
+    for (int i=0;i<words.length;i++){
+        int count = 0;
+        int co =0;
+        String s = words[i];
+        for (int j =0;j<s.length();j++){
+            char tempchar = s.charAt(j);
+            for (int k = 0;k<chararr.length;k++){
+                if (tempchar == chararr[k]){
+                    count=1;
+                }
+            }
+            if (count==1) {
+                co++;
+            }
+        }
+        if (co==s.length()){
+            ans++;
+        }
+    }
+    return ans;
+    }
+
+
+
+
+    public int sumOddLengthSubarray(int[] arr) {
+    int sum =0;
+
+    for (int j=1;j<=arr.length;j+=2){
+        int d=0; //d is sum of sub arrays
+        for (int k=0;k<arr.length;k++) {
+
+        }
+        sum+=d;
+    }
+    return sum;
+    }
+    public static int sumofarr(int[] arr){
+        int sum =0;
+        for (int i =0;i<arr.length;i++){
+            sum+=arr[i];
+        }
+        return sum;
+    }
+
+//    public static void main(String[] args) {
+//        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+//        Scanner scan = new Scanner(System.in);
+//        int len = scan.nextInt();
+//        if (len==1||len==2){
+//            System.out.println(0);
+//            return;
+//        }
+//        int[] arr = new int[len];
+//        for (int i=0;i<arr.length;i++){
+//            arr[i]=scan.nextInt();
+//        }
+//        //sort
+//        for (int n = arr.length; n > 0; n--) {
+//            for (int i = 0; i < (n - 1); i++) {
+//                if (arr[i] > arr[i + 1]) {
+//                    swap2(arr, i, (i + 1));
+//                }
+//            }
+//        }
+//        int a = ans(arr);
+//        System.out.println(a);
+//    }
+    public static int ans(int[] arr){
+        int b = arr.length;
+        int[] sumarr = new int[b];
+        int max =0;
+        for (int i = arr.length-1;i>=0;i--){
+            max+=arr[i];
+            sumarr[i]=max;
+        }
+        int as = Integer.MIN_VALUE;
+        for (int i = 0;i<sumarr.length;i++){
+            if (sumarr[i]>as && sumarr[i]%3==0){
+                as = sumarr[i];
+            }
+        }
+        return as;
+    }
+    public static void swap2(int[] array, int i, int j) {
+        if (i == j) {
+            return;
+        }
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+
+
+
+
+
+
+    public int numTeams(int[] rating) {
+        int ans = 0;
+        for (int i=0;i<rating.length-2;i++){
+            for (int j = i+1;j<rating.length-1;j++){
+                for (int k = j+1;k<rating.length;k++){
+                    if (rating[i]>rating[j] && rating[j]>rating[k]){
+                        ans++;
+                    }else if (rating[i]<rating[j] && rating[j]<rating[k]){
+                        ans++;
+                    }
+                }
+            }
+        }
+        return ans;
+    }
+    public List<Integer> findDuplicates(int[] nums) {
+    List<Integer> ls = new LinkedList<Integer>();
+    for (int i=0;i<nums.length;i++){
+        int count=0;
+        int a = nums[i];
+        for (int j=i+1;j<nums.length;j++){
+            if (a==nums[j] && !ls.contains(a)){
+                    count++;
+            }
+        }
+        if (count!=0){
+            ls.add(a);
+        }
+    }
+    return ls;
+    }
+
+    public int getMaximumGenerated(int n) {
+    int[] arr = new int[n+1];
+    arr[0]=0;
+    arr[1]=1;
+    for (int i=0;i<arr.length;i++){
+        int k = 2*i;
+        if (2<=k && k<=n) {
+            arr[k] = arr[i];
+        }
+    }
+    for (int i=0;i<arr.length;i++){
+         int k = ((2*i)+1);
+         if (2<=k && k<=n) {
+             arr[k] = arr[i] + arr[i + 1];
+         }
+    }
+    int max = arr[0];
+    for (int i =0;i<arr.length;i++){
+        if (max<arr[i]){
+            max=arr[i];
+        }
+    }
+    return max;
+    }
+
+
+    public int peakIndexInMountainArray(int[] arr) {
+    int val =0;
+    for (int i=0;i<arr.length-1;i++){
+        if (arr[i]>arr[i+1]){
+            val = i;
+            break;
+        }
+    }
+    return val;
+    }
     public int sumOddLengthSubarrays(int[] arr) {
     int sum =0;
 
@@ -142,29 +469,29 @@ public class hr {
         }
         return fin;
 }
-    public static void main(String[] args) {
-        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
-        ArrayList arrls = new ArrayList();
-        Scanner scan = new Scanner(System.in);
-        int q = scan.nextInt();
-        for (int i=0;i<q;i++){
-            int opt = scan.nextInt();
-            switch (opt){
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-            }
-        }
-        for (int j =0;j<;j++){
-
-        }
-
-
-    }
-    static int[] matchingStrings(String[] strings, String[] queries) {
+//    public static void main(String[] args) {
+//        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+//        ArrayList arrls = new ArrayList();
+//        Scanner scan = new Scanner(System.in);
+//        int q = scan.nextInt();
+//        for (int i=0;i<q;i++){
+//            int opt = scan.nextInt();
+//            switch (opt){
+//                case 1:
+//                    break;
+//                case 2:
+//                    break;
+//                case 3:
+//                    break;
+//            }
+//        }
+//        for (int j =0;j<;j++){
+//
+//        }
+//
+//
+//    }
+ static int[] matchingStrings(String[] strings, String[] queries) {
         int[] finalarr = new int[queries.length];
         for (int i=0;i<queries.length;i++){
         int count = 0;

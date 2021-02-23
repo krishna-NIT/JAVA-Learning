@@ -252,7 +252,14 @@ public static void main(String[] args) {
     return ans;
     }
 
-
+    public static void swap2(LinkedList<Integer> rem,int i, int j) {
+        if (i==j){
+            return;
+        }
+        int temp = rem.get(i);
+        rem.add(i,rem.get(i+1));
+        rem.add(i+1,temp);
+    }
 
 
     public int sumOddLengthSubarray(int[] arr) {

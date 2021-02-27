@@ -5,6 +5,16 @@ import java.util.Stack;
 
 
 public class hr {
+
+    static int[] reverseArray(int[] a) {
+        int[] arr = new int[a.length];
+        int j = 0;
+        for (int i =a.length-1;i>=0;i--){
+            arr[j] = a[i];
+            j++;
+        }
+        return arr;
+    }
     /*
      * Complete the 'rotateLeft' function below.
      *

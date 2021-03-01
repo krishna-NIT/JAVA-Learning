@@ -5,6 +5,39 @@ import java.util.Stack;
 
 
 public class hr {
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        int n = scan .nextInt();
+        int[][] darr = new int[n][n];
+        for(int i =0;i<n;i++){
+            for (int j =0;j<n;j++){
+                darr[i][j] = scan.nextInt();
+            }
+        }
+     // Printing 90 rotated in clockwise direction.
+        int temp = n;
+        int k=0;
+        while(temp>0){
+            for (int i =n-1;i>=0;i--){
+                System.out.print(darr[i][k]+" ");
+            }
+            k++;
+            temp--;
+            System.out.println();
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     static int[] reverseArray(int[] a) {
         int[] arr = new int[a.length];
@@ -130,60 +163,60 @@ public class hr {
 //        }
 //        return count;
 //    }
-public static void main(String[] args) {
-    /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
-    Scanner scan = new Scanner(System.in);
-    int len = scan.nextInt();
-    if (len==1||len==2){
-        System.out.println(0);
-        return;
-    }
-    int[] arr = new int[len];
-    for (int i=0;i<arr.length;i++){
-        arr[i]=scan.nextInt();
-    }
-    //sort
-    LinkedList<Integer> rem1 = new LinkedList<Integer>();
-    LinkedList<Integer> rem2 = new LinkedList<Integer>();
-    int maxsum=0;
-    for (int i=0;i<arr.length;i++){
-        int nu = arr[i];
-        if (nu%3==0){
-            maxsum+=nu;
-        }else if (nu%3==1){
-            rem1.push(nu);
-        }else if (nu%3==2){
-            rem2.push(nu);
-        }
-    }
-    System.out.println(rem1);
-    System.out.println(rem2);
-
-    //sort descending order
-    InsertSort(rem1);
-    InsertSort(rem2);
-
-
-    System.out.println(rem2);
-    int maxoftwo =0;
-    int bha2 = rem2.size()-(rem2.size()%3);
-    System.out.println(bha2);
-    for (int i=0;i<bha2;i++){
-        maxsum+=rem2.get(i);
-    }
-    int bha1 = rem1.size()-(rem1.size()%3);
-    System.out.println(bha1);
-    for (int i =0;i<bha1;i++){
-        maxsum+=rem1.get(i);
-    }
-
-    while (bha1<rem1.size() && bha2<rem2.size()){
-        maxsum+=rem1.get(bha1)+rem2.get(bha2);
-        bha1++;
-        bha2++;
-    }
-    System.out.println(maxsum+maxoftwo);
-    }
+//public static void main(String[] args) {
+//    /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+//    Scanner scan = new Scanner(System.in);
+//    int len = scan.nextInt();
+//    if (len==1||len==2){
+//        System.out.println(0);
+//        return;
+//    }
+//    int[] arr = new int[len];
+//    for (int i=0;i<arr.length;i++){
+//        arr[i]=scan.nextInt();
+//    }
+//    //sort
+//    LinkedList<Integer> rem1 = new LinkedList<Integer>();
+//    LinkedList<Integer> rem2 = new LinkedList<Integer>();
+//    int maxsum=0;
+//    for (int i=0;i<arr.length;i++){
+//        int nu = arr[i];
+//        if (nu%3==0){
+//            maxsum+=nu;
+//        }else if (nu%3==1){
+//            rem1.push(nu);
+//        }else if (nu%3==2){
+//            rem2.push(nu);
+//        }
+//    }
+//    System.out.println(rem1);
+//    System.out.println(rem2);
+//
+//    //sort descending order
+//    InsertSort(rem1);
+//    InsertSort(rem2);
+//
+//
+//    System.out.println(rem2);
+//    int maxoftwo =0;
+//    int bha2 = rem2.size()-(rem2.size()%3);
+//    System.out.println(bha2);
+//    for (int i=0;i<bha2;i++){
+//        maxsum+=rem2.get(i);
+//    }
+//    int bha1 = rem1.size()-(rem1.size()%3);
+//    System.out.println(bha1);
+//    for (int i =0;i<bha1;i++){
+//        maxsum+=rem1.get(i);
+//    }
+//
+//    while (bha1<rem1.size() && bha2<rem2.size()){
+//        maxsum+=rem1.get(bha1)+rem2.get(bha2);
+//        bha1++;
+//        bha2++;
+//    }
+//    System.out.println(maxsum+maxoftwo);
+//    }
     public static void swap2(LinkedList<Integer> rem,int i, int j) {
         if (i==j){
             return;

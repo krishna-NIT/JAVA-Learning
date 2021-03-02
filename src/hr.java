@@ -5,49 +5,318 @@ import java.util.Stack;
 
 
 public class hr {
-    public static void main(String[] args){
-        Scanner scan = new Scanner(System.in);
-        int n = scan .nextInt();
-        int[][] darr = new int[n][n];
-        for(int i =0;i<n;i++){
-            for (int j =0;j<n;j++){
-                darr[i][j] = scan.nextInt();
+    public int maximumUnits(int[][] boxTypes, int truckSize) {
+
+    }
+
+    public boolean isSubsequence(String s, String t) {
+    int a = 0;
+    int tempp = 0;
+    for (int i =0;i<s.length();i++){
+        for (int j=i+1;j<t.length();j++) {
+            if (s.charAt(i) == t.charAt(j) && j>tempp) {
+                a++;
+                tempp=j;
             }
         }
-     // Printing 90 rotated in clockwise direction.
-        int temp = n;
-        int k=0;
-        while(temp>0){
-            for (int i =n-1;i>=0;i--){
-                System.out.print(darr[i][k]+" ");
+    }
+    if (a==s.length()){
+        return true;
+    }
+    return false;
+    }
+
+
+    public int[] twoSum(int[] numbers, int target) {
+    int[] ans = new int[2];
+        for (int i= 0;i<numbers.length-1;i++){
+        for (int j =i+1;j<numbers.length;j++){
+            if (numbers[i]+numbers[j]==target){
+                ans[0]=i;
+                ans[1]=j;
+            }
+        }
+    }
+    }
+
+    public int firstBadVersion(int n) {
+        for (int i =1;i<=n;i++){
+            if (!isBadVersion(i)){
+                if (isBadVersion(i+1)){
+                    return i+1;
+                }
+            }
+        }
+        return -1;
+    }
+
+
+    public int mySqrt(int x) {
+    int i=0;
+    int k=0;
+        while (i==0){
+            if(x>=Math.pow(k,2) && x<Math.pow(k+1,2)){
+                return k;
             }
             k++;
-            temp--;
-            System.out.println();
         }
-
+        return k;
     }
 
 
 
-
-
-
-
-
-
-
-
-
-    static int[] reverseArray(int[] a) {
-        int[] arr = new int[a.length];
-        int j = 0;
-        for (int i =a.length-1;i>=0;i--){
-            arr[j] = a[i];
-            j++;
+    public int[] intersection(int[] nums1, int[] nums2) {
+        LinkedList<Integer> ls = new LinkedList<Integer>();
+        if (nums1.length<=nums2.length){
+        for (int i=0;i<nums1.length;i++){
+            for (int j =0;j<nums2.length;j++){
+                if (nums1[i]==nums2[j] && !ls.contains(nums1[i])){
+                    ls.add(nums1[i]);
+                }
+            }
+        }
+        }else{
+            for (int i=0;i<nums2.length;i++){
+                for (int j =0;j<nums1.length;j++){
+                    if (nums2[i]==nums1[j] && !ls.contains(nums2[i])){
+                        ls.add(nums2[i]);
+                    }
+                }
+            }
+        }
+        int[] arr = new int[ls.size()];
+        for (int i =0;i<ls.size();i++){
+            arr[i]=ls.get(i);
         }
         return arr;
     }
+
+    public int guessNumber(int n) {
+        int gue = guess(n);
+
+    }
+
+    public int search(int[] nums, int target) {
+        for (int i=0;i<nums.length;i++){
+            if (nums[i]==target){
+                return i;
+            }else if (nums[i]>target){
+                return -1;
+            }
+
+        }
+        return -1;
+    }
+    public String removeDuplicates(String S) {
+        int count =1;
+        int len = S.length();
+        while (count>0){
+            for (int i=0;i<S.length()-2;i++){
+                if (S.charAt(i)==S.charAt(i+1)){
+                    String oldstri = S.substring(0,i);
+                    String laststr = S.substring(i+2,len-1);
+                }
+                count=0;
+            }
+
+            for (int i =0;i<S.length()-1;i++){
+                if (S.charAt(i)==S.charAt(i+1)){
+                    count++;
+                }
+            }
+        }
+        return S;
+    }
+
+    public String destCity(List<List<String>> paths) {
+
+    }
+
+
+    public String mergeAlternately(String word1, String word2) {
+        int len1 = word1.length();
+        int len2 = word2.length();
+        int lasttemp1=0;
+        int lasttemp2=0;
+        String ans = "";
+        for (int i=0;i<len1 && i<len2;i++){
+            if (i<len1){ ans+=word1.charAt(i); lasttemp1=i; }
+            if (i<len2){ ans+=word2.charAt(i); lasttemp2=i; }
+        }
+        if (len1<len2){
+            ans+=word2.substring(lasttemp2+1,len2-1);
+        }
+        if (len1>len2){
+            ans+=word1.substring(lasttemp1+1,len1-1);
+        }
+    return ans;
+    }
+
+
+    public boolean arrayStringsAreEqual(String[] word1, String[] word2) {
+        String a = "";
+        String b = "";
+        for (int i=0;i<word1.length;i++){
+            a+=word1[i];
+        }
+        for (int i=0;i<word2.length;i++){
+            b+=word2[i];
+        }
+        if (a.equals(b)){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public int maxProduct(int[] nums) {
+    int max  = Integer.MIN_VALUE;
+    for (int i =0;i<nums.length-1;i++){
+        for (int j = i+1;j<nums.length;j++){
+            if (max<(nums[i]-1)*(nums[j]-1)){
+                max= (nums[i]-1)*(nums[j]-1);
+            }
+        }
+    }
+    return max;
+    }
+    public int oddCells(int n, int m, int[][] indices) {
+    int[][] darr = new int[n][m];
+    for (int i = 0;i<n;i++){
+            for (int j = 0;j<m;j++){
+                darr[i][j] = 0;
+            }
+        }
+    for (int i = 0;i<indices[0].length;i++){
+        int a = indices[i][0];
+        int b = indices[i][1];
+        for (int j = 0;j<m;j++){
+            darr[a][i]++;
+        }
+        for (int j =0;j<n;j++){
+            darr[i][b]++;
+        }
+    }
+    int countodd = couodd(n,m,darr);
+    return countodd;
+    }
+    public static int couodd(int n, int m, int[][] indices){
+        int count =0;
+        for (int i = 0;i<n;i++){
+            for (int j = 0;j<m;j++){
+                if (indices[i][j]%2!=0){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+
+    public static void findNumbers(int[] nums) {
+    int ans = 0;
+    for (int i = 0; i<nums.length;i++) {
+        int digit = 0;
+        int n = nums[i];
+        while (n>0){
+            digit++;
+            n/=10;
+        }
+        System.out.println(digit);
+        if (digit%2==0) {
+        ans++;
+        }
+        System.out.println("d");
+    }
+        System.out.println(ans);
+    }
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        int n = scan.nextInt();
+        int[] arr = new int[n];
+        for (int i =0;i<n;i++) {
+            arr[i] = scan.nextInt();
+        }
+        System.out.println("Input done");
+        findNumbers(arr);
+//        int q = scan.nextInt();
+
+//        while (q-- > 0) {
+//            int n = scan.nextInt();
+//            int leap = scan.nextInt();
+//
+//            int[] game = new int[n];
+//            for (int i = 0; i < n; i++) {
+//                game[i] = scan.nextInt();
+//            }
+//
+//            System.out.println( (canWin(leap, game)) ? "YES" : "NO" );
+//        }
+//        scan.close();
+    }
+    public int fact(int n){
+        int ans = 1;
+        while (n>0){
+            ans *= n;
+            n--;
+        }
+        return ans;
+    }
+    public int distributeCandies(int[] candyType) {
+    LinkedList<Integer> ls = new LinkedList<Integer>();
+    for (int i = 0;i<candyType.length;i++){
+    if (!ls.contains(candyType[i])){
+        ls.add(candyType[i]);
+    }
+    }
+    int n = ls.size();
+    int r = candyType.length/2;
+    int ans = (fact(n)/(fact(r)*fact(n-r)));
+    return ans;
+    }
+//    public static void main(String[] args){
+//        Scanner scan = new Scanner(System.in);
+//        int n = scan .nextInt();
+//        int[][] darr = new int[n][n];
+//        for(int i =0;i<n;i++){
+//            for (int j =0;j<n;j++){
+//                darr[i][j] = scan.nextInt();
+//            }
+//        }
+//     // Printing 90 rotated in clockwise direction.
+//        int temp = n;
+//        int k=0;
+//        while(temp>0){
+//            for (int i =n-1;i>=0;i--){
+//                System.out.print(darr[i][k]+" ");
+//            }
+//            k++;
+//            temp--;
+//            System.out.println();
+//        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    static int[] reverseArray(int[] a) {
+//        int[] arr = new int[a.length];
+//        int j = 0;
+//        for (int i =a.length-1;i>=0;i--){
+//            arr[j] = a[i];
+//            j++;
+//        }
+//        return arr;
+//    }
     /*
      * Complete the 'rotateLeft' function below.
      *
@@ -217,14 +486,14 @@ public class hr {
 //    }
 //    System.out.println(maxsum+maxoftwo);
 //    }
-    public static void swap2(LinkedList<Integer> rem,int i, int j) {
-        if (i==j){
-            return;
-        }
-        int temp = rem.get(i);
-        rem.add(i,rem.get(i+1));
-        rem.add(i+1,temp);
-    }
+//    public static void swap2(LinkedList<Integer> rem,int i, int j) {
+//        if (i==j){
+//            return;
+//        }
+//        int temp = rem.get(i);
+//        rem.add(i,rem.get(i+1));
+//        rem.add(i+1,temp);
+//    }
 
     public static void InsertSort(LinkedList<Integer> ls) {
         for (int i =0;i<ls.size();i++){
@@ -974,59 +1243,59 @@ public class hr {
             }
         }
         return stack.isEmpty();
-    }
+    }}
 
-    class Difference {
-        private int[] elements;
-        LinkedList<Integer> ls = new LinkedList<Integer>();
-        public int maximumDifference = Integer.MIN_VALUE;
-        public Difference(int[] arr){
-            this.elements = arr;
-        }
-
-        LinkedList<Integer> lsls = new LinkedList<Integer>();
-        // Add your code here
-        public void computeDifference(){
-            for (int i=0;i<elements.length-1;i++){
-                for(int j = i+1;j<elements.length;j++){
-                    int temp = elements[i]-elements[j];
-                    if (temp>=0){
-                        ls.add(temp);
-                    }else {
-                        ls.add(-1*temp);
-                    }
-                }
-            }
-            int temp = elements[0]-elements[elements.length-1];
-            if (temp>=0){
-                ls.add(temp);
-            }else {
-                ls.add(-1*temp);
-            }
-            System.out.println(ls);
-        }
-        //   Correct it
-        public int maximumDifference(){
-            maximumDifference = Integer.MIN_VALUE;
-            while (!ls.isEmpty()){
-                if (ls.getLast()>maximumDifference){
-                    maximumDifference = ls.pop();
-                }else {
-                    ls.pop();
-                }
-            }
+//    class Difference {
+//        private int[] elements;
+//        LinkedList<Integer> ls = new LinkedList<Integer>();
+//        public int maximumDifference = Integer.MIN_VALUE;
+//        public Difference(int[] arr){
+//            this.elements = arr;
+//        }
 //
-//            for (int i =0;i<ls.size();i++){
-//                if (ls.get(i)>maximumDifference){
-//                    maximumDifference=ls.get(i);
+//        LinkedList<Integer> lsls = new LinkedList<Integer>();
+//        // Add your code here
+//        public void computeDifference(){
+//            for (int i=0;i<elements.length-1;i++){
+//                for(int j = i+1;j<elements.length;j++){
+//                    int temp = elements[i]-elements[j];
+//                    if (temp>=0){
+//                        ls.add(temp);
+//                    }else {
+//                        ls.add(-1*temp);
+//                    }
 //                }
 //            }
-            System.out.println(maximumDifference);
-            return maximumDifference;
-        }
-    } // End of Difference class
+//            int temp = elements[0]-elements[elements.length-1];
+//            if (temp>=0){
+//                ls.add(temp);
+//            }else {
+//                ls.add(-1*temp);
+//            }
+//            System.out.println(ls);
+//        }
+//        //   Correct it
+//        public int maximumDifference(){
+//            maximumDifference = Integer.MIN_VALUE;
+//            while (!ls.isEmpty()){
+//                if (ls.getLast()>maximumDifference){
+//                    maximumDifference = ls.pop();
+//                }else {
+//                    ls.pop();
+//                }
+//            }
+////
+////            for (int i =0;i<ls.size();i++){
+////                if (ls.get(i)>maximumDifference){
+////                    maximumDifference=ls.get(i);
+////                }
+////            }
+//            System.out.println(maximumDifference);
+//            return maximumDifference;
+//        }
+//    } // End of Difference class
 
-    public class Solution {
+    //public class Solution {
 
 //        public static void main(String[] args) {
 //            Scanner sc = new Scanner(System.in);
@@ -1043,5 +1312,4 @@ public class hr {
 //
 //          //  System.out.print(difference.maximumDifference);
 //        }
-    }
-}
+

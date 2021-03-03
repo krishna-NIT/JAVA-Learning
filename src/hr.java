@@ -5,16 +5,91 @@ import java.util.Stack;
 
 
 public class hr {
-    public static void main(String[] args){
-    Scanner scan = new Scanner(System.in);
-    String s = scan.nextLine();
-    System.out.println(halvesAreAlike(s));
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        String mail = scan.nextLine();
+        for (int j = 0; j < mail.length(); j++) {
+            if (mail.charAt(j) == '+') {
+                mail = atmeth(mail, j);
+                break;
+            }
+        }
+        System.out.println(mail);
+    }
+
+    public static int equalStacks(List<Integer> h1, List<Integer> h2, List<Integer> h3) {
+        // Write your code here
+        int sum1 = 0;
+        int sum2 = 0;
+        int sum3 = 0;
+        for (int i =0;i<h1.size();i++){
+            sum1+=h1.get(i);
+        }
+        for (int j =0;j<h1.size();j++){
+            sum1+=h1.get(j);
+        }
+        for (int k =0;k<h1.size();k++){
+            sum1+=h1.get(k);
+        }
+
+
+    }
+
+
+// answer
+    public static String atmeth(String mail, int index){
+        int indexofatrate=0;
+        for (int i =0;i<mail.length();i++){
+            if (mail.charAt(i) =='@' ){
+                indexofatrate = i;
+            }
+        }
+        if (indexofatrate==0){
+            return mail;
+        }
+        String ltem = mail.substring(indexofatrate,mail.length());
+        String ftem = mail.substring(0,index);
+        return (ftem+""+ltem);
+    }
+
+    public static String removealphabet(String mail, int index){
+    String ltem = mail.substring(index+1,mail.length());
+    String ftem = mail.substring(0,index);
+    System.out.println(ftem+ltem);
+    return (ltem+""+ftem);
     }
     public int numUniqueEmails(String[] emails) {
-    int ans =0;
+    LinkedList<String> finalsingleemail = new LinkedList<String>();
+    for (int i = 0;i<emails.length;i++){
+        //make email simple by .
+        int k = 0;
+        String mail = emails[i];
+        for (int j =0;j<mail.length();j++){
+            if (mail.charAt(j)=='.'){
+                mail = removealphabet(mail,j);
+                j--;
+            }
+            if (mail.charAt(j)=='@'){
+                break;
+            }
+        }
+        //make email simply by @
+        for (int j =0;j<mail.length();j++){
+            if (mail.charAt(j)=='+'){
+                mail = atmeth(mail,j);
+                break;
+            }
+        }
 
-    return ans;
+        //add in list if not included
+        if (!finalsingleemail.contains(mail)){
+            finalsingleemail.add(mail);
+        }
     }
+    return finalsingleemail.size();
+    }
+
+
 
     public static boolean halvesAreAlike(String s) {
         s = s.toLowerCase();

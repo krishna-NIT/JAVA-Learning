@@ -5,8 +5,58 @@ import java.util.Stack;
 
 
 public class hr {
-    public int maximumUnits(int[][] boxTypes, int truckSize) {
+    public static void main(String[] args){
+    Scanner scan = new Scanner(System.in);
+    String s = scan.nextLine();
+    System.out.println(halvesAreAlike(s));
+    }
+    public int numUniqueEmails(String[] emails) {
+    int ans =0;
 
+    return ans;
+    }
+
+    public static boolean halvesAreAlike(String s) {
+        s = s.toLowerCase();
+        int len = s.length();
+        String a = s.substring(0,((len/2)));
+        String b = s.substring(len/2,len);
+        System.out.println(s);
+        System.out.println(a+" "+b);
+        int avcount = 0;
+        int bvcount = 0;
+        for (int i =0;i<a.length();i++){
+            if(a.charAt(i)=='a' ||a.charAt(i)=='e' ||a.charAt(i)=='i' ||a.charAt(i)=='o' ||a.charAt(i)=='u'){
+                System.out.print(a.charAt(i)+"");
+                avcount++;
+            }
+            if(b.charAt(i)=='a' ||b.charAt(i)=='e' ||b.charAt(i)=='i' ||b.charAt(i)=='o' ||b.charAt(i)=='u'){
+                System.out.print(b.charAt(i)+"");
+                bvcount++;
+            }
+        }
+        if (avcount==bvcount){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+
+    public void reverseString(char[] s) {
+    int k =0;
+    char[] fin = new char[s.length];
+    for (int i=s.length-1;i>=0;i--){
+    fin[k]= s[i];
+    k++;
+    }
+    for (int i =0;i<s.length;i++){
+        s[i]= fin[i];
+    }
+}
+
+    public int maximumUnits(int[][] boxTypes, int truckSize) {
+return  0;
     }
 
     public boolean isSubsequence(String s, String t) {
@@ -27,7 +77,7 @@ public class hr {
     }
 
 
-    public int[] twoSum(int[] numbers, int target) {
+    public void twoSum(int[] numbers, int target) {
     int[] ans = new int[2];
         for (int i= 0;i<numbers.length-1;i++){
         for (int j =i+1;j<numbers.length;j++){
@@ -39,17 +89,17 @@ public class hr {
     }
     }
 
-    public int firstBadVersion(int n) {
-        for (int i =1;i<=n;i++){
-            if (!isBadVersion(i)){
-                if (isBadVersion(i+1)){
-                    return i+1;
-                }
-            }
-        }
-        return -1;
-    }
-
+//    public int firstBadVersion(int n) {
+//        for (int i =1;i<=n;i++){
+//            if (!isBadVersion(i)){
+//                if (isBadVersion(i+1)){
+//                    return i+1;
+//                }
+//            }
+//        }
+//        return -1;
+//    }
+//
 
     public int mySqrt(int x) {
     int i=0;
@@ -92,8 +142,8 @@ public class hr {
     }
 
     public int guessNumber(int n) {
-        int gue = guess(n);
-
+       // int gue = guess(n);
+return 0;
     }
 
     public int search(int[] nums, int target) {
@@ -129,7 +179,7 @@ public class hr {
     }
 
     public String destCity(List<List<String>> paths) {
-
+return "dom";
     }
 
 
@@ -231,30 +281,7 @@ public class hr {
         System.out.println(ans);
     }
 
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        int n = scan.nextInt();
-        int[] arr = new int[n];
-        for (int i =0;i<n;i++) {
-            arr[i] = scan.nextInt();
-        }
-        System.out.println("Input done");
-        findNumbers(arr);
-//        int q = scan.nextInt();
 
-//        while (q-- > 0) {
-//            int n = scan.nextInt();
-//            int leap = scan.nextInt();
-//
-//            int[] game = new int[n];
-//            for (int i = 0; i < n; i++) {
-//                game[i] = scan.nextInt();
-//            }
-//
-//            System.out.println( (canWin(leap, game)) ? "YES" : "NO" );
-//        }
-//        scan.close();
-    }
     public int fact(int n){
         int ans = 1;
         while (n>0){

@@ -16,6 +16,61 @@ public class hr {
         }
         System.out.println(mail);
     }
+    public int maxNumberOfBalloons(String text) {
+        int[] arr = new int[5];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = 0;
+        }
+        for (int i = 0; i < text.length(); i++) {
+            if (text.charAt(i) == 'b') {
+                arr[0] += 1;
+            }
+            if (text.charAt(i) == 'a') {
+                arr[1] += 1;
+            }
+            if (text.charAt(i) == 'l') {
+                arr[2] += 1;
+            }
+            if (text.charAt(i) == 'o') {
+                arr[3] += 1;
+            }
+            if (text.charAt(i) == 'n') {
+                arr[4] += 1;
+            }
+        }
+        int count = 0;
+        int k = text.length();
+        while (k >= 0) {
+            if (arr[0] > 0 && arr[1] > 0 && arr[2] > 1 && arr[3] > 1 && arr[4] > 0) {
+                arr[0]--;
+                arr[1]--;
+                arr[2]--;
+                arr[2]--;
+                arr[4]--;
+                arr[3]--;
+                arr[3]--;
+                count++;
+            }
+            k--;
+
+        }
+        return count;
+    }
+    public List<String> stringMatching(String[] words) {
+        LinkedList<String> ls = new LinkedList<String>();
+        for (int i =0;i<words.length;i++){
+            String temp = words[i];
+            for (int j=0;j<words.length;j++){
+                if (temp.contains(words[j]) && i!=j){
+                    if (!ls.contains(words[j])) {
+                        ls.add(words[j]);
+                    }
+                }
+            }
+        }
+        return ls;
+    }
+
 
     public static int equalStacks(List<Integer> h1, List<Integer> h2, List<Integer> h3) {
         // Write your code here

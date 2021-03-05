@@ -7,15 +7,72 @@ import java.util.Stack;
 public class hr {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        String mail = scan.nextLine();
-        for (int j = 0; j < mail.length(); j++) {
-            if (mail.charAt(j) == '+') {
-                mail = atmeth(mail, j);
-                break;
+        int t = scan.nextInt();
+        int sum = scan.nextInt();
+        int[] arr = new int[t];
+        int cal =0;
+        for (int i =0;i<t;i++){
+            arr[i] = scan.nextInt();
+            cal+= arr[i];
+        }
+        int d = 0;
+        if (cal==sum){
+            System.out.println(1);
+            d = -1;
+        }
+        if (d!= -1){
+            for (int i = 0;i<arr.length;i++){
+                int temp = cal;
+                temp = temp - (arr[i]*2);
+                if (temp == sum){
+                    System.out.println(1);
+                    d = -1;
+                }
             }
         }
-        System.out.println(mail);
+        if (d!=-1){
+            for (int i = 0;i<arr.length;i++){
+                int temp = cal;
+                for (int j = 0;j<arr.length && i!= j;j++) {
+                    temp = temp - (arr[i] * 2)-(arr[j] * 2);
+                    if (temp == sum) {
+                        System.out.println(1);
+                        d = -1;
+                    }
+                }
+            }
+        }
+
     }
+//        LinkedList<Integer> ls = new LinkedList<Integer>();
+//        for (int i =0;i<t;i++){
+//            int n = scan.nextInt();
+//            int nin = 0;
+//            for (int b=1;nin==0;b++){
+//                for (int nb =1;nb<=b;nb++) {
+//                    if (b % nb == 0) {
+//                        ls.add(nb);
+//                    }
+//                }
+//                int count =0;
+//                if (ls.size()>=4) {
+//                    for (int k = 0; k < ls.size(); k++) {
+//                        for (int j = 0; j < ls.size(); j++) {
+//                            int diff = ls.get(k)-ls.get(j);
+//                            if (diff ==0 || diff>=n || diff<=(-1*n)){
+//                                count++;
+//                            }
+//                        }
+//                    }
+//                    if (count == Math.pow(ls.size(),2)){
+//                        System.out.println(b);
+//                        nin = 1;
+//                    }
+//                }
+//                ls.clear();
+//            }
+//        }
+
 
     public int singleNonDuplicate(int[] nums) {
     for (int i =0;i<nums.length;i++){
@@ -50,7 +107,7 @@ public class hr {
         if (nums.length==2){
             if (nums[0]>nums[1]){
                 return 0;
-            }else {return 1};
+            }else {return 1;}
         }
     int index= 0;
     int val = Integer.MIN_VALUE;
@@ -157,23 +214,23 @@ public class hr {
     }
 
 
-    public static int equalStacks(List<Integer> h1, List<Integer> h2, List<Integer> h3) {
-        // Write your code here
-        int sum1 = 0;
-        int sum2 = 0;
-        int sum3 = 0;
-        for (int i =0;i<h1.size();i++){
-            sum1+=h1.get(i);
-        }
-        for (int j =0;j<h1.size();j++){
-            sum1+=h1.get(j);
-        }
-        for (int k =0;k<h1.size();k++){
-            sum1+=h1.get(k);
-        }
-
-
-    }
+//    public static int equalStacks(List<Integer> h1, List<Integer> h2, List<Integer> h3) {
+//        // Write your code here
+//        int sum1 = 0;
+//        int sum2 = 0;
+//        int sum3 = 0;
+//        for (int i =0;i<h1.size();i++){
+//            sum1+=h1.get(i);
+//        }
+//        for (int j =0;j<h1.size();j++){
+//            sum1+=h1.get(j);
+//        }
+//        for (int k =0;k<h1.size();k++){
+//            sum1+=h1.get(k);
+//        }
+//
+//
+//    }
 
 
 // answer

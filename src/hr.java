@@ -8,41 +8,32 @@ public class hr {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         int t = scan.nextInt();
-        int sum = scan.nextInt();
-        int[] arr = new int[t];
-        int cal =0;
-        for (int i =0;i<t;i++){
-            arr[i] = scan.nextInt();
-            cal+= arr[i];
-        }
-        int d = 0;
-        if (cal==sum){
-            System.out.println(1);
-            d = -1;
-        }
-        if (d!= -1){
-            for (int i = 0;i<arr.length;i++){
-                int temp = cal;
-                temp = temp - (arr[i]*2);
-                if (temp == sum){
-                    System.out.println(1);
-                    d = -1;
+        for (int i = 0;i<t;i++){
+            int a = scan.nextInt();
+            int b = scan.nextInt();
+            int count =0;
+            LinkedList<Integer> ls = new LinkedList<Integer>();
+            for (int j = a;j<=b;j++){
+            int n = j;
+            while (n>0){
+                ls.add(n%10);
+                n/=10;
+            }
+               // System.out.println(ls);
+            int bha =0;
+            for (int k=0;k<ls.size()-1;k++){
+                if (ls.get(k)-ls.get(k+1)==0 || ls.get(k)-ls.get(k+1)==1 || ls.get(k)-ls.get(k+1)==(-1)){
+                    //System.out.println("> is taken");
+                    bha++;
                 }
             }
-        }
-        if (d!=-1){
-            for (int i = 0;i<arr.length;i++){
-                int temp = cal;
-                for (int j = 0;j<arr.length && i!= j;j++) {
-                    temp = temp - (arr[i] * 2)-(arr[j] * 2);
-                    if (temp == sum) {
-                        System.out.println(1);
-                        d = -1;
-                    }
-                }
+            if (bha == ls.size()-1){
+                count++;
             }
+            ls.clear();
+            }
+            System.out.println(count);
         }
-
     }
 //        LinkedList<Integer> ls = new LinkedList<Integer>();
 //        for (int i =0;i<t;i++){

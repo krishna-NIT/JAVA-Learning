@@ -16,6 +16,91 @@ public class hr {
         }
         System.out.println(mail);
     }
+
+    public int singleNonDuplicate(int[] nums) {
+    for (int i =0;i<nums.length;i++){
+        int count =0;
+        for (int j = 0;j<nums.length;j++){
+            if (nums[i]==nums[j]){
+                count++;
+            }
+        }
+
+        if (count!=2){
+            return nums[i];
+        }
+    }
+    return 0;
+    }
+    public int search(int[] nums, int target) {
+        int index = -1;
+        for (int i =0;i<nums.length;i++){
+            if (nums[i]==target){
+                index=i;
+                return i;
+            }
+        }
+        System.out.println(index);
+        return index;
+    }
+    public int findPeakElement(int[] nums) {
+        if (nums.length<=1){
+            return -1;
+        }
+        if (nums.length==2){
+            if (nums[0]>nums[1]){
+                return 0;
+            }else {return 1};
+        }
+    int index= 0;
+    int val = Integer.MIN_VALUE;
+    for (int i =0;i<nums.length-2;i++){
+        if (nums[i]<nums[i+1] && nums[i+1]>nums[i+2]){
+            if (nums[i+1]>val){
+                val = nums[i+1];
+                index = i+1;
+            }
+        }
+    }
+    if (val<nums[nums.length-1] && nums[nums.length-1]>nums[nums.length-2]){
+        index = nums.length-1;
+    }
+    return index;
+    }
+
+    public int[] searchRange(int[] nums, int target) {
+    int[] arr = new int[2];
+    arr[0] = -1;
+    arr[1] = -1;
+    int count = 0;
+    for (int i =0;i<nums.length;i++){
+        if (nums[i]==target){
+            arr[1]=i;
+            count++;
+        }
+        if (count==1){
+            arr[0]=i;
+            count++;
+        }
+    }
+    return arr;
+    }
+
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int fi =0;
+        System.out.println(matrix.length+" "+matrix[0].length);
+        for (int i=0;i<matrix.length;i++){
+            if (matrix[i][0]<=target && matrix[i][matrix[0].length-1]>=target){
+                for (int j = 0;j<matrix[0].length;j++){
+                    if (matrix[i][j]==target){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     public int maxNumberOfBalloons(String text) {
         int[] arr = new int[5];
         for (int i = 0; i < arr.length; i++) {
@@ -276,7 +361,7 @@ return  0;
 return 0;
     }
 
-    public int search(int[] nums, int target) {
+    public int searchbhagwat(int[] nums, int target) {
         for (int i=0;i<nums.length;i++){
             if (nums[i]==target){
                 return i;

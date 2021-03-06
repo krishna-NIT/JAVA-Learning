@@ -35,6 +35,26 @@ public class hr {
             System.out.println(count);
         }
     }
+
+    public int[] finalPrices(int[] prices) {
+        int[] arr = new int[prices.length];
+        for (int i =0;i<prices.length;i++){
+            int temp = 0;
+            for (int j = i+1;j<arr.length;j++){
+                if (prices[j]<=prices[i]){
+                    arr[i] = prices[i]-prices[j];
+                    temp = 1;
+                    break;
+                }
+            }
+            if (temp == 0){
+                arr[i] = prices[i];
+            }
+        }
+        return arr;
+    }
+
+
 //        LinkedList<Integer> ls = new LinkedList<Integer>();
 //        for (int i =0;i<t;i++){
 //            int n = scan.nextInt();

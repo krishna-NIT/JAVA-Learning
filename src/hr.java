@@ -7,35 +7,156 @@ import java.util.Stack;
 public class hr {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        int t = scan.nextInt();
-        for (int i = 0;i<t;i++){
-            int a = scan.nextInt();
-            int b = scan.nextInt();
-            int count =0;
-            LinkedList<Integer> ls = new LinkedList<Integer>();
-            for (int j = a;j<=b;j++){
-            int n = j;
-            while (n>0){
-                ls.add(n%10);
-                n/=10;
+        int n1 = 0;
+        String num1 = scan.nextLine();
+        int nlen = num1.length();
+        for (int i =0;i<num1.length();i++){
+            if (num1.charAt(i)=='1'){
+                n1+=1*(Math.pow(10,nlen-1));
+            }if (num1.charAt(i)=='2'){
+                n1+=2*(Math.pow(10,nlen-1));
+            }if (num1.charAt(i)=='3'){
+                n1+=3*(Math.pow(10,nlen-1));
+            }if (num1.charAt(i)=='4'){
+                n1+=4*(Math.pow(10,nlen-1));
+            }if (num1.charAt(i)=='5'){
+                n1+=5*(Math.pow(10,nlen-1));
+            }if (num1.charAt(i)=='6'){
+                n1+=6*(Math.pow(10,nlen-1));
+            }if (num1.charAt(i)=='7'){
+                n1+=7*(Math.pow(10,nlen-1));
+            }if (num1.charAt(i)=='8'){
+                n1+=8*(Math.pow(10,nlen-1));
+            }if (num1.charAt(i)=='9'){
+                n1+=9*(Math.pow(10,nlen-1));
             }
-               // System.out.println(ls);
-            int bha =0;
-            for (int k=0;k<ls.size()-1;k++){
-                if (ls.get(k)-ls.get(k+1)==0 || ls.get(k)-ls.get(k+1)==1 || ls.get(k)-ls.get(k+1)==(-1)){
-                    //System.out.println("> is taken");
-                    bha++;
+            nlen--;
+        }
+        System.out.println(n1);
+    }
+    static long largestRectangle(int[] h) {
+    int maxarea = Integer.MIN_VALUE;
+    for (int i =0 ;i<h.length-1;i++){
+        int minheight = Integer.MAX_VALUE;
+        for (int j = i+1;j<h.length;j++){
+            int count = 0;
+            for (int k = i; k<=j;k++){
+                if (h[k]<=minheight){
+
+                    count++;
                 }
             }
-            if (bha == ls.size()-1){
-                count++;
+            if (count ==j-i+1){
+
             }
-            ls.clear();
-            }
-            System.out.println(count);
         }
     }
 
+    }
+    public int kthSmallest(int[][] matrix, int k) {
+    int totlen = matrix.length*matrix[0].length;
+    LinkedList<Integer> ls = new LinkedList<Integer>();
+    //sort arr in ascending order
+        for (int i = 0;i<matrix.length-1;i++){
+            for (int j = 0;j<matrix[0].length-1;j++) {
+                if (matrix[i][j]<matrix[i+1][j] && matrix[i+1][j]>matrix[i][j+1]){
+                    ls.add(matrix[i+1][j]);
+                    matrix[i+1][j] = ;
+                }else {
+                    ls.add(matrix[i][j]);
+                }
+            }
+        }
+
+    //
+    return ls.get(k-1);
+    }
+    public int findDuplicate(int[] nums) {
+        for (int i = 0;i<nums.length-1;i++){
+            int count = 0;
+        for (int j = 0;j<nums.length;j++){
+            if (nums[i]==nums[j] && i!=j){
+                count++;
+                return nums[i];
+                break;
+            }
+        }
+        }
+        return -1;
+    }
+
+    public String addStrings(String num1, String num2) {
+        //convert n1
+        int n1 = 0;
+        int nlen = num1.length();
+        for (int i =0;i<num1.length();i++){
+            if (num1.charAt(i)=='1'){
+                n1+=1*(Math.pow(10,nlen-1));
+            }if (num1.charAt(i)=='2'){
+                n1+=2*(Math.pow(10,nlen-1));
+            }if (num1.charAt(i)=='3'){
+                n1+=3*(Math.pow(10,nlen-1));
+            }if (num1.charAt(i)=='4'){
+                n1+=4*(Math.pow(10,nlen-1));
+            }if (num1.charAt(i)=='5'){
+                n1+=5*(Math.pow(10,nlen-1));
+            }if (num1.charAt(i)=='6'){
+                n1+=6*(Math.pow(10,nlen-1));
+            }if (num1.charAt(i)=='7'){
+                n1+=7*(Math.pow(10,nlen-1));
+            }if (num1.charAt(i)=='8'){
+                n1+=8*(Math.pow(10,nlen-1));
+            }if (num1.charAt(i)=='9'){
+                n1+=9*(Math.pow(10,nlen-1));
+            }
+            nlen--;
+        }
+        System.out.println(n1);
+        //convert n2
+        int n2 = 0;
+        nlen = num2.length();
+        for (int i =0;i<num2.length();i++){
+            if (num2.charAt(i)=='1'){
+                n2+=1*(Math.pow(10,nlen-1));
+            }if (num2.charAt(i)=='2'){
+                n2+=2*(Math.pow(10,nlen-1));
+            }if (num2.charAt(i)=='3'){
+                n2+=3*(Math.pow(10,nlen-1));
+            }if (num2.charAt(i)=='4'){
+                n2+=4*(Math.pow(10,nlen-1));
+            }if (num2.charAt(i)=='5'){
+                n2+=5*(Math.pow(10,nlen-1));
+            }if (num2.charAt(i)=='6'){
+                n2+=6*(Math.pow(10,nlen-1));
+            }if (num2.charAt(i)=='7'){
+                n2+=7*(Math.pow(10,nlen-1));
+            }if (num2.charAt(i)=='8'){
+                n2+=8*(Math.pow(10,nlen-1));
+            }if (num2.charAt(i)=='9'){
+                n2+=9*(Math.pow(10,nlen-1));
+            }
+            nlen--;
+        }
+        System.out.println(n2);
+        //add
+        int sum = n1 + n2;
+        //make string
+        LinkedList<Integer> ls = new LinkedList<>();
+        while (sum>=0){
+            ls.add(sum%10);
+            sum/=10;
+        }
+        //String ans="";
+        String ans = Integer.toString(sum);
+        return ans;
+    }
+    public int romanToInt(String s) {
+    int ans = 0;
+    for (int i = 0;i<s.length();i++){
+
+    }
+    return ans;
+    }
     public int[] finalPrices(int[] prices) {
         int[] arr = new int[prices.length];
         for (int i =0;i<prices.length;i++){

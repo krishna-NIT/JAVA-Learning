@@ -1,58 +1,181 @@
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
 
 
 public class hr {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        int n1 = 0;
-        String num1 = scan.nextLine();
-        int nlen = num1.length();
-        for (int i =0;i<num1.length();i++){
-            if (num1.charAt(i)=='1'){
-                n1+=1*(Math.pow(10,nlen-1));
-            }if (num1.charAt(i)=='2'){
-                n1+=2*(Math.pow(10,nlen-1));
-            }if (num1.charAt(i)=='3'){
-                n1+=3*(Math.pow(10,nlen-1));
-            }if (num1.charAt(i)=='4'){
-                n1+=4*(Math.pow(10,nlen-1));
-            }if (num1.charAt(i)=='5'){
-                n1+=5*(Math.pow(10,nlen-1));
-            }if (num1.charAt(i)=='6'){
-                n1+=6*(Math.pow(10,nlen-1));
-            }if (num1.charAt(i)=='7'){
-                n1+=7*(Math.pow(10,nlen-1));
-            }if (num1.charAt(i)=='8'){
-                n1+=8*(Math.pow(10,nlen-1));
-            }if (num1.charAt(i)=='9'){
-                n1+=9*(Math.pow(10,nlen-1));
-            }
-            nlen--;
+        int[] a = new int[5];
+        int[] b = new int[5];
+        for (int i = 0;i<5;i++){
+            a[i] = scan.nextInt();
         }
-        System.out.println(n1);
+        for (int i = 0;i<5;i++){
+            b[i] = scan.nextInt();
+        }
+        createTargetArray(a,b);
+//        int T  = scan.nextInt();
+//        if (T>=1 && T<=power(10,5)) {
+//            for (int i = 0; i < T; i++) {
+//                int C = scan.nextInt();
+//                if (C>=1 && C<=power(10,9)) {
+//                    int maxproduct = Integer.MIN_VALUE;
+//                    int temp = 0;
+//                    while (temp != -1) {
+//                        for (int a = power(2, temp); a >= 0 && a < power(2, temp); a--) {
+//                            for (int b = a; b >= 0 && b < power(2, temp); b--) {
+//                                if ((a ^ b) == C && (a * b) > maxproduct) {
+//                                        maxproduct = a * b;
+//                                }
+//                            }
+//                        }
+//                        temp++;
+//                        if (maxproduct != Integer.MIN_VALUE) {
+//                            temp = -1;
+//                            break;
+//                        }
+//                    }
+//                    System.out.println(maxproduct);
+//                }
+//            };
+//        }
     }
-    static long largestRectangle(int[] h) {
-    int maxarea = Integer.MIN_VALUE;
-    for (int i =0 ;i<h.length-1;i++){
-        int minheight = Integer.MAX_VALUE;
-        for (int j = i+1;j<h.length;j++){
-            int count = 0;
-            for (int k = i; k<=j;k++){
-                if (h[k]<=minheight){
+    public static int power(int a, int b){
+        int p = 1;
+        while (b>0){
+            p *= a;
+            b--;
+        }
+        return p;
+    }
+    public int[] createTargetArray(int[] nums, int[] index) {
+        LinkedList<Integer> ls = new LinkedList<Integer>();
+        for (int i = 0;i<nums.length;i++){
+            ls.add(index[i],nums[i]);
+        }
+        int[] arr = new int[ls.size()];
+        for (int i = 0;i<arr.length;i++){
+            arr[i] = ls.get(i);
+        }
+        return arr;
+    }
+    public int[] decode(int[] encoded, int first) {
+        int[] arr = new int[encoded.length+1];
+        arr[0] = first;
+        for (int i = 1;i<arr.length;i++) {
+            int temp = 0;
+            int val = 0;
+            while (temp==0){
+                if ((arr[i-1]^val) == encoded[i-1]){
+                    arr[i] = val;
+                    temp = -1;
+                }
+                val++;
+            }
+        }
+        return arr;
+    }
+    public int xorOperation(int n, int start) {
+        int[] nums = new int[n];
+        for (int i = 0;i<n;i++){
+            nums[i] = start + (2*i);
+        }
+        int ans = nums[0];
+        if (n>1) {
+            ans = nums[0] ^ nums[1];
+            for (int i = 2; i < n; i++) {
+                ans ^= nums[i];
+            }
+        }
+            return ans;
+    }
 
-                    count++;
+    public static void countGroup(String S){
+        int ans = 0;
+        int temp = 0;
+        for (int i =0;i<S.length();i++){
+            if (S.charAt(i)=='0'){
+                if (temp == 1){
+                    ans++;
+                    temp = 0;
+                }
+                }else {
+                    temp = 1;
+
                 }
             }
-            if (count ==j-i+1){
+        if (temp == 1){
+            ans++;
+        }
+        System.out.println(ans);
+    }
 
+    //int N = scan.nextInt();
+    //        int H = scan.nextInt();
+//        int x = scan.nextInt();
+//        int[] arr = new int[N];
+//        for (int i = 0;i<N;i++){
+//            arr[i] = scan.nextInt();
+//        }
+//        if (solve(N,H,x,arr)){
+//            System.out.println("YES");
+//        }else {
+//            System.out.println("NO");
+//        }
+    public static boolean solve(int N,int H,int x,int[] arr){
+        for (int i = 0;i<arr.length;i++){
+            if (arr[i]+x>=H){
+                return true;
             }
         }
+        return false;
     }
+        //Scanner scan = new Scanner(System.in);
+//        int n1 = 0;
+//        String num1 = scan.nextLine();
+//        int nlen = num1.length();
+//        for (int i =0;i<num1.length();i++){
+//            if (num1.charAt(i)=='1'){
+//                n1+=1*(Math.pow(10,nlen-1));
+//            }if (num1.charAt(i)=='2'){
+//                n1+=2*(Math.pow(10,nlen-1));
+//            }if (num1.charAt(i)=='3'){
+//                n1+=3*(Math.pow(10,nlen-1));
+//            }if (num1.charAt(i)=='4'){
+//                n1+=4*(Math.pow(10,nlen-1));
+//            }if (num1.charAt(i)=='5'){
+//                n1+=5*(Math.pow(10,nlen-1));
+//            }if (num1.charAt(i)=='6'){
+//                n1+=6*(Math.pow(10,nlen-1));
+//            }if (num1.charAt(i)=='7'){
+//                n1+=7*(Math.pow(10,nlen-1));
+//            }if (num1.charAt(i)=='8'){
+//                n1+=8*(Math.pow(10,nlen-1));
+//            }if (num1.charAt(i)=='9'){
+//                n1+=9*(Math.pow(10,nlen-1));
+//            }
+//            nlen--;
+//        }
+//        System.out.println(n1);
 
-    }
+//    static long largestRectangle(int[] h) {
+//    int maxarea = Integer.MIN_VALUE;
+//    for (int i =0 ;i<h.length-1;i++){
+//        int minheight = Integer.MAX_VALUE;
+//        for (int j = i+1;j<h.length;j++){
+//            int count = 0;
+//            for (int k = i; k<=j;k++){
+//                if (h[k]<=minheight){
+//
+//                    count++;
+//                }
+//            }
+//            if (count ==j-i+1){
+//
+//            }
+//        }
+//    }
+//
+//    }
     public int kthSmallest(int[][] matrix, int k) {
     int totlen = matrix.length*matrix[0].length;
     LinkedList<Integer> ls = new LinkedList<Integer>();
@@ -61,7 +184,7 @@ public class hr {
             for (int j = 0;j<matrix[0].length-1;j++) {
                 if (matrix[i][j]<matrix[i+1][j] && matrix[i+1][j]>matrix[i][j+1]){
                     ls.add(matrix[i+1][j]);
-                    matrix[i+1][j] = ;
+                    matrix[i+1][j] = 25;
                 }else {
                     ls.add(matrix[i][j]);
                 }
@@ -78,7 +201,6 @@ public class hr {
             if (nums[i]==nums[j] && i!=j){
                 count++;
                 return nums[i];
-                break;
             }
         }
         }

@@ -12,7 +12,7 @@ public class hr {
         for (int i = 0;i<5;i++){
             b[i] = scan.nextInt();
         }
-        createTargetArray(a,b);
+        //createTargetArray(a,b);
 //        int T  = scan.nextInt();
 //        if (T>=1 && T<=power(10,5)) {
 //            for (int i = 0; i < T; i++) {
@@ -39,6 +39,33 @@ public class hr {
 //            };
 //        }
     }
+    public int[] shuffle(int[] nums, int n) {
+        int[] arr = new int[2*n];
+        int f1 = 0;
+        int f2 = n;
+        for (int i =0;i<2*n;i+=2){
+            arr[i] = nums[f1];
+            arr[i+1] = nums[f2];
+            f1++;
+            f2++;
+        }
+        return arr;
+    }
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int max = 0;
+        int temp = 0;
+        for (int i = 0;i<nums.length;i++){
+            if (nums[i]==1){
+                temp++;
+            }
+            if (nums[i+1]==0 && temp>max){
+                max = temp;
+                temp = 0;
+            }
+        }
+        return max;
+    }
+
     public static int power(int a, int b){
         int p = 1;
         while (b>0){
@@ -46,6 +73,21 @@ public class hr {
             b--;
         }
         return p;
+    }
+    public int minimumLengthEncoding(String[] words) {
+
+    }
+    public int missingNumber(int[] nums) {
+        int[] arr = new int[nums.length];
+        for (int i = 0;i<nums.length;i++){
+            arr[nums[i]] = 3;
+        }
+        for (int i = 0;i<nums.length;i++){
+            if (arr[i]!=3){
+                return i;
+            }
+        }
+        return 0;
     }
     public int[] createTargetArray(int[] nums, int[] index) {
         LinkedList<Integer> ls = new LinkedList<Integer>();

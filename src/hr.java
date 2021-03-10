@@ -39,6 +39,41 @@ public class hr {
 //            };
 //        }
     }
+
+    public int sumOddLengthSubarrays(int[] arr) {
+        int sum =0;
+        for (int i = 0;i<arr.length;i++){
+            sum+=arr[i];
+        }
+        for (int j=3;j<=arr.length;j+=2){
+            for (int k=0;k<=arr.length-j;k++) {
+                int d=0;
+                for (int i = k; d<j; i++) {
+                    sum += arr[i];
+                    d++;
+                }
+            }
+            System.out.println(sum);
+        }
+        return sum;
+    }
+    public int diagonalSum(int[][] mat) {
+        int sum = 0;
+        for (int i =0;i<mat.length;i++){
+            sum += mat[i][i];
+        }
+        int j = 0;
+        for (int i = mat.length-1;i>=0;i--){
+            sum += mat[i][j];
+            j++;
+        }
+        if (mat.length%2!=0) {
+            sum -= mat[(mat.length / 2)][(mat.length / 2)];
+        }
+            return sum;
+    }
+
+
     public int[] shuffle(int[] nums, int n) {
         int[] arr = new int[2*n];
         int f1 = 0;
@@ -1169,18 +1204,18 @@ return "dom";
 //    }
 
 
-    public int sumOddLengthSubarray(int[] arr) {
-    int sum =0;
-
-    for (int j=1;j<=arr.length;j+=2){
-        int d=0; //d is sum of sub arrays
-        for (int k=0;k<arr.length;k++) {
-
-        }
-        sum+=d;
-    }
-    return sum;
-    }
+//    public int sumOddLengthSubarray(int[] arr) {
+//    int sum =0;
+//
+//    for (int j=1;j<=arr.length;j+=2){
+//        int d=0; //d is sum of sub arrays
+//        for (int k=0;k<arr.length;k++) {
+//
+//        }
+//        sum+=d;
+//    }
+//    return sum;
+//    }
     public static int sumofarr(int[] arr){
         int sum =0;
         for (int i =0;i<arr.length;i++){
@@ -1303,20 +1338,20 @@ return "dom";
     }
     return val;
     }
-    public int sumOddLengthSubarrays(int[] arr) {
-    int sum =0;
-
-    for (int j=1;j<=arr.length;j+=2){
-        int d=0;
-        for (int k=0;k<=arr.length-j;k++) {
-            for (int i = k; i < arr.length && d <= j; i++) {
-                sum += arr[i];
-                d++;
-            }
-        }
-    }
-    return sum;
-    }
+//    public int sumOddLengthSubarrays(int[] arr) {
+//    int sum =0;
+//
+//    for (int j=1;j<=arr.length;j+=2){
+//        int d=0;
+//        for (int k=0;k<=arr.length-j;k++) {
+//            for (int i = k; i < arr.length && d <= j; i++) {
+//                sum += arr[i];
+//                d++;
+//            }
+//        }
+//    }
+//    return sum;
+//    }
    public int maximumWealth(int[][] accounts) {
         int row = accounts.length;
         int col = accounts[0].length;

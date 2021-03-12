@@ -1,18 +1,204 @@
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Stack;
 
 
 public class hr {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        int[] a = new int[5];
-        int[] b = new int[5];
-        for (int i = 0;i<5;i++){
-            a[i] = scan.nextInt();
+        System.out.println("Enter Size of Arraay");
+        int n = scan.nextInt();
+        int[] arrr = new int[n];
+        for (int i = 0;i<n;i++){
+            arrr[i] = scan.nextInt();
         }
-        for (int i = 0;i<5;i++){
-            b[i] = scan.nextInt();
+        double a = average(arrr);
+        System.out.println(a);
+    }
+    public int heightChecker(int[] heights) {
+        int[] temp = new int[heights.length];
+        for (int i  =0;i<temp.length;i++){
+            temp[i] = heights[i];
         }
-        //createTargetArray(a,b);
+        int[] array = sortasscendingarray(heights);
+
+        int ans = 0;
+        //print
+        for (int i  =0;i<temp.length;i++){
+            System.out.println(temp[i]+" "+array[i]);
+        }
+        for (int i = 0;i<heights.length;i++){
+            if (array[i] != temp[i]){
+                ans++;
+            }
+        }
+        return ans;
+    }
+    public int[] sortasscendingarray(int[] array){
+        for (int n = array.length; n > 0; n--) {
+            for (int i = 0; i < (n - 1); i++) {
+                if (array[i] > array[i + 1]) {
+                    swap2(array, i, (i + 1));
+                }
+            }
+        }
+        return array;
+    }
+    public static void swap2(int[] array, int i, int j) {
+        if (i == j) {
+            return;
+        }
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+
+    public static double average(int[] salary) {
+        int min = salary[0];
+        int max = salary[0];
+        double sum = 0;
+        for (int i =0;i<salary.length;i++){
+        if (salary[i]>max){
+            max = salary[i];
+        }
+        if (salary[i]<min){
+            min = salary[i];
+        }
+        sum += salary[i];
+        }
+        sum -= (max);
+        sum -= (min);
+        System.out.println(min+" "+max);
+        System.out.println(sum+" "+(salary.length-2));
+        double avg = sum/(salary.length-2);
+        System.out.println(avg);
+        return avg;
+    }
+    public int[] replaceElements(int[] arr) {
+        int[] darr = arr;
+        for (int i = 0;i<arr.length-1;i++){
+            arr[i] = greatindex(darr,i+1);
+        }
+        arr[arr.length-1] = -1;
+        return arr;
+    }
+    public int greatindex(int[] arr, int startindex){
+        int max = Integer.MIN_VALUE;
+        int maxindex = startindex;
+        for (int i = startindex;i<arr.length;i++){
+            if (max<arr[i]){
+                max = arr[i];
+                maxindex = i;
+            }
+        }
+        return max;
+    }
+
+    public int busyStudent(int[] startTime, int[] endTime, int queryTime) {
+        int ans = 0;
+        for (int i = 0;i<startTime.length;i++){
+            if (queryTime<=endTime[i] && queryTime>=startTime[i]){
+                ans++;
+            }
+        }
+        return ans;
+    }
+
+    public int countBalls(int lowLimit, int highLimit) {
+        LinkedList<Integer> ls = new LinkedList<Integer>();
+        int noofdigit = 0;
+        int btemp = highLimit;
+        while (highLimit>0){
+            highLimit/=10;
+            noofdigit++;
+        }
+        highLimit = btemp;
+        for (int i =0;i<(9*noofdigit);i++){
+            ls.add(i,0);
+        }
+
+        for (int i = lowLimit;i<=highLimit;i++){
+            int temp = i;
+            int sumtemp = 0;
+            while (temp>0){
+                sumtemp += temp%10;
+                temp/=10;
+            }
+            int dtemp  =ls.get(sumtemp);
+            dtemp++;
+            ls.remove(sumtemp);
+            ls.add(sumtemp,dtemp);
+        }
+        int max = Integer.MIN_VALUE;
+        for (int i =0;i<ls.size();i++){
+            if (ls.get(i)>max){
+                max = ls.get(i);
+            }
+        }
+        return max;
+    }
+
+    public String toLowerCase(String str) {
+        String ans = str.toLowerCase();
+        return ans;
+    }
+
+    public static int peakval(int[] arr){
+        int peak = arr[0];
+        for (int i = 0;i<arr.length;i++){
+            if (peak<arr[i]){
+                peak = arr[i];
+            }
+        }
+        return peak;
+    }
+
+//        Scanner scan = new Scanner(System.in);
+//        int n = scan.nextInt();
+//        int[] a = new int[n];
+//        for (int i = 0;i<n;i++){
+//            a[i] = scan.nextInt();
+//        }
+//        int bhu = sumOfUnique(a);
+//        System.out.println(bhu);
+
+    public static int sumOfUnique(int[] nums) {
+        int sum = 0;
+        LinkedList<Integer> ls = new LinkedList<Integer>();
+        for (int i =0;i<nums.length;i++){
+             ls.add(nums[i]);
+        }
+        System.out.println(ls);
+        for (int i =0;i<nums.length;i++){
+            int temp = nums[i];
+            System.out.println(temp);
+            //ls.add(i,0);
+            ls.remove(i);
+            System.out.println(ls);
+            if (!ls.contains(temp)){
+              //  System.out.println("contains");
+                sum+=temp;
+            }
+            ls.add(i,temp);
+            //System.out.println(sum);
+        }
+        return sum;
+    }
+
+
+    public int countNegatives(int[][] grid) {
+        int ans = 0;
+        for (int i = 0;i<grid.length;i++){
+            for (int j =0;j<grid[0].length;j++){
+                if (grid[i][j]<0){
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+    //createTargetArray(a,b);
 //        int T  = scan.nextInt();
 //        if (T>=1 && T<=power(10,5)) {
 //            for (int i = 0; i < T; i++) {
@@ -38,8 +224,8 @@ public class hr {
 //                }
 //            };
 //        }
-    }
 
+// git commit -A correct or not ??
     public int sumOddLengthSubarrays(int[] arr) {
         int sum =0;
         for (int i = 0;i<arr.length;i++){
@@ -108,9 +294,6 @@ public class hr {
             b--;
         }
         return p;
-    }
-    public int minimumLengthEncoding(String[] words) {
-
     }
     public int missingNumber(int[] nums) {
         int[] arr = new int[nums.length];

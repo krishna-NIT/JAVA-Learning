@@ -10,12 +10,113 @@ public class hr {
         System.out.println("Enter Size of Arraay");
         int n = scan.nextInt();
         int[] arrr = new int[n];
+        System.out.println("Enter "+n+" Elements of array");
         for (int i = 0;i<n;i++){
             arrr[i] = scan.nextInt();
         }
-        double a = average(arrr);
-        System.out.println(a);
+        System.out.println("By How much Position You want to Shift Array Leftwards :");
+        int t = scan.nextInt();
+        for (int i = 0;i<t;i++){
+            leftrotation(arrr);
+        }
+        System.out.println("After LEft Rotation the Final Array is :");
+        for (int i = 0;i<arrr.length;i++){
+            System.out.print(arrr[i]+" ");
+        }
     }
+
+
+    public int[] decrypt(int[] code, int k) {
+        if (k>0){
+            met1kpos(code,k);
+        }else if (k<0){
+            met2kneg(code, k);
+        }else {
+            met3kzero(code,k);
+        }
+        return code;
+    }
+    public int[] met1kpos(int[] code,int k){
+        int[] tem = new int[code.length];
+        for (int i =0;i<code.length;i++){
+            tem[i] = code[i];
+        }
+        int maxindex = code.length-1;
+        for (int i = 0;i<code.length;i++){
+            int sum = 0;
+            int temp = 0;
+            for (int j = 1;j<=k;j++){
+                if (i+j<=maxindex){
+                    sum += tem[i+j];
+                }else {
+                    sum += tem[temp];
+                    temp++;
+                }
+            }
+            code[i] = sum;
+        }
+        return code;
+    }
+    public int[] met2kneg(int[] code,int k){
+        int[] tem = new int[code.length];
+        for (int i =0;i<code.length;i++){
+            tem[i] = code[i];
+        }
+        k = k*(-1);
+        for (int i = 0;i<code.length;i++){
+            int sum = 0;
+            int temp = code.length-1;
+            for (int j = 1;j<=k;j++){
+                if (i-j>=0){
+                    sum += tem[i-j];
+                }else {
+                    sum += tem[temp];
+                    temp--;
+                }
+                System.out.println(sum);
+            }
+            code[i] = sum;
+        }
+        return code;
+    }
+    public int[] met3kzero(int[] code,int k){
+        for (int i =0;i<code.length;i++){
+            code[i] = 0;
+        }
+        return code;
+    }
+
+
+    public boolean check(int[] nums) {
+        for (int i = 0;i<nums.length;i++){
+            int count = 0;
+            for (int j = 0;j<nums.length-1;j++){
+                if (nums[j]<nums[j+1]){
+                    count++;
+                }
+            }
+            if (count == nums.length-1){
+                for (int k = 0;k<nums.length;k++){
+                    System.out.println(nums[k]+" ");
+                }
+                return true;
+            }
+            leftrotation(nums);
+        }
+        return false;
+    }
+
+    public static void leftrotation(int[] arrr){
+        int firstval = arrr[0];
+        for (int i =0;i<arrr.length-1;i++){
+            arrr[i] = arrr[i+1];
+        }
+        arrr[arrr.length-1] = firstval;
+    }
+
+
+
+
     public int heightChecker(int[] heights) {
         int[] temp = new int[heights.length];
         for (int i  =0;i<temp.length;i++){

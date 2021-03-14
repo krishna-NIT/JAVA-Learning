@@ -24,6 +24,42 @@ public class hr {
             System.out.print(arrr[i]+" ");
         }
     }
+    public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
+    LinkedList newls = new LinkedList();
+    int max = Integer.MIN_VALUE;
+    for (int i = 0;i<candies.length;i++){
+        if (max<candies[i]){
+            max = candies[i];
+        }
+    }
+    for (int i = 0;i<candies.length;i++){
+        if (candies[i]+extraCandies >= max){
+            newls.add(true);
+        }else {
+            newls.add(false);
+        }
+    }
+    return newls;
+    }
+
+
+
+    public int[] decompressRLElist(int[] nums) {
+    int n = (nums.length+1)/2;
+    LinkedList<Integer> ls = new LinkedList<Integer>();
+    for (int i =0;i<n;i++){
+        int freq = nums[2*i];
+        for (int j =0;j<freq;j++){
+            ls.add(nums[(2*i)+1]);
+        }
+    }
+    int len = ls.size();
+    int[] ans = new int[len];
+    for (int i =0;i<len;i++){
+        ans[i] = ls.get(i);
+    }
+    return ans;
+    }
 
 
     public int[] decrypt(int[] code, int k) {

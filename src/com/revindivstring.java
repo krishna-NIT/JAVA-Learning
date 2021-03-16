@@ -5,16 +5,109 @@ Concatenation & at last will reverse last word & hence will return the string te
 */
 
 package com;
+
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 public class revindivstring {
     public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
-        int n = scan.nextInt();
-        //maximum69Number(n);
-        System.out.println(maximum69Number(n));
+        int l = scan.nextInt();
+        int r = scan.nextInt();
+        selfDividingNumbers(l,r);
+
     }
+
+    public List<String> commonChars(String[] A) {
+        LinkedList<String> lsc = new LinkedList<String>();
+        LinkedList<Character> aa = new LinkedList<Character>();
+    for (int i = 0;i<A[0].length();i++){
+        char temp = A[0].charAt(i);
+        aa.add(temp);
+    }
+
+    for (int i = 0;i<aa.size();i++){
+        int temp = 0;
+        String chtostr = aa.get(i).toString();
+        for (int j = 0;j<A.length;j++){
+            if (!A[j].contains(chtostr)){
+                temp = 1;
+                break;
+            }else {
+                int bhu = A[j].indexOf(chtostr);
+            }
+        }
+        if (temp == 0){
+            lsc.add(chtostr);
+        }
+    }
+        return lsc;
+    }
+
+    public boolean canMakeArithmeticProgression(int[] arr) {
+        for (int n = arr.length; n > 0; n--) {
+            for (int i = 0; i < (n - 1); i++) {
+                if (arr[i] > arr[i + 1]) {
+                    swap2(arr, i, (i + 1));
+                }
+            }
+        }
+        int d = arr[1]-arr[0];
+        for (int i = 0;i<arr.length-1;i++) {
+            if (arr[i + 1] - arr[i] != d) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public static void swap2(int[] array, int i, int j) {
+        if (i == j) {
+            return;
+        }
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+
+    }
+
+
+
+    public static List<Integer> selfDividingNumbers(int left, int right) {
+        LinkedList<Integer> ls = new LinkedList<Integer>();
+        for (int i = left;i<=right;i++){
+            if (selfdivno(i)){
+                ls.add(i);
+            }
+        }
+        System.out.println(ls);
+        return ls;
+    }
+    public static boolean selfdivno(int i){
+        int num = i;
+        int temp = 0;
+        LinkedList<Integer> ls2 = new LinkedList<>();
+        while (i>0){
+            int d = i%10;
+            ls2.add(d);
+            i/=10;
+        }
+        if (ls2.contains(0)){
+            return false;
+        }else {
+            for (i = 0;i<ls2.size();i++){
+                if (num%ls2.get(i) != 0){
+                    temp = 1;
+                }
+            }
+        }
+        if (temp == 1){
+            return false;
+        }
+        return true;
+    }
+
+
     public int[] sumZero(int n) {
         int[] arr = new int[n];
         int temp = 4;

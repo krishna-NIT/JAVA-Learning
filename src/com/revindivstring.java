@@ -16,7 +16,77 @@ public class revindivstring {
         int l = scan.nextInt();
         int r = scan.nextInt();
         selfDividingNumbers(l,r);
+    }
 
+    public int[] sortByBits(int[] arr) {
+        LinkedList<Integer> ls = new LinkedList<Integer>();
+        for (int n = arr.length; n > 0; n--) {
+            for (int i = 0; i < (n - 1); i++) {
+                if (Integer.toBinaryString(arr[i]) > Integer.toBinaryString(arr[i+1])) {
+                    swap2(arr, i, (i + 1));
+                }
+            }
+        }
+
+
+        int[] ar = new int[ls.size()];
+        for (int i = 0;i<ls.size();i++) {
+            ar[i] = ls.get(i);
+        }
+        return ar;
+    }
+
+    public String removeDuplicates(String S) {
+        String ans = "";
+        LinkedList<Character> ls = new LinkedList<Character>();
+        for (int i = 0; i < S.length(); i++) {
+            ls.add(S.charAt(i));
+        }
+        for (int i = 0;i<ls.size()-1;i++) {
+            if (ls.get(i) == ls.get(i + 1)) {
+                ls.remove(i);
+                ls.remove(i);
+                i = -1;
+            }
+        }
+        for (int i = 0;i<ls.size();i++) {
+        ans += ls.get(i).toString();
+        }
+        return ans;
+    }
+    public List<Integer> luckyNumbers (int[][] matrix) {
+        LinkedList<Integer> ls = new LinkedList<Integer>();
+        LinkedList<Integer> min1 = new LinkedList<Integer>();
+        LinkedList<Integer> max1 = new LinkedList<Integer>();
+
+        for (int i = 0;i<matrix[0].length;i++) {
+            int max = Integer.MIN_VALUE;
+            for (int k = 0; k < matrix.length; k++) {
+                if (matrix[k][i] > max) {
+                    max = matrix[k][i];
+                }
+            }
+            max1.add(max);
+        }
+
+        for (int i = 0;i<matrix.length;i++) {
+            int min = Integer.MAX_VALUE;
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (matrix[i][j] < min) {
+                    min = matrix[i][j];
+                }
+            }
+            min1.add(min);
+        }
+        System.out.println(min1+" "+max1);
+        for (int i = 0;i<max1.size();i++) {
+            if (min1.contains(max1.get(i))) {
+                ls.add(max1.get(i));
+            }
+        }
+            System.out.println(ls);
+        return ls;
+        }
     }
 
     public List<String> commonChars(String[] A) {

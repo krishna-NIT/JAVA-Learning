@@ -17,14 +17,58 @@ public class revindivstring {
         int r = scan.nextInt();
         selfDividingNumbers(l,r);
     }
+    public boolean threeConsecutiveOdds(int[] arr) {
+        for (int i = 0;i<arr.length-2;i++) {
+        if (arr[i]%2 !=0 && arr[i+1]%2 !=0 && arr[i+2]%2 !=0) {
+        return true;
+        }
+        }
+        return false;
+    }
+    public int[] shortestToChar(String s, char c) {
+        int[] arr = new int[s.length()];
+        int val;
+        for (int i = 0; i < s.length(); i++) {
+            val = -1;
+            int front = i;
+            int back = i - 1;
+            int temp = 1;
+            while (temp == 1) {
+                if(front < s.length()){
+                    if (s.charAt(front) == c) {
+                        val = (i - front);
+                        temp = 0;
+                    }
+                }
+                if (front<s.length()) {
+                    if (s.charAt(front) != c) {
+                        if (back >= 0) {
+                            if (s.charAt(back) == c && back >= 0) {
+                                val = i - back;
+                                temp = 0;
+                            }
+                        }
+                    }
+                }
+                back--;
+                front++;
+            }
+            if (val < 0) {
+                val *= (-1);
+                arr[i] = val;
+            }
+            arr[i] = val;
+        }
+        return arr;
+    }
 
     public int[] sortByBits(int[] arr) {
         LinkedList<Integer> ls = new LinkedList<Integer>();
         for (int n = arr.length; n > 0; n--) {
             for (int i = 0; i < (n - 1); i++) {
-                if (Integer.toBinaryString(arr[i]) > Integer.toBinaryString(arr[i+1])) {
-                    swap2(arr, i, (i + 1));
-                }
+                //if (Integer.toBinaryString(arr[i]) > Integer.toBinaryString(arr[i+1])) {
+                  //  swap2(arr, i, (i + 1));
+                //}
             }
         }
 

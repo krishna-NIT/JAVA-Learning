@@ -6,6 +6,7 @@ Concatenation & at last will reverse last word & hence will return the string te
 
 package com;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,6 +18,76 @@ public class revindivstring {
         int r = scan.nextInt();
         selfDividingNumbers(l,r);
     }
+    //1694 Reformat Phone Number ---> Leetcode Pending
+    public String reformatNumber(String number) {
+    String fin = "";
+        ArrayList<Character>  arrchar = new ArrayList<Character>();
+        for (int i = 0;i<number.length();i++) {
+        if (number.charAt(i)!='-' && number.charAt(i)!=' '){
+            arrchar.add(number.charAt(i));
+        }
+        }
+        System.out.println(arrchar);
+        int count = 0;
+        for (int i = 0;i<arrchar.size();i++) {
+            if (count <= 3) {
+                fin += Character.toString(arrchar.get(i));
+                count++;
+            }
+            if (count == 3 && i!= arrchar.size()-1) {
+                count = 0;
+                fin += "-";
+            }
+            if (arrchar.size() - i == 4 && arrchar.size()%3 == 1) {
+                fin += Character.toString(arrchar.get(i));
+                fin += Character.toString(arrchar.get(i+1));
+                fin += "-";
+                fin += Character.toString(arrchar.get(i+2));
+                fin += Character.toString(arrchar.get(i+3));
+            }
+        }
+        return fin;
+    }
+
+
+    // 500 Keyword Row  ---> Leetcode Pending
+    public String[] findWords(String[] words) {
+    LinkedList<String> ls = new LinkedList<String>();
+        String a = "qwertyuiop";
+        String b = "asdfghjkl";
+        String c = "zxcvbnm";
+
+    for (int i = 0;i<words.length;i++) {
+        int z = 0;
+        int x = 0;
+        int v = 0;
+        String def = words[i];
+        words[i] = words[i].toLowerCase();
+            for (int j = 0;j<words[i].length();j++) {
+            String tem = Character.toString(words[i].charAt(j));
+                System.out.println(tem);
+                if (a.contains(tem)) {
+                    z++;
+                }
+                if (b.contains(tem)) {
+                    x++;
+                }
+                if (c.contains(tem)) {
+                    v++;
+                }
+            }
+        System.out.println(z+" "+x+" "+v);
+            if (z == words[i].length() || x == words[i].length() || v == words[i].length()) {
+            ls.add(def);
+            }
+        }
+    String[] arr = new String[ls.size()];
+    for (int i = 0;i<ls.size();i++) {
+            arr[i] = ls.get(i);
+        }
+    return arr;
+    }
+
     public boolean threeConsecutiveOdds(int[] arr) {
         for (int i = 0;i<arr.length-2;i++) {
         if (arr[i]%2 !=0 && arr[i+1]%2 !=0 && arr[i+2]%2 !=0) {

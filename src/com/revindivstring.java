@@ -29,6 +29,14 @@ public class revindivstring {
         }
         System.out.println(arrchar);
         int count = 0;
+        int bh = 0;
+        if (arrchar.size() == 4) {
+            fin += Character.toString(arrchar.get(bh));
+            fin += Character.toString(arrchar.get(bh+1));
+            fin += "-";
+            fin += Character.toString(arrchar.get(bh+2));
+            fin += Character.toString(arrchar.get(bh+3));
+        }
         for (int i = 0;i<arrchar.size();i++) {
             if (count <= 3) {
                 fin += Character.toString(arrchar.get(i));
@@ -38,6 +46,7 @@ public class revindivstring {
                 count = 0;
                 fin += "-";
             }
+            System.out.println();
             if (arrchar.size() - i == 4 && arrchar.size()%3 == 1) {
                 fin += Character.toString(arrchar.get(i));
                 fin += Character.toString(arrchar.get(i+1));

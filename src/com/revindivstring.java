@@ -39,8 +39,66 @@ public class revindivstring {
         }
         return -1;
     }
-// trial changes
+    public String reformatDate(String date) {
+        String ans = "";
+        int count = 0;
+        int temp = date.length()-1;
+        ans += date.charAt(temp-3);
+        ans += date.charAt(temp-2);
+        ans += date.charAt(temp-1);
+        ans += date.charAt(temp);
+        ans += "-";
+        //add Month
+        int bha = 0;
+        int inc = 0;
+        while (bha == 0){
+            if (date.charAt(inc) == ' '){
+                bha = inc+1;
+                break;
+            }
+            if (bha == 0) {
+                inc++;
+            }
+        }
+        String mon = date.substring(bha,bha+3);
+        if (mon.equals("Jan")){
+            ans+="01";
+        }else if (mon.equals("Feb")){
+            ans+="02";
+        }else if (mon.equals("Mar")){
+            ans+="03";
+        }else if (mon.equals("Apr")){
+            ans+="04";
+        }else if (mon.equals("May")){
+            ans+="05";
+        }else if (mon.equals("Jun")){
+            ans+="06";
+        }else if (mon.equals("Jul")){
+            ans+="07";
+        }else if (mon.equals("Aug")){
+            ans+="08";
+        }else if (mon.equals("Sep")){
+            ans+="09";
+        }else if (mon.equals("Oct")){
+            ans+="10";
+        }else if (mon.equals("Nov")){
+            ans+="11";
+        }else if (mon.equals("Dec")){
+            ans+="12";
+        }
+        //add day
+        ans += "-";
+        if (date.charAt(1) == 't' || date.charAt(1) == 'r' ||date.charAt(1) == 's'||date.charAt(1) == 'n'){
+            ans+="0";
+            ans+=date.charAt(0);
+        }else {
+            ans+=date.charAt(0);
+            ans+=date.charAt(1);
+        }
+        return ans;
+    }
 
+// trial changes
     public int[] numberOfLines(int[] widths, String s) {
     int[] result = new int[2];
     int count = 0;

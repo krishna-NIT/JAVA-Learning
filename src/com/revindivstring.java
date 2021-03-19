@@ -14,9 +14,82 @@ import java.util.Scanner;
 public class revindivstring {
     public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
-        int l = scan.nextInt();
-        int r = scan.nextInt();
-        selfDividingNumbers(l,r);
+        String[] arr = new String[5];
+        for (int i = 0;i<arr.length;i++){
+            arr[i] = scan.nextLine();
+        }
+        System.out.println(calPoints(arr));
+    }
+    public int isPrefixOfWord(String sentence, String searchWord) {
+        int count = 1;
+        if (sentence.contains(searchWord)){
+            for (int i = 0;i<sentence.length();i++){
+                if (searchWord.charAt(i) == ' '){
+                    count++;
+                }
+                int orii = i;
+                int temp = 0;
+                for (int j = 0;j<searchWord.length() && (orii+searchWord.length())<sentence.length();j +=0){
+                if (searchWord.charAt(j)==sentence.charAt(i)){
+
+                }
+                if (temp == searchWord.length()){
+                    return count;
+                }
+                i = orii;
+                }
+            }
+        }else {
+            return -1;
+        }
+        return -1;
+    }
+    public static int calPoints(String[] ops) {
+        LinkedList<Integer> ls = new LinkedList<Integer>();
+        for (int i = 0;i<ops.length;i++){
+            if (ops[i].equals("C")){
+                ls.remove(ls.size()-1);
+            }else if (ops[i].equals("D")){
+                ls.add(2*ls.getLast());
+            }else if (ops[i].equals("+")){
+                ls.add((ls.getLast()+ls.get(ls.size()-2)));
+            }else {
+                int n = Integer.parseInt(ops[i]);
+                ls.add(n);
+            }
+            System.out.println(ls);
+        }
+        int sum = 0;
+        for (int i = 0;i<ls.size();i++){
+            sum += ls.get(i);
+        }
+        return sum;
+    }
+
+    public int findTheDistanceValue(int[] arr1, int[] arr2, int d) {
+    int count = 0;
+        for (int i = 0;i<arr1.length;i++){
+        for (int j = 0;j<arr2.length;j++){
+            int temp = arr1[i] - arr2[j];
+            if (temp<0){
+                temp = temp*(-1);
+            }
+            if (temp<= d && temp>0){
+                count++;
+            }
+            }
+        }
+        return count;
+    }
+    // Fibonacci Number
+    public int fib(int n) {
+    LinkedList<Integer> ls = new LinkedList<Integer>();
+    ls.add(0);
+    ls.add(1);
+    for (int i = 2 ;i<=n;i++){
+        ls.add(ls.get(i-1) + ls.get(i-2));
+    }
+    return ls.get(n);
     }
     //1694 Reformat Phone Number ---> Leetcode Pending
     public String reformatNumber(String number) {
@@ -211,7 +284,7 @@ public class revindivstring {
             System.out.println(ls);
         return ls;
         }
-    }
+    
 
     public List<String> commonChars(String[] A) {
         LinkedList<String> lsc = new LinkedList<String>();

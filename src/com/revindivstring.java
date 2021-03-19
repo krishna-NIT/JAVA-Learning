@@ -13,12 +13,7 @@ import java.util.Scanner;
 
 public class revindivstring {
     public static void main(String[] args){
-        Scanner scan = new Scanner(System.in);
-        String[] arr = new String[5];
-        for (int i = 0;i<arr.length;i++){
-            arr[i] = scan.nextLine();
-        }
-        System.out.println(calPoints(arr));
+        Scanner scan = new Scanner(System.in);g
     }
     public int isPrefixOfWord(String sentence, String searchWord) {
         int count = 1;
@@ -43,6 +38,25 @@ public class revindivstring {
             return -1;
         }
         return -1;
+    }
+
+    public int[] numberOfLines(int[] widths, String s) {
+    int[] result = new int[2];
+    int count = 0;
+    int dose = 1;
+    for (int i = 0;i<s.length();i++){
+        int cha = s.charAt(i);
+        int ascii = (int) cha -97;
+        if (count+widths[ascii] <=100){
+            count+=widths[ascii];
+        }else {
+            dose++;
+            count = widths[ascii];
+        }
+    }
+    result[0] = dose;
+    result[1] = count;
+    return result;
     }
     public static int calPoints(String[] ops) {
         LinkedList<Integer> ls = new LinkedList<Integer>();

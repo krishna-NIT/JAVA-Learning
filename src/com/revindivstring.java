@@ -39,6 +39,7 @@ public class revindivstring {
         }
         return -1;
     }
+// trial changes
 
     public int[] numberOfLines(int[] widths, String s) {
     int[] result = new int[2];

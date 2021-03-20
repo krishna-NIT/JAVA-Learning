@@ -39,6 +39,78 @@ public class revindivstring {
         }
         return -1;
     }
+    //985
+    public int[] sumEvenAfterQueries(int[] A, int[][] queries) {
+        LinkedList<Integer> ls = new LinkedList<Integer>();
+
+        int[] arr = new int[ls.size()];
+        for (int i = 0;i<arr.length;i++){
+            arr[i] = ls.get(i);
+        }
+        return arr;
+    }
+    public char slowestKey(int[] releaseTimes, String keysPressed) {
+        int[] arr = new int[]
+    }
+    public int majorityElement(int[] nums) {
+        int ans = 0;
+        LinkedList<Integer> ls = new LinkedList<Integer>();
+        for (int i = 0;i<nums.length;i++){
+            if (!ls.contains(nums[i])){
+                ls.add(nums[i]);
+            }
+        }
+        int[] arr = new int[ls.size()];
+        for (int i = 0;i<nums.length;i++){
+            arr[ls.indexOf(nums[i])]++;
+        }
+        int maxcount = 0;
+        int maxval = 0;
+        for (int i = 0;i<arr.length;i++){
+            if (arr[i]>maxcount){
+                maxcount = arr[i];
+                maxval = ls.get(i);
+            }
+        }
+        return maxval;
+    }
+    //1446 Consecative Character
+    public int maxPower(String s) {
+        int ans = 0;
+        int max = 0;
+        char temp = s.charAt(0);
+        for (int i = 1;i<s.length();i++){
+            if (s.charAt(i) == temp){
+                 ans++;
+                 if (max<ans){
+                     max = ans;
+                 }
+            }else {
+                ans = 0;
+            }
+            temp = s.charAt(i);
+        }
+        return max+1;
+    }
+    //transpose matrix
+    public int[][] transpose(int[][] matrix) {
+        int[][] arr = new int[matrix[0].length][matrix.length];
+        int k = 0;
+        for (int i = 0;i<matrix.length;i++){
+            for (int j = 0;j<matrix[0].length;j++){
+                arr[j][k]=matrix[i][j];
+            }
+            k++;
+        }
+        return arr;
+    }
+
+    public static void swap(int a, int b){
+        int temp = a;
+        a=b;
+        b = temp;
+    }
+
     public String reformatDate(String date) {
         String ans = "";
         int count = 0;

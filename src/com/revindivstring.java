@@ -39,6 +39,42 @@ public class revindivstring {
         }
         return -1;
     }
+
+    public int[] kWeakestRows(int[][] mat, int k) {
+        int[] noofsoldier = new int[mat[0].length];
+        int[] rowindex = new int[mat[0].length];
+        for (int i = 0; i < mat[0].length; i++) {
+            noofsoldier[i] = nosoldier(mat, i);
+            rowindex[i] = i;
+        }
+        System.out.println(noofsoldier);
+        sortArray(noofsoldier,rowindex);
+        System.out.println(noofsoldier);
+        int[] ans = new int[k];
+        for (int i = 0; i < k; i++) {
+            ans[i] = rowindex[i];
+
+        }
+        return ans;
+    }
+    public int nosoldier(int[][] matrix,int i){
+        int count = 0;
+        for (int j = 0;j<matrix[0].length;j++){
+            if (matrix[i][j] == 1){
+                count++;
+            }
+        }
+        return count;
+    }
+    public int nocivil(int[][] matrix, int i){
+        int count = 0;
+        for (int j = 0;j<matrix[0].length;j++){
+            if (matrix[i][j] == 0){
+                count++;
+            }
+        }
+        return count;
+    }
     public char nextGreatestLetter(char[] letters, char target) {
     int targetascii = (int) target;
     int index = 0;
@@ -134,7 +170,7 @@ public class revindivstring {
     }
 
 
-    public int[] sortArray(int[] nums) {
+    public int[] sortArray(int[] nums,int[] rowindex) {
         for (int i = 0;i<nums.length;i++){
             for (int j = i+1 ;j<nums.length-1;j++){
                 int minindex = Integer.MAX_VALUE;
@@ -142,7 +178,14 @@ public class revindivstring {
                     minindex = j;
                 }
                 if (nums[minindex]<nums[i]){
-                    swap(nums[i],nums[minindex]);
+                    int temp = nums[i];
+                    nums[i] = nums[minindex];
+                    nums[minindex] = temp;
+
+                    temp = rowindex[i];
+                    rowindex[i] = nums[minindex];
+                    rowindex[minindex] = temp;
+
                 }
             }
         }

@@ -6,14 +6,19 @@ Concatenation & at last will reverse last word & hence will return the string te
 
 package com;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class revindivstring {
     public static void main(String[] args){
-        Scanner scan = new Scanner(System.in);g
+        Scanner scan = new Scanner(System.in);
+        int n1 = scan.nextInt();
+        int[] stu = new int[n1];
+        int[] san = new int[n1];
+        for (int i = 0;i<stu.length;i++){
+            stu[i] = scan.nextInt();
+            san[i] = scan.nextInt();
+        }
+        System.out.println(countStudents(stu,san));
     }
     public int isPrefixOfWord(String sentence, String searchWord) {
         int count = 1;
@@ -39,6 +44,69 @@ public class revindivstring {
         }
         return -1;
     }
+    //1700
+    public static int countStudents(int[] students, int[] sandwiches) {
+        LinkedList<Integer> lsstudent = new LinkedList<Integer>();
+        LinkedList<Integer> lssandwiches = new LinkedList<Integer>();
+        for (int i = 0;i<sandwiches.length;i++){
+            lssandwiches.add(sandwiches[i]);
+            lsstudent.add(students[i]);
+        }
+        int count0 = count0(lsstudent);
+        int count1 = count1(lsstudent);
+        while (count0>0 && count1>0) {
+            for (int i = 0;i<lssandwiches.size(); i++) {
+                if (lssandwiches.get(i) == lsstudent.get(i)){
+                    lssandwiches.remove(i);
+                    lsstudent.remove(i);
+                }else {
+                    int temp = lsstudent.get(i);
+                    lsstudent.remove(i);
+                    lsstudent.add(temp);
+                }
+            }
+            count0 = count0(lsstudent);
+            count1 = count1(lsstudent);
+        }
+        return lssandwiches.size();
+    }
+    public static int count0(LinkedList<Integer> ls0){
+        int count = 0;
+        int i = 0;
+        while (i<ls0.size()){
+            if (ls0.get(i) == 0){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static int count1(LinkedList<Integer> ls1){
+        int count = 0;
+        int i = 0;
+        while (i<ls1.size()){
+            if (ls1.get(i) == 0){
+                count++;
+            }
+        }
+        return count;
+    }
+
+
+    public int[] sortArray(int[] nums) {
+        for (int i = 0;i<nums.length;i++){
+            for (int j = i+1 ;j<nums.length-1;j++){
+                int minindex = Integer.MAX_VALUE;
+                if (minindex>nums[j]){
+                    minindex = j;
+                }
+                if (nums[minindex]<nums[i]){
+                    swap(nums[i],nums[minindex]);
+                }
+            }
+        }
+        return nums;
+    }
     //985
     public int[] sumEvenAfterQueries(int[] A, int[][] queries) {
         LinkedList<Integer> ls = new LinkedList<Integer>();
@@ -49,8 +117,113 @@ public class revindivstring {
         }
         return arr;
     }
+    public String thousandSeparator(int n) {
+        String ans = "";
+        if(n ==0){
+            return "0";
+        }
+        Stack<Integer> stack = new Stack<Integer>();
+        while (n>0){
+            stack.add(n%10);
+            n /= 10;
+        }
+        int temp = stack.size()%3;
+        if (stack.size()>3) {
+            if (temp == 1) {
+                ans += stack.pop();
+                for (int i = 0; i < stack.size(); i++) {
+                    ans += ".";
+                    ans += stack.pop();
+                    ans += stack.pop();
+                    ans += stack.pop();
+                }
+            }
+            if (temp == 2) {
+                ans += stack.pop();
+                ans += stack.pop();
+                for (int i = 0; i < stack.size(); i++) {
+                    ans += ".";
+                    ans += stack.pop();
+                    ans += stack.pop();
+                    ans += stack.pop();
+                }
+            }
+            if (temp == 0) {
+                ans += stack.pop();
+                ans += stack.pop();
+                ans += stack.pop();
+                for (int i = 0; i < stack.size(); i++) {
+                    ans += ".";
+                    ans += stack.pop();
+                    ans += stack.pop();
+                    ans += stack.pop();
+                }
+            }
+        }else {
+            for (int i =0;i<=stack.size();i++){
+                ans+=stack.pop();
+            }
+        }
+        return ans;
+    }
+
+    public int numSpecial(int[][] mat) {
+        int sp = 0;
+        for (int i =0;i<mat.length;i++){
+            for (int j = 0;j<mat[0].length;j++){
+                if (mat[i][j] == 1){
+                    int temp = 0;
+                    for (int k = 0;k<mat[0].length;k++){
+                        if (mat[i][k] == 1){
+                            temp++;
+                        }
+                    }
+                    for (int k = 0;k<mat.length;k++){
+                        if (mat[k][j] == 1){
+                            temp++;
+                        }
+                    }
+                    if (temp == 2){
+                        sp++;
+                    }
+                }
+            }
+        }
+        return sp;
+    }
     public char slowestKey(int[] releaseTimes, String keysPressed) {
-        int[] arr = new int[]
+        int[] arr = new int[keysPressed.length()];
+        arr[0] = releaseTimes[0];
+        for (int i =1;i<arr.length;i++){
+            arr[i] = releaseTimes[i] - releaseTimes[i-1];
+        }
+        LinkedList<Character> lschar = new LinkedList<Character>();
+        int maxindex = 0;
+        for (int i = 0;i<arr.length;i++){
+            if (maxindex<arr[i]){
+                maxindex = arr[i];
+            }
+        }
+        for (int i = 0;i<arr.length;i++){
+            if (arr[i] == maxindex){
+                lschar.add(keysPressed.charAt(i));
+            }
+        }
+        if (lschar.size() == 1){
+            return lschar.get(0);
+        }else {
+            //compare lexico... form lschar
+            char fin = ' ';
+            int maxascci = 0;
+            for (int i = 0;i<lschar.size();i++){
+                int temp = (int) lschar.get(i);
+                if (temp>maxascci){
+                    maxascci = temp;
+                    fin  = lschar.get(i);
+                }
+            }
+            return fin;
+        }
     }
     public int majorityElement(int[] nums) {
         int ans = 0;

@@ -39,6 +39,52 @@ public class revindivstring {
         }
         return -1;
     }
+    public int singleNumber(int[] nums) {
+    LinkedList<Integer> ls = new LinkedList<Integer>();
+    for (int i = 0;i<nums.length;i++){
+        int temp = ls.get(nums[i]);
+        temp++;
+        ls.add(nums[i],temp);
+    }
+    for (int i = 0;i<ls.size();i++){
+        if (ls.get(i)==1){
+            return i;
+        }
+    }
+    return -1;
+    }
+    // Teoplitz Matrix
+    public boolean isToeplitzMatrix(int[][] matrix) {
+        int rlen = matrix.length;
+        int clen = matrix[0].length;
+
+        //horizontal checking
+        for (int i = 0;i<clen;i++){
+            int temp = 0;
+            int val = matrix[temp][i];
+            temp++;
+            for (int j = i+1;j<clen && temp<rlen;j++){
+                if (val!=matrix[temp][j]){
+                    return false;
+                }
+                temp++;
+            }
+        }
+
+        //vertical checking
+        for (int i = 1;i<rlen;i++){
+            int temp = 0;
+            int val = matrix[i][temp];
+            temp++;
+            for (int j = i+1;j<rlen && temp<clen;j++){
+                if (val!=matrix[j][temp]){
+                    return false;
+                }
+                temp++;
+            }
+        }
+        return true;
+    }
 
     public int[] kWeakestRows(int[][] mat, int k) {
         int[] noofsoldier = new int[mat[0].length];
@@ -48,7 +94,7 @@ public class revindivstring {
             rowindex[i] = i;
         }
         System.out.println(noofsoldier);
-        sortArray(noofsoldier,rowindex);
+        sortArray(noofsoldier);
         System.out.println(noofsoldier);
         int[] ans = new int[k];
         for (int i = 0; i < k; i++) {
@@ -168,11 +214,30 @@ public class revindivstring {
         }
         return count;
     }
+    public double trimMean(int[] arr) {
+        System.out.println(arr.length);
+        double ans = 0;
+        printarr(arr);
+        sortArray(arr);
+        System.out.println();
+        printarr(arr);
+        double sum = 0;
+        int fivper = arr.length*5/100;
+        System.out.println("THis added in sequence");
+        for (int i = fivper;i<arr.length-fivper;i++){
+            System.out.println(arr[i]);
+            sum+=arr[i];
 
-
-    public int[] sortArray(int[] nums,int[] rowindex) {
+        }
+        int len = arr.length-(2*fivper);
+        System.out.println(sum);
+        System.out.println("Length is"+len);
+        ans = sum/len;
+        return (sum/len);
+    }
+    public int[] sortArray(int[] nums) {
         for (int i = 0;i<nums.length;i++){
-            for (int j = i+1 ;j<nums.length-1;j++){
+            for (int j = i+1 ;j<nums.length;j++){
                 int minindex = Integer.MAX_VALUE;
                 if (minindex>nums[j]){
                     minindex = j;
@@ -181,16 +246,64 @@ public class revindivstring {
                     int temp = nums[i];
                     nums[i] = nums[minindex];
                     nums[minindex] = temp;
-
-                    temp = rowindex[i];
-                    rowindex[i] = nums[minindex];
-                    rowindex[minindex] = temp;
-
                 }
             }
         }
         return nums;
     }
+
+    public void printarr(int[] arr){
+        for (int i = 0;i<arr.length;i++){
+            System.out.print(arr[i]+" ");
+        }
+    }
+
+    public boolean divisorGame2(int N) {
+        int temp = 0;
+        while (N>0){
+            //alience play
+            if (N==1){
+                return false;
+            }
+            N--;
+            //bob play
+            if (N==1){
+                return true;
+            }
+            N--;
+        }
+        return false;
+    }
+    public boolean divisorGame(int N) {
+        int temp = 0;
+        int judge = 0;
+        while (N>0){
+            //Alice Playing
+            for (int i = 1;i<N && judge ==0;i++){
+                judge = 0;
+                if (N%i ==0){
+                    N = N-i;
+                    judge++;
+                }
+                if (judge == 0){
+                    return false;
+                }
+            }
+            // Bob Playing
+            for (int i = 1 ;i<N && judge ==0;i++){
+                judge = 0;
+                if (N%i ==0){
+                    N = N-i;
+                    judge++;
+                }
+                if (judge == 0){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public int totalMoney(int n) {
     int temp = n%7;
     int ans = 0;

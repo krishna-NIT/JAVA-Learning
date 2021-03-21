@@ -191,6 +191,34 @@ public class revindivstring {
         }
         return nums;
     }
+    public int totalMoney(int n) {
+    int temp = n%7;
+    int ans = 0;
+    int bha = 1;
+    while (n>=7){
+        System.out.println();
+        System.out.println("starting form"+bha);
+        ans +=bha;
+        int kri = bha;
+        for (int i = 1;i<7;i++){
+            System.out.println(kri+1);
+            ans+=(kri+1);
+            kri++;
+        }
+        n -= 7;
+        bha++;
+        System.out.println(ans);
+    }
+        System.out.println();
+        System.out.println("reminder");
+    for (int i = 1;i<=n;i++){
+        System.out.println("starting from "+bha);
+        ans += bha;
+        bha++;
+        System.out.println(ans);
+    }
+    return ans;
+    }
     //985
     public int[] sumEvenAfterQueries(int[] A, int[][] queries) {
         LinkedList<Integer> ls = new LinkedList<Integer>();

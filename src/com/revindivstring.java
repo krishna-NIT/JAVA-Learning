@@ -11,14 +11,9 @@ import java.util.*;
 public class revindivstring {
     public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
-        int n1 = scan.nextInt();
-        int[] stu = new int[n1];
-        int[] san = new int[n1];
-        for (int i = 0;i<stu.length;i++){
-            stu[i] = scan.nextInt();
-            san[i] = scan.nextInt();
-        }
-        System.out.println(countStudents(stu,san));
+        double a = scan.nextInt();
+        int b = scan.nextInt();
+        System.out.println(myPow(a,b));
     }
     public int isPrefixOfWord(String sentence, String searchWord) {
         int count = 1;
@@ -43,6 +38,19 @@ public class revindivstring {
             return -1;
         }
         return -1;
+    }
+    public char nextGreatestLetter(char[] letters, char target) {
+    int targetascii = (int) target;
+    int index = 0;
+    int minascii = Integer.MAX_VALUE;
+    for (int i = 0;i<letters.length;i++){
+        int tempascci = (int) letters[i];
+        if (tempascci>targetascii && minascii>tempascci){
+            minascii = tempascci;
+            index = i;
+        }
+    }
+    return letters[index];
     }
     //1700
     public static int countStudents(int[] students, int[] sandwiches) {
@@ -69,6 +77,39 @@ public class revindivstring {
             count1 = count1(lsstudent);
         }
         return lssandwiches.size();
+    }
+    public static double myPow(double x, int n) {
+        if (n<= 2147483647 && n>= -2147483648){
+            return 0;
+        }
+        if (x == 1.00000){
+            return 1;
+        }
+        double ans = 1;
+        int d =n;
+        if(n<0){
+            n *= (-1);
+        }
+        for (int i = 0;i<n;i++){
+            ans *= x;
+            System.out.println(ans);
+        }
+        if (d<0){
+            System.out.println(ans);
+            double temp = (1/ans);
+            return temp;
+        }
+        return ans;
+    }
+    public boolean searchMatrix(int[][] matrix, int target) {
+        for (int i = 0;i<matrix.length;i++){
+            for (int j = 0;j<matrix[0].length;j++){
+                if (matrix[i][j] == target){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     public static int count0(LinkedList<Integer> ls0){
         int count = 0;

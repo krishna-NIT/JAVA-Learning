@@ -15,6 +15,9 @@ public class revindivstring {
         int b = scan.nextInt();
         System.out.println(myPow(a,b));
     }
+    public int repeatedNTimes(int[] A) {
+        sortArray()
+    }
     public int isPrefixOfWord(String sentence, String searchWord) {
         int count = 1;
         if (sentence.contains(searchWord)){

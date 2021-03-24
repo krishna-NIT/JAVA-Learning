@@ -30,6 +30,19 @@ public class revindivstring {
     return count;
     }
 
+    public void rotate(int[] nums, int k) {
+        for (int i = 0;i<k;i++){
+            rotby1right(nums);
+        }
+    }
+    public void rotby1right(int[] nums){
+        int f = nums[nums.length-1];
+        for (int i = nums.length-1;i>=1;i--){
+            nums[i] = nums[i-1];
+        }
+        nums[0] = f;
+    }
+
     public int[] toBinary(int decimal){
         int binary[] = new int[40];
         int index = 0;

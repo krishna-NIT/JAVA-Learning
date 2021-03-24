@@ -16,7 +16,186 @@ public class revindivstring {
         System.out.println(myPow(a,b));
     }
     public int repeatedNTimes(int[] A) {
-        sortArray()
+        int N = A.length/2;
+        for (int i = 0;i<A.length;i++){
+            int times = 0;
+            for (int j = 0;j<A.length;j++){
+                if (A[i] == A[j]){
+                    times++;
+                }
+            }
+            if (times == N){
+                System.out.println("temp = N");
+                return A[i];
+            }
+        }
+        return -1;
+    }
+
+    public int[] sortArrayByParity(int[] A) {
+    int[] arr = new int[A.length];
+    int count = 0;
+    for (int i = 0;i<A.length;i++){
+        if (A[i] % 2 ==0){
+            arr[count] = A[i];
+            count++;
+        }
+    }
+        for (int i = 0;i<A.length;i++){
+            if (A[i] % 2 !=0){
+                arr[count] = A[i];
+                count++;
+            }
+        }
+    return arr;
+    }
+    public int countGoodRectangles(int[][] rectangles) {
+        LinkedList<Integer> ls = new LinkedList<Integer>();
+        for (int i = 0;i<rectangles.length;i++){
+            if (rectangles[i][0]>rectangles[i][1]){
+                ls.add(rectangles[i][1]);
+            }else {
+                ls.add(rectangles[i][0]);
+            }
+        }
+        int max  = Integer.MIN_VALUE;
+        for (int i = 0;i<ls.size();i++){
+            if (max<ls.get(i)){
+                max = ls.get(i);
+            }
+        }
+        int count = 0;
+        for (int i = 0;i<ls.size();i++){
+            if (max == ls.get(i)){
+                count++;
+            }
+        }
+        return count;
+    }
+    public String sortString(String s) {
+        String ans = "";
+        for (int i = 0;i<s.length();i++){
+            //Pending
+        }
+        return ans;
+    }
+    public String freqAlphabets(String s) {
+    String ans = "";
+        for (int i = 0;i<s.length();i++){
+            if (i+2 < s.length()) {
+                if (s.charAt(i + 1) != '#' && s.charAt(i + 2) != '#') {
+                    int num = (int) s.charAt(i);
+                    num = num - 48;
+                    int asc = 96 + num;
+                    char b = (char) asc;
+                    ans += b;
+                }
+            }
+
+        }
+    return ans;
+    }
+    public int[][] flipAndInvertImage(int[][] image) {
+        for (int i = 0;i<image.length;i++) {
+            for (int j = 0; j < image[0].length; j++) {
+                //Reverse
+                if (image[0].length%2 == 0 && j<image[0].length/2) {
+                    int temp = image[i][j];
+                    image[i][j] = image[i][image[0].length-j-1];
+                    image[i][image[0].length-j-1] = temp;
+                }else if (image[0].length%2 ==1 && j<=image[0].length/2){
+                    System.out.println("ex1");
+                    int temp = image[i][j];
+                    image[i][j] = image[i][image[0].length-j-1];
+                    image[i][image[0].length-j-1] = temp;
+                }
+                //Inverse
+                if (image[i][j] == 0) {
+                    image[i][j] = 1;
+                }else {
+                    image[i][j] = 0;
+                }
+
+            }
+        }
+        return image;
+    }
+    public int countGoodTriplets(int[] arr, int a, int b, int c) {
+    int count = 0;
+    for (int i =0;i<arr.length;i++){
+        for (int j = i+1;j<arr.length;j++){
+            for (int k = j+1;k<arr.length;k++){
+                int a1 = arr[i] - arr[j];
+                int a2 = arr[j] - arr[k];
+                int a3 = arr[i] - arr[k];
+                if (a1<0){
+                    a1 *= (-1);
+                }
+                if (a2<0){
+                    a2 *= (-1);
+                }if (a3<0){
+                    a3 *= (-1);
+                }
+                if (a1<= a && a2<=b && a3<=c && i<j && j<k && k<arr.length){
+                    count++;
+                }
+                }
+            }
+        }
+        return count;
+    }
+
+    public int minTimeToVisitAllPoints(int[][] points) {
+        int ans = 0;
+        int xcurrent = points[0][0];
+        int ycurrent = points[0][1];
+        for (int i = 1;i<points.length;i++){
+            int x = points[i][0];
+            int y = points[i][1];
+            while (xcurrent != x && ycurrent != y){
+                //movinng toward 1nd quardant
+                if (xcurrent + 1 == x && ycurrent + 1 == y) {
+                    ans++;
+                    xcurrent = x;
+                    ycurrent = y;
+                }
+                if (xcurrent+1<x && ycurrent+1<y){
+                    xcurrent++;
+                    ycurrent++;
+                    ans++;
+                }
+                if (xcurrent<x && ycurrent == y){
+                    xcurrent++;
+                    ans++;
+                }
+                if (ycurrent<y && xcurrent ==x){
+                    ycurrent++;
+                    ans++;
+                }
+
+                //movinng toward 2nd quardant
+                if (xcurrent -1 == x && ycurrent + 1 == y) {
+                    ans++;
+                    xcurrent = x;
+                    ycurrent = y;
+                }
+                if (xcurrent-1<x && ycurrent-1<y){
+                    xcurrent++;
+                    ycurrent++;
+                    ans++;
+                }
+                if (xcurrent<x && ycurrent == y){
+                    xcurrent++;
+                    ans++;
+                }
+                if (ycurrent<y && xcurrent ==x){
+                    ycurrent++;
+                    ans++;
+                }
+            }
+
+        }
+        return ans;
     }
     public int isPrefixOfWord(String sentence, String searchWord) {
         int count = 1;

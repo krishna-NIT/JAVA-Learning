@@ -15,6 +15,30 @@ public class revindivstring {
         int b = scan.nextInt();
         System.out.println(myPow(a,b));
     }
+    public int hammingDistance(int x, int y) {
+    int[] a = toBinary(x);
+    int[] b = toBinary(y);
+    System.out.println(a+" "+b);
+    int count = 0;
+    for (int i = 0;i<a.length;i++){
+        System.out.println(a[i]+" "+b[i]);
+        if (a[i] == b[i]){
+            System.out.println("done");
+            count++;
+        }
+    }
+    return count;
+    }
+
+    public int[] toBinary(int decimal){
+        int binary[] = new int[40];
+        int index = 0;
+        while(decimal > 0){
+            binary[index++] = decimal%2;
+            decimal = decimal/2;
+        }
+        return binary;
+    }
     public int repeatedNTimes(int[] A) {
         int N = A.length/2;
         for (int i = 0;i<A.length;i++){

@@ -146,6 +146,45 @@ public class SnapshotArray {
     }
     }
 
+    public String reverseOnlyLetters(String S) {
+    int lastindex = S.length()-1;
+    String ans = "";
+    for (int i = 0;i<S.length() && lastindex>=0;i++){
+        int ascii = (int) S.charAt(i);
+        if ((ascii>=65 && ascii<90) || (ascii>=97 && ascii<=122)){
+            int lastindexascii = (int) S.charAt(lastindex);
+            int trm = 0;
+            if ((lastindexascii>=65 && lastindexascii<90) || (lastindexascii>=97 && lastindexascii<=122)) {
+                ans += S.charAt(lastindex);
+                trm = 1;
+            }
+            lastindex--;
+            if (trm!=1){
+
+            }
+
+        }else {
+            ans+=S.charAt(i);
+        }
+    }
+    return ans;
+    }
+
+    public int singleNumber(int[] nums) {
+        LinkedList<Integer> ls = new LinkedList<Integer>();
+        for (int i = 0;i<nums.length;i++){
+            int temp = ls.get(nums[i]);
+            temp++;
+            ls.add(nums[i],temp);
+        }
+        for (int i = 0;i<ls.size();i++){
+            if (ls.get(i)==1){
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public int minOperations(String[] logs) {
     LinkedList ls = new LinkedList();
     int point = 0;

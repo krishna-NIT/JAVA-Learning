@@ -1,6 +1,7 @@
 package com;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class SnapshotArray {
     public SnapshotArray(int length) {
@@ -146,6 +147,110 @@ public class SnapshotArray {
     }
     }
 
+    public static List<Integer> dynamicArray(int n, List<List<Integer>> queries) {
+        // Write your code here
+        int lastanswer  = 0;
+        LinkedList<Integer> ls = new LinkedList<Integer>();
+
+        return ls;
+    }
+    public class SinglyLinkedListNode {
+         int data;
+         SinglyLinkedListNode next;
+    }
+
+    public static int equalStacks(List<Integer> h1, List<Integer> h2, List<Integer> h3) {
+        // Write your code here
+        while (sumoflist(h1) != sumoflist(h2) || sumoflist(h3) != sumoflist(h2)){
+            int a = sumoflist(h1);
+            int b = sumoflist(h2);
+            int c = sumoflist(h3);
+
+            int maxndex = maxndex(a,b,c);
+            if (maxndex == 0){
+                h1.remove(0);
+            }else if (maxndex == 1){
+                h2.remove(0);
+            }else if (maxndex == 2){
+                h3.remove(0);
+            }
+            System.out.println(h1);
+            System.out.println(h2);
+            System.out.println(h3);
+        }
+        return sumoflist(h1);
+    }
+    public static int sumoflist(List<Integer> ls){
+        int sum = 0;
+        for (int i = 0;i<ls.size();i++){
+            sum += ls.get(i);
+        }
+        return sum;
+    }
+    public static int maxndex(int a, int b, int c){
+        if (a>=b && a>=c){
+            return 0;
+        }
+        if (b>=a && b>=c){
+            return 1;
+        }
+        if (c>=a && c>=b){
+            return 2;
+        }
+        return 0;
+    }
+
+    public boolean isPalindrome(String s) {
+    String pal = "";
+    String formattedstring = "";
+    s.toLowerCase();
+    for (int i = 0;i<s.length();i++){
+        if (Character.isAlphabetic(s.charAt(i)) || Character.isDigit(s.charAt(i))){
+            formattedstring+=s.charAt(i);
+        }
+    }
+    formattedstring = formattedstring.toLowerCase();
+    for (int i = formattedstring.length()-1;i>=0;i--){
+        pal+=formattedstring.charAt(i);
+    }
+        System.out.println(formattedstring);
+        System.out.println(pal);
+    if (pal.equals(formattedstring)){
+        return true;
+    }else {
+        return false;
+    }
+    }
+
+    static int arrayManipulation(int n, int[][] queries) {
+        int[] arr = new int[n];
+
+        for (int i=0;i<queries.length;i++){
+            for (int j=(queries[i][0]-1);j<=(queries[i][1]-1);j++){
+                arr[j]+=(queries[i][2]);
+            }
+        }
+
+        int max = Integer.MIN_VALUE;
+        for (int i = 0;i<arr.length;i++){
+            if (arr[i] > max){
+                max = arr[i];
+            }
+        }
+        return max;
+    }
+
+    static int[] matchingStrings(String[] strings, String[] queries) {
+        int[] arr = new int[queries.length];
+            for (int i = 0;i<queries.length;i++){
+                for (int j = 0;j<strings.length;j++){
+                    if (queries[i].equals(strings[j])){
+                        arr[i]++;
+                    }
+                }
+            }
+        return arr;
+    }
     public String reverseOnlyLetters(String S) {
     int lastindex = S.length()-1;
     String ans = "";

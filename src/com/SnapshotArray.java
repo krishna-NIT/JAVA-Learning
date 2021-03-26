@@ -200,6 +200,31 @@ public class SnapshotArray {
         return 0;
     }
 
+    public String reverseVowels(String s) {
+        String ans = "";
+        char add = 'a';
+        String vowel = "AEIOUaeiou";
+        int temp = s.length();
+        for (int i =0;i<s.length();i++){
+            if (vowel.contains(Character.toString(s.charAt(i)))){
+                int repo = 0;
+                for (int j =temp-1;j>=0 && repo ==0;j--){
+                    if (vowel.contains(Character.toString(s.charAt(j)))){
+                        add = s.charAt(j);
+                        repo = 1;
+                        temp = j;
+                    }
+                }
+                ans += add;
+            }else {
+                ans += s.charAt(i);
+            }
+        }
+        System.out.println(s);
+        System.out.println(ans);
+        return ans;
+    }
+
     public boolean isPalindrome(String s) {
     String pal = "";
     String formattedstring = "";

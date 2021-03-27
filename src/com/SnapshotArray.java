@@ -77,6 +77,59 @@ public class SnapshotArray {
         }
     }
 
+    public int nearestValidPoint(int x, int y, int[][] points) {
+        int ans =  -1;
+        LinkedList<Integer> indexofvalid = new LinkedList<Integer>();
+        LinkedList<Integer> manhattandistance = new LinkedList<Integer>();
+        for (int i = 0;i<points.length;i++){
+                if (points[i][0] == x || points[i][1] == y){
+                    indexofvalid.add(i);
+                }
+        }
+        System.out.println(indexofvalid);
+        if (indexofvalid.isEmpty()){
+            return -1;
+        }
+        for (int i =0;i<indexofvalid.size();i++){
+                int d = Math.abs(points[indexofvalid.get(i)][0]-x) + Math.abs(points[indexofvalid.get(i)][1]-y);
+                manhattandistance.add(d);
+        }
+        System.out.println(manhattandistance);
+        LinkedList<Integer> mindistaneceindex = new LinkedList<Integer>();
+        int mind = Integer.MAX_VALUE;
+        for (int i = 0;i<manhattandistance.size();i++){
+            if (mind > manhattandistance.get(i)){
+                mind = manhattandistance.get(i);
+            }
+        }
+        System.out.println(mind);
+
+        for (int i = 0;i<manhattandistance.size();i++){
+            if (manhattandistance.get(i) == mind){
+                mindistaneceindex.add(i);
+            }
+        }
+        System.out.println(mindistaneceindex);
+        ans = Integer.MAX_VALUE;
+        for (int i = 0;i<mindistaneceindex.size();i++){
+            if (x == points[indexofvalid.get(mindistaneceindex.get(i))][0] && y == points[indexofvalid.get(mindistaneceindex.get(i))][1]) {
+                return 0;
+            }
+
+            if (x!= points[indexofvalid.get(mindistaneceindex.get(i))][0]) {
+                if (ans > points[indexofvalid.get(mindistaneceindex.get(i))][0]) {
+                    ans = points[indexofvalid.get(mindistaneceindex.get(i))][0];
+                }
+            }else {
+                if (ans > points[indexofvalid.get(mindistaneceindex.get(i))][1]) {
+                    ans = points[indexofvalid.get(mindistaneceindex.get(i))][1];
+                }
+            }
+        }
+        System.out.println(ans);
+        return ans;
+    }
+
 
         public int arrangeCoins(int n) {
     int count = 0;
@@ -89,6 +142,10 @@ public class SnapshotArray {
     return count;
     }
 
+    public static List<Integer> getMax(List<String> operations) {
+        // Write your code here
+
+    }
 
     public int longestMountain(int[] arr) {
         LinkedList<Integer> ls = new LinkedList<Integer>();
@@ -100,13 +157,44 @@ public class SnapshotArray {
         }
         return maxlen;
     }
+
+    public boolean detectCapitalUse(String word) {
+        if (word.length()<=1){
+            return true;
+        }
+        if (Character.isUpperCase(word.charAt(0))){
+            if (Character.isUpperCase(word.charAt(1))){
+                for (int i = 1;i<word.length();i++){
+                    if (!Character.isUpperCase(word.charAt(i))){
+                        return false;
+                    }
+                }
+                return true;
+            }else {
+                for (int i = 1;i<word.length();i++){
+                    if (!Character.isLowerCase(word.charAt(i))){
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }else {
+            for (int i = 1;i<word.length();i++){
+                if (!Character.isLowerCase(word.charAt(i))){
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
     public int maxind(int[] arr, int s, int e){
         for (int i = s;i<=e-2;i++){
             if (arr[i]<arr[i+1] && arr[i+1]>arr[i+2]){
                 return i+1;
             }
         }
-
+        return -1;
     }
     public int divide(int dividend, int divisor) {
     if (dividend == -2147483648 && divisor == -1){

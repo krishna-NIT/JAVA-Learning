@@ -1,5 +1,6 @@
 package com;
 
+import java.awt.font.NumericShaper;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -75,6 +76,106 @@ public class SnapshotArray {
         }else {
             return ans;
         }
+    }
+
+    public String reverseStr(String s, int k) {
+        String ans = "";
+        if ((s.length() - k)<k) {
+            for (int i = s.length()-1;i>=0;i--){
+                ans += s.charAt(i);
+            }
+        }else {
+            for (int i = k-1;i>=0;i--){
+                ans += s.charAt(i);
+            }
+            for (int i = k;i<s.length();i++){
+                ans += s.charAt(i);
+            }
+        }
+        return ans;
+    }
+
+    public int secondHighest(String s) {
+        LinkedList<Integer> ls =new LinkedList<Integer>();
+        for (int i = 0;i<s.length();i++){
+            int temp = (int) s.charAt(i);
+            if (temp>=48 && temp<=57){
+                ls.add(temp-48);
+            }
+        }
+        System.out.println(ls);
+        if (ls.isEmpty()){
+            return -1;
+        }
+        sortls(ls);
+        System.out.println(ls);
+        int fhighest = ls.get(ls.size()-1);
+        int shighest = -1;
+        int bha = 0;
+        int i = ls.size()-2;
+        while (bha == 0 && i>=0){
+            if (fhighest != ls.get(i)){
+                shighest = ls.get(i);
+                bha++;
+            }
+            i--;
+        }
+        System.out.println(fhighest);
+        System.out.println(shighest);
+        return shighest;
+    }
+    public void sortls(LinkedList<Integer> ls){
+        for (int n = ls.size(); n > 0; n--) {
+            for (int i = 0; i < (n - 1); i++) {
+                if (ls.get(i) > ls.get(i+1)) {
+                    int temp = ls.get(i+1);
+                    ls.remove(i+1);
+                    ls.add(i+1,ls.get(i));
+                    ls.remove(i);
+                    ls.add(i,temp);
+                }
+            }
+        }
+    }
+
+    public int lengthOfLastWord(String s) {
+        if (s.charAt(s.length()-1) == ' ') {
+            for (int i = s.length() - 1; i >= 1; i--) {
+                if (s.charAt(i) == ' ' && s.charAt(i - 1) != ' ') {
+                    for (int j = i - 1; j >= 0; j--) {
+                        if (j == 0 && s.charAt(j) == ' '){
+                            return i-1;
+                        }
+                        if (j == 0){
+                            return i;
+                        }
+                        if (s.charAt(j) == ' ') {
+                            return (i - j - 1);
+                        }
+                    }
+                }
+            }
+        }
+        for (int i = s.length()-1;i>=0;i--){
+            if (s.charAt(i) == ' '){
+                return (s.length()-i-1);
+            }
+        }
+        return s.length();
+    }
+
+
+    public String toGoatLatin(String S) {
+        String ans = "";
+        String vowel = "AEIOUaeiou";
+        int temp = 1;
+        for (int i = 0;i<S.length();i++) {
+            String fir = Character.toString(S.charAt(0));
+            if (vowel.contains(fir)) {
+                temp = 0;
+            }
+        }
+        return ans;
     }
 
     public int nearestValidPoint(int x, int y, int[][] points) {

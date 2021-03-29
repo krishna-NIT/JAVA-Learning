@@ -78,6 +78,123 @@ public class SnapshotArray {
         }
     }
 
+    public int[] kWeakestRows(int[][] mat, int k) {
+        int[] noofsoldier = new int[mat.length];
+        int[] rowindex = new int[mat.length];
+        for (int i = 0; i < mat[0].length; i++) {
+            noofsoldier[i] = nosoldier(mat, i);
+            rowindex[i] = i;
+        }
+        int[] oldnoofsoldier = new int[noofsoldier.length];
+        for (int i = 0;i<noofsoldier.length;i++){
+            oldnoofsoldier[i] = noofsoldier[i];
+        }
+        for (int i = 0 ;i<noofsoldier.length;i++){
+            System.out.print(noofsoldier[i]+" ");
+        }
+        System.out.println();
+        for (int i = 0 ;i<rowindex.length;i++){
+            System.out.print(rowindex[i]+" ");
+        }
+        System.out.println();
+        System.out.println();
+        sortArray(noofsoldier);
+        for (int i = 0 ;i<noofsoldier.length;i++){
+            System.out.print(noofsoldier[i]+" ");
+        }
+        System.out.println();
+
+        for (int i = 0;i<rowindex.length;i++){
+            for (int j = 0;j<oldnoofsoldier.length;j++){
+                if (noofsoldier[i] == oldnoofsoldier[j]){
+                    rowindex[i] = j;
+                    oldnoofsoldier[j] = -1;
+                    break;
+                }
+            }
+        }
+
+
+        for (int i = 0 ;i<rowindex.length;i++){
+            System.out.print(rowindex[i]+" ");
+        }
+        int[] ans = new int[k];
+        for (int i = 0; i < k; i++) {
+            ans[i] = rowindex[i];
+        }
+        return ans;
+    }
+    public int nosoldier(int[][] matrix,int i){
+        int count = 0;
+        for (int j = 0;j<matrix[0].length;j++){
+            if (matrix[i][j] == 1){
+                count++;
+            }
+        }
+        return count;
+    }
+    public int[] sortArray(int[] nums) {
+        for (int i = 0;i<nums.length;i++){
+            for (int j = i+1 ;j<nums.length;j++){
+                int minindex = Integer.MAX_VALUE;
+                if (minindex>nums[j]){
+                    minindex = j;
+                }
+                if (nums[minindex]<nums[i]){
+                    int temp = nums[i];
+                    nums[i] = nums[minindex];
+                    nums[minindex] = temp;
+                }
+            }
+        }
+        return nums;
+    }
+
+
+
+
+    public int firstUniqChar(String s) {
+    String bh = s.substring(1);
+    if (!bh.contains(Character.toString(s.charAt(0)))){
+        return -1;
+    }
+        String afterrem = Character.toString(s.charAt(0));
+        for (int i = 1;i<s.length();i++){
+            afterrem = s.substring(0,i-1);
+        if (i < 2) {
+            afterrem = Character.toString(s.charAt(0));
+        }
+            afterrem += s.substring(i+1);
+        if (i== s.length()-1){
+            afterrem += Character.toString(s.charAt(s.length()-1));
+        }
+            if (!afterrem.substring(i+1).contains(Character.toString(s.charAt(i)))){
+                System.out.println(afterrem);
+                return i;
+            }
+        }
+    return -1;
+    }
+
+    public boolean areAlmostEqual(String s1, String s2) {
+        for (int i = 0;i<s1.length();i++){
+            if (!s2.contains(Character.toString(s1.charAt(i)))){
+                return false;
+            }
+        }
+    int count = 0;
+    for (int i = 0;i<s1.length();i++){
+        if (s1.charAt(i) == s2.charAt(i)){
+            count++;
+        }
+    }
+    if (count == s1.length()-2 || count == s1.length()){
+        return true;
+    }else {
+        return false;
+    }
+    }
+
     public String reverseStr(String s, int k) {
         String ans = "";
         if ((s.length() - k)<k) {

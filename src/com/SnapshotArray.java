@@ -3,6 +3,7 @@ package com;
 import java.awt.font.NumericShaper;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Stack;
 
 public class SnapshotArray {
     public SnapshotArray(int length) {
@@ -76,6 +77,85 @@ public class SnapshotArray {
         }else {
             return ans;
         }
+    }
+
+    public String removeDuplicates(String s, int k) {
+        Stack<Character> stack = new Stack<Character>();
+        stack.add(s.charAt(0));
+        for (int i = 1;i<s.length();i++){
+            if (stack.get(stack.size()-1) != s.charAt(i)){
+                stack.add(s.charAt(i));
+            }
+        }
+        String ans = "";
+        for (int i = 0;i<stack.size();i++){
+            ans += stack.get(i);
+        }
+        return ans;
+    }
+
+    public int minEatingSpeed(int[] piles, int h) {
+        for (int speed = 1;speed>=0;speed++){
+            int hour = 0;
+            for (int i = 0;i<piles.length;i++){
+                if (piles[i]%speed == 0){
+                    hour += piles[i]/speed;
+                }else {
+                    hour += piles[i]/speed;
+                    hour++;
+                }
+                System.out.println(hour);
+                if (hour<=0){
+                    speed++;
+                    i = -1;
+                    hour=0;
+                }
+            }
+            if (hour<=h){
+                System.out.println(hour);
+                return speed;
+            }
+        }
+        return 0;
+    }
+
+    public int fourSumCount(int[] A, int[] B, int[] C, int[] D) {
+    int ans = 0;
+        for (int i = 0;i<A.length;i++){
+            for (int j = 0;j<B.length;j++){
+                for (int k = 0;k<C.length;k++){
+                    for (int l =0;l<D.length;l++){
+                        if (A[i] +B[j] +C[k]+D[l] == 0){
+                            ans++;
+                        }
+                    }
+                }
+            }
+        }
+    return ans;
+    }
+
+    public int smallestDivisor(int[] nums, int threshold) {
+        int sum = 0;
+        for (int i =0;i<nums.length;i++){
+            sum += nums[i];
+        }
+
+        for (int i =1;i<=threshold;i++){
+
+        }
+    }
+
+    public int findMin(int[] nums) {
+        int minno = Integer.MAX_VALUE;
+        int minindex = 0;
+        for (int i = 0;i<nums.length;i++){
+            if (minno<nums[i]){
+                minno = nums[i];
+                minindex = i;
+            }
+        }
+        return minno;
     }
 
     public int[] kWeakestRows(int[][] mat, int k) {

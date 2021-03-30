@@ -1,6 +1,7 @@
 package com;
 
 import java.awt.font.NumericShaper;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
@@ -76,6 +77,102 @@ public class SnapshotArray {
             return ans;
         }else {
             return ans;
+        }
+    }
+
+    int counter = 0;
+
+    public String entityParser(String text) {
+    String ans = "";
+        for (int i = 0;i<text.length();i++){
+            int temp = -1;
+            if (text.charAt(i) == '&'){
+                //1
+                if (text.substring(i,i+5).equals("&quot")){
+                    ans += '"';
+                    temp = 5;
+                }else if (text.substring(i,i+5).equals("&apos")){
+                    ans += '\'';
+                    temp = 5;
+                }else if (text.substring(i,i+4).equals("&amp")){
+                    System.out.println("hello");
+                    ans += '&';
+                    temp = 4;
+                }else if (text.substring(i,i+3).equals("&gt")){
+                    ans += '>';
+                    temp = 3;
+                }else if (text.substring(i,i+3).equals("&lt")){
+                    ans += '<';
+                    temp = 3;
+                }else if (text.substring(i,i+6).equals("&frasl")){
+                    ans += '/';
+                    temp = 6;
+                }
+                i = i+temp;
+            }else {
+                ans += text.charAt(i);
+            }
+        }
+        return ans;
+    }
+
+    public boolean find132pattern(int[] nums) {
+        for (int i = 0;i<nums.length-2;i++){
+            for (int j = i+1;j<nums.length-1;j++){
+                for (int k = j+1;k<nums.length;k++){
+                    if (nums[i] < nums[k] && nums[k] < nums[j]){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+
+    public List<List<Integer>> minimumAbsDifference(int[] arr) {
+    int mindis = Integer.MAX_VALUE;
+    for (int i =0;i<arr.length-1;i++){
+        for (int j = i+1;j<arr.length;j++){
+            int diff = Math.abs(arr[i]-arr[j]);
+            if (diff<mindis){
+                mindis = diff;
+            }
+        }
+    }
+    //add
+        List<List<Integer>> lspair = new ArrayList<List<Integer>>();
+    for (int i =0;i<arr.length-1;i++){
+            for (int j = i+1;j<arr.length;j++){
+                int diff = Math.abs(arr[i]-arr[j]);
+                if (diff==mindis){
+                    List<Integer> temp = new ArrayList<Integer>();
+                    if (arr[i]<arr[j]) {
+                        temp.add(arr[i]);
+                        temp.add(arr[j]);
+                    }else {
+                        temp.add(arr[j]);
+                        temp.add(arr[i]);
+                    }
+                    lspair.add(temp);
+                }
+            }
+    }
+    sortlsls(lspair);
+    return lspair;
+    }
+    public void sortlsls(List<List<Integer>> lspair){
+        for (int n = lspair.size(); n > 0; n--) {
+            for (int i = 0; i < (n - 1); i++) {
+                if (lspair.get(i).get(0) > lspair.get(i+1).get(0)) {
+                    List<Integer> tempi = lspair.get(i);
+                    List<Integer> tempi1 = lspair.get(i+1);
+                    lspair.remove(i);
+                    lspair.remove(i);
+                    lspair.add(i,tempi);
+                    lspair.add(i,tempi1);
+                }
+            }
         }
     }
 

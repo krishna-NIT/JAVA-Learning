@@ -80,6 +80,47 @@ public class SnapshotArray {
         }
     }
 
+    public int[] arrayRankTransform(int[] arr) {
+    int[] rank = new int[arr.length];
+    int ramk = 1;
+    int minindex = 0;
+    int tempmin = Integer.MIN_VALUE;
+    for (int i = 0;i<rank.length;i++){
+        int min = Integer.MAX_VALUE;
+        for (int j = 0;j<arr.length;j++){
+            if (min>arr[j]){
+                min = arr[j];
+                minindex = j;
+            }
+        }
+        if (min == tempmin){
+            ramk--;
+        }
+        rank[minindex] = ramk;
+        arr[minindex] = Integer.MAX_VALUE;
+        ramk++;
+        tempmin = min;
+    }
+    return rank;
+    }
+
+    public int[] sortArray(int[] nums) {
+        for (int i = 0;i<nums.length;i++){
+            for (int j = i+1 ;j<nums.length;j++){
+                int minindex = Integer.MAX_VALUE;
+                if (minindex>nums[j]){
+                    minindex = j;
+                }
+                if (nums[minindex]<nums[i]){
+                    int temp = nums[i];
+                    nums[i] = nums[minindex];
+                    nums[minindex] = temp;
+                }
+            }
+        }
+        return nums;
+    }
+
     int counter = 0;
 
     public String entityParser(String text) {
@@ -310,22 +351,7 @@ public class SnapshotArray {
         }
         return count;
     }
-    public int[] sortArray(int[] nums) {
-        for (int i = 0;i<nums.length;i++){
-            for (int j = i+1 ;j<nums.length;j++){
-                int minindex = Integer.MAX_VALUE;
-                if (minindex>nums[j]){
-                    minindex = j;
-                }
-                if (nums[minindex]<nums[i]){
-                    int temp = nums[i];
-                    nums[i] = nums[minindex];
-                    nums[minindex] = temp;
-                }
-            }
-        }
-        return nums;
-    }
+
 
 
 

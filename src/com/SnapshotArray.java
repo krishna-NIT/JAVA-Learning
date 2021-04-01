@@ -1,6 +1,5 @@
 package com;
 
-import java.awt.font.NumericShaper;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,13 +14,6 @@ public class SnapshotArray {
 
     }
 
-    public int snap() {
-
-    }
-
-    public int get(int index, int snap_id) {
-
-    }
 
     public boolean isPerfectSquare(int num) {
         for (int i = 1;i<=num;i++){
@@ -282,6 +274,7 @@ public class SnapshotArray {
         for (int i =1;i<=threshold;i++){
 
         }
+        return 0;
     }
 
     public int findMin(int[] nums) {
@@ -563,10 +556,6 @@ public class SnapshotArray {
     return count;
     }
 
-    public static List<Integer> getMax(List<String> operations) {
-        // Write your code here
-
-    }
 
     public int longestMountain(int[] arr) {
         LinkedList<Integer> ls = new LinkedList<Integer>();

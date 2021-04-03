@@ -11,10 +11,26 @@ import java.util.*;
 public class revindivstring {
     public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
-        double a = scan.nextInt();
-        int b = scan.nextInt();
-        System.out.println(myPow(a,b));
+        int T = scan.nextInt();
+        for (int i = 0;i<T;i++){
+            float k1 = scan.nextFloat();
+            float k2 = scan.nextFloat();
+            float k3 = scan.nextFloat();
+            float v = scan.nextFloat();
+            willBreak(k1,k2,k3,v);
+        }
     }
+    public static void willBreak(float a, float b, float c, float v){
+        float mul = a*b*c*v;
+        float time = 100/mul;
+        System.out.println(time);
+        if (time <9.575000){
+            System.out.println("YES");
+        }else {
+            System.out.println("No");
+        }
+    }
+
     public int hammingDistance(int x, int y) {
     int[] a = toBinary(x);
     int[] b = toBinary(y);

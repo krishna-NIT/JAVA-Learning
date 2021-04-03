@@ -5,7 +5,6 @@ Concatenation & at last will reverse last word & hence will return the string te
 */
 
 package com;
-
 import java.util.*;
 
 public class revindivstring {
@@ -13,13 +12,52 @@ public class revindivstring {
         Scanner scan = new Scanner(System.in);
         int T = scan.nextInt();
         for (int i = 0;i<T;i++){
-            float k1 = scan.nextFloat();
-            float k2 = scan.nextFloat();
-            float k3 = scan.nextFloat();
-            float v = scan.nextFloat();
-            willBreak(k1,k2,k3,v);
+            int n = scan.nextInt();
+            int ans = 21-n;
+            System.out.println(ans);
         }
     }
+
+
+    public int isPrefixOfWord(String sentence, String searchWord) {
+        if (searchWord.length()-1 <sentence.length()) {
+            if (sentence.substring(0, searchWord.length()).equals(searchWord)) {
+                return 1;
+            }
+        }
+        int word = 1;
+        if (sentence.contains(searchWord)){
+            for (int i= 1;i<sentence.length();i++){
+                if (sentence.charAt(i) == ' '){
+                    word++;
+                }
+                if (i+searchWord.length()-1 <sentence.length() && sentence.charAt(i-1) == ' ') {
+                    System.out.println(sentence.substring(i, i + searchWord.length()));
+                    if (sentence.substring(i, i + searchWord.length()).equals(searchWord)) {
+                        return word;
+                    }
+                }
+            }
+        }
+        return -1;
+    }
+
+    public static boolean isStrong(int a ,int b ,String str){
+        int count = 0;
+        for (int i = 0;i<str.length();i++){
+            if (str.charAt(i) == '*'){
+                count++;
+            }
+            if (count>=b){
+                return true;
+            }
+            if (str.charAt(i) != '*'){
+                count = 0;
+            }
+        }
+        return false;
+    }
+
     public static void willBreak(float a, float b, float c, float v){
         float mul = a*b*c*v;
         float time = 100/mul;
@@ -250,30 +288,7 @@ public class revindivstring {
         }
         return ans;
     }
-    public int isPrefixOfWord(String sentence, String searchWord) {
-        int count = 1;
-        if (sentence.contains(searchWord)){
-            for (int i = 0;i<sentence.length();i++){
-                if (searchWord.charAt(i) == ' '){
-                    count++;
-                }
-                int orii = i;
-                int temp = 0;
-                for (int j = 0;j<searchWord.length() && (orii+searchWord.length())<sentence.length();j +=0){
-                if (searchWord.charAt(j)==sentence.charAt(i)){
 
-                }
-                if (temp == searchWord.length()){
-                    return count;
-                }
-                i = orii;
-                }
-            }
-        }else {
-            return -1;
-        }
-        return -1;
-    }
     public int singleNumber(int[] nums) {
     LinkedList<Integer> ls = new LinkedList<Integer>();
     for (int i = 0;i<nums.length;i++){

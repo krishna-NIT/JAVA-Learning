@@ -65,6 +65,45 @@ public class revindivstring {
         }
     }
 
+    public boolean uniqueOccurrences(int[] arr) {
+        LinkedList<Integer> occurance = new LinkedList<Integer>();
+        LinkedList<Integer> arrls = new LinkedList<Integer>();
+        for (int i = 0;i<arr.length;i++){
+            arrls.add(arr[i]);
+        }
+        for (int i = 0;i<arrls.size();i++){
+            int occ = 0;
+            for (int j = 0;j<arr.length;j++) {
+                if (arrls.get(i) == arr[j]) {
+                    occ++;
+                }
+            }
+            if (!occurance.contains(occ)){
+                occurance.add(occ);
+                int numb = arrls.get(i);
+                System.out.println(arrls.get(i));
+                for (int d = 0;d<arrls.size();d++){
+                    if (arrls.get(d).equals(numb)){
+                        System.out.println(arrls.get(d));
+                        arrls.remove(d);
+                        if(d>=0){
+                            d--;
+                        }
+                    }
+                }
+                System.out.println(arrls);
+                i--;
+            }else {
+                System.out.println(occurance);
+                System.out.println(arrls);
+                return false;
+            }
+        }
+        System.out.println(occurance);
+        System.out.println(arrls);
+        return true;
+    }
+
 
     public int isPrefixOfWord(String sentence, String searchWord) {
         if (searchWord.length()-1 <sentence.length()) {

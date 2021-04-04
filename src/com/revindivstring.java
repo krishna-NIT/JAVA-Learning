@@ -12,29 +12,56 @@ public class revindivstring {
         Scanner scan = new Scanner(System.in);
         int T = scan.nextInt();
         for (int i = 0;i<T;i++){
-            int n = scan.nextInt();
-            if (n == 1){
-                System.out.println(20);
-            }else if (n == 2){
-                System.out.println(36);
-            }else if (n == 3){
-                System.out.println(51);
-            }else if (n == 4){
-                System.out.println(60);
-            }else {
-                int rem = n%4;
-                int ans = ((n-rem)/4)*44;
-                if (rem == 0){
-                    ans += 16;
-                }else if (rem == 1){
-                    ans += 32;
-                }else if (rem == 2){
-                    ans += 44;
-                }else if (rem == 3){
-                    ans += 55;
+            int rlen = scan.nextInt();
+            int clen = scan.nextInt();
+            int x = scan.nextInt();
+            int[][] tdarr = new int[rlen][clen];
+            for (int j =0 ;j<rlen;j++){
+                for (int k = 0;k<clen;k++){
+                    tdarr[j][k] = scan.nextInt();
                 }
-                System.out.println(ans);
             }
+            // Main Solution
+            int min = 0;
+            if (rlen<clen){
+                min = rlen;
+            }else {
+                min = clen;
+            }
+            int ans = 0;
+            for (int a = 0;a<rlen;a++){
+                for (int b = 0;b<clen;b++){
+                    int temp = 0;
+                    for (int d = 0;d<min && temp ==0;d++) {
+                        int p = a+d;
+                        int q = b+d;
+                        if (p<rlen && q<clen) {
+                            if (isWorthy(tdarr, a, b, p, q, x)) {
+                                ans++;
+                            }
+                        }else {
+                            temp++;
+                        }
+                    }
+                }
+            }
+            System.out.println(ans);
+        }
+    }
+
+    public static boolean isWorthy(int[][] arr, int a, int b, int p, int q,int x){
+        int sum = 0;
+        for (int i = a;i<=p;i++){
+            for (int j = b;j<=q;j++){
+                sum += arr[i][j];
+            }
+        }
+        int noofelement = (p-a+1)*(q-b+1);
+        float mean = sum/noofelement;
+        if (mean >=x){
+            return true;
+        }else {
+            return false;
         }
     }
 

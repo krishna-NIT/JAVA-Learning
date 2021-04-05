@@ -104,6 +104,31 @@ public class revindivstring {
         return true;
     }
 
+    public String reverseWords(String s) {
+        String ans = "";
+        int a  = 0;
+        int temp = -1;
+        for (int i =0;i<s.length();i++){
+            if (s.charAt(i) == ' '){
+                if (a == 1){
+                    ans += ' ';
+                }
+                for (int j = i-1;j>temp;j--){
+                    ans += s.charAt(j);
+                    a = 1;
+                }
+                temp  = i;
+            }
+        }
+        if (a == 1){
+            ans += ' ';
+        }
+        for (int i = s.length()-1;i>=temp+1;i--){
+            ans += s.charAt(i);
+        }
+        return ans;
+    }
+
 
     public int isPrefixOfWord(String sentence, String searchWord) {
         if (searchWord.length()-1 <sentence.length()) {

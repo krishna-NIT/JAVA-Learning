@@ -48,6 +48,60 @@ public class revindivstring {
             System.out.println(ans);
         }
     }
+    public void rotate(int[][] matrix) {
+        int[][] fin = new int[matrix.length][matrix[0].length];
+        int a = 0;
+
+        while (a<matrix.length) {
+            int rl = matrix.length - 1;
+            for (int i = 0; i < matrix.length; i++) {
+                fin[a][i] = matrix[rl][a];
+                rl--;
+            }
+            a++;
+        }
+
+        for (int i = 0;i<matrix.length;i++){
+            for (int j = 0;j<matrix[0].length;j++){
+                matrix[i][j] = fin[i][j];
+            }
+        }
+    }
+
+    public String rankTeams(String[] votes) {
+        String ans = "";
+        for (int i = 0;i<votes[0].length();i++){
+            int[] asciiarray = new int[200];
+            for (int j = 0;j<votes.length;j++){
+                asciiarray[(int) votes[j].charAt(i)]++;
+            }
+            int ascii = maxindofarray(asciiarray);
+            char ch = (char) ascii;
+            ans += (ch);
+        }
+        return ans;
+    }
+    public int maxindofarray(int[] arr){
+        int maxindex = 0;
+        int maxvalue = Integer.MIN_VALUE;
+        for (int i = 0;i<arr.length;i++){
+            if (maxvalue<arr[i]){
+                maxvalue = arr[i];
+                maxindex = i;
+            }
+        }
+        return maxindex;
+    }
+
+    public boolean containsDuplicate(int[] nums) {
+        sortArray(nums);
+        for (int i =  0;i<nums.length-1;i++){
+            if (nums[i] == nums[i+1]){
+                return true;
+            }
+        }
+        return false;
+    }
 
     public static boolean isWorthy(int[][] arr, int a, int b, int p, int q,int x){
         int sum = 0;

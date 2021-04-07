@@ -667,6 +667,95 @@ public class revindivstring {
         return nums;
     }
 
+    public void setZeroes(int[][] matrix) {
+        int[][] ans = new int[matrix.length][matrix[0].length];
+        for (int i =0;i<matrix.length;i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                ans[i][j] = matrix[i][j];
+            }
+        }
+        for (int i =0;i<matrix.length;i++){
+            for (int j = 0;j<matrix[0].length;j++){
+                if (matrix[i][j] == 0){
+                    for (int k = 0;k<matrix[0].length;k++){
+                        ans[i][k] = 0;
+                    }
+                    for (int b = 0;b<matrix.length;b++){
+                        ans[b][j] = 0;
+                    }
+                }
+            }
+        }
+        for (int i =0;i<matrix.length;i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                matrix[i][j] = ans[i][j];
+            }
+        }
+    }
+
+    public int minSubarray(int[] nums, int p) {
+        long total = 0;
+        for (int i =0;i<nums.length;i++){
+            total += nums[i];
+        }
+        System.out.println(total+" "+p);
+        System.out.println(total%p);
+        if (total%p == 0){
+            return 0;
+        }
+        for (int i = 0;i<nums.length;i++){
+            if ((total - nums[i]) % p == 0){
+                return 1;
+            }
+        }
+        int k =1;
+        while (k<=nums.length-1) {
+            for (int i = 0; (i+k) < nums.length; i++) {
+                long temptot = total;
+                for (int d = i;d<=(i+k);d++){
+                    temptot -= nums[d];
+                }
+                if (temptot == 0){
+                    return -1;
+                }
+                if (temptot%p == 0){
+                    return k+1;
+                }
+            }
+            k++;
+        }
+        return -1;
+    }
+
+    public int subarraysDivByK(int[] A, int K) {
+        int count = 0;
+        for (int i = 0;i<A.length-1;i++){
+            if (A[i]%K == 0){
+                count++;
+            }
+            for (int j = i+1;j<A.length;j++){
+                if (isSumDiv(A,i,j,K)){
+                    count++;
+                }
+            }
+        }
+        if (A[A.length-1]%K == 0){
+            count++;
+        }
+        return count;
+    }
+    public boolean isSumDiv(int[] arr, int s,int e,int K){
+        int sum = 0;
+        for (int i = s;i<=e;i++){
+            sum += arr[i];
+        }
+        if (sum%K == 0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
     public int[] intersect(int[] nums1, int[] nums2) {
         LinkedList<Integer> ls = new LinkedList<Integer>();
         if (nums1.length<nums2.length){

@@ -667,6 +667,63 @@ public class revindivstring {
         return nums;
     }
 
+    public int[] intersect(int[] nums1, int[] nums2) {
+        LinkedList<Integer> ls = new LinkedList<Integer>();
+        if (nums1.length<nums2.length){
+            for (int i = 0;i<nums1.length;i++){
+                int temp = nums1[i];
+                for (int j = 0;j<nums2.length;j++){
+                    if (nums2[j] == temp){
+                        nums2[j] = Integer.MIN_VALUE;
+                        ls.add(temp);
+                        break;
+                    }
+                }
+            }
+        }else {
+            for (int i = 0;i<nums2.length;i++){
+                int temp = nums2[i];
+                for (int j = 0;j<nums1.length;j++){
+                    if (nums1[j] == temp){
+                        nums1[j] = Integer.MIN_VALUE;
+                        ls.add(temp);
+                        break;
+                    }
+                }
+            }
+        }
+        int[] arr = new int[ls.size()];
+        for (int i = 0;i<arr.length;i++){
+            arr[i] = ls.get(i);
+        }
+        return arr;
+    }
+
+    public int[] dailyTemperatures(int[] T) {
+        LinkedList<Integer> ls = new LinkedList<Integer>();
+        for (int i = 0;i<T.length;i++){
+            int count = 0;
+            if (i+1 < T.length) {
+                for (int j = i + 1; j < T.length && count >= 0; j++) {
+                    count++;
+                    if (T[j] > T[i]) {
+                        ls.add(count);
+                        count = -1;
+                    }
+                }
+                if (count != -1){
+                    ls.add(0);
+                }
+            }
+        }
+        ls.add(0);
+        int[] ans = new int[ls.size()];
+        for (int i = 0;i<ls.size();i++){
+            ans[i] = ls.get(i);
+        }
+        return ans;
+    }
+
     public void printarr(int[] arr){
         for (int i = 0;i<arr.length;i++){
             System.out.print(arr[i]+" ");

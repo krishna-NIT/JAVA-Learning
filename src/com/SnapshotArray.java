@@ -568,6 +568,43 @@ public class SnapshotArray {
         return maxlen;
     }
 
+    public void moveZeroes(int[] nums) {
+        int count = 0;
+        LinkedList<Integer> ls = new LinkedList<Integer>();
+        for (int i = 0;i<nums.length;i++){
+            if (nums[i] != 0){
+                ls.add(nums[i]);
+            }else {
+                count++;
+            }
+        }
+        if (count>0){
+            for (int i = 0;i<count;i++){
+                ls.add(0);
+            }
+        }
+        for (int i = 0;i<ls.size();i++){
+            nums[i] = ls.get(i);
+        }
+    }
+
+    public int[] plusOne(int[] digits) {
+        for (int i = digits.length-1;i>=0;i--){
+            if (digits[i] <= 8){
+                digits[i]++;
+                return digits;
+            }else {
+                digits[i] = 0;
+            }
+        }
+        int[] oneextra = new int[digits.length+1];
+        oneextra[0] = 1;
+        for (int i = 0;i<digits.length;i++){
+            oneextra[i+1] = digits[i];
+        }
+        return oneextra;
+    }
+
     public boolean detectCapitalUse(String word) {
         if (word.length()<=1){
             return true;

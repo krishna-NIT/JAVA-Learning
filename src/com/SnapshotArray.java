@@ -63,6 +63,85 @@ public class SnapshotArray {
 
     }
 
+    public static int floorSqrt(int x)
+    {
+        if (x == 0 || x == 1) {
+            return x;
+        }
+
+        // Binary Search
+        int start = 1, end = x, ans=0;
+        while (start <= end)
+        {
+            int mid = (start + end) / 2;
+            if (mid*mid == x) {
+                return mid;
+            }
+
+            // Since we need floor, we update answer when mid*mid is
+            // smaller than x, and move closer to sqrt(x)
+            if (mid*mid < x)
+            {
+                start = mid + 1;
+                ans = mid;
+            }
+            else {   // If mid*mid is greater than x
+                end = mid - 1;
+            }
+        }
+        return ans;
+    }
+
+    public int largestPerimeter(int[] nums) {
+
+    }
+
+    public int rotatedDigits(int N) {
+        int count = 0;
+        for (int i = 1;i<=N;i++){
+            if (isGood(i)){
+                count++;
+            }
+        }
+        return count;
+    }
+    public boolean isGood(int x){
+        int a = 0;
+        int b = 0;
+        int len = 0;
+        while (x>0){
+            int digit = x%10;
+            len++;
+            if (digit == 2 || digit == 5 || digit == 6 || digit == 9){
+                b++;
+            }else if (digit == 1 || digit == 0 || digit == 8){
+                a++;
+            }else{
+                return false;
+            }
+            x /= 10;
+        }
+        if (a == 0){
+            return true;
+        }
+        if (b == 0){
+            return false;
+        }
+        if (a>0 && b>0){
+            return true;
+        }
+        return true;
+    }
+
+    public static void inversearrray(int[] arr){
+        int[] ans = new int[arr.length];
+        for (int i = 0;i<arr.length;i++){
+            ans[arr[i]] = i;
+        }
+        for (int i = 0;i<ans.length;i++){
+            System.out.print(ans[i]+" ");
+        }
+    }
 
     public boolean isPerfectSquare(int num) {
         for (int i = 1;i<=num;i++){

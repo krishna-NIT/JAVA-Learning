@@ -1,11 +1,60 @@
 package com;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class SnapshotArray {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter Size of Arraay");
+        int n = scan.nextInt();
+        int[] arrr = new int[n];
+        for (int i = 0;i<n;i++){
+            arrr[i] = scan.nextInt();
+        }
+        System.out.println(most(arrr));
+    }
+    public static int most(int[] arr){
+        int ans = -1;
+        sortArray(arr);
+        for (int i = 0;i<arr.length;i++){
+            System.out.print(arr[i]+" ");
+        }
+        int prevno = arr[0];
+        int count = 1;
+        int maxoccc = Integer.MIN_VALUE;
+        for (int i = 1;i<arr.length;i++){
+            if (arr[i] == prevno){
+                count++;
+            }else {
+                prevno = arr[i];
+                if (count>maxoccc){
+                    maxoccc = count;
+                    ans = arr[i-1];
+                }
+                count = 1;
+            }
+            System.out.println(count);
+        }
+        if (count>maxoccc){
+            ans = arr[arr.length-1];
+        }
+        return ans;
+    }
+    public static void sortArray(int[] nums) {
+        for (int i = 0;i<nums.length;i++){
+            for (int j = i+1 ;j<nums.length;j++){
+                int minindex = Integer.MAX_VALUE;
+                if (minindex>nums[j]){
+                    minindex = j;
+                }
+                if (nums[minindex]<nums[i]){
+                    int temp = nums[i];
+                    nums[i] = nums[minindex];
+                    nums[minindex] = temp;
+                }
+            }
+        }
+    }
     public SnapshotArray(int length) {
         int[] arr = new int[length];
     }
@@ -96,22 +145,6 @@ public class SnapshotArray {
     return rank;
     }
 
-    public int[] sortArray(int[] nums) {
-        for (int i = 0;i<nums.length;i++){
-            for (int j = i+1 ;j<nums.length;j++){
-                int minindex = Integer.MAX_VALUE;
-                if (minindex>nums[j]){
-                    minindex = j;
-                }
-                if (nums[minindex]<nums[i]){
-                    int temp = nums[i];
-                    nums[i] = nums[minindex];
-                    nums[minindex] = temp;
-                }
-            }
-        }
-        return nums;
-    }
 
     int counter = 0;
 

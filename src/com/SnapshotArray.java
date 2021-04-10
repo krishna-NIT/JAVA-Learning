@@ -372,6 +372,103 @@ public class SnapshotArray {
     return -1;
     }
 
+    public int minOperations(String s) {
+    LinkedList<Character> lschar = new LinkedList<Character>();
+    for (int i = 0;i<s.length();i++){
+        lschar.add(s.charAt(i));
+    }
+        int count = 0;
+        for (int i= 0;i<s.length()-1;i++){
+            if (lschar.get(i) == lschar.get(i+1)){
+                count++;
+                if (lschar.get(i+1) == '0'){
+                    lschar.remove(i+1);
+                    lschar.add(i+1,'1');
+                }else {
+                    lschar.remove(i+1);
+                    lschar.add(i+1,'0');
+                }
+            }
+        }
+
+
+        LinkedList<Character> rev = new LinkedList<Character>();
+        int b = s.length()-1;
+        for (int i = 0;i<s.length();i++){
+            rev.add(s.charAt(b));
+            b--;
+        }
+        int count1 = 0;
+        for (int i= 0;i<s.length()-1;i++){
+            if (rev.get(i) == rev.get(i+1)){
+                count1++;
+                if (rev.get(i+1) == '0'){
+                    rev.remove(i+1);
+                    rev.add(i+1,'1');
+                }else {
+                    rev.remove(i+1);
+                    rev.add(i+1,'0');
+                }
+            }
+        }
+        System.out.println(count+" "+count1);
+        if (count<count1){
+            return count;
+        }else {
+            return count1;
+        }
+    }
+
+    public int minSetSize(int[] arr) {
+        LinkedList<Integer> ls = new LinkedList<Integer>();
+        for (int i = 0;i<arr.length;i++){
+            ls.add(arr[i]);
+        }
+        return ls.size();
+    }
+
+    public List<Integer> addToArrayForm(int[] num, int k) {
+        int temp = num[num.length-1];
+        int a = 0;
+        if (k+num[num.length-1] <=9){
+            num[num.length-1] = num[num.length-1]+k;
+        }else {
+            num[num.length-1] = (num[num.length-1]+k)%10;
+            for (int i = num.length - 2; i >= 0 && a == 0; i--) {
+                if (num[i]+1<=9){
+                    num[i]++;
+                    a = 1;
+                }else {
+                    num[i]= 0;
+
+                }
+            }
+        }
+
+        List<Integer> lsint = new LinkedList<Integer>();
+        if (num[0] == 0){
+            lsint.add(1);
+        }
+        for (int i = 0;i<num.length;i++){
+            lsint.add(num[i]);
+        }
+        return lsint;
+    }
+
+    public int maximumProduct(int[] nums) {
+        int max = Integer.MIN_VALUE;
+        for (int i = 0;i<nums.length-2;i++){
+            for (int j = i+1;j<nums.length-1;j++){
+                for (int k = j+1;k<nums.length;k++){
+                    if (max< (nums[i]*nums[j]*nums[k])){
+                        max = (nums[i]*nums[j]*nums[k]);
+                    }
+                }
+            }
+        }
+        return max;
+    }
+
     public boolean areAlmostEqual(String s1, String s2) {
         for (int i = 0;i<s1.length();i++){
             if (!s2.contains(Character.toString(s1.charAt(i)))){
@@ -604,6 +701,31 @@ public class SnapshotArray {
         }
         return oneextra;
     }
+    public int thirdMax(int[] nums) {
+        LinkedList<Integer> maxls = new LinkedList<Integer>();
+        int max1 = Integer.MIN_VALUE;
+        int max2 = Integer.MIN_VALUE;
+        int max3 = Integer.MIN_VALUE;
+        for (int i=0;i<nums.length;i++){
+            int no = nums[i];
+            if (max1<no){
+            max1 = no;
+            }
+            if (max2<no && max1>no){
+                max2 = no;
+            }
+            if (max3<no && max1>no && max2>no){
+                max3 = no;
+            }
+        }
+        System.out.println(max1+" "+max2+" "+max3);
+        if (max3 != Integer.MIN_VALUE){
+            return max3;
+        }else {
+            return max1;
+        }
+    }
+
 
     public boolean detectCapitalUse(String word) {
         if (word.length()<=1){

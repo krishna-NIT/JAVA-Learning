@@ -3,16 +3,162 @@ package com;
 import java.util.*;
 
 public class SnapshotArray {
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter Size of Arraay");
-        int n = scan.nextInt();
-        int[] arrr = new int[n];
-        for (int i = 0;i<n;i++){
-            arrr[i] = scan.nextInt();
+        int l1 = scan.nextInt();
+        int h1 = scan.nextInt();
+        int[][] A = new int[l1][h1];
+        System.out.println("Enter All Values of 1st Matrix");
+        // Taking Input of Matrix
+        for (int i = 0; i < l1; i++) {
+            for (int j = 0; j < h1; j++) {
+                A[i][j] = scan.nextInt();
+            }
         }
-        System.out.println(most(arrr));
+        // For adjoint of A[][]
+        int [][]adj = new int[A.length][A[0].length];
+        // For Inverse of A[][]
+        float [][]inv = new float[A.length][A[0].length];
+        System.out.println("Entered matrix is :");
+        display(A);
+        System.out.println("rx");
+        System.out.println("Adjoint of Entered Matrix is :");
+
+        adjoint(A, adj);
+        display(adj);
+        System.out.println("Inverse of Matrix is :");
+        if (inverse(A, inv)) {
+            display(inv);
+        }else{
+            System.out.println("Inverse Doset Exist");
+        }
     }
+
+    public int splitArray(int[] nums, int m) {
+
+    }
+
+    // Function to get cofactor of A[p][q] in temp[][]. n is current
+    public static void getCofactor(int A[][], int temp[][], int p, int q, int n)
+    {
+        int i = 0, j = 0;
+        // Looping for each element of the matrix
+        for (int row = 0; row < n; row++)
+        {
+            for (int col = 0; col < n; col++)
+            {
+                // Copying into temporary matrix only those element which are not in given row and column
+                if (row != p && col != q)
+                {
+                    temp[i][j++] = A[row][col];
+                    // Row is filled, so increase row index and reset col index
+                    if (j == n - 1)
+                    {
+                        j = 0;
+                        i++;
+                    }
+                }
+            }
+        }
+    }
+
+    // Determinant of matrix using Recursion.
+    public static int determinant(int A[][], int n)
+    {
+        int D = 0;
+        // case 1 : if matrix contains single element
+        if (n == 1) {
+            return A[0][0];
+        }
+        // For cofactors
+        int [][]temp = new int[A.length][A[0].length];
+        // For sign multiplier
+        int sign = 1;
+        // Iterate first row's each element
+        for (int f = 0; f < n; f++)
+        {
+            // Getting Cofactor of A[0][f]
+            getCofactor(A, temp, 0, f, n);
+            D += sign * A[0][f] * determinant(temp, n - 1);
+            // terms are to be added with alternate sign
+            sign = -sign;
+        }
+        return D;
+    }
+
+    // Function to get adjoint of A[N][N] in adj[N][N].
+    public static void adjoint(int A[][],int [][]adj)
+    {
+        if (A.length == 1)
+        {
+            adj[0][0] = 1;
+            return;
+        }
+        // temp is used to store cofactors of A[][]
+        int sign = 1;
+        int [][]temp = new int[A.length][A[0].length];
+        for (int i = 0; i < A.length; i++){
+            for (int j = 0; j < A[0].length; j++){
+                // Get cofactor of A[i][j]
+                getCofactor(A, temp, i, j, A.length);
+                // sign of adj[j][i] positive if sum of row and column indexes is even.
+                sign = ((i + j) % 2 == 0)? 1: -1;
+                // Interchanging rows and columns to get the transpose of the cofactor matrix
+                adj[j][i] = (sign)*(determinant(temp, A.length-1));
+            }
+        }
+    }
+
+    // Method to calculate Inverse
+    public static boolean inverse(int A[][], float [][]inverse) {
+        // Find determinant of A[][]
+        int det = determinant(A, A.length);
+        if (det == 0) {
+            System.out.print("A is a Singular matrix so Inverse dosent Exist");
+            return false;
+        }
+
+        // Getting adjoint
+        int[][] adj = new int[A.length][A[0].length];
+        adjoint(A, adj);
+
+        // Inverse using formula "inverse(A) = adj(A)/det(A)"
+        for (int i = 0; i < A.length; i++){
+            for (int j = 0; j < A.length; j++) {
+                inverse[i][j] = (adj[i][j] / (float) det);
+            }
+        }
+        return true;
+    }
+
+    // Method to display the matrix
+    public static void display(int A[][])
+    {
+        for (int i = 0; i < A.length; i++)
+        {
+            for (int j = 0; j < A[0].length; j++) {
+                System.out.print(A[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+    public static void display(float A[][])
+    {
+        for (int i = 0; i < A.length; i++)
+        {
+            for (int j = 0; j < A[0].length; j++) {
+                System.out.printf("%.6f ", A[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
+
+
+
+
     public static int most(int[] arr){
         int ans = -1;
         sortArray(arr);

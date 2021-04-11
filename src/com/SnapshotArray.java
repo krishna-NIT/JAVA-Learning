@@ -92,8 +92,65 @@ public class SnapshotArray {
         return ans;
     }
 
-    public int largestPerimeter(int[] nums) {
+    public int countPrimes(int n) {
+        int count = 0;
+        if (n <=2){
+            return 0;
+        }
+        for (int i =2;i<n;i++){
+            if (isPrime(i)){
+                count++;
+            }
+        }
+        return count;
+    }
+    public boolean isPrime(int x){
+        if (x == 2){
+            return true;
+        }
+        if (x%2==0){
+            return false;
+        }
+        int temp = 0;
+        for (int i = 2;i<x;i++){
+            if (x%i == 0){
+                temp++;
+            }
+        }
+        if (temp == 0){
+            return true;
+        }else {
+            return false;
+        }
+    }
 
+    public int addDigits(int num) {
+        while (num%10 != 0){
+            num = sumofdigit(num);
+        }
+        return num;
+    }
+    public int sumofdigit(int n){
+        int sum = 0;
+        while (n>0){
+            sum += (n%10);
+            n/=10;
+        }
+        return sum;
+    }
+
+    public boolean isPowerOfTwo(int n) {
+    if (n %2 != 0){
+        return false;
+    }
+        int power = 1;
+    while (power<=n){
+        if (power == n){
+            return true;
+        }
+        power = power*2;
+    }
+    return false;
     }
 
     public int rotatedDigits(int N) {

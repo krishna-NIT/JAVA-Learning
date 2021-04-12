@@ -3,42 +3,96 @@ package com;
 import java.util.*;
 
 public class SnapshotArray {
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter Size of Arraay");
-        int l1 = scan.nextInt();
-        int h1 = scan.nextInt();
-        int[][] A = new int[l1][h1];
-        System.out.println("Enter All Values of 1st Matrix");
-        // Taking Input of Matrix
-        for (int i = 0; i < l1; i++) {
-            for (int j = 0; j < h1; j++) {
-                A[i][j] = scan.nextInt();
+        int n = scan.nextInt();
+        int m = scan.nextInt();
+        int[] arrr = new int[n];
+        System.out.println("Enter "+n+" Elements of array");
+        for (int i = 0;i<n;i++){
+            arrr[i] = scan.nextInt();
+        }
+        System.out.println(splitArray(arrr, m));
+    }
+
+    public String complexNumberMultiply(String a, String b) {
+
+    }
+
+
+    public int numDifferentIntegers(String word) {
+        LinkedList<Integer> lsno = new LinkedList<Integer>();
+        LinkedList<Integer> digits = new LinkedList<Integer>();
+        for (int i = 0;i<word.length();i++){
+            int ascii = (int) word.charAt(i);
+            if (ascii>=48 && ascii<=57){
+                digits.add(ascii-48);
+            }else {
+                int num = 0;
+                int len = digits.size();
+                for (int j = 0;j<digits.size();j++){
+                    num += (digits.get(j)*(Math.pow(10,len-1)));
+                    len--;
+                }
+                if (i>0) {
+                    int asc = (int) word.charAt(i - 1);
+                    if (!lsno.contains(num) && asc >= 48 && asc <= 57) {
+                        lsno.add(num);
+                    }
+                }
+                digits.clear();
             }
         }
-        // For adjoint of A[][]
-        int [][]adj = new int[A.length][A[0].length];
-        // For Inverse of A[][]
-        float [][]inv = new float[A.length][A[0].length];
-        System.out.println("Entered matrix is :");
-        display(A);
-        System.out.println("rx");
-        System.out.println("Adjoint of Entered Matrix is :");
-
-        adjoint(A, adj);
-        display(adj);
-        System.out.println("Inverse of Matrix is :");
-        if (inverse(A, inv)) {
-            display(inv);
-        }else{
-            System.out.println("Inverse Doset Exist");
+        if (!digits.isEmpty()){
+            int num = 0;
+            int len = digits.size();
+            for (int j = 0;j<digits.size();j++){
+                num += (digits.get(j)*(Math.pow(10,len-1)));
+                len--;
+            }
+            if (!lsno.contains(num)){
+                lsno.add(num);
+            }
+            digits.clear();
         }
+        System.out.println(lsno);
+        return lsno.size();
     }
 
-    public int splitArray(int[] nums, int m) {
+    public static int splitArray(int[] nums, int m) {
+        int n = nums.length;
+        int left = 0;
+        int right = 0;
+        for (int i = 0; i < n; ++i) {
+            left = Math.max(left, nums[i]);
+            right += nums[i];
+        }
 
+        while (left <= right) {
+            int mid = (right - left) / 2 + left;
+            if (canSplit(nums, mid, m)) right = mid - 1;
+            else left = mid + 1;
+        }
+
+        return left;
     }
+
+    private static boolean canSplit(int[] nums, int target, int m) {
+        int cnt = 1;
+        int sum = 0;
+        for (int i = 0; i < nums.length; ++i) {
+            sum += nums[i];
+            if (sum > target) {
+                ++cnt;
+                sum = nums[i];
+                if (cnt > m) return false;
+            }
+        }
+
+        return true;
+    }
+
 
     // Function to get cofactor of A[p][q] in temp[][]. n is current
     public static void getCofactor(int A[][], int temp[][], int p, int q, int n)

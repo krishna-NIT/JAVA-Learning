@@ -7,18 +7,87 @@ public class SnapshotArray {
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter Size of Arraay");
         int n = scan.nextInt();
-        int m = scan.nextInt();
+        int k = scan.nextInt();
         int[] arrr = new int[n];
-        System.out.println("Enter "+n+" Elements of array");
         for (int i = 0;i<n;i++){
             arrr[i] = scan.nextInt();
         }
-        System.out.println(splitArray(arrr, m));
+        System.out.println(kthmax(arrr,k));
+    }
+    public static int kthmax(int[] arr,int k){
+        sort(arr,0,arr.length-1);
+        return arr[k-1];
+    }
+    public static void merge(int arr[], int l, int m, int r)
+    {
+        // Find sizes of two subarrays to be merged
+        int n1 = m - l + 1;
+        int n2 = r - m;
+
+        /* Create temp arrays */
+        int L[] = new int[n1];
+        int R[] = new int[n2];
+
+        /*Copy data to temp arrays*/
+        for (int i = 0; i < n1; ++i)
+            L[i] = arr[l + i];
+        for (int j = 0; j < n2; ++j)
+            R[j] = arr[m + 1 + j];
+
+        /* Merge the temp arrays */
+
+        // Initial indexes of first and second subarrays
+        int i = 0, j = 0;
+
+        // Initial index of merged subarry array
+        int k = l;
+        while (i < n1 && j < n2) {
+            if (L[i] <= R[j]) {
+                arr[k] = L[i];
+                i++;
+            }
+            else {
+                arr[k] = R[j];
+                j++;
+            }
+            k++;
+        }
+
+        /* Copy remaining elements of L[] if any */
+        while (i < n1) {
+            arr[k] = L[i];
+            i++;
+            k++;
+        }
+
+        /* Copy remaining elements of R[] if any */
+        while (j < n2) {
+            arr[k] = R[j];
+            j++;
+            k++;
+        }
     }
 
-    public String complexNumberMultiply(String a, String b) {
+    // Main function that sorts arr[l..r] using
+    // merge()
+    public static void sort(int arr[], int l, int r)
+    {
+        if (l < r) {
+            // Find the middle point
+            int m =l+ (r-l)/2;
 
+            // Sort first and second halves
+            sort(arr, l, m);
+            sort(arr, m + 1, r);
+
+            // Merge the sorted halves
+            merge(arr, l, m, r);
+        }
     }
+
+
+
+
 
 
     public int numDifferentIntegers(String word) {
@@ -1144,28 +1213,27 @@ public class SnapshotArray {
         return arr;
     }
     public String reverseOnlyLetters(String S) {
-    int lastindex = S.length()-1;
-    String ans = "";
-    for (int i = 0;i<S.length() && lastindex>=0;i++){
-        int ascii = (int) S.charAt(i);
-        if ((ascii>=65 && ascii<90) || (ascii>=97 && ascii<=122)){
-            int lastindexascii = (int) S.charAt(lastindex);
-            int trm = 0;
-            if ((lastindexascii>=65 && lastindexascii<90) || (lastindexascii>=97 && lastindexascii<=122)) {
-                ans += S.charAt(lastindex);
-                trm = 1;
-            }
-            lastindex--;
-            if (trm!=1){
-
-            }
-
-        }else {
-            ans+=S.charAt(i);
-        }
+       String ans = "";
+       Stack<Character> stackchar = new Stack<Character>();
+       for (int i = 0;i<S.length();i++){
+           int ascii = (int) S.charAt(i);
+           if ((ascii>=65 && ascii<=90) || (ascii>=97 && ascii<=122)){
+               stackchar.add(S.charAt(i));
+           }
+       }
+        System.out.println(stackchar);
+       for (int i = 0;i<S.length();i++){
+           if (!Character.isAlphabetic(S.charAt(i))){
+                   ans += Character.toString(S.charAt(i));
+           }else {
+               ans += Character.toString(stackchar.pop());
+           }
+       }
+       return ans;
     }
-    return ans;
-    }
+    // 65 - 90
+    // 97 - 122
+
 
     public int singleNumber(int[] nums) {
         LinkedList<Integer> ls = new LinkedList<Integer>();

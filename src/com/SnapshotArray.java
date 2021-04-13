@@ -7,13 +7,182 @@ public class SnapshotArray {
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter Size of Arraay");
         int n = scan.nextInt();
-        int k = scan.nextInt();
-        int[] arrr = new int[n];
-        for (int i = 0;i<n;i++){
-            arrr[i] = scan.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = scan.nextInt();
         }
-        System.out.println(kthmax(arrr,k));
+        System.out.println(getMaxArea(arr));
     }
+    public static int getMaxArea(int hist[]){
+        int n  = hist.length;
+        // stack holds indexes of hist[] array
+        Stack<Integer> s = new Stack<>();
+        int max_area = 0;
+        //stores top of stack
+        int tp;
+        int area_with_top; // To store area with top bar as the smallest bar
+        // Run through all bars of given histogram
+        int i = 0;
+        while (i < n)
+        {
+            // Here we will push bar to stack, If this bar is higher than the bar on top stack,
+            if (s.empty() || hist[s.peek()] <= hist[i])
+                s.push(i++);
+                // If this bar is lower than top of stack, then calculate area of rectangle
+                // with stack top as the smallest (or minimum height) bar. 'i' is
+                // 'right index' for the top and element before top in stack is 'left index'
+            else
+            {
+                tp = s.peek();
+                s.pop();
+                // Calculating the area with hist[tp] stack as smallest bar
+                area_with_top = hist[tp] * (s.empty() ? i : i - s.peek() - 1);
+                if (max_area < area_with_top)
+                    max_area = area_with_top;
+            }
+        }
+        // Here we will pop the remaining bars from stack
+        //  then calculate area with every popped bar as the smallest bar
+        while (s.empty() == false)
+        {
+            tp = s.peek();
+            s.pop();
+            area_with_top = hist[tp] * (s.empty() ? i : i - s.peek() - 1);
+            if (max_area < area_with_top)
+                max_area = area_with_top;
+        }
+        return max_area;
+    }
+
+
+
+
+    public static void unionANDintersection(int[] A, int[] B){
+        LinkedList<Integer> ls1 = new LinkedList<Integer>();
+        for (int i = 0;i<A.length;i++){
+            ls1.add(A[i]);
+        }
+        LinkedList<Integer> ls2 = new LinkedList<Integer>();
+        for (int i = 0;i<B.length;i++){
+            ls2.add(B[i]);
+        }
+        LinkedList<Integer> union = new LinkedList<Integer>();
+        LinkedList<Integer> intersection = new LinkedList<Integer>();
+        for (int i = 0;i<ls1.size();i++){
+            int num = ls1.get(i);
+            if (ls2.contains(num)){
+                intersection.add(num);
+            }
+            if (!union.contains(num)){
+                union.add(num);
+            }
+        }
+        for (int i = 0;i<ls2.size();i++){
+            int num = ls2.get(i);
+            if (!union.contains(num)){
+                union.add(num);
+            }
+        }
+        System.out.println("Intersection Array");
+        System.out.println(intersection);
+        System.out.println("Union Array");
+        System.out.println(union);
+    }
+
+
+
+    public static void LongestPalindromicString(String text)
+    {
+        int N = text.length();
+        if (N == 0)
+            return;
+        N = 2 * N + 1;
+        // Position count
+        // LPS Length Array
+        int[] L = new int[N + 1];
+        L[0] = 0;
+        L[1] = 1;
+        // centerPosition then centerRightPosition then currentRightPosition then acurrentLeftPosition
+            int C = 1;
+            int R = 2;
+            int i = 0;
+            int iMirror;
+            int maximumLenOFLPS = 0;
+            int maximumLPSCenPos = 0;
+            int start = -1;
+            int end = -1;
+            int diff = -1;
+
+        // Uncomment it to print LPS Length array
+        // printf("%d %d ", L[0], L[1]);
+        for (i = 2; i < N; i++)
+        {
+            // get currentLeftPosition iMirror for currentRightPosition i
+            iMirror = 2 * C - i;
+            L[i] = 0;
+            diff = R - i;
+            // If currentRightPosition i is within centerRightPosition R
+            if (diff > 0)
+                L[i] = Math.min(L[iMirror], diff);
+            // Attempt to expand palindrome centered at currentRightPosition i. Here for odd positions,
+            // here we compare characters and if match then increment LPS Length by ONE.
+            // If even position, we just increment LPS by ONE without any character comparison
+            while (((i + L[i]) + 1 < N && (i - L[i]) > 0) &&
+                    (((i + L[i] + 1) % 2 == 0) ||
+                            (text.charAt((i + L[i] + 1) / 2) ==
+                                    text.charAt((i - L[i] - 1) / 2))))
+            {
+                L[i]++;
+            }
+
+            if (L[i] > maximumLenOFLPS) // Track maximumLenOFLPS
+            {
+                maximumLenOFLPS = L[i];
+                maximumLPSCenPos = i;
+            }
+            // If palindrome centered at currentRightPosition i
+            // expand beyond centerRightPosition R,
+            // adjust centerPosition C based on expanded palindrome.
+            if (i + L[i] > R)
+            {
+                C = i;
+                R = i + L[i];
+            }
+        }
+        start = (maximumLPSCenPos - maximumLenOFLPS) / 2;
+        end = start + maximumLenOFLPS - 1;
+        for (i = start; i <= end; i++)
+            System.out.print(text.charAt(i));
+        System.out.println();
+    }
+
+
+
+
+    public static void findMin(int V,int[] notes)
+    {
+        Vector<Integer> ans = new Vector<>();
+        int n = notes.length;
+        // Traverse through all notesmination of Notes / Currency
+        for (int i = n - 1; i >= 0; i--)
+        {
+            while (V >= notes[i])
+            {
+                V -= notes[i];
+                ans.add(notes[i]);
+            }
+        }
+        // Printing which Notes will make use of Minimum Coins / Notes
+        for (int i = 0; i < ans.size(); i++)
+        {
+            System.out.print(ans.elementAt(i)+" ");
+        }
+        System.out.println();
+        System.out.println("Min No of Coins / Notes is "+ ans.size());
+    }
+
+
+
     public static int kthmax(int[] arr,int k){
         sort(arr,0,arr.length-1);
         return arr[k-1];

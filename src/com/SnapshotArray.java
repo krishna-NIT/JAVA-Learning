@@ -13,6 +13,37 @@ public class SnapshotArray {
         }
         System.out.println(getMaxArea(arr));
     }
+
+    public boolean checkRecord(String s) {
+        int absent = 0;
+        int template = 1;
+        int present = 0;
+        int continousCount = 1;
+        for (int i = 0;i<s.length();i++){
+            if (s.charAt(i)=='P'){
+                present++;
+                continousCount = 0;
+            }else if (s.charAt(i) == 'L'){
+                if (i>0){
+                    if (s.charAt(i-1) == 'L'){
+                        continousCount++;
+                        if (continousCount>=3){
+                            return false;
+                        }
+                    }
+                }
+            }else{
+                absent++;
+                continousCount = 0;
+            }
+        }
+        System.out.println(absent);
+        if ( absent<=2){
+            return true;
+        }
+        return false;
+    }
+
     public static int getMaxArea(int hist[]){
         int n  = hist.length;
         // stack holds indexes of hist[] array

@@ -7,10 +7,38 @@ public class SnapshotArray {
         int[] arr = new int[length];
     }
 
-    public void set(int index, int val) {
-
+    public boolean checkRecord(String s) {
+        int absent = 0;
+        int bhagwat = 0;
+        int template = 1;
+        int present = 0;
+        int continousCount = 1;
+        for (int i = 0;i<s.length();i++){
+            if (s.charAt(i)=='P'){
+                present++;
+                continousCount = 0;
+            }else if (s.charAt(i) == 'L'){
+                if (i>0){
+                    if (s.charAt(i-1) == 'L'){
+                        continousCount++;
+                        if (continousCount>=2){
+                            bhagwat = 1;
+                        }
+                    }
+                }
+            }else{
+                absent++;
+                continousCount = 0;
+            }
+        }
+        System.out.println(absent);
+        System.out.println(continousCount);
+        System.out.println(present);
+        if ( absent<2 && bhagwat == 0){
+            return true;
+        }
+        return false;
     }
-
 
     public boolean isPerfectSquare(int num) {
         for (int i = 1;i<=num;i++){

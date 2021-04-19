@@ -6,6 +6,174 @@ public class SnapshotArray {
     public SnapshotArray(int length) {
         int[] arr = new int[length];
     }
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        int n = scan.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0;i<n;i++){
+            arr[i] = scan.nextInt();
+        }
+        negtooneside(arr);
+    }
+
+
+
+    public static int rowWithMax1s(int arr[][], int n, int m) {
+        int maxln = 0;
+        int ans = -1;
+        for (int i = 0;i<n;i++){
+            int count = 0;
+            for (int j = m-1;j>=0;j--){
+                if (arr[i][j] == 1){
+                    count++;
+                }else {
+                    break;
+                }
+            }
+            if (maxln<count){
+                maxln = count;
+                ans = i;
+            }
+        }
+        return ans;
+    }
+
+    public static void negtooneside(int[] arr){
+        int last = arr.length-1;
+        for (int i = 0;i<arr.length && last>=i;i++){
+            if (arr[i]<0){
+                int temp = arr[last];
+                arr[last] = arr[i];
+                arr[i] = temp;
+                last--;
+                i--;
+            }
+        }
+        for (int i = 0;i<arr.length;i++){
+            System.out.print(arr[i]+" ");
+        }
+    }
+    public static void minmaxarr(int[] arr){
+        int min = arr[0];
+        int max = arr[0];
+            for (int i = 0;i<arr.length;i++){
+                if (max<arr[i]){
+                    max = arr[i];
+                }
+                if (min>arr[i]){
+                    min = arr[i];
+                }
+            }
+        for (int i = 0;i<arr.length;i++){
+            System.out.print(arr[i]+" ");
+        }
+    }
+    public static void reversearray(int[] arr){
+        int last = arr.length-1;
+        for (int i = 0;i<arr.length/2;i++){
+            int temp = arr[i];
+            arr[i] = arr[last];
+            arr[last] = temp;
+            last--;
+        }
+        for (int i = 0;i<arr.length;i++){
+            System.out.println();
+            System.out.print(arr[i]+" ");
+        }
+    }
+
+    public String findReplaceString(String S, int[] indexes, String[] sources, String[] targets) {
+        String ans = "";
+        int bh = 0;
+        for (int i = 0;i<S.length();i++){
+            if (indexes[bh] == i){
+                int token = 0;
+                int lenofword = sources[bh].length();
+                int count = 0;
+                int mk = i;
+                for (int n = 0;n<lenofword;n++){
+                    if (mk<S.length() && count<sources[bh].length()) {
+                        if (S.charAt(mk) == sources[bh].charAt(count)) {
+                            token++;
+                        }
+                    }
+                    mk++;
+                    count++;
+                }
+                if (token == lenofword) {
+                    ans += targets[bh];
+                    bh++;
+                    i += lenofword - 1;
+                }
+            }else {
+                ans += S.charAt(i);
+            }
+        }
+        return ans;
+    }
+
+    public String modifyString(String s) {
+        String ans = "";
+        for (int i = 1;i<s.length()-1;i++){
+            if (s.charAt(i) == '?'){
+                char forward = s.charAt(i+1);
+                char backward = s.charAt(i-1);
+
+            }
+        }
+        return ans;
+    }
+
+    public static void reverseWord(String str)
+    {
+        String ans = "";
+        for (int i = str.length()-1;i>=0;i--){
+            ans += str.charAt(i);
+        }
+    }
+    public boolean isValid(String s) {
+        LinkedList<Character> ls = new LinkedList<Character>();
+        for (int i =0;i<s.length();i++){
+            ls.add(s.charAt(i));
+        }
+        for (int i = 0;i<ls.size();i++){
+            char ch = ls.get(i);
+            if (ch == '{' || ch == '(' || ch == '['){
+            }else {
+                if (i == 0){
+                    System.out.println(ls);
+                    System.out.println("a");
+                    return false;
+                }
+                int backchar = ls.get(i-1);
+                if (ch == ']'&& backchar == '['){
+                    ls.remove(i);
+                    ls.remove(i-1);
+                    i--;
+                    i--;
+                }else if (ch == '}' && backchar == '{'){
+                    ls.remove(i);
+                    ls.remove(i-1);
+                    i--;
+                    i--;
+                }else if (ch == ')' && backchar == '('){
+                    ls.remove(i);
+                    ls.remove(i-1);
+                    i--;
+                    i--;
+                }else{
+                    System.out.println("b");
+                    return false;
+                }
+            }
+        }
+        if (ls.size() == 0){
+            System.out.println("c");
+            return true;
+        }
+        System.out.println("d");
+        return false;
+    }
 
     public boolean checkRecord(String s) {
         int absent = 0;
@@ -465,17 +633,6 @@ public class SnapshotArray {
         return lsint;
     }
 
-
-    public static void main(String[] args){
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Enter Size of Arraay");
-        int n = scan.nextInt();
-        int[] arrr = new int[n];
-        for (int i = 0;i<n;i++){
-            arrr[i] = scan.nextInt();
-        }
-        System.out.println(most(arrr));
-    }
     public static int most(int[] arr){
         int ans = -1;
         sortArray(arr);

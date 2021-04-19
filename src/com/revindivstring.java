@@ -750,31 +750,32 @@ public class revindivstring {
     public void duplicateZeros(int[] arr) {
         LinkedList<Integer> ls = new LinkedList<Integer>();
         int len = 0;
-        for (int i =0;i<arr.length && len <= arr.length;i++){
+        for (int i = 0; i < arr.length && len <= arr.length; i++) {
             ls.add(arr[i]);
-            if (arr[i] == 0){
+            if (arr[i] == 0) {
                 ls.add(0);
             }
         }
-        for (int i = 0;i<arr.length;i++){
-            if (arr[i] == 0){
-            arr[i] = ls.get(i);
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == 0) {
+                arr[i] = ls.get(i);
+            }
         }
     }
 
 
-
-    public int[] productExceptSelf(int[] nums) {
-        int[] ans = new int[nums.length];
-        int productall = 1;
-        for (int i =0;i<nums.length;i++){
-            productall *= nums[i];
-        }
-        for (int i = 0;i<nums.length;i++){
-            ans[i] = productall/nums[i];
-        }
-        return ans;
-    }
+//
+//    public int[] productExceptSelf(int[] nums) {
+//        int[] ans = new int[nums.length];
+//        int productall = 1;
+//        for (int i =0;i<nums.length;i++){
+//            productall *= nums[i];
+//        }
+//        for (int i = 0;i<nums.length;i++){
+//            ans[i] = productall/nums[i];
+//        }
+//        return ans;
+//    }
 
     public int subarraysDivByK(int[] A, int K) {
         int count = 0;

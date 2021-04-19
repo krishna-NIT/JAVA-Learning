@@ -16,7 +16,26 @@ public class SnapshotArray {
         negtooneside(arr);
     }
 
+    public static void printallsubstring(String str){
+        for (int i = 0;i<str.length()-1;i++){
+            for (int j = 1;j<str.length();j++){
+                System.out.print(str.substring(i,i+j)+" ");
+            }
+        }
+    }
 
+    public String truncateSentence(String s, int k) {
+        int count = 1;
+        for (int i = 0;i<s.length();i++){
+            if (s.charAt(i) == ' '){
+                count++;
+            }
+            if (count == k){
+                return s.substring(0,i);
+            }
+        }
+        return s;
+    }
 
     public static int rowWithMax1s(int arr[][], int n, int m) {
         int maxln = 0;

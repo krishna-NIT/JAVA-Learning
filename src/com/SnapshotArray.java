@@ -3,9 +3,6 @@ package com;
 import java.util.*;
 
 public class SnapshotArray {
-    public SnapshotArray(int length) {
-        int[] arr = new int[length];
-    }
     public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
         int n = scan.nextInt();
@@ -14,6 +11,89 @@ public class SnapshotArray {
             arr[i] = scan.nextInt();
         }
         negtooneside(arr);
+    }
+
+    public boolean isLongPressedName(String name, String typed) {
+        if (typed.length() < name.length()){
+            return false;
+        }
+        LinkedList<Character> namechar = new LinkedList<Character>();
+        LinkedList<Character> typedchar = new LinkedList<Character>();
+
+        for (int i = 0;i<name.length();i++){
+            namechar.add(name.charAt(i));
+        }
+        for (int i = 0;i<typed.length();i++){
+            typedchar.add(typed.charAt(i));
+        }
+        int count = -1;
+        while (count <= typed.length()){
+            if (typedchar.get(0) == na
+            mechar.get(0)){
+                typedchar.remove(0);
+                if (typedchar.isEmpty()){
+                    return true;
+                }
+                if (typedchar.get(0) != namechar.get(0)){
+                    namechar.remove(0);
+                }
+            }
+            if (namechar.isEmpty()){
+                return true;
+            }
+            if (typedchar.isEmpty()){
+                return false;
+            }
+            count++;
+        }
+
+        if (name.isEmpty()){
+            return true;
+        }
+        return false;
+    }
+
+    public int countSegments(String s) {
+        if (s.isEmpty()){
+            return 0;
+        }
+        int ans = 1;
+        for (int i = 0;i<s.length()-1;i++){
+            if (s.charAt(i) != ' ' && s.charAt(i+1) == ' '){
+                ans++;
+            }
+        }
+        if (s.charAt(s.length()-1) == ' '){
+            ans--;
+        }
+        return ans;
+    }
+
+    public List<String> findAndReplacePattern(String[] words, String pattern) {
+        LinkedList<String> lsstring = new LinkedList<String>();
+        for (int i = 0;i<words.length;i++){
+            String str = words[i];
+            if (str.length() == pattern.length()){
+                int value = 0;
+                for (int j = 0;j<str.length()-1;j++){
+                    for (int k = j+1;k<str.length();k++){
+                        if (str.charAt(j) == str.charAt(k)){
+                            if (pattern.charAt(j) == pattern.charAt(k)){
+                            }else {
+                                value++;
+                            }
+                        }else if (pattern.charAt(j) != pattern.charAt(k)){
+                        }else {
+                            value++;
+                        }
+                    }
+                }
+                if (value == 0){
+                    lsstring.add(str);
+                }
+            }
+        }
+        return lsstring;
     }
 
     public static void printallsubstring(String str){

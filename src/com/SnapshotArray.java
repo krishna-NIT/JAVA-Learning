@@ -28,8 +28,7 @@ public class SnapshotArray {
         }
         int count = -1;
         while (count <= typed.length()){
-            if (typedchar.get(0) == na
-            mechar.get(0)){
+            if (typedchar.get(0) == namechar.get(0)){
                 typedchar.remove(0);
                 if (typedchar.isEmpty()){
                     return true;

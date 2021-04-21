@@ -13,6 +13,60 @@ public class SnapshotArray {
         negtooneside(arr);
     }
 
+    public boolean isMonotonic(int[] A) {
+        LinkedList<Integer> diff = new LinkedList<Integer>();
+        for (int i = 0;i<A.length-1;i++){
+            int temp = A[i]-A[i+1];
+            if (temp != 0) {
+                diff.add(temp);
+            }
+        }
+        if (diff.isEmpty()){
+            return true;
+        }
+        if (diff.get(0)<0){
+            for (int i = 1;i<diff.size();i++){
+                if (diff.get(i)>0){
+                    return false;
+                }
+            }
+        }else {
+            for (int i = 1;i<diff.size();i++){
+                if (diff.get(i)<0){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public String addStrings(String num1, String num2) {
+        int sum = 0;
+        int a = 0;
+        int b = 0;
+        int alen = num1.length();
+        int blen = num2.length();
+
+        for (int i = 0;i<num1.length();i++){
+            int ascii = (int) num1.charAt(i);
+            int tempno = ascii-48;
+            a += Math.pow(10,alen-1)*tempno;
+            alen--;
+        }
+        for (int i = 0;i<num2.length();i++){
+            int ascii = (int) num2.charAt(i);
+            int tempno = ascii-48;
+            b += Math.pow(10,blen-1)*tempno;
+            blen--;
+        }
+        System.out.println(a+" "+ b);
+        sum = a+b;
+        System.out.println(sum);
+        String ans = "";
+        Stack<Integer> stack = new Stack<Integer>();
+        return "asdf";
+    }
+
     public boolean isLongPressedName(String name, String typed) {
         if (typed.length() < name.length()){
             return false;

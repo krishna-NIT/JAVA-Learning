@@ -13,6 +13,85 @@ public class SnapshotArray {
         negtooneside(arr);
     }
 
+    public int[][] matrixReshape(int[][] nums, int r, int c) {
+        int[][] fin = new int[r][c];
+        LinkedList<Integer> lsno = new LinkedList<Integer>();
+        for (int i = 0;i<nums.length;i++){
+            for (int j = 0;j<nums[0].length;j++){
+                lsno.add(nums[i][j]);
+            }
+        }
+        if ((r*c) != lsno.size()){
+            return nums;
+        }
+        int b = 0;
+        for (int i = 0;i<r;i++){
+            for (int j = 0;j<c;j++){
+                fin[i][j] = lsno.get(b);
+                b++;
+            }
+        }
+        return fin;
+    }
+
+    public boolean canConstruct(String ransomNote, String magazine) {
+        LinkedList<Character> lschar = new LinkedList<Character>();
+        for (int i = 0;i<magazine.length();i++){
+            lschar.add(magazine.charAt(i));
+        }
+        for (int i = 0;i<ransomNote.length();i++){
+            char temp = ransomNote.charAt(i);
+            if (lschar.contains(temp)){
+                int b  =0;
+                while (b ==0){
+                    for (int j = 0;j<lschar.size();j++){
+                        if (temp == lschar.get(i)){
+                            lschar.remove(i);
+                            b++;
+                            break;
+                        }
+                    }
+                }
+            }else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // NEWS
+    public boolean isPathCrossing(String path) {
+        LinkedList<Integer> ls = new LinkedList<Integer>();
+        int N = 0;
+        int E = 0;
+        int W = 0;
+        int S = 0;
+        ls.add(0000);
+        for (int i = 0;i<path.length();i++){
+            if (path.charAt(i) == 'N'){
+                N++;
+            }
+            if (path.charAt(i) == 'E'){
+                E++;
+            }
+            if (path.charAt(i) == 'W'){
+                W++;
+            }
+            if (path.charAt(i) == 'S'){
+                S++;
+            }
+            int loc = (N*1000)+(E*100)+(W*10)+(S);
+            if (!ls.contains(loc)){
+                ls.add(loc);
+            }else {
+                System.out.println(ls);
+                return true;
+            }
+        }
+        System.out.println(ls);
+        return false;
+    }
+
     public boolean isMonotonic(int[] A) {
         LinkedList<Integer> diff = new LinkedList<Integer>();
         for (int i = 0;i<A.length-1;i++){

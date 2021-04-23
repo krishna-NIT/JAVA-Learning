@@ -10,7 +10,86 @@ public class SnapshotArray {
         for (int i = 0;i<n;i++){
             arr[i] = scan.nextInt();
         }
-        negtooneside(arr);
+        mean(arr);
+        median(arr);
+        mode(arr);
+    }
+
+    public String removeKdigits(String num, int k) {
+
+    }
+
+    public String gcdOfStrings(String str1, String str2) {
+        String gcd = "";
+        for (int i = str2.length();i>=1;i--){
+            String temp = str2.substring()
+        }
+        return gcd;
+    }
+
+    public static void mean(int[] arr){
+        int sum = 0;
+        for (int i = 0;i<arr.length;i++){
+            sum += arr[i];
+        }
+        float mean = sum/arr.length;
+        System.out.println(mean);
+    }
+    public static void median(int[] arr){
+        sortArray(arr);
+        if (arr.length %2 ==0){
+            int i = arr.length/2;
+            float ans = (arr[i]+arr[i-1])/2;
+            System.out.println(ans);
+        }else {
+            int ans = arr[arr.length/2];
+            System.out.println(ans);
+        }
+    }
+    public static void mode(int[] arr){
+        sortArray(arr);
+        LinkedList<Integer> entries = new LinkedList<Integer>();
+        LinkedList<Integer> frequency = new LinkedList<Integer>();
+        int count = 0;
+        int tempvalue = arr[0];
+        for (int i = 0; i<arr.length;i++){
+            int no = arr[i];
+            if (!entries.contains(no)){
+                entries.add(no);
+                count = 1;
+            }else {
+                if (no == arr[i-1]){
+                    count++;
+                }
+            }
+
+        }
+    }
+    public static void sortArray(int[] nums) {
+        for (int i = 0;i<nums.length;i++){
+            for (int j = i+1 ;j<nums.length;j++){
+                int minindex = Integer.MAX_VALUE;
+                if (minindex>nums[j]){
+                    minindex = j;
+                }
+                if (nums[minindex]<nums[i]){
+                    int temp = nums[i];
+                    nums[i] = nums[minindex];
+                    nums[minindex] = temp;
+                }
+            }
+        }
+    }
+
+
+    public static int inSequence(int A, int B, int C){
+            while (A <= B) {
+                if (A == B) {
+                    return 1;
+                }
+                A += C;
+            }
+        return 0;
     }
 
     public int[][] matrixReshape(int[][] nums, int r, int c) {
@@ -884,22 +963,22 @@ public class SnapshotArray {
         }
         return ans;
     }
-    public static void sortArray(int[] nums) {
-        for (int i = 0;i<nums.length;i++){
-            for (int j = i+1 ;j<nums.length;j++){
-                int minindex = Integer.MAX_VALUE;
-                if (minindex>nums[j]){
-                    minindex = j;
-                }
-                if (nums[minindex]<nums[i]){
-                    int temp = nums[i];
-                    nums[i] = nums[minindex];
-                    nums[minindex] = temp;
-                }
-            }
-        }
-    }
-
+//    public static void sortArray(int[] nums) {
+//        for (int i = 0;i<nums.length;i++){
+//            for (int j = i+1 ;j<nums.length;j++){
+//                int minindex = Integer.MAX_VALUE;
+//                if (minindex>nums[j]){
+//                    minindex = j;
+//                }
+//                if (nums[minindex]<nums[i]){
+//                    int temp = nums[i];
+//                    nums[i] = nums[minindex];
+//                    nums[minindex] = temp;
+//                }
+//            }
+//        }
+//    }
+//
 
     public int maximumProduct(int[] nums) {
         int max = Integer.MIN_VALUE;

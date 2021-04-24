@@ -15,7 +15,7 @@ public class SnapshotArray {
         mode(arr);
     }
 
-    public String removeKdigits(String num, int k) {
+    public int findRadius(int[] houses, int[] heaters) {
 
     }
 

@@ -15,14 +15,11 @@ public class SnapshotArray {
         mode(arr);
     }
 
-    public int findRadius(int[] houses, int[] heaters) {
-
-    }
 
     public String gcdOfStrings(String str1, String str2) {
         String gcd = "";
         for (int i = str2.length();i>=1;i--){
-            String temp = str2.substring()
+            String temp = str2.substring(5);
         }
         return gcd;
     }

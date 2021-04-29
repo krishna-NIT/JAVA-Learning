@@ -10,43 +10,85 @@ import java.util.*;
 public class revindivstring {
     public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
-        int T = scan.nextInt();
-        for (int i = 0;i<T;i++){
-            int rlen = scan.nextInt();
-            int clen = scan.nextInt();
-            int x = scan.nextInt();
-            int[][] tdarr = new int[rlen][clen];
-            for (int j =0 ;j<rlen;j++){
-                for (int k = 0;k<clen;k++){
-                    tdarr[j][k] = scan.nextInt();
-                }
+        int l = scan.nextInt();
+        int b = scan.nextInt();
+        int[][] matrix = new int[l][b];
+        for (int i = 0;i<l;i++){
+            for (int j = 0;j<b;j++){
+                matrix[i][j] = scan.nextInt();
             }
-            // Main Solution
-            int min = 0;
-            if (rlen<clen){
-                min = rlen;
-            }else {
-                min = clen;
-            }
-            int ans = 0;
-            for (int a = 0;a<rlen;a++){
-                for (int b = 0;b<clen;b++){
-                    int temp = 0;
-                    for (int d = 0;d<min && temp ==0;d++) {
-                        int p = a+d;
-                        int q = b+d;
-                        if (p<rlen && q<clen) {
-                            if (isWorthy(tdarr, a, b, p, q, x)) {
-                                ans++;
-                            }
-                        }else {
-                            temp++;
-                        }
-                    }
-                }
-            }
-            System.out.println(ans);
         }
+        System.out.println(isToeplitzMatrix(matrix));
+    }
+
+    public int countMatches(List<List<String>> items, String ruleKey, String ruleValue) {
+        int match = 0;
+        int tally = 0;
+        if (ruleKey.equals("type")){
+            tally = 0;
+        }else if (ruleKey.equals("color")){
+            tally = 1;
+        }else if (ruleKey.equals("name")){
+            tally = 2;
+        }
+
+        for (int i = 0;i<items.size();i++){
+            if (items.get(i).get(tally).equals(ruleValue)){
+                match++;
+                System.out.println(items.get(i).get(tally));
+            }
+        }
+        System.out.println(match);
+        return match;
+    }
+
+    public boolean repeatedSubstringPattern(String s) {
+        for (int i = 0;i<s.length()-2;i++){
+            String temp = s.substring(0,i);
+            if (s.length()%temp.length() == 0){
+                int turn = s.length()/temp.length();
+                int check = 0;
+                for (int j = 0;j<turn;j++){
+                    temp += temp;
+                }
+                if (check == turn){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean isToeplitzMatrix(int[][] matrix) {
+        int rlen = matrix.length;
+        int clen = matrix[0].length;
+
+        //horizontal checking
+        for (int i = 0;i<clen;i++){
+            int temp = 0;
+            int val = matrix[temp][i];
+            temp++;
+            for (int j = i+1;j<clen && temp<rlen;j++){
+                if (val!=matrix[temp][j]){
+                    return false;
+                }
+                temp++;
+            }
+        }
+
+        //vertical checking
+        for (int i = 1;i<rlen;i++){
+            int temp = 0;
+            int val = matrix[i][temp];
+            temp++;
+            for (int j = i+1;j<rlen && temp<clen;j++){
+                if (val!=matrix[j][temp]){
+                    return false;
+                }
+                temp++;
+            }
+        }
+        return true;
     }
     public void rotate(int[][] matrix) {
         int[][] fin = new int[matrix.length][matrix[0].length];
@@ -469,38 +511,38 @@ public class revindivstring {
     return -1;
     }
     // Teoplitz Matrix
-    public boolean isToeplitzMatrix(int[][] matrix) {
-        int rlen = matrix.length;
-        int clen = matrix[0].length;
-
-        //horizontal checking
-        for (int i = 0;i<clen;i++){
-            int temp = 0;
-            int val = matrix[temp][i];
-            temp++;
-            for (int j = i+1;j<clen && temp<rlen;j++){
-                if (val!=matrix[temp][j]){
-                    return false;
-                }
-                temp++;
-            }
-        }
-
-        //vertical checking
-        for (int i = 1;i<rlen;i++){
-            int temp = 0;
-            int val = matrix[i][temp];
-            temp++;
-            for (int j = i+1;j<rlen && temp<clen;j++){
-                if (val!=matrix[j][temp]){
-                    return false;
-                }
-                temp++;
-            }
-        }
-        return true;
-    }
-
+//    public boolean isToeplitzMatrix(int[][] matrix) {
+//        int rlen = matrix.length;
+//        int clen = matrix[0].length;
+//
+//        //horizontal checking
+//        for (int i = 0;i<clen;i++){
+//            int temp = 0;
+//            int val = matrix[temp][i];
+//            temp++;
+//            for (int j = i+1;j<clen && temp<rlen;j++){
+//                if (val!=matrix[temp][j]){
+//                    return false;
+//                }
+//                temp++;
+//            }
+//        }
+//
+//        //vertical checking
+//        for (int i = 1;i<rlen;i++){
+//            int temp = 0;
+//            int val = matrix[i][temp];
+//            temp++;
+//            for (int j = i+1;j<rlen && temp<clen;j++){
+//                if (val!=matrix[j][temp]){
+//                    return false;
+//                }
+//                temp++;
+//            }
+//        }
+//        return true;
+//    }
+//
     public int[] kWeakestRows(int[][] mat, int k) {
         int[] noofsoldier = new int[mat[0].length];
         int[] rowindex = new int[mat[0].length];
@@ -626,6 +668,7 @@ public class revindivstring {
             if (ls1.get(i) == 0){
                 count++;
             }
+
         }
         return count;
     }

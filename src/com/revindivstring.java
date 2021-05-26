@@ -10,16 +10,95 @@ import java.util.*;
 public class revindivstring {
     public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
-        int l = scan.nextInt();
-        int b = scan.nextInt();
-        int[][] matrix = new int[l][b];
-        for (int i = 0;i<l;i++){
-            for (int j = 0;j<b;j++){
-                matrix[i][j] = scan.nextInt();
+        System.out.println("Enter Binary Number :");
+        int n = scan.nextInt();
+        System.out.println("Decimal Representation is :");
+        bintodec(n);
+    }
+
+    public int numEquivDominoPairs(int[][] dominoes) {
+        int count = 0;
+        for (int i = 0; i<dominoes.length;i++){
+            for (int j = 0;j<dominoes.length;j++){
+                if (i != j) {
+                    if ((dominoes[i][0] == dominoes[j][0] && dominoes[i][1] == dominoes[j][1]) ||
+                            (dominoes[i][0] == dominoes[j][1] && dominoes[i][1] == dominoes[j][0])) {
+                        count++;
+                    }
+                }
             }
         }
-        System.out.println(isToeplitzMatrix(matrix));
+        return count/2;
     }
+
+    public int findLengthOfLCIS(int[] nums) {
+        int max_count = 0;
+        int count = 1;
+        for (int i = 1;i<nums.length;i++){
+            if (nums[i]-nums[i-1] > 0){
+                count++;
+            }else{
+                if (max_count < count){
+                    max_count = count;
+                }
+                count = 1;
+            }
+        }
+        if (max_count < count){
+            max_count = count;
+        }
+        return max_count;
+    }
+
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int max = 0;
+        int prev_temp = 0;
+        int count = 0;
+        for (int i = 0;i<nums.length;i++){
+            if (prev_temp == 0 && nums[i] == 1){
+                count = 0;
+                prev_temp = 1;
+            }
+            if (prev_temp == 1 && nums[i] == 1){
+                count++;
+            }
+            if (prev_temp == 1 && nums[i]!=1){
+                if (count>max){
+                    max = count;
+                }
+                prev_temp = 0;
+            }
+        }
+        if (count>max){
+            max = count;
+        }
+        return max;
+    }
+
+    public static void bintodec(int n){
+        int dec = 0;
+        int dummy = n;
+        int count = 0;
+        while (dummy > 0){
+            int lastdigit = dummy % 10;
+            dummy /= 10;
+            dec += (lastdigit * Math.pow(2,count));
+            count++;
+        }
+        System.out.println(dec);
+    }
+    public static void dublicate(int[] arr){
+        int len = arr.length;
+        for (int i = 0; i < len; i++) {
+            int j = Math.abs(arr[i]);
+            if (arr[j] >= 0) {
+                arr[j] = -arr[j];
+            }else {
+                System.out.print(j + " ");
+            }
+        }
+    }
+
 
     public int countMatches(List<List<String>> items, String ruleKey, String ruleValue) {
         int match = 0;

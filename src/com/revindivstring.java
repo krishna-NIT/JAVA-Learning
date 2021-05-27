@@ -16,6 +16,55 @@ public class revindivstring {
         bintodec(n);
     }
 
+    public boolean checkIfPangram(String sentence) {
+        if (sentence.length() < 26){
+            return false;
+        }else {
+            int[] arr = new int[26];
+            for (int i = 0;i<arr.length;i++){
+                arr[i] = 0;
+            }
+            // Calculating Frequency
+            for (int i = 0;i<sentence.length();i++){
+                char ch = sentence.charAt(i);
+                int ascii = (int) ch;
+                if (ascii<=122 || ascii>=97){
+                    int index = ascii - 97;
+                    arr[index]++;
+                }else {
+                    return false;
+                }
+            }
+            //if 0 return false
+            for (int i = 0;i<arr.length;i++){
+                if (arr[i] == 0){
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    public int findLucky(int[] arr) {
+        int max_value = -1;
+        for (int i = 0;i<arr.length;i++){
+            int val = arr[i];
+            if (val != 0) {
+                int count = 0;
+                for (int j = 0; j < arr.length; j++) {
+                    if (arr[j] == val) {
+                        count++;
+                        arr[j] = 0;
+                    }
+                }
+                if (count > max_value && count == val) {
+                    max_value = count;
+                }
+            }
+        }
+        return max_value;
+    }
+
     public int numEquivDominoPairs(int[][] dominoes) {
         int count = 0;
         for (int i = 0; i<dominoes.length;i++){

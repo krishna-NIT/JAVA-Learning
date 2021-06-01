@@ -10,10 +10,87 @@ import java.util.*;
 public class revindivstring {
     public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
-        System.out.println("Enter Binary Number :");
         int n = scan.nextInt();
-        System.out.println("Decimal Representation is :");
-        bintodec(n);
+        LinkedList<Integer> seq = new LinkedList<Integer>();
+        int c1 = 0;
+        LinkedList<Integer> ls = new LinkedList<Integer>();
+        for (int i = 0;i<n;i++){
+            int temp =scan.nextInt();
+            seq.add(temp);
+            if (i>0 && c1 ==0) {
+                if (seq.get(i) < seq.get(i-1)) {
+                    c1++;
+                    ls.add(i-1);
+                }
+            }
+        }
+        int check = 0;
+        if (c1 == 0) {
+            for (int i = 1; i <= seq.size() - 2 && check == 0 && c1 == 0; i++) {
+                int asum = sumfromto(seq, 0, i - 1);
+                int bsum = sumfromto(seq, i, seq.size() - 1);
+                if (asum == bsum) {
+                    System.out.println("SAFE");
+                    check++;
+                    break;
+                }
+            }
+            if (check==0){
+                System.out.println("UNSAFE");
+            }
+        }
+        System.out.println(ls);
+
+        if (ls.size() != 1){
+            System.out.println("UNSAFE");
+            check++;
+        }
+        System.out.println(seq);
+        System.out.println(check);
+        System.out.println(c1);
+
+        if (check==0){
+                int val = seq.get(ls.get(0));
+                System.out.println("Value is "+val);
+            System.out.println(seq);
+            System.out.println("here");
+            System.out.println(ls.get(0));
+                seq.remove(ls.get(0));
+            System.out.println(seq);
+                seq.add(val);
+            System.out.println(seq);
+            for (int i = 1; i <= seq.size() - 2 && check == 0 && c1 == 0; i++) {
+                int asum = sumfromto(seq, 0, i - 1);
+                int bsum = sumfromto(seq, i, seq.size() - 1);
+                if (asum == bsum) {
+                    System.out.println("SAFE");
+                    check++;
+                    break;
+                }
+            }
+            if (check==0){
+                System.out.println("UNSAFE");
+            }
+        }
+        System.out.println("UNSAFE");
+    }
+    public static int sumfromto(LinkedList<Integer> seq,int s,int e){
+        int sum = 0;
+        for (int i = s;i<=e;i++){
+            sum+=seq.get(i);
+        }
+        return sum;
+    }
+
+
+    public static int sumofdi(long n){
+        int sum = 0;
+        while (n>0){
+            int rem = (int)n%10;
+            n /=10;
+            sum += rem;
+        }
+        return sum;
     }
 
     public boolean checkIfPangram(String sentence) {

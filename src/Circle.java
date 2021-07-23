@@ -1,17 +1,36 @@
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Circle {
 double radius;
-public static void main(String[] args){
-    Scanner scan = new Scanner(System.in);
-    int r= scan.nextInt();
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        int r= scan.nextInt();
+        System.out.println(isPalindrome(r));
+    }
 
-    Scanner sca = new Scanner(System.in);
-    String name = sca.nextLine();
-    System.out.println("Area is "+(Math.PI*r*r)+"And NAme is "+name);
-    sca.close();
-    scan.close();
-}
+    public static boolean isPalindrome(int x) {
+        if (x <0){
+            return false;
+        }
+        LinkedList<Integer> ls = new LinkedList<Integer>();
+        while (x>0){
+            int temp = x%10;
+            x /= 10;
+            ls.add(temp);
+        }
+        System.out.println(ls);
+        int lasti = ls.size()-1;
+        int starti = 0;
+        while (lasti>starti){
+            if (ls.get(lasti) != ls.get(starti)){
+                return false;
+            }
+            lasti--;
+            starti++;
+        }
+        return true;
+    }
 
 public Circle(double radius){
     if (radius<0){

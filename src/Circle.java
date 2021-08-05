@@ -5,27 +5,34 @@ import java.util.Stack;
 
 public class Circle {
 double radius;
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        int r= scan.nextInt();
-        int[] arr = new int[r];
-        for (int i =0;i<r;i++){
-            arr[i] = scan.nextInt();
-        }
-        int k = scan.nextInt();
-        addToArrayForm(arr,k);
+        int r = scan.nextInt();
+        System.out.println(trailingZeroes(r));
     }
 
-    public String longestCommonPrefix(String[] strs) {
-        String com = "";
-        int j = 0;
-        int count = 0;
-        for (int i = 0;i<strs.length;i++){
-            char temp = strs[i].charAt(j);
-
+    public static int trailingZeroes(int n) {
+        int rem5 = 0;
+        int rem10 = 0;
+        for (int i = n ; i>0 ; i--){
+            if (i%10 == 0){
+                rem10++;
+            }else if (i%5 == 0){
+                rem5++;
+            }
         }
-        return com;
+        System.out.println(rem5+" "+rem10);
+        return (rem10 + rem5);
     }
+
+    public static int minof2(int a, int b){
+        if (a<b){
+            return a;
+        }else {
+            return b;
+        }
+    }
+
 
     public int maxArea(int[] height) {
         int maxa = 0;

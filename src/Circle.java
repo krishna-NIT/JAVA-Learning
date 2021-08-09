@@ -4,12 +4,27 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class Circle {
-double radius;
+    double radius;
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        int r = scan.nextInt();
-        System.out.println(trailingZeroes(r));
+        System.out.println("Enter the name:");
+        String temp1 = scan.nextLine();
+        System.out.println("The Name is: "+temp1);
+
+        System.out.println("Enter the marks:");
+        temp1 = scan.nextLine();
+        System.out.println("The Name is: "+temp1);
+
+        System.out.println("Enter the name:");
+        temp1 = scan.nextLine();
+        System.out.println("The Name is: "+temp1);
+
+        System.out.println("Enter the salary:");
+        temp1 = scan.nextLine();
+        System.out.println("The Name is: Rs "+temp1);
     }
+
+
 
     public static int trailingZeroes(int n) {
         int rem5 = 0;

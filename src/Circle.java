@@ -24,8 +24,6 @@ public class Circle {
         System.out.println("The Name is: Rs "+temp1);
     }
 
-
-
     public static int trailingZeroes(int n) {
         int rem5 = 0;
         int rem10 = 0;

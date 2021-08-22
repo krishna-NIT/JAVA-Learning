@@ -7,21 +7,63 @@ public class Circle {
     double radius;
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Enter the name:");
-        String temp1 = scan.nextLine();
-        System.out.println("The Name is: "+temp1);
 
-        System.out.println("Enter the marks:");
-        temp1 = scan.nextLine();
-        System.out.println("The Name is: "+temp1);
+    }
 
-        System.out.println("Enter the name:");
-        temp1 = scan.nextLine();
-        System.out.println("The Name is: "+temp1);
+    public boolean isHappy(int n) {
+        int newnum = 0;
+        while (n>0){
+            int temp = n%10;
+            newnum += ((temp)*(temp));
+            n /= 10;
+        }
+        System.out.println(newnum);
+        if (newnum == 1){
+            System.out.println("isHappy");
+            return true;
+        }else {
+            return false;
+        }
+        return isHappy(newnum);
+    }
 
-        System.out.println("Enter the salary:");
-        temp1 = scan.nextLine();
-        System.out.println("The Name is: Rs "+temp1);
+    public String convertToTitle(int columnNumber) {
+        int div = columnNumber/26;
+        int rem = columnNumber%26;
+        String ans = "";
+        for (int i = 0;i<div;i++){
+            ans += "A";
+        }
+        char fin;
+        System.out.println(ans);
+        if (rem == 0){
+            fin = 'Z';
+        }else {
+            fin = (char) (rem+64);
+        }
+        ans += fin;
+        System.out.println(ans);
+        return ans;
+    }
+
+    public static int maxProfit(int[] prices) {
+        int profit = Integer.MIN_VALUE;
+        for (int i = 0 ; i < prices.length-1 ; i++){
+            for (int j = i+1 ; j< prices.length ; j++){
+                if (prices[j] > prices[i]) {
+                    if (profit < (prices[j] - prices[i])) {
+                        profit = (prices[j] - prices[i]);
+                        System.out.println(i + " " + j);
+                    }
+                }
+            }
+        }
+
+        if (profit > 0){
+            return profit;
+        }else {
+            return 0;
+        }
     }
 
     public static int trailingZeroes(int n) {

@@ -24,7 +24,6 @@ public class Circle {
         }else {
             return false;
         }
-        return isHappy(newnum);
     }
 
     public String convertToTitle(int columnNumber) {

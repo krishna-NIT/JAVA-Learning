@@ -6,9 +6,86 @@ import java.util.Stack;
 public class Circle {
     double radius;
     public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
         Scanner scan = new Scanner(System.in);
+        int n = scan.nextInt();
+        int[] arr = new int[n];
+        for (int i =0;i<n;i++){
+            arr[i] = scan.nextInt();
+        }
+        mean(arr);
 
+        //  Sorting of array -> Ascending order
+        for (int i = 0; i < n-1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    // swap arr[j+1] and arr[j]
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+//        System.out.println();
+//        System.out.println("Sorted Array");
+//            for (int i = 0 ;i <arr.length;i++){
+//                System.out.println(arr[i]);
+//            }
+
+        median(arr);
+        mode(arr);
     }
+
+
+    public static void mode(int[] arr){
+        int max_value = arr[0];
+        int max_freq = 0;
+        int count = 1;
+        int prev = arr[0];
+        for (int i = 1;i<arr.length;i++){
+            if (prev == arr[i]){
+                count++;
+            }else {
+                if (max_freq < count){
+                    max_freq = count;
+                    max_value = prev;
+                }
+                prev = arr[i];
+                count = 1;
+            }
+        }
+        if (count > max_freq){
+            max_freq = count;
+            max_value = arr[arr.length-1];
+        }
+
+        System.out.println(max_value);
+    }
+
+    public static void mean(int[] arr){
+        float sum = 0;
+        for (int i= 0;i <arr.length;i++){
+            sum += arr[i];
+        }
+        System.out.println(sum/arr.length);
+    }
+
+
+    public static void median(int[] arr){
+        if (arr.length%2 != 0){
+            float median = arr[(arr.length+1)/2];
+            System.out.println(median);
+            return;
+        }
+        int n = arr.length/2;
+        float su = (arr[n] + arr[n-1]);
+        float median = su/2;
+        System.out.println(median);
+    }
+
+
+
+
 
     public boolean isHappy(int n) {
         int newnum = 0;

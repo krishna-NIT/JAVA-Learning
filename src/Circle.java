@@ -1,4 +1,3 @@
-import java.text.DecimalFormat;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,30 +10,50 @@ public class Circle {
         Scanner scan = new Scanner(System.in);
         int n = scan.nextInt();
         int[] arr = new int[n];
-        for (int i =0;i<n;i++){
+        for (int i = 0; i<arr.length;i++){
             arr[i] = scan.nextInt();
         }
-        mean(arr);
 
-        //  Sorting of array -> Ascending order
-        for (int i = 0; i < n-1; i++) {
-            for (int j = 0; j < n - i - 1; j++) {
-                if (arr[j] > arr[j + 1]) {
-                    // swap arr[j+1] and arr[j]
-                    int temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
+        //Bubble sort
+        for (int i= 0;i<arr.length;i++){
+            for (int j = 0;j < arr.length-1-i ; j++){
+                if (arr[j]>arr[j+1]){
+                    int temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
                 }
             }
         }
-//        System.out.println();
-//        System.out.println("Sorted Array");
-//            for (int i = 0 ;i <arr.length;i++){
-//                System.out.println(arr[i]);
-//            }
 
-        median(arr);
-        mode(arr);
+        //Printing Sorted Array in Increasing order
+        System.out.println();
+        for (int i = 0; i<arr.length;i++){
+            System.out.print(arr[i]+" ");
+        }
+
+    }
+
+    public int search(int[] nums, int target) {
+        for (int i = 0; i<nums.length;i++){
+            if (nums[i] == target){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public int firstBadVersion(int n) {
+        // boolean isBadVersion(int version);
+//        while (isBadVersion(n)){
+//            n--;
+//        }
+        return (n+1);
+    }
+
+    public static int makeAnagram(String a, String b) {
+        int count = 0;
+        
+        return count;
     }
 
     public static void interQuartile(List<Integer> values, List<Integer> freqs) {

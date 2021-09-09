@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -36,6 +37,124 @@ public class Circle {
         mode(arr);
     }
 
+    public static void interQuartile(List<Integer> values, List<Integer> freqs) {
+        // Print your answer to 1 decimal place within this function
+
+
+    }
+
+    public static void weightedMean(List<Integer> X, List<Integer> W) {
+        int len = 0;
+        if (X.size() > W.size()){
+            len = X.size();
+        }else {
+            len = W.size();
+        }
+
+        // Write your code here
+        float multisum = 0;
+        int[] arr = new int[len];
+        for (int i = 0;i<arr.length;i++){
+            multisum += (X.get(i)* W.get(i));
+        }
+
+        int sumW = 0;
+        for (int i = 0;i< W.size();i++){
+            sumW += W.get(i);
+        }
+
+        System.out.println(multisum);
+        System.out.println(sumW);
+        double ans = multisum/sumW;
+
+        ans = Math.round(ans*10)/10.0;
+        System.out.println(ans);
+//        DecimalFormat df = new DecimalFormat("#.#");
+//        System.out.println(df.format(ans));
+    }
+
+    public static List<Integer> quartiles(List<Integer> arr) {
+        // Write your code here
+        int n = arr.size();
+        // Sorting Done here in List
+        for (int i = 0; i < n-1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr.get(j) > arr.get(j+1)) {
+                    // swap arr[j+1] and arr[j]
+                    int temp = arr.get(j);
+                    arr.remove(j);
+                    arr.add(j+1,temp);
+                }
+            }
+        }
+        System.out.println("Sorted List : "+arr);
+        List<Integer> lsfin = new LinkedList<Integer>();
+        int mid_inddex = 0;
+        if (arr.size()%2 ==0){
+            mid_inddex = arr.size()/2;
+            lsfin.add(median(arr,0,mid_inddex-1));
+            lsfin.add(median(arr, 0,arr.size()-1));
+            lsfin.add(endmedian(arr,mid_inddex,arr.size()-1));
+            System.out.println(lsfin);
+            return lsfin;
+        }else {
+            mid_inddex = arr.size()/2;
+            lsfin.add(median(arr,0,mid_inddex-1));
+            lsfin.add(median(arr, 0,arr.size()-1));
+            lsfin.add(endmedian(arr,mid_inddex+1,arr.size()-1));
+            System.out.println(lsfin);
+            return lsfin;
+        }
+    }
+
+    public static int endmedian(List<Integer> arr, int start, int end){
+        int median = 0;
+        int len = end-start+1;
+
+        if (len %2 ==0){
+            int st = start+ len/2;
+            median = arr.get(st)+arr.get(st-1);
+            return median/2;
+        }else {
+            int temp = len/2;
+            median = arr.get(temp+start);
+            return median;
+        }
+    }
+
+    public static int median(List<Integer> arr, int start, int end){
+        if ((end+1)%2 != 0){
+            int median = arr.get((end+1)/2);
+            System.out.println(median);
+            return median;
+        }
+        int n = (end+1)/2;
+        int su = (arr.get(n) + arr.get(n-1));
+        int median = su/2;
+        System.out.println(median);
+        return median;
+    }
+
+
+    public static void stdDev(List<Integer> arr) {
+        // Print your answers to 1 decimal place within this function
+        float sum = 0;
+        for (int i = 0;i<arr.size();i++){
+            sum += arr.get(i);
+        }
+        float mean = sum/arr.size();
+        sum = 0;
+        float[] diffsquare = new float[arr.size()];
+        for (int i =0;i<arr.size();i++){
+            float temp = mean - arr.get(i);
+            diffsquare[i] = (temp * temp);
+            sum += diffsquare[i];
+        }
+        float val = sum/arr.size();
+        double ans = Math.sqrt(val);
+        System.out.println(ans);
+    }
+
 
     public static void mode(int[] arr){
         int max_value = arr[0];
@@ -69,22 +188,6 @@ public class Circle {
         }
         System.out.println(sum/arr.length);
     }
-
-
-    public static void median(int[] arr){
-        if (arr.length%2 != 0){
-            float median = arr[(arr.length+1)/2];
-            System.out.println(median);
-            return;
-        }
-        int n = arr.length/2;
-        float su = (arr[n] + arr[n-1]);
-        float median = su/2;
-        System.out.println(median);
-    }
-
-
-
 
 
     public boolean isHappy(int n) {

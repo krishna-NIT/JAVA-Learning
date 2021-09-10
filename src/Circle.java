@@ -8,30 +8,119 @@ public class Circle {
     public static void main(String[] args) {
         /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
         Scanner scan = new Scanner(System.in);
+//        int mean = scan.nextInt();              // Median = Mean = Mode
+//        int std = scan.nextInt();               // Standard Deviation
+//        int topper = scan.nextInt();            // >80 Topper
+//        int boundary = scan.nextInt();          // >=60 Pass         <60 Fail
+
         int n = scan.nextInt();
-        int[] arr = new int[n];
-        for (int i = 0; i<arr.length;i++){
-            arr[i] = scan.nextInt();
+        String[] ansarr = new String[n];
+        for (int i = 0;i<n;i++){
+            if (cantravel()){
+                ansarr[i] = "Yes";
+            }else {
+                ansarr[i] = "NO";
+            }
         }
 
-        //Bubble sort
-        for (int i= 0;i<arr.length;i++){
-            for (int j = 0;j < arr.length-1-i ; j++){
-                if (arr[j]>arr[j+1]){
-                    int temp = arr[i];
-                    arr[i] = arr[j];
-                    arr[j] = temp;
+        for (int i = 0;i<n;i++) {
+            System.out.println(ansarr[i]);
+        }
+
+//        //Bubble sort
+//        for (int i= 0;i<arr.length;i++){
+//            for (int j = 0;j < arr.length-1-i ; j++){
+//                if (arr[j]>arr[j+1]){
+//                    int temp = arr[i];
+//                    arr[i] = arr[j];
+//                    arr[j] = temp;
+//                }
+//            }
+//        }
+//
+//        //Printing Sorted Array in Increasing order
+//        System.out.println();
+//        for (int i = 0; i<arr.length;i++){
+//            System.out.print(arr[i]+" ");
+//        }
+
+    }
+
+    public static boolean cantravel(){
+        Scanner scan = new Scanner(System.in);
+        int[] arr = new int[3];
+        int total_sum = 0;
+        for (int i = 0;i<arr.length;i++){
+            arr[i] = scan.nextInt();
+            total_sum += arr[i];
+        }
+        int D = scan.nextInt();
+        int E = scan.nextInt();
+
+        LinkedList<Integer> ls = new LinkedList<>();
+        for (int i = 0;i<arr.length;i++){
+            if (arr[i] < E){
+                ls.add(arr[i]);
+            }
+        }
+        if (ls.isEmpty()){
+            return false;
+        }
+
+        int maxofLinkedlist = ls.get(0);
+        if (ls.size() >= 2){
+            for (int i = 0;i<ls.size();i++){
+                if (maxofLinkedlist < ls.get(i)){
+                    maxofLinkedlist = ls.get(i);
                 }
             }
         }
 
-        //Printing Sorted Array in Increasing order
-        System.out.println();
-        for (int i = 0; i<arr.length;i++){
-            System.out.print(arr[i]+" ");
+        int rem_sum = total_sum - maxofLinkedlist;
+        if (rem_sum <= D){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+
+    public void rotate(int[] nums, int k) {
+        int[] finalarr = new int[nums.length];
+        int d = 0;
+        int temp = k % nums.length;
+        for (int i = nums.length-k ;i<nums.length;i++){
+            finalarr[d] = nums[i];
+            d++;
         }
 
+        for (int i = 0;i<=(nums.length-k-1);i++){
+            finalarr[d] = nums[i];
+            d++;
+        }
+
+        for (int i = 0;i<nums.length;i++){
+            nums[i] = finalarr[i];
+        }
     }
+
+    public int searchInsert(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length-1;
+
+        while (left < right){
+            int mid = left + ((right-left)/2);
+            if (target < nums[mid]){
+                right = mid;
+            }else {
+                left = mid + 1;
+            }
+        }
+        return left;
+    }
+
+
+
 
     public int search(int[] nums, int target) {
         for (int i = 0; i<nums.length;i++){
@@ -43,13 +132,22 @@ public class Circle {
     }
 
     public int firstBadVersion(int n) {
-        // boolean isBadVersion(int version);
-//        while (isBadVersion(n)){
-//            n--;
-//        }
-        return (n+1);
+        int left = 0;
+        int right = n;
+        while (left<right){
+            int mid = left + ((right-left)/2);
+            if (!isBadVersions(mid)){
+                left = mid+1;
+            }else {
+                right = mid;
+            }
+        }
+        return left;
     }
 
+    public static boolean isBadVersions(int temp){
+        return true;
+    }
     public static int makeAnagram(String a, String b) {
         int count = 0;
         

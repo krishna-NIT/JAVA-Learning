@@ -46,6 +46,33 @@ public class Circle {
 
     }
 
+    public static void interQuartile(List<Integer> values, List<Integer> freqs) {
+        // Print your answer to 1 decimal place within this function
+
+        for (int i = 0;i <values.size()-1;i++){
+            for (int j = 0;j<values.size()-i-1;j++){
+                if (values.get(j) > values.get(j+1)){
+                    int temp = values.get(j+1);
+                    int t = values.get(j);
+                    values.remove(j);
+                    values.remove(j+1);
+                    values.add(temp,j);
+                    values.add(t,j+1);
+
+                    temp = freqs.get(j+1);
+                    t = freqs.get(j);
+                    freqs.remove(j);
+                    freqs.remove(j+1);
+                    freqs.add(temp,j);
+                    freqs.add(t,j+1);
+                }
+            }
+        }
+        System.out.println(values);
+        System.out.println(freqs);
+
+    }
+
     public static boolean cantravel(){
         Scanner scan = new Scanner(System.in);
         int[] arr = new int[3];
@@ -154,11 +181,7 @@ public class Circle {
         return count;
     }
 
-    public static void interQuartile(List<Integer> values, List<Integer> freqs) {
-        // Print your answer to 1 decimal place within this function
 
-
-    }
 
     public static void weightedMean(List<Integer> X, List<Integer> W) {
         int len = 0;

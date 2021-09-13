@@ -8,12 +8,25 @@ public class Circle {
     public static void main(String[] args) {
         /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
         Box b = new Box();
-        b.height = 5;
-        b.width = 4;
-        System.out.println(b.length);
-        b.volume();
 
-        Scanner scan = new Scanner(System.in);
+
+    }
+    public static class Box{
+        int width;
+        int height;
+        int length;
+        Box(){}
+        Box(int a, int b, int c){
+            width = a;
+            height = b;
+            length = c;
+        }
+        void volume(){
+            System.out.println(length * width * height);
+        }
+    }
+
+    Scanner scan = new Scanner(System.in);
 //        int mean = scan.nextInt();              // Median = Mean = Mode
 //        int std = scan.nextInt();               // Standard Deviation
 //        int topper = scan.nextInt();            // >80 Topper
@@ -66,16 +79,6 @@ public class Circle {
 //        for (int i = 0; i<arr.length;i++){
 //            System.out.print(arr[i]+" ");
 //        }
-
-    }
-    public static class Box{
-        int width;
-        int height;
-        int length;
-        void volume(){
-            System.out.println(length * width * height);
-        }
-    }
 
     static int i = 0;
     public static void reverseString(char[] s) {

@@ -7,25 +7,48 @@ public class Circle {
     double radius;
     public static void main(String[] args) {
         /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Box b = new Box();
+        b.height = 5;
+        b.width = 4;
+        System.out.println(b.length);
+        b.volume();
+
         Scanner scan = new Scanner(System.in);
 //        int mean = scan.nextInt();              // Median = Mean = Mode
 //        int std = scan.nextInt();               // Standard Deviation
 //        int topper = scan.nextInt();            // >80 Topper
 //        int boundary = scan.nextInt();          // >=60 Pass         <60 Fail
-
-        int n = scan.nextInt();
-        String[] ansarr = new String[n];
-        for (int i = 0;i<n;i++){
-            if (cantravel()){
-                ansarr[i] = "Yes";
-            }else {
-                ansarr[i] = "NO";
-            }
-        }
-
-        for (int i = 0;i<n;i++) {
-            System.out.println(ansarr[i]);
-        }
+//
+//        int n = scan.nextInt();
+//        List<Integer> lis = new ArrayList<Integer>();
+//        int b = scan.nextInt();
+//        int c = scan.nextInt();
+//        int d = scan.nextInt();
+//
+//        lis.add(b);
+//        lis.add(c);
+//        lis.add(d);
+//
+//        System.out.println(lis);
+//        lis.add(1,d);
+//        System.out.println("Hi");
+//        System.out.println(lis);
+//        lis.remove(2);
+//        System.out.println(lis);
+//
+//
+//        String[] ansarr = new String[n];
+//        for (int i = 0;i<n;i++){
+//            if (cantravel()){
+//                ansarr[i] = "Yes";
+//            }else {
+//                ansarr[i] = "NO";
+//            }
+//        }
+//
+//        for (int i = 0;i<n;i++) {
+//            System.out.println(ansarr[i]);
+//        }
 
 //        //Bubble sort
 //        for (int i= 0;i<arr.length;i++){
@@ -45,6 +68,72 @@ public class Circle {
 //        }
 
     }
+    public static class Box{
+        int width;
+        int height;
+        int length;
+        void volume(){
+            System.out.println(length * width * height);
+        }
+    }
+
+    static int i = 0;
+    public static void reverseString(char[] s) {
+        char temp = s[i];
+        s[i] = s[s.length-i-1];
+        s[s.length-i-1] = temp;
+        if (i == (s.length/2)-1){
+            return;
+        }
+        i++;
+        reverseString(s);
+    }
+
+
+
+    public int find_median(int[] v)
+    {
+        // Sorting Code here
+        // Bubble Sort
+
+        for ( int i = 0;i<v.length-1;i++){
+            for (int j = 0; j < v.length-i-1;j++){
+                if (v[j] > v[j+1]){
+                    int temp = v[j+1];
+                    v[j+1] = v[j];
+                    v[j] = temp;
+                }
+            }
+        }
+
+
+        // after sorting
+        if (v.length == 1){
+            return v[0];
+        }
+        if (v.length % 2 == 0){
+            int k = v.length/2;
+            int sum = v[k] + v[k-1];
+            return sum/2;
+        }else{
+            int loc = v.length/2;
+            return v[loc];
+        }
+    }
+
+
+    public void shift1(int[]nums){
+        if (nums.length == 0){
+            return;
+        }
+
+        int temp = nums[nums.length-1];
+        for (int i = nums.length-1;i>0;i--){
+            nums[i] = nums[i-1];
+        }
+        nums[0] = temp;
+    }
+
 
     public static void interQuartile(List<Integer> values, List<Integer> freqs) {
         // Print your answer to 1 decimal place within this function
@@ -53,26 +142,57 @@ public class Circle {
             for (int j = 0;j<values.size()-i-1;j++){
                 if (values.get(j) > values.get(j+1)){
                     int temp = values.get(j+1);
-                    int t = values.get(j);
-                    values.remove(j);
                     values.remove(j+1);
-                    values.add(temp,j);
-                    values.add(t,j+1);
+                    values.add(j,temp);
 
                     temp = freqs.get(j+1);
-                    t = freqs.get(j);
-                    freqs.remove(j);
                     freqs.remove(j+1);
-                    freqs.add(temp,j);
-                    freqs.add(t,j+1);
+                    freqs.add(j, temp);
                 }
             }
         }
-        System.out.println(values);
-        System.out.println(freqs);
+        // System.out.println(values);
+        // System.out.println(freqs);
+
+        LinkedList<Integer> lsfin = new LinkedList<>();
+        for (int i = 0; i<values.size();i++){
+            for (int j = 0;j<freqs.get(i);j++){
+                lsfin.add(values.get(i));
+            }
+        }
+        //System.out.println(lsfin);
+
+        if (lsfin.size()%2 == 0){
+            int num = lsfin.size()/2;
+            int z = median(lsfin,0,num-1);
+            int w = median(lsfin,num,lsfin.size()-1);
+            float s = w-z;
+            System.out.println(s);
+
+        }else{
+            int num = lsfin.size()/2;
+            int z = median(lsfin,0,num-1);
+            int w = median(lsfin,num+1,lsfin.size()-1);
+            float s = w-z;
+            System.out.println(s);
+
+        }
 
     }
 
+    public static int median(List<Integer> arr, int start, int end){
+        int size = end-start +1;
+        if (size%2 != 0){
+            int median = arr.get(start+(size/2));
+            //System.out.println(median);
+            return median;
+        }
+        int n = start + size/2;
+        int su = (arr.get(n) + arr.get(n-1));
+        int median = su/2;
+        //System.out.println(median);
+        return median;
+    }
     public static boolean cantravel(){
         Scanner scan = new Scanner(System.in);
         int[] arr = new int[3];
@@ -262,18 +382,7 @@ public class Circle {
         }
     }
 
-    public static int median(List<Integer> arr, int start, int end){
-        if ((end+1)%2 != 0){
-            int median = arr.get((end+1)/2);
-            System.out.println(median);
-            return median;
-        }
-        int n = (end+1)/2;
-        int su = (arr.get(n) + arr.get(n-1));
-        int median = su/2;
-        System.out.println(median);
-        return median;
-    }
+
 
 
     public static void stdDev(List<Integer> arr) {

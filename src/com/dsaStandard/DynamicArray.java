@@ -62,6 +62,6 @@ public class DynamicArray {
     }
 
     public int size(){
-        return nextindex;
+        return this.nextindex;
     }
 }

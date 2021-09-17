@@ -3,13 +3,20 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
 
-public class Circle {
+class Vehicle{}
+
+public class Circle extends Vehicle{
+    Vehicle obj = new Vehicle();
+    Circle obj2 = new Circle();
+
+
+
     double radius;
     public static void main(String[] args) {
         /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
-        Box b = new Box();
-
-
+        Vehicle obj = new Vehicle();
+        Circle obj2 = new Circle();
+        Vehicle obj3 = new Circle();
     }
     public static class Box{
         int width;
@@ -617,14 +624,14 @@ public class Circle {
         return true;
     }
 
-public Circle(double radius){
-    if (radius<0){
-        radius =0;
-        this.radius = radius;
-    }else {
-        this.radius = radius;
-    }
-}
+//public Circle(double radius){
+//    if (radius<0){
+//        radius =0;
+//        this.radius = radius;
+//    }else {
+//        this.radius = radius;
+//    }
+//}
 
 public double getRadius(){
     return this.radius;

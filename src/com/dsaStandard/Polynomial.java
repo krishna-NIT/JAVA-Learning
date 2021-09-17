@@ -2,7 +2,7 @@ package com.dsaStandard;
 
 import java.util.Scanner;
 
-public class Polynomial {
+public class Polynomial{
 
     /* This function sets coefficient for a particular degree value, if degree is not there in the polynomial
      *  then corresponding term(with specified degree and value is added int the polynomial. If the degree

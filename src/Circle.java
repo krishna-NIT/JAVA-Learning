@@ -9,9 +9,64 @@ public class Circle extends Vehicle{
     double radius;
     public static void main(String[] args) {
         /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
-        int a = 5/0;
-        System.out.println(a);
+        int[] a = {1,2,8,5,25};
+        System.out.println();
+        System.out.println(sum(a));
     }
+
+    public static int countZerosRec(int input){
+        // Base Case
+        //if (input%10 == 0){
+        if (input == 0){
+            return 1;
+        }else {
+            return 0;
+        }
+        //}
+
+        int rem = input%10;
+        input = input /10;
+        int val = countZerosRec(input);
+
+        if (rem == 0){
+            return (val+1);
+        }
+        return val;
+        //return countZerosRec(input);
+
+    }
+
+    public static int countZerosRec(int input){
+        // Base Case
+        if (input%10 == 0){
+            if (input == 0){
+                return 1;
+            }else {
+                return 0;
+            }
+        }
+
+        int temprem = input%10;
+        input /= 10;
+        if (temprem == 0){
+            return countZerosRec(input)+1;
+        }else {
+            return countZerosRec(input);
+        }
+    }
+
+    public static int sum(int input[]) {
+        if(input.length == 1){
+            return input[0];
+        }
+
+        int[] newinp = new int[input.length -1];
+        for (int i = 0;i< input.length-1;i++){
+            newinp[i] = input[i+1];
+        }
+        return (input[0] + sum(newinp));
+    }
+
 
     public static boolean isSorted(int[] input){
         // Base Case

@@ -2,7 +2,7 @@ public class Cylinder extends Circle{
     double height;
 
 public Cylinder(double radius, double height){
-    super(radius);
+    //super(radius);
     if (height<0){
         height = 0;
     }

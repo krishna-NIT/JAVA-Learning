@@ -6,18 +6,34 @@ import java.util.Stack;
 class Vehicle{}
 
 public class Circle extends Vehicle{
-    Vehicle obj = new Vehicle();
-    Circle obj2 = new Circle();
-
-
-
     double radius;
     public static void main(String[] args) {
         /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
-        Vehicle obj = new Vehicle();
-        Circle obj2 = new Circle();
-        Vehicle obj3 = new Circle();
+        int a = 5/0;
+        System.out.println(a);
     }
+
+    public static boolean isSorted(int[] input){
+        // Base Case
+        if (input.length <= 1){
+            return true;
+        }
+
+        if (input[0] < input[1]){
+            return false;
+        }
+
+        // Logic
+        int[] newinp = new int[input.length-1];
+        for (int i = 0 ; i < input.length ; i++){
+            newinp[i] = input[i+1];
+        }
+
+        boolean secAnswer = isSorted(newinp);
+        return secAnswer;
+    }
+
+
     public static class Box{
         int width;
         int height;

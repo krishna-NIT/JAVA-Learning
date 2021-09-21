@@ -9,51 +9,230 @@ public class Circle extends Vehicle{
     double radius;
     public static void main(String[] args) {
         /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
-        int[] a = {1,2,8,5,25};
-        System.out.println();
-        System.out.println(sum(a));
+        Scanner scan = new Scanner(System.in);
+        String a = "pi";
+
+        System.out.println(replace(a));
     }
 
-    public static int countZerosRec(int input){
-        // Base Case
-        //if (input%10 == 0){
-        if (input == 0){
-            return 1;
-        }else {
-            return 0;
-        }
-        //}
-
-        int rem = input%10;
-        input = input /10;
-        int val = countZerosRec(input);
-
-        if (rem == 0){
-            return (val+1);
-        }
-        return val;
-        //return countZerosRec(input);
-
+    public static String addStars(String s) {
+        // Write your code here
+        //System.out.println(ad(s,s.length()-1).length());
+        return ad(s,0);
     }
 
-    public static int countZerosRec(int input){
-        // Base Case
-        if (input%10 == 0){
-            if (input == 0){
-                return 1;
-            }else {
-                return 0;
+    public static String ad(String s, int i){
+        String str = "";
+        if(i >= s.length()){
+            return str;
+        }
+
+        str = s.substring(i,i+1);
+
+        if(i+1 <= s.length()-1){
+
+            if(s.charAt(i) == s.charAt(i+1)){
+                //str = s.substring(i,i+1);
+                str = str.concat("*");
+                i++;
             }
         }
 
-        int temprem = input%10;
-        input /= 10;
-        if (temprem == 0){
-            return countZerosRec(input)+1;
+        return str.concat(ad(s,i+1));
+    }
+
+
+
+    public static String replace(String inp){
+        return replace2(inp,0);
+    }
+
+    public static String replace2(String inp, int i){
+        String str = "";
+        if (i > inp.length()){
+            return str;
+        }
+
+        if (i+2 <= inp.length()) {
+            if (inp.substring(i, i + 2).equals("pi")) {
+                str = "3.14";
+                System.out.println(str);
+                i = i + 1;
+            } else {
+                str = inp.substring(i, i + 1);
+            }
         }else {
-            return countZerosRec(input);
+            str = inp.substring(i, i + 1);
+        }
+
+        if (i == inp.length()-1){
+            return str;
+        }
+        if ((i+1) < inp.length()) {
+            return str.concat(replace2(inp, i + 1));
+        }else {
+            String abv = "";
+            return abv;
         }
     }
+
+    public static String addStars(String s) {
+        // Write your code here
+        return ad(s,s.length()-1);
+    }
+
+    public static String ad(String s, int i){
+        String str = "";
+        if (i == 0){
+            str = s.substring(0,1);
+            return str;
+        }
+
+        if(s.charAt(i-1) == s.charAt(i)){
+            str = s.substring(i-1,i);
+            str = str.concat("*");
+            str = str.concat(s.substring(i-1,i));
+           // System.out.println("extra str is"+str+" concated is"+s.substring(i-1,i));
+            i--;
+        }else{
+            str = s.substring(i,i+1);
+        }
+
+
+        return ad(s, i-1).concat(str);
+    }
+
+    public static int convert(String input, int powr){
+        if(powr == input.length()){
+            return 0;
+        }
+
+
+        int ascii = (int) (input.charAt(input.length()-powr-1));
+        double val = Math.pow(10,powr)*(ascii-48);
+        int temp = (int) val;
+        return temp+convert(input,powr+1);
+    }
+
+
+    public static String removeX(String input){
+        // Write your code here
+        return rem(input, input.length());
+    }
+
+    public static String rem(String input, int i){
+        String str = "";
+
+        if ( i <= 0){
+            return str;
+        }
+
+        if (input.charAt(i-1) != 'x'){
+            str = input.substring(i-1,i);
+        }
+
+        return rem(input, i-1).concat(str);
+
+    }
+
+//    public static String replace(String input){
+//        // Write your code here
+//        return replace2(input, input.length());
+//
+//    }
+//
+//    public static String replace2(String inp, int lasti){
+//        if(lasti == 0){
+//            return inp.substring(0,1);
+//        }else if(lasti < 0){
+//            String emp = "";
+//            return emp;
+//        }
+//
+//        String ne = "";
+//
+//        if(inp.substring(lasti-2,lasti) == "pi"){
+//            ne = "pi";
+//        }
+//
+//        return replace2(inp, lasti-3).concat(ne);
+//    }
+    public static int countZerosRec(int input){
+
+        if (input == 0){
+            return 0;
+        }
+
+        int rem = input%10;
+        int newInput = input/10;
+
+
+        if (rem == 0){
+            return countZerosRec(newInput)+1;
+        }else {
+            return countZerosRec(newInput);
+        }
+    }
+
+    private static boolean isSorted(int[] arr, int i){
+        if (i == arr.length-1){
+            return true;
+        }
+        if (arr[i] > arr[i+1]){
+            return false;
+        }
+        return isSorted(arr,i+1);
+    }
+
+    // Wah Kya baat Hai
+    // This Technique ias too Important
+    public static boolean isSortedArray(int[] arr){
+        return isSorted(arr,0);
+    }
+
+
+    public static int fib(int n){
+        if (n == 0){
+            return 0;
+        }else if (n == 1){
+            return 1;
+        }
+
+        return fib(n-1)+fib(n-2);
+    }
+
+
+//    public static String removeX(String input){
+//
+//        if (input.length() == 1){
+//            if (input == "x"){
+//                String temp = "";
+//                return temp;
+//            }else {
+//                return input;
+//            }
+//        }
+//
+//        String newInput = input.substring(0,input.length()-1);
+//        String ch = input.substring(input.length()-1,input.length());
+//        if (ch != "x"){
+//            System.out.println(removeX(newInput).concat(ch));
+//            return removeX(newInput).concat(ch);
+//        }else {
+//            System.out.println(removeX(newInput));
+//            return removeX(newInput);
+//        }
+//    }
+
+    public static double findGeometricSum(int k){
+        if (k == 0){
+            return 1;
+        }
+
+        double temp = 1/Math.pow(2,k);
+        return findGeometricSum(k-1) + temp;
+    }
+
 
     public static int sum(int input[]) {
         if(input.length == 1){

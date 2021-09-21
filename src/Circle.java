@@ -10,9 +10,26 @@ public class Circle extends Vehicle{
     public static void main(String[] args) {
         /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
         Scanner scan = new Scanner(System.in);
-        String a = "pi";
+        char a = 'a';
+        char b = 'b';
+        char c = 'c';
+        towerOfHanoi(2,a,b,c);
+        String str = "a";
+        str.concat(Character.toString(c));
 
-        System.out.println(replace(a));
+    }
+
+    public static void towerOfHanoi(int disks, char source, char auxiliary, char destination) {
+        if (disks == 1){
+            //System.out.println("disk 1 came");
+            System.out.println(source+" "+destination);
+        }else if (disks == 0){
+            System.out.println("");
+        }else {
+            towerOfHanoi(disks - 1, source, destination, auxiliary);
+            System.out.println(source + " " + destination);
+            towerOfHanoi(disks - 1, auxiliary, source, destination);
+        }
     }
 
     public static String addStars(String s) {
@@ -34,7 +51,7 @@ public class Circle extends Vehicle{
             if(s.charAt(i) == s.charAt(i+1)){
                 //str = s.substring(i,i+1);
                 str = str.concat("*");
-                i++;
+                //i++;
             }
         }
 
@@ -76,31 +93,31 @@ public class Circle extends Vehicle{
         }
     }
 
-    public static String addStars(String s) {
-        // Write your code here
-        return ad(s,s.length()-1);
-    }
-
-    public static String ad(String s, int i){
-        String str = "";
-        if (i == 0){
-            str = s.substring(0,1);
-            return str;
-        }
-
-        if(s.charAt(i-1) == s.charAt(i)){
-            str = s.substring(i-1,i);
-            str = str.concat("*");
-            str = str.concat(s.substring(i-1,i));
-           // System.out.println("extra str is"+str+" concated is"+s.substring(i-1,i));
-            i--;
-        }else{
-            str = s.substring(i,i+1);
-        }
-
-
-        return ad(s, i-1).concat(str);
-    }
+//    public static String addStars(String s) {
+//        // Write your code here
+//        return ad(s,s.length()-1);
+//    }
+//
+//    public static String ad(String s, int i){
+//        String str = "";
+//        if (i == 0){
+//            str = s.substring(0,1);
+//            return str;
+//        }
+//
+//        if(s.charAt(i-1) == s.charAt(i)){
+//            str = s.substring(i-1,i);
+//            str = str.concat("*");
+//            str = str.concat(s.substring(i-1,i));
+//           // System.out.println("extra str is"+str+" concated is"+s.substring(i-1,i));
+//            i--;
+//        }else{
+//            str = s.substring(i,i+1);
+//        }
+//
+//
+//        return ad(s, i-1).concat(str);
+//    }
 
     public static int convert(String input, int powr){
         if(powr == input.length()){

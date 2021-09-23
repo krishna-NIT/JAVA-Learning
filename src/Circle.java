@@ -11,14 +11,77 @@ public class Circle extends Vehicle {
     public static void main(String[] args) {
         /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
         Scanner scan = new Scanner(System.in);
-        //System.out.println(fact(3));
+        int n = scan.nextInt();
+        int ans = 0;
+        for (int i=0;i<n;i++){
+            int a = scan.nextInt();
+            int b = scan.nextInt();
+            int c = scan.nextInt();
 
-        int i = 5;
+            if (che(a,b,c)){
+                ans++;
+            }
+        }
+        System.out.println(ans);
+    }
 
-        System.out.println(fact(i-2));
-        System.out.println(fact(i));
+    public static boolean che(int a, int b, int c){
+        if ( (a+b+c) >=2){
+            return true;
+        }else {
+            return false;
+        }
+    }
 
-        //System.out.println(handshake(i));
+
+    public double powe(double x, int n) {
+        if (n == 1){
+            return x;
+        }else if (n == 0){
+            return 1.0;
+        }else if (n < 0) {
+            return (1/x)*powe(1/x,-(n+1));
+        }
+
+        double val = powe(x*x,n/2);
+
+        if (n%2 == 0){
+            return val;
+        }else {
+            return val*x;
+        }
+    }
+
+
+    public static double myPow(double x, int n) {
+        if ( n < 0){
+            n = Math.abs(n);
+            return myPow2(1/x,n);
+        }else{
+            return myPow2(x,n);
+        }
+    }
+    public static double myPow2(double x, int n) {
+        if(x ==0){
+            return 0;
+        }
+
+        if (n == 0){
+            return 1;
+        }
+
+        if(x ==1){
+            return 1;
+        }
+
+
+        double val = myPow(x,n/2);
+
+        if(n%2 == 0){
+            return val*val;
+        }else{
+            return x*val*val;
+        }
     }
 
     public static int handshake(int n) {

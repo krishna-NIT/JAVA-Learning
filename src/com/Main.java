@@ -8,12 +8,129 @@ public class Main {
     public static void main(String[] args) {
         /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
         Scanner scan = new Scanner(System.in);
-        int n = scan.nextInt();
-        for(int i = 0;i<n;i++){
-            int val = scan.nextInt();
-            countOrdinary(val);
+        int n1 = scan.nextInt();
+        int[] arr1 = new int[n1];
+
+        for (int i = 0 ;i<n1;i++){
+            arr1[i] = scan.nextInt();
+        }
+        int n2 = scan.nextInt();
+        int[] arr2 = new int[n2];
+
+        for (int i = 0 ;i<n2;i++){
+            arr2[i] = scan.nextInt();
+        }
+        intersection(arr1,arr2);
+
+    }
+
+    public static void intersection(int[] arr1, int[] arr2) {
+        //Your code goes here
+        int len1 = arr1.length;
+        int len2 = arr2.length;
+
+        sort(arr1,0,len1-1);
+        sort(arr2,0,len2-1);
+
+
+        for (int i = 0 ;i<len1;i++){
+            System.out.print(arr1[i]+" ");
+        }
+        System.out.println();
+        for (int i = 0 ;i<len2;i++){
+            System.out.print(arr2[i]+" ");
+        }
+
+        System.out.println();
+
+        int i = 0;
+        int j = 0;
+
+        while( i < len1 && j < len2){
+            if(arr1[i] < arr2[j]){
+                i++;
+            }else if(arr1[i] > arr2[j]){
+                j++;
+            }else{
+                System.out.print(arr1[i]+" ");
+                i++;
+                j++;
+            }
+        }
+
+
+
+    }
+
+    public static void merge(int arr[], int l, int m, int r)
+    {
+        // Find sizes of two subarrays to be merged
+        int n1 = m - l + 1;
+        int n2 = r - m;
+
+        /* Create temp arrays */
+        int L[] = new int[n1];
+        int R[] = new int[n2];
+
+        /*Copy data to temp arrays*/
+        for (int i = 0; i < n1; ++i)
+            L[i] = arr[l + i];
+        for (int j = 0; j < n2; ++j)
+            R[j] = arr[m + 1 + j];
+
+        /* Merge the temp arrays */
+
+        // Initial indexes of first and second subarrays
+        int i = 0, j = 0;
+
+        // Initial index of merged subarray array
+        int k = l;
+        while (i < n1 && j < n2) {
+            if (L[i] <= R[j]) {
+                arr[k] = L[i];
+                i++;
+            }
+            else {
+                arr[k] = R[j];
+                j++;
+            }
+            k++;
+        }
+
+        /* Copy remaining elements of L[] if any */
+        while (i < n1) {
+            arr[k] = L[i];
+            i++;
+            k++;
+        }
+
+        /* Copy remaining elements of R[] if any */
+        while (j < n2) {
+            arr[k] = R[j];
+            j++;
+            k++;
+        }
+
+        //return arr;
+    }
+
+    // Main function that sorts arr[l..r] using
+    // merge()
+    public static void sort(int arr[], int l, int r)
+    {
+        if (l < r) {
+            // Find the middle point
+            int m =l+ (r-l)/2;
+
+            // Sort first and second halves
+            sort(arr, l, m);
+            sort(arr, m + 1, r);
+
+            // Merge the sorted halves
+            merge(arr, l, m, r);
         }
     }
+
     public static void countOrdinary(int num){
         int count = 0;
         int numdig = countdigits(num);

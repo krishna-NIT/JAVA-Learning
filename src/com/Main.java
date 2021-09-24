@@ -9,10 +9,64 @@ public class Main {
         /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
         Scanner scan = new Scanner(System.in);
         int n = scan.nextInt();
-        int[] arr = new int[5];
-        Arrays.sort(arr);
+        for(int i = 0;i<n;i++){
+            int val = scan.nextInt();
+            countOrdinary(val);
+        }
+    }
+    public static void countOrdinary(int num){
+        int count = 0;
+        int numdig = countdigits(num);
 
-        System.out.println(staircase(n));
+        if (numdig >=2) {
+            count += 9 * (numdig - 1);
+
+//            double tem = Math.pow(10,numdig-1);
+//            int temp = (int) tem;
+
+            int oneoneone = 0;
+            for (int i = 1;i<=numdig;i++){
+                oneoneone = oneoneone*10 +1;
+            }
+
+            int div = num/oneoneone;
+            count += div;
+//            for (int i = temp;i<=num;i++){
+//                if (isOrdinary(i)){
+//                    count++;
+//                }
+//            }
+
+
+            System.out.println(count);
+        }else{
+            System.out.println(num);
+        }
+    }
+
+    public static boolean isOrdinary(int n){
+//        if (n<=9 && n>=1){
+//            return true;
+//        }
+        int rem = n%10;
+        n /= 10;
+        while (n > 0){
+            int rem2 = n%10;
+            n/=10;
+            if (rem2!=rem){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static int countdigits(int n){
+        int count = 0;
+        while (n>0){
+            n /=10;
+            count++;
+        }
+        return count;
     }
 
 
@@ -117,40 +171,6 @@ public class Main {
         }
         return s;
     }
-    public static void countOrdinary(int num){
-        int count = 0;
-        for (int i = 1;i<=num;i++){
-            if (isOrdinary(i)){
-                count++;
-            }
-        }
-        System.out.println(count);
-    }
-
-    public static boolean isOrdinary(int n){
-        if (n<=9 && n>=1){
-            return true;
-        }
-//        if (n<100) {
-//            if (n % 11 == 0 ) {
-//                return true;
-//            }else {
-//                return false;
-//            }
-//        }
-        int rem = n%10;
-        n /= 10;
-        while (n > 0){
-            int rem2 = n%10;
-            n/=10;
-            if (rem2!=rem){
-                return false;
-            }
-        }
-        return true;
-    }
-
-
 
     public static boolean candivide(int n){
         for (int i = 2;i<n;i+=2){

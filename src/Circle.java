@@ -9,21 +9,30 @@ public class Circle extends Vehicle {
     double radius;
 
     public static void main(String[] args) {
-        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
         Scanner scan = new Scanner(System.in);
         int n = scan.nextInt();
-        int ans = 0;
-        for (int i=0;i<n;i++){
-            int a = scan.nextInt();
-            int b = scan.nextInt();
-            int c = scan.nextInt();
+        for(int i = 0;i<n;i++){
+            int val = scan.nextInt();
+            countOrdinary(val);
+        }
+    }
+    public static void countOrdinary(int n){
+        int count = 0;
+        for (int digit = 1;digit<=9;digit++){
+            for (int len = 1;len<=9;len++){
+                long val = 0;
+                for (int i = 0;i<len;i++){
+                    val = val*10 + digit;
+                    if (val<=n){
+                        count++;
+                    }
+                }
 
-            if (che(a,b,c)){
-                ans++;
             }
         }
-        System.out.println(ans);
+        System.out.println(count);
     }
+
 
     public static boolean che(int a, int b, int c){
         if ( (a+b+c) >=2){

@@ -3,26 +3,60 @@ package com;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class Main {
     public static void main(String[] args) {
         /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
         Scanner scan = new Scanner(System.in);
         int n1 = scan.nextInt();
-        int[] arr1 = new int[n1];
 
-        for (int i = 0 ;i<n1;i++){
-            arr1[i] = scan.nextInt();
-        }
-        int n2 = scan.nextInt();
-        int[] arr2 = new int[n2];
-
-        for (int i = 0 ;i<n2;i++){
-            arr2[i] = scan.nextInt();
-        }
-        intersection(arr1,arr2);
-
+        String and = Integer.toString(5);
+        System.out.println(and);
+        and = "sdf";
+        char b= 'v';
+        and += b;
+        System.out.println(and);
+        Stack<Integer> stack  = new Stack<Integer>();
     }
+
+    public String freqAlphabets(String s) {
+        String str = "";
+
+        Stack<Integer> stack = new Stack<Integer>();
+
+        for(int i = s.length()-1 ; i >=0 ; i--){
+            if(s.charAt(i) == '#'){
+                int t = (int) s.charAt(i-2);
+                int d = (int) s.charAt(i-1);
+
+                t -= 48;
+                d -= 48;
+
+                t = t*10;
+                t += d;
+
+                stack.add(t);
+                i -= 2;
+            }else{
+                int d = (int) s.charAt(i);
+                d -= 48;
+                stack.add(d);
+            }
+
+        }
+
+        System.out.println(stack);
+        while(!stack.isEmpty()){
+            int n = stack.pop();
+            char ch = (char) (96+n);
+            str += ch;
+        }
+
+        return str;
+    }
+
+
 
     public static void intersection(int[] arr1, int[] arr2) {
         //Your code goes here

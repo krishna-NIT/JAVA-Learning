@@ -7,18 +7,101 @@ import java.util.Stack;
 
 public class Main {
     public static void main(String[] args) {
-        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
         Scanner scan = new Scanner(System.in);
-        int n1 = scan.nextInt();
-
-        String and = Integer.toString(5);
-        System.out.println(and);
-        and = "sdf";
-        char b= 'v';
-        and += b;
-        System.out.println(and);
-        Stack<Integer> stack  = new Stack<Integer>();
+        int n = scan.nextInt();
+        for (int i = 0;i<n;i++){
+            int val = scan.nextInt();
+            int niteration = game(val);
+            //System.out.println(niteration);
+            if (niteration%2 == 0){
+                System.out.println("Alice");
+            }else {
+                System.out.println("Bob");
+            }
+        }
     }
+
+    public int sumBase(int n, int k) {
+        int base6 = 0;
+        int sum = n% k;
+        n = n - sum;
+
+        int i = 2;
+        while (n <=0){
+            double kz = Math.pow(6,i);
+            int ki = (int) kz;
+            int val = n % ki;
+            n = n-val;
+            double z = Math.pow(6,i-1);
+            int zi = (int) z;
+            int newv = val / zi;
+            sum += newv;
+            i++;
+
+        }
+        return sum;
+    }
+
+    public static int game(int val){
+        //Alice
+        int n = 2;
+        if (val <= 0){
+            return 1;
+        }
+
+        while (val % n !=0 && n > val){
+            n *= 2;
+        }
+
+        if (val%n == 0){
+            val = val/ n;
+        }else {
+            val--;
+        }
+
+        return 1+game(val);
+    }
+
+//    public static int pairSum(int arr[], int i, int j, int num){
+//        int k =0;
+//        while (i<j)
+//        {
+//            if (arr[i]+arr[j]<num)
+//                i++;
+//            else if (arr[i]+arr[j]>num)
+//                j--;
+//            else {
+//                if (arr[i]==arr[j])
+//                {
+//                    int h=j-i;
+//                    k=h*(h+1)/2+k; return k;
+//                }
+//                else{
+//                    int a=1,b=1;
+//                    while(arr[i]==arr[i+1]){
+//                        a++; i++;
+//                    }
+//                    while(arr[j]==arr[j-1]){
+//                        b++; j--;
+//                    }
+//                    k=a*b+k;i++;j--;
+//                }
+//            }
+//        }
+//        return k;
+//    }
+//
+//    public static int tripletSum(int arr[], int n, int num)
+//    {
+//        sort(arr, arr+n);
+//        int ans = 0;
+//        for(int i=0; i<n; i++){
+//            ans += pairSum(arr, i+1, n-1, num-arr[i]);
+//        }
+//
+//        return ans;
+//    }
+
 
     public String freqAlphabets(String s) {
         String str = "";

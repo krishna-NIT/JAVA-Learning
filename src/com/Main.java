@@ -8,17 +8,198 @@ import java.util.Stack;
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        int n = scan.nextInt();
-        for (int i = 0;i<n;i++){
-            int val = scan.nextInt();
-            int niteration = game(val);
-            //System.out.println(niteration);
-            if (niteration%2 == 0){
-                System.out.println("Alice");
-            }else {
-                System.out.println("Bob");
+        String a = scan.next();
+        String b = scan.next();
+        String c = scan.next();
+
+        System.out.println(isSumEqual(a,b,c));
+
+
+    }
+    public static boolean isSumEqual(String firstWord, String secondWord, String targetWord) {
+        int a = numv(firstWord);
+        int b = numv(secondWord);
+        int c = numv(targetWord);
+
+        if(a+b == c){
+            return true;
+        }else if(a+c == b){
+            return true;
+        }else if(c+b == a){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public static int numv(String str){
+        String n_string = "";
+        for(int i = 0;i<str.length();i++){
+            int ascii = (int) str.charAt(i);
+            ascii -= 97;
+
+            n_string += Integer.toString(ascii);
+        }
+        System.out.print(n_string);
+        int n = 0;
+        for(int i = 0;i<n_string.length();i++){
+            int ascii = (int) n_string.charAt(i);
+            ascii -= 48;
+            int tempdouble = (int) Math.pow(10,n_string.length()-1-i);
+            n += (ascii*tempdouble);
+        }
+
+        System.out.println(n);
+        return n;
+
+    }
+
+    public static int getLucky(String s, int k) {
+        int len = s.length();
+        int t = 0;
+        int sum = 0;
+        String num = "";
+        for(int i = 0 ; i<s.length();i++ ){
+            int ascii = (int) s.charAt(i);
+            ascii = ascii - 96;
+            String tempnum = Integer.toString(ascii);
+            num = num.concat(tempnum);
+        }
+        //System.out.println(num);
+        for(int i = 0 ; i<num.length();i++ ){
+            int ascii = (int) num.charAt(i);
+            ascii = ascii - 48;
+            sum+= ascii;
+        }
+
+        return sumofdig(sum, k-1);
+
+
+    }
+
+    public static int sumofdig(int num, int k){
+        if( k == 0){
+            return num;
+        }
+
+        int sum = 0;
+        while (num!= 0){
+            int rem = num % 10;
+            num /= 10;
+            sum += rem;
+        }
+        return sumofdig(sum,k-1);
+    }
+
+    public static void quickSort(int[] input) {
+        /* Your class should be named Solution
+         * Don't write main().
+         * Don't read input, it is passed as function argument.
+         * No need to print or return the output.
+         * Taking input and printing output is handled automatically.
+         */
+        qs(input, 0,input.length-1);
+    }
+
+    public static void qs(int[] arr, int si, int ei){
+        if(si >= ei ){
+            return;
+        }
+
+        int pivotloc = partision(arr, si,ei);
+
+        qs(arr, si, pivotloc-1);
+        qs(arr, pivotloc+1,ei);
+
+    }
+
+    public static int partision(int[] arr, int si, int ei){
+        int pivot = arr[si];
+        int count = 0;
+        for(int i = si;i<=ei;i++){
+            if(arr[i] < pivot){
+                count++;
             }
         }
+        int pivotloc = si + count;
+        //swap pivot
+        arr[si] = arr[pivotloc];
+        arr[pivotloc] = pivot;
+
+        //Verifiy Partision Rule and Satisfy Pivot Location
+        int i = si;
+        int j = ei;
+
+        while(i<pivotloc && j>pivotloc){
+            j = ei;
+            int tempi = i;
+            if(arr[i] < pivot){
+                i++;
+            }else{
+                while (i <=tempi) {
+                    if (arr[j] < pivot) {
+                        //swap maro
+                        int temp = arr[j];
+                        arr[j] = arr[i];
+                        arr[i] = temp;
+                        i++;
+                    } else {
+                        j--;
+                    }
+                }
+            }
+
+        }
+        return pivotloc;
+    }
+
+    public static void mergeSort(int[] input){
+        // Write your code here
+        ms(input,0,input.length-1);
+
+    }
+
+    public static void ms(int[] input, int s, int e){
+        if(s>=e){
+            return;
+        }
+
+        int mid = (s+e)/2;
+        ms(input,s,mid);
+        ms(input,mid+1,e);
+        merge(input,s,e);
+    }
+    public static void merge(int[] arr, int s, int e){
+        int mid  = (s+e)/2;
+        int[] arr2 = new int[e-s+1];
+
+        int i = s;
+        int j = mid +1 ;
+
+        for(int k = 0;k<arr2.length;k++){
+
+            if (i <= mid && j <= e){
+                if(arr[i] < arr[j]){
+                    arr2[k] = arr[i];
+                    i++;
+                }else{
+                    arr2[k] = arr[j];
+                    j++;
+                }
+            }else{
+                if (j>e){
+                    arr2[k] = arr[i];
+                    i++;
+                }else{
+                    arr2[k] = arr[j];
+                    j++;
+                }
+            }
+        }
+        for(i = s;i<=e;i++){
+            arr[i] = arr2[i-s];
+        }
+
     }
 
     public int sumBase(int n, int k) {

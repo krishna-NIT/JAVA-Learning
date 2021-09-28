@@ -8,14 +8,183 @@ import java.util.Stack;
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        String a = scan.next();
-        String b = scan.next();
-        String c = scan.next();
+        String str = scan.nextLine();
+        System.out.println(isNice(str));
+        //System.out.println(longestNiceSubstring(str));
+    }
 
-        System.out.println(isSumEqual(a,b,c));
-
+    public static String longestNiceSubstring(String s) {
+        String str = "";
+        if(s.length() <= 1){
+            return str;
+        }
+        for(int i =0;i<s.length()-1;i++){
+            for(int j = i+2;j<=s.length();j++){
+                //System.out.print(s.substring(i,j)+" ");
+                if(isNice(s.substring(i,j))){
+                    String ans = s.substring(i,j);
+                    if(ans.length() > str.length()){
+                        str = ans;
+                    }
+                }
+            }
+        }
+        return str;
 
     }
+
+    public static boolean isNice(String s){
+        LinkedList<Character> lower = new LinkedList<Character>();
+        LinkedList<Character> upper = new LinkedList<Character>();
+        for (int i =0;i<s.length();i++){
+            if (Character.isLowerCase(s.charAt(i))) {
+                if (!lower.contains(s.charAt(i))) {
+                    lower.add(s.charAt(i));
+                }
+            }else{
+                if (!upper.contains(s.charAt(i))) {
+                    upper.add(s.charAt(i));
+                }
+            }
+        }
+
+        System.out.println(lower);
+        System.out.println(upper);
+
+        if (lower.size() != upper.size()){
+            return false;
+        }
+        
+        for (int i =0;i<upper.size();i++){
+            char lowwer = Character.toLowerCase(upper.get(i));
+            upper.remove(i);
+            upper.add(i,lowwer);
+        }
+        System.out.println();
+        System.out.println(lower);
+        System.out.println(upper);
+
+        for (int i =0;i<upper.size();i++){
+            if (!lower.contains(upper.get(i))){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //a 97 to 122
+    //A 65 to 90
+    // diff = 32
+
+    public static String sortSentence(String s) {
+        LinkedList<String> ls = new LinkedList<String>();
+        LinkedList<Integer> loc = new LinkedList<Integer>();
+
+        // ascii 48 to 57 for integers from 0 to 48
+
+        for (int i = s.length()-1;i>=0;i--){
+            int ascii = (int) s.charAt(i);
+            if (ascii<=57 && ascii>=49){
+                int a = 0;
+                for (int j = i;j>=0 && a == 0;j--){
+                    if (j == 0){
+                        ls.add(s.substring(j,i));
+                        loc.add(ascii-48);
+                        a++;
+                    }else if (s.charAt(j-1) == ' '){
+                        ls.add(s.substring(j,i));
+                        loc.add(ascii-48);
+                        a++;
+                    }
+                }
+            }
+        }
+
+        System.out.println(ls);
+        System.out.println(loc);
+
+        String[] stringunit = new String[ls.size()];
+        for (int i = 0;i<loc.size();i++){
+            stringunit[loc.get(i)-1] = ls.get(i);
+        }
+
+        String str = "";
+        for (int i = 0;i<loc.size()-1;i++){
+            str += stringunit[i];
+            str += " ";
+        }
+        str += stringunit[loc.size()-1];
+        return str;
+
+    }
+
+    public static String[] keypad(int n){
+        // Write your code here
+        if(n == 0){
+            String[] str = {""};
+            return str;
+        }
+
+        int rem = n%10;
+        n = n/10;
+
+
+        String[] st = keypad(n);
+        if(rem <= 1){
+            return st;
+        }
+
+
+        String[] st2 = {""};
+
+        String[] a1 = {"a","b","c"};
+        String[] a2 = {"d","e","f"};
+        String[] a3 = {"g","h","i"};
+        String[] a4 = {"j","k","l"};
+        String[] a5 = {"m","n","o"};
+        String[] a6 = {"p","q","r","s"};
+        String[] a7 = {"t","u","v"};
+        String[] a8 = {"w","x","y","z"};
+
+        if (st.length == 0){
+            return st2;
+        }
+        if(rem == 2){
+            st2 = a1;
+        }else if(rem == 3){
+            st2 = a2;
+        }else if(rem == 4){
+            st2 = a3;
+        }else if(rem == 5){
+            st2 = a4;
+        }else if(rem == 6){
+            st2 = a5;
+        }else if(rem == 7){
+            st2 = a6;
+        }else if(rem == 8){
+            st2 = a7;
+        }else if(rem == 9){
+            st2 = a8;
+        }
+
+        String[] finans = new String[st.length * st2.length];
+
+//        for(int i = 0;i<st.length;i++){
+//            finans[i] = st[i];
+//        }
+
+        int loc = 0;
+        for(int i = 0;i<st.length;i++) {
+            for (int j = 0; j < st2.length; j++) {
+                String vput = st[i] + st2[j];
+                finans[loc] = vput;
+                loc++;
+            }
+        }
+        return finans;
+    }
+
+
     public static boolean isSumEqual(String firstWord, String secondWord, String targetWord) {
         int a = numv(firstWord);
         int b = numv(secondWord);
@@ -51,6 +220,7 @@ public class Main {
 
         System.out.println(n);
         return n;
+
 
     }
 

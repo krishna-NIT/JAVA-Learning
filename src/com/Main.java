@@ -6,12 +6,90 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        String str = scan.nextLine();
-        System.out.println(isNice(str));
-        //System.out.println(longestNiceSubstring(str));
+        public static void main(String[] args) {
+            Scanner scan = new Scanner(System.in);
+            int n =scan.nextInt();
+            for (int i = 0;i<n;i++) {
+                int a = scan.nextInt();
+                int b = scan.nextInt();
+                System.out.println(getGCD(a,b)+" "+getLCM(a,b));
+            }
+        }
+
+        public static int getGCD(int a, int b){
+            int min = Math.min(a,b);
+            int m = min;
+            int max = Math.max(a,b);
+            while (min>0){
+                if (max % min == 0 && m%min == 0){
+                    return min;
+                }
+                min--;
+            }
+            return 1;
+        }
+        public static int getLCM(int a,int b){
+            int min = Math.min(a,b);
+            int max = Math.max(a,b);
+
+            int num = max;
+            while (a>=0){
+                if (num%min == 0){
+                    return num;
+                }
+                num+=max;
+            }
+            return max;
+        }
+
+        public static boolean isPrimed(int n){
+            if(n==2){
+                return true;
+            }else if(n%2 == 0 || n<=1){
+                return false;
+            }
+            for(int i = 3;i<n;i++){
+                if(n%i == 0){
+                    return false;
+                }
+            }
+            return true;
+
+        }
+
+//    public static void main(String[] args) {
+//        Scanner scan = new Scanner(System.in);
+//        int n =scan.nextInt();
+//        int k = 0;
+//        n++;
+//        while(k==0){
+//            if(isPrime(n)){
+//                k++;
+//                System.out.println(n);
+//            }
+//            n++;
+//        }
+//    }
+
+    public static boolean isPrime(int n){
+        if(n==2){
+            return true;
+        }else if(n%2 == 0){
+            return false;
+        }
+        return true;
     }
+
+    public static long factorial(int n){
+
+        if(n==1){
+            return 1;
+        }
+        System.out.print(n+ " ");
+        return n*factorial(n-1);
+    }
+    // This is not Optimizzed
+    // Try to make it Optimized
 
     public static String longestNiceSubstring(String s) {
         String str = "";

@@ -11,10 +11,51 @@ public class Circle extends Vehicle {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         int n = scan.nextInt();
+        int[] arr = new int[n];
         for(int i = 0;i<n;i++){
-            int val = scan.nextInt();
-            countOrdinary(val);
+            arr[i] = scan.nextInt();
         }
+        SelectionSort(arr);
+        for(int i = 0;i<n;i++){
+            System.out.print(arr[i]+" ");
+        }
+
+    }
+    public static void InsertionSort(int[] arr){
+
+    }
+
+
+    public static void swap(int a, int b){
+        int temp = a;
+        a = b;
+        b = temp;
+    }
+    public static void SelectionSort(int[] arr){
+        if (arr.length <=1){
+            return;
+        }
+        for (int i = 0;i<arr.length-1;i++){
+            int min = arr[i+1];
+            int mini = i+1;
+            for (int j = i+1;j<arr.length;j++){
+                if (arr[j] < min){
+                    min = arr[j];
+                    mini = j;
+                }
+
+            }
+            arr[mini] = arr[i];
+            arr[i] = min;
+        }
+
+        if (arr[arr.length-1] < arr[arr.length-2]){
+            int temp = arr[arr.length-1];
+            arr[arr.length-1] = arr[arr.length-2];
+            arr[arr.length-2] = temp;
+
+        }
+
     }
     public static void countOrdinary(int n){
         int count = 0;

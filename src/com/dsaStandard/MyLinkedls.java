@@ -14,6 +14,8 @@ public class MyLinkedls {
             n.next = temp1;
         }
     }
+
+
     public void show(){
         Node n = head;
         while (n.next!=null){

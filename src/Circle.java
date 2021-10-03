@@ -6,19 +6,173 @@ class Vehicle{}
 public class Circle extends Vehicle {
     public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
-        int n = scan.nextInt();
-        int[] arr = new int[n];
-        for (int i = 0;i<n;i++){
-            arr[i] =scan.nextInt();
+        long test_case = scan.nextLong();
+        for (long i = 0;i<test_case;i++){
+            long power = scan.nextInt();
+            long target = scan.nextInt();
+            System.out.println(ans(power,target));
         }
-        for (int i = 0;i<n;i++){
-            if(whoWins(arr[i])){
-                System.out.println("Deepa");
-            }else{
-                System.out.println("Arjit");
-            }
-        }
+
     }
+    public static long ans(long power, long target){
+        long count = 0;
+        while (power < target){
+            power *= 3;
+            count++;
+        }
+        return count;
+    }
+//public static void main(String[] args){
+//    Scanner scan = new Scanner(System.in);
+//    long n = scan.nextLong();
+//    if (threefive(n)){
+//        System.out.println("YES");
+//    }else{
+//        System.out.println("NO");
+//    }
+//}
+
+    public static boolean threefive(long n){
+        if(n%3 == 0 || n%5 == 0){
+            return true;
+        }
+        int i = 0;
+        while (i*3 <= n){
+            long temp = n - (i*3);
+
+            if (temp == 0){
+                return true;
+            }
+            if (temp%5 == 0){
+                return true;
+            }
+            i++;
+        }
+        return false;
+    }
+
+    public static long gcd(long a, long b){
+        if (b == 0){
+            return a;
+        }
+        return gcd(b,a%b);
+    }
+    public static long lcm(long a, long b){
+        long g = gcd(a,b);
+        long lcm = a*b;
+        return lcm/g;
+    }
+    //        int n = scan.nextInt();
+//        int A = scan.nextInt();
+//        int B = scan.nextInt();
+//        int k = scan.nextInt();
+//
+//        int noofrounds = scan.nextInt();
+//        LinkedList<LinkedList<Integer>> correspondingwizard = new LinkedList<>();
+//        for (int i = 0;i<noofrounds;i++){
+//            int noofwizardcasted = scan.nextInt();
+//            LinkedList<Integer> temp = new LinkedList<>();
+//            for (int j =0;j<noofwizardcasted;j++){
+//                int tempnum = scan.nextInt();
+//                temp.add(tempnum);
+//            }
+//            correspondingwizard.add(temp);
+//        }
+//
+//        int[] wizard = new int[n];
+//        Arrays.fill(wizard,0);
+//
+//        for (int i = 0;i<noofrounds;i++){
+//            for (int p = 0;p<n;p++){
+//                wizard[p] -= B;
+//            }
+//            for (int p = 0;p<correspondingwizard.get(i).size();p++){
+//                int index = correspondingwizard.get(i).get(p);
+//                wizard[index-1] += (A+B);
+//            }
+//        }
+//
+//        int count = 0;
+//        for (int i = 0;i<wizard.length;i++){
+//            if (wizard[i] >= k){
+//                count++;
+//            }
+//        }
+//        System.out.println(count);
+
+
+
+//    int n = 100000;
+//    boolean[] st = new boolean[n+1];
+//
+//        Arrays.fill(st,true);
+//    st[0] = false;
+//    st[1] = false;
+//
+//        for(int i = 2;i*i <= n;i++){
+//        for(int j = i*2;j < n;j+=i){
+//            st[j] = false;
+//        }
+//    }
+//
+//
+//        for (int j = 0;j<testcase;j++){
+//        int lucky = scan.nextInt();
+//        int count = 0;
+//        for (int i = 0;i<st.length;i++){
+//            if (st[i] == true && i%10 == lucky){
+//                count++;
+//            }
+//        }
+//        System.out.println(count);
+//
+//    }
+
+
+    // 97 to 122
+    public static void getCounter(String str, int len){
+        Stack<Character> stack = new Stack<>();
+        String ans = "";
+        int towhich = 0;
+
+        towhich = (len/2)-1;
+
+        for (int i = 0;i<=towhich;i++){
+
+            int a = (str.charAt(i)-96);
+            int b = (str.charAt(len -1-i)-96);
+
+            int sum = a+b+96;
+
+            while(sum> 122){
+                sum = sum-26;
+            }
+            char temp = (char) (sum);
+            stack.add(temp);
+            ans += temp;
+        }
+        if (len%2 != 0){
+            int a = (str.charAt(len/2)-96);
+            int sum = a+a+96;
+
+            while(sum> 122){
+                sum = sum-26;
+            }
+            char temp = (char) (sum);
+            ans+= temp;
+        }
+        for (int i = stack.size()-1 ;i >=0;i--){
+            ans+= stack.pop();
+        }
+        System.out.println(ans);
+    }
+//    long n = scan.nextInt();
+//        if (threefive(n)){
+//        System.out.println("YES");
+//    }else{
+//        System.out.println("NO");
+//    }
+
     public static boolean whoWins(int n){
         boolean[] st = new boolean[n];
 
@@ -40,18 +194,7 @@ public class Circle extends Vehicle {
         return false;
     }
 
-    public static long gcd(long a, long b){
-        if (b == 0){
-            return a;
-        }
-        return gcd(b,a%b);
-    }
-    public static void lcm(long a, long b){
-        long g = gcd(a,b);
-        long lcm = a*b;
-        lcm = lcm / g;
-        System.out.println(g+" "+lcm);
-    }
+
 
     public static BigInteger fact(int n){
         BigInteger f = new BigInteger("1");
@@ -61,18 +204,8 @@ public class Circle extends Vehicle {
         return f;
     }
 
-    public static int gcd(int a, int b){
-        if (b == 0){
-            return a;
-        }
-        return gcd(b,a%b);
-    }
-    public static void lcm(int a, int b){
-        int g = gcd(a,b);
-        int lcm = a*b;
-        lcm = lcm / g;
-        System.out.println(g+" "+lcm);
-    }
+
+
     public int removeDuplicates(int[] nums) {
         LinkedList<Integer> ls = new LinkedList<Integer>();
         for(int i = 0;i<nums.length;i++){
@@ -1301,4 +1434,5 @@ public class Circle extends Vehicle {
         }
 
 }
+
 

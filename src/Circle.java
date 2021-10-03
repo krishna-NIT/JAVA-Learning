@@ -1,25 +1,45 @@
 import java.math.BigInteger;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
 
 class Vehicle{}
 
 public class Circle extends Vehicle {
-    double radius;
-    public static void main (String[] args) throws java.lang.Exception
-    {
-        // your code goes here
+    public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
-        //int n = scan.nextInt();
-        //int[] arr = new int[n];
-        String str = String.valueOf(10);
-        str = Integer.toString(11);
-        System.out.println(str);
-        System.out.println(str.charAt(0));
-
+        int n = scan.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0;i<n;i++){
+            arr[i] =scan.nextInt();
+        }
+        for (int i = 0;i<n;i++){
+            if(whoWins(arr[i])){
+                System.out.println("Deepa");
+            }else{
+                System.out.println("Arjit");
+            }
+        }
     }
+    public static boolean whoWins(int n){
+        boolean[] st = new boolean[n];
+
+        Arrays.fill(st,true);
+        st[0] = false;
+        st[1] = false;
+
+        for(int i = 2;i*i <= n-1;i++){
+            for(int j = i*2;j < n-1;j+=i){
+                st[j] = false;
+            }
+        }
+
+        for(int i = 2;i<st.length;i++){
+            if (st[i] == true && st[n-i] == true){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static long gcd(long a, long b){
         if (b == 0){
             return a;
@@ -1272,7 +1292,7 @@ public class Circle extends Vehicle {
 //        this.radius = radius;
 //    }
 //}
-
+        static int radius = 0;
         public double getRadius () {
             return this.radius;
         }

@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -7,30 +8,200 @@ class Vehicle{}
 
 public class Circle extends Vehicle {
     double radius;
-
-    public static void main(String[] args) {
+    public static void main (String[] args) throws java.lang.Exception
+    {
+        // your code goes here
         Scanner scan = new Scanner(System.in);
-        int n = scan.nextInt();
-        int[] arr = new int[n];
-        for(int i = 0;i<n;i++){
-            arr[i] = scan.nextInt();
-        }
-        SelectionSort(arr);
-        for(int i = 0;i<n;i++){
-            System.out.print(arr[i]+" ");
-        }
+        //int n = scan.nextInt();
+        //int[] arr = new int[n];
+        String str = String.valueOf(10);
+        str = Integer.toString(11);
+        System.out.println(str);
+        System.out.println(str.charAt(0));
 
     }
+    public static long gcd(long a, long b){
+        if (b == 0){
+            return a;
+        }
+        return gcd(b,a%b);
+    }
+    public static void lcm(long a, long b){
+        long g = gcd(a,b);
+        long lcm = a*b;
+        lcm = lcm / g;
+        System.out.println(g+" "+lcm);
+    }
+
+    public static BigInteger fact(int n){
+        BigInteger f = new BigInteger("1");
+        for(int i = 2;i<=n;i++){
+            f = f.multiply(BigInteger.valueOf(i));
+        }
+        return f;
+    }
+
+    public static int gcd(int a, int b){
+        if (b == 0){
+            return a;
+        }
+        return gcd(b,a%b);
+    }
+    public static void lcm(int a, int b){
+        int g = gcd(a,b);
+        int lcm = a*b;
+        lcm = lcm / g;
+        System.out.println(g+" "+lcm);
+    }
+    public int removeDuplicates(int[] nums) {
+        LinkedList<Integer> ls = new LinkedList<Integer>();
+        for(int i = 0;i<nums.length;i++){
+            if (!ls.contains(nums[i])){
+                ls.add(nums[i]);
+            }
+        }
+
+        for (int i = 0;i<ls.size();i++){
+            nums[i] = ls.get(i);
+        }
+
+        return ls.size();
+    }
+    public static void printSubset(int[] input, int starti ,int[] output){
+        //base cas
+        if(starti == input.length){
+            for(int i = 0;i<output.length;i++){
+                System.out.print(output[i]+" ");
+            }
+            System.out.println();
+            return;
+        }
+
+        // m1 m2
+        int[] newOutput = new int[output.length+1];
+        for(int i = 0;i<output.length;i++){
+            newOutput[i] = output[i];
+        }
+        newOutput[output.length] = input[starti];
+        // option 1
+        printSubset(input,starti+1,newOutput);
+
+        printSubset(input,starti+1,output);
+        // option 2
+
+    }
+
+    public static boolean isPalindrome(LinkedListNode<Integer> head) {
+        //Your code goes here
+        LinkedListNode slow = head;
+        boolean ispalin = true;
+        Stack<Integer> stack = new Stack<Integer>();
+
+        while (slow != null) {
+            //int nk = slow.data;
+            //stack.push(nk);
+            slow = slow.next;
+        }
+
+        while (head != null) {
+
+            int i = stack.pop();
+            if (head.data == i) {
+                ispalin = true;
+            }
+            else {
+                ispalin = false;
+                break;
+            }
+            head = head.next;
+        }
+        return ispalin;
+    }
+
+    class LinkedListNode<T> {
+        T data;
+        LinkedListNode<T> next;
+
+        public LinkedListNode(T data) {
+            this.data = data;
+        }
+    }
+
+    public static void printSubsets(int input[]) {
+        // Write your code here
+        ps(input, 0, input.length-1);
+    }
+    public static void ps(int[] arr,int start,int end){
+
+        if(end==start  && start < arr.length){
+            System.out.print(arr[start]+" ");
+        }
+        System.out.print(arr[start]+" ");
+        ps(arr, start+1,end);
+        System.out.println();
+        ps(arr, start+1,end);
+
+    }
+
+    public static int binarySearch(int input[], int element) {
+        // Write your code here
+        return bs(input, 0,input.length-1,element);
+    }
+    public static int bs(int[] arr, int start, int end, int element){
+        int mid = (start+end)/2;
+        if(start>end){
+            return -1;
+        }
+
+        if(arr[mid] < element){
+            return bs(arr,mid+1,end,element);
+        }else if(arr[mid] > element){
+            return bs(arr,start,mid-1,element);
+        }else if(arr[mid] == element){
+            return mid;
+        }
+        return -1;
+    }
+
+    // 12 42 36 96 10
     public static void InsertionSort(int[] arr){
+        if (arr.length<=1){
+            return;
+        }
 
+        for (int i = 1;i<arr.length;i++){
+            int current = arr[i];
+            int j = i-1;
+            while (arr[j] > arr[i] && j>=0){
+                arr[j+1] = arr[j];
+                j--;
+            }
+            arr[j+1] = current;
+
+        }
     }
 
+    public static void InsertionSort1(int[] arr){
+        if (arr.length <=1){
+            return;
+        }
+        for (int i = 1 ;i <arr.length;i++){
+            int current = arr[i];
+            int j = i-1;
+            while (arr[j] > arr[i] && j>=0){
+                arr[j+1] = arr[j];
+                j--;
+            }
+            arr[j+1] = current;
+        }
+    }
 
     public static void swap(int a, int b){
         int temp = a;
         a = b;
         b = temp;
     }
+
     public static void SelectionSort(int[] arr){
         if (arr.length <=1){
             return;
@@ -134,22 +305,22 @@ public class Circle extends Vehicle {
         }
     }
 
-    public static int handshake(int n) {
-        if (n <= 1) {
-            return 0;
-        }
+//    public static int handshake(int n) {
+//        if (n <= 1) {
+//            return 0;
+//        }
+//
+//        int den = 2 * fact(n - 2);
+//        return (fact(n)/den);
+//    }
 
-        int den = 2 * fact(n - 2);
-        return (fact(n)/den);
-    }
-
-    public static int fact(int f) {
-        if (f <= 1) {
-            return 1;
-        }
-
-        return (f*fact(f - 1));
-    }
+//    public static int fact(int f) {
+//        if (f <= 1) {
+//            return 1;
+//        }
+//
+//        return (f*fact(f - 1));
+//    }
 
 
     public List<String> fizzBuzz(int i) {

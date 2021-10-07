@@ -4,16 +4,216 @@ import java.util.*;
 class Vehicle{}
 
 public class Circle extends Vehicle {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        long test_case = scan.nextLong();
-        for (long i = 0;i<test_case;i++){
-            long power = scan.nextInt();
-            long target = scan.nextInt();
-            System.out.println(ans(power,target));
+        LinkedList<Integer> ls = new LinkedList<Integer>();
+        int n = scan.nextInt();
+        int[] arr = new int[n];
+        for(int i = 0;i<n;i++){
+            arr[i] = scan.nextInt();
+        }
+        int a = 0;
+        int b = 0;
+
+        int starti = 0;
+        int endi = arr.length-1;
+
+        while(starti <=endi){
+            if (starti == endi){
+                a+= arr[starti];
+                starti++;
+            }
+
+            if (starti<endi) {
+                if (arr[starti] > arr[endi]) {
+                    a += arr[starti];
+                    starti++;
+                } else {
+                    a += arr[endi];
+                    endi--;
+                }
+            }
+
+            if (starti == endi){
+                b+= arr[starti];
+                starti++;
+            }
+
+
+            if (starti<endi){
+                if (arr[starti] > arr[endi]){
+                    b += arr[starti];
+                    starti++;
+                }else{
+                    b += arr[endi];
+                    endi--;
+                }
+            }
+
         }
 
+        System.out.println(a+" "+b);
     }
+
+
+// Baisc approach M1
+//    public static void main(String[] args) {
+//        Scanner scan = new Scanner(System.in);
+//        int n = scan.nextInt();
+//        for (int i = 0; i < n; i++) {
+//            int le = scan.nextInt();
+//            String str = scan.next();
+//            int revindex = str.length()-1;
+//
+//            String ans = "";
+//            for (int j = 0; j < str.length(); j++) {
+//                int sum = str.charAt(j) - 96 + str.charAt(revindex) - 96;
+//                //System.out.println(sum);
+//                sum += 96;
+//                while (sum > 122) {
+//                    sum -= 26;
+//                }
+//                ans += (char) sum;
+//                revindex--;
+//            }
+//            System.out.println(ans);
+//        }
+//    }
+
+
+
+//    int a = (str.charAt(len/2)-96);
+//    int sum = a+a+96;
+//
+//            while(sum> 122){
+//        sum = sum-26;
+//    }
+//    char temp = (char) (sum);
+//    ans+= temp;
+
+//    long[] arr = new long[n];
+//        for (int i = 0;i<n;i++){
+//        arr[i] = scan.nextLong();
+//    }
+//        if (isDangerous(arr)){
+//        System.out.println("YES");
+//        for (int i = n-1;i>=0;i--){
+//            System.out.print(arr[i]+" ");
+//        }
+//    }else{
+//        System.out.println("NO");
+//    }
+
+    public static boolean isDangerous(long[] arr){
+        if (arr.length<2){
+            return false;
+        }
+        for (int i =0;i<arr.length-1;i++){
+            if (!isPerfectSquare(arr[i]+arr[i+1])){
+                return false;
+            }
+        }
+        return true;
+    }
+    public static boolean isPerfectSquare(long n){
+        for (int i= 1;i*i<=n;i++){
+            if (i *i == n){
+                return true;
+            }
+        }
+        return false;
+    }
+
+//
+//    int n = scan.nextInt();
+//    long A = scan.nextLong();
+//    long B = scan.nextLong();
+//    long k = scan.nextLong();
+//
+//    long noofrounds = scan.nextLong();
+//
+//    long[] wizard = new long[n];
+//        Arrays.fill(wizard,-noofrounds*B);
+//        for (int i = 0;i<noofrounds;i++){
+//        long notest = scan.nextInt();
+//        for (int j = 0;j<notest;j++){
+//            int inp = scan.nextInt();
+//            wizard[inp-1] += (A+B);
+//        }
+//    }
+//
+//
+//    long count = 0;
+//        for (int i = 0;i<wizard.length;i++){
+//        if (wizard[i] >= k){
+//            count++;
+//        }
+//    }
+//        System.out.println(count);
+    //
+//        int n = 100000;
+//        boolean[] st = new boolean[n+1];
+//
+//        Arrays.fill(st,true);
+//        st[0] = false;
+//        st[1] = false;
+//
+//        for(int i = 2;i*i <= n;i++){
+//            for(int j = i*2;j < n;j+=i){
+//                st[j] = false;
+//            }
+//        }
+//
+//
+//        for (int j = 0;j<testcase;j++){
+//            int lucky = scan.nextInt();
+//            int count = 0;
+//            for (int i = 0;i<st.length;i++){
+//                if (st[i] == true && i%10 == lucky){
+//                    count++;
+//                }
+//            }
+//            System.out.println(count);
+//        }
+
+    public static void getCounter(String str, int len){
+        Stack<Character> stack = new Stack<>();
+        String ans = "";
+        int towhich = 0;
+
+        towhich = (len/2)-1;
+
+        for (int i = 0;i<=towhich;i++){
+
+            int a = (str.charAt(i)-96);
+            int b = (str.charAt(len -1-i)-96);
+
+            int sum = a+b+96;
+
+            while(sum> 122){
+                sum = sum-26;
+            }
+            char temp = (char) (sum);
+            stack.add(temp);
+            ans += temp;
+        }
+        if (len%2 != 0){
+            int a = (str.charAt(len/2)-96);
+            int sum = a+a+96;
+
+            while(sum> 122){
+                sum = sum-26;
+            }
+            char temp = (char) (sum);
+            ans+= temp;
+        }
+        for (int i = stack.size()-1 ;i >=0;i--){
+            ans+= stack.pop();
+        }
+        System.out.println(ans);
+    }
+
+
     public static long ans(long power, long target){
         long count = 0;
         while (power < target){
@@ -62,7 +262,9 @@ public class Circle extends Vehicle {
         long lcm = a*b;
         return lcm/g;
     }
-    //        int n = scan.nextInt();
+
+
+//        int n = scan.nextInt();
 //        int A = scan.nextInt();
 //        int B = scan.nextInt();
 //        int k = scan.nextInt();
@@ -99,9 +301,9 @@ public class Circle extends Vehicle {
 //            }
 //        }
 //        System.out.println(count);
-
-
-
+//
+//
+//
 //    int n = 100000;
 //    boolean[] st = new boolean[n+1];
 //
@@ -130,42 +332,7 @@ public class Circle extends Vehicle {
 
 
     // 97 to 122
-    public static void getCounter(String str, int len){
-        Stack<Character> stack = new Stack<>();
-        String ans = "";
-        int towhich = 0;
 
-        towhich = (len/2)-1;
-
-        for (int i = 0;i<=towhich;i++){
-
-            int a = (str.charAt(i)-96);
-            int b = (str.charAt(len -1-i)-96);
-
-            int sum = a+b+96;
-
-            while(sum> 122){
-                sum = sum-26;
-            }
-            char temp = (char) (sum);
-            stack.add(temp);
-            ans += temp;
-        }
-        if (len%2 != 0){
-            int a = (str.charAt(len/2)-96);
-            int sum = a+a+96;
-
-            while(sum> 122){
-                sum = sum-26;
-            }
-            char temp = (char) (sum);
-            ans+= temp;
-        }
-        for (int i = stack.size()-1 ;i >=0;i--){
-            ans+= stack.pop();
-        }
-        System.out.println(ans);
-    }
 //    long n = scan.nextInt();
 //        if (threefive(n)){
 //        System.out.println("YES");

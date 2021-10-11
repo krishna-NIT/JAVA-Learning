@@ -12,49 +12,116 @@ public class Circle extends Vehicle {
         for(int i = 0;i<n;i++){
             arr[i] = scan.nextInt();
         }
-        int a = 0;
-        int b = 0;
-
-        int starti = 0;
-        int endi = arr.length-1;
-
-        while(starti <=endi){
-            if (starti == endi){
-                a+= arr[starti];
-                starti++;
-            }
-
-            if (starti<endi) {
-                if (arr[starti] > arr[endi]) {
-                    a += arr[starti];
-                    starti++;
-                } else {
-                    a += arr[endi];
-                    endi--;
-                }
-            }
-
-            if (starti == endi){
-                b+= arr[starti];
-                starti++;
-            }
-
-
-            if (starti<endi){
-                if (arr[starti] > arr[endi]){
-                    b += arr[starti];
-                    starti++;
+        System.out.println(maximumProfit(arr));
+    }
+    public static boolean splitArray(int input[]) {
+        LinkedList<Integer> mainls = new LinkedList<>();
+        LinkedList<Integer> group1 = new LinkedList<>();
+        LinkedList<Integer> group2 = new LinkedList<>();
+        int sum1 = 0;
+        int sum2 = 0;
+        int summain = 0;
+        for (int i = 0;i<input.length;i++){
+            if (input[i]%5 == 0){
+                if (input[i]%3 == 0){
+                    group1.add(input[i]);
+                    sum1 += input[i];
                 }else{
-                    b += arr[endi];
-                    endi--;
+                    group2.add(input[i]);
+                    sum2 += input[i];
                 }
+            }else{
+                mainls.add(input[i]);
+                summain += input[i];
             }
-
         }
 
-        System.out.println(a+" "+b);
+        // now divide summain
+
+
+
+        return true;
     }
 
+    public static int maximumProfit(int budget[]) {
+        int maxprofit = Integer.MIN_VALUE;
+        //Arrays.sort(budget);
+        ms(budget, 0,budget.length-1);
+
+        int j = budget.length;
+        for (int i = 0;i<budget.length;i++){
+            if (maxprofit < j*budget[i]){
+                maxprofit = j*budget[i];
+            }
+            j--;
+        }
+        return maxprofit;
+    }
+    public static void ms(int[] input, int s, int e){
+        if(s>=e){
+            return;
+        }
+
+        int mid = (s+e)/2;
+        ms(input,s,mid);
+        ms(input,mid+1,e);
+        merge(input,s,e);
+    }
+    public static void merge(int[] arr, int s, int e){
+        int mid  = (s+e)/2;
+        int[] arr2 = new int[e-s+1];
+
+        int i = s;
+        int j = mid +1 ;
+
+        for(int k = 0;k<arr2.length;k++){
+
+            if (i <= mid && j <= e){
+                if(arr[i] < arr[j]){
+                    arr2[k] = arr[i];
+                    i++;
+                }else{
+                    arr2[k] = arr[j];
+                    j++;
+                }
+            }else{
+                if (j>e){
+                    arr2[k] = arr[i];
+                    i++;
+                }else{
+                    arr2[k] = arr[j];
+                    j++;
+                }
+            }
+        }
+        for(i = s;i<=e;i++){
+            arr[i] = arr2[i-s];
+        }
+
+    }
+    public static boolean checkSequence(String a, String b) {
+
+        int i = 0;
+        int j = 0;
+        int stat = 0;
+        int count = 0;
+        while(i < b.length()){
+            stat = 0;
+            while(j<a.length() && stat == 0){
+                if (a.charAt(j) == b.charAt(i)){
+                    count++;
+                    stat++;
+                }
+                j++;
+            }
+            i++;
+        }
+        if (count==b.length()){
+            return true;
+        }else {
+            return false;
+        }
+    }
 
 // Baisc approach M1
 //    public static void main(String[] args) {

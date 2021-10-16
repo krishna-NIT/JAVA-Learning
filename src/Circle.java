@@ -43,6 +43,26 @@ public class Circle extends Vehicle {
         return true;
     }
 
+    public static long arrayManipulation(int n, List<List<Integer>> queries) {
+        long[] arr = new long[n];
+        long max = Long.MIN_VALUE;
+
+        for (int i = 0;i<queries.size();i++){
+            int starti = queries.get(i).get(0);
+            int endi = queries.get(i).get(1);
+            int val = queries.get(i).get(2);
+
+            for (int j=starti-1;j<endi;j++){
+                arr[j] += val;
+                if (max < arr[j]){
+                    max = arr[j];
+                }
+            }
+        }
+        return max;
+    }
+
+
     public static int maximumProfit(int budget[]) {
         int maxprofit = Integer.MIN_VALUE;
         //Arrays.sort(budget);
@@ -57,6 +77,9 @@ public class Circle extends Vehicle {
         }
         return maxprofit;
     }
+
+
+
     public static void ms(int[] input, int s, int e){
         if(s>=e){
             return;

@@ -6,13 +6,270 @@ class Vehicle{}
 public class Circle extends Vehicle {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        LinkedList<Integer> ls = new LinkedList<Integer>();
         int n = scan.nextInt();
-        int[] arr = new int[n];
-        for(int i = 0;i<n;i++){
-            arr[i] = scan.nextInt();
+        for (int i = 0;i<n;i++){
+            int len = scan.nextInt();
+            String a = scan.next();
+            String b = scan.next();
+            if (isequivalent(a,b)){
+                System.out.println("Yes");
+            }else {
+                System.out.println("No");
+            }
         }
-        System.out.println(maximumProfit(arr));
+    }
+    public static boolean isequivalent(String a, String b){
+        if (a.equals(b)){
+            return true;
+        }
+        if(a.length() == 2){
+            if (a.charAt(0) == b.charAt(1) && a.charAt(1)==b.charAt(0)){
+                return false;
+            }
+        }
+        LinkedList<Character> uniquechar = new LinkedList<Character>();
+        LinkedList<Character> unique = new LinkedList<Character>();
+        for (int i = 0;i<a.length();i++){
+            if (a.charAt(i) != b.charAt(i)){
+                if (!uniquechar.contains(a.charAt(i)) && !unique.contains(a.charAt(i))){
+                    unique.add(a.charAt(i));
+                }
+                if (!uniquechar.contains(b.charAt(i)) && !unique.contains(b.charAt(i))){
+                    unique.add(b.charAt(i));
+                }
+
+                uniquechar.add(a.charAt(i));
+                uniquechar.add(b.charAt(i));
+            }
+        }
+        System.out.println(unique.size()+" "+uniquechar);
+        if (unique.size()*2 == uniquechar.size() && unique.size()==2){
+            return true;
+        }
+        return false;
+    }
+
+
+//         Spoiler alert
+//
+//    int spell = scan.nextInt();
+//    int spelltocast = scan.nextInt();
+//    int[] arr = new int[spell];
+//        for (int i = 0;i<spell;i++){
+//        arr[i] = scan.nextInt();
+//    }
+//
+//
+//
+//    long[] ls = new long[n];
+//        Arrays.fill(ls,-1);
+//        for(int i = 0;i<n;i++){
+//        long num = scan.nextLong();
+//        if (num%2 == 0){
+//            ls[i] = num;
+//        }
+//    }
+//        Arrays.sort(ls);
+//        if (ls[ls.length-1] != -1){
+//        System.out.println("YES");
+//    }else {
+//        System.out.println("NO");
+//        return;
+//    }
+//
+//        for (int i  = ls.length-1;i>=0;i--){
+//        if (ls[i] == -1){
+//            return;
+//        }
+//        System.out.print(ls[i]+" ");
+//    }
+
+//   public static void main(String[] args) {
+////        Scanner scan = new Scanner(System.in);
+////        int l = scan.nextInt();
+////        int b = scan.nextInt();
+////        int totaldemonk = scan.nextInt();
+////        int[][] arr = new int[l][b];
+////        for (int i =0;i<totaldemonk;i++){
+////            int p = scan.nextInt()-1;
+////            int q = scan.nextInt()-1;
+////            arr[p][q] = 1;
+////        }
+////
+////        int rsum = -1;
+////        LinkedList<Integer> lsri = new LinkedList<>();
+////        int csum = -1;
+////        LinkedList<Integer> lsci = new LinkedList<>();
+////
+////        for (int i = 0;i<arr.length;i++){
+////            int sum = 0;
+////            for (int j = 0;j<arr[0].length;j++){
+////                sum += arr[i][j];
+////            }
+////            if(sum == rsum){
+////                lsri.add(i);
+////            }
+////            if (sum > rsum){
+////                lsri.clear();
+////                rsum = sum;
+////                lsri.add(i);
+////            }
+////
+////        }
+////
+////        for (int i = 0;i<b;i++){
+////            int sum = 0;
+////            for (int j = 0;j<l;j++){
+////                sum += arr[j][i];
+////            }
+////            if(sum == csum){
+////                lsci.add(i);
+////            }
+////            if (sum > csum){
+////                lsci.clear();
+////                csum = sum;
+////                lsci.add(i);
+////            }
+////
+////        }
+////        System.out.println(lsri);
+////        System.out.println(lsci);
+////        System.out.println(rsum+" "+csum);
+////        int isthere = 1;
+////        for (int i = 0;i<lsri.size();i++){
+////            for (int j = 0;j<lsci.size();j++){
+////                if (arr[lsri.get(i)][lsci.get(j)] == 0){
+////                    isthere = 0;
+////                }
+////            }
+////        }
+////        int ans = csum+rsum-isthere;
+////
+////        System.out.println(ans);
+////    }
+
+
+//    public static boolean isequivalent(String a, String b){
+//        if (a.equals(b)){
+//            return true;
+//        }
+//
+//        LinkedList<Character> uniquechar = new LinkedList<Character>();
+//        LinkedList<Character> unique = new LinkedList<Character>();
+//        for (int i = 0;i<a.length();i++){
+//            if (a.charAt(i) != b.charAt(i)){
+//                if (!uniquechar.contains(a.charAt(i)) && !unique.contains(a.charAt(i))){
+//                    unique.add(a.charAt(i));
+//                }
+//                if (!uniquechar.contains(b.charAt(i)) && !unique.contains(b.charAt(i))){
+//                    unique.add(b.charAt(i));
+//                }
+//
+//                uniquechar.add(a.charAt(i));
+//                uniquechar.add(b.charAt(i));
+//            }
+//        }
+//        System.out.println(unique.size()+" "+uniquechar);
+//
+//        if (unique.size()*2 == uniquechar.size() && unique.size()==2){
+//            return true;
+//        }
+//        return false;
+//    }
+
+    // Similar String
+//    public static void main(String[] args) {
+//        Scanner scan = new Scanner(System.in);
+//        int n = scan.nextInt();
+//        for (int i = 0;i<n;i++){
+//            int len = scan.nextInt();
+//            String a = scan.next();
+//            String b = scan.next();
+//            if (isequivalent(a,b)){
+//                System.out.println("Yes");
+//            }else {
+//                System.out.println("No");
+//            }
+//        }
+//    }
+//    public static boolean isequivalent(String a, String b){
+//        if (a.equals(b)){
+//            return true;
+//        }
+//
+//        LinkedList<Character> uniquechar = new LinkedList<Character>();
+//        LinkedList<Character> unique = new LinkedList<Character>();
+//        for (int i = 0;i<a.length();i++){
+//            if (a.charAt(i) != b.charAt(i)){
+//                if (!uniquechar.contains(a.charAt(i)) && !unique.contains(a.charAt(i))){
+//                    unique.add(a.charAt(i));
+//                }
+//                if (!uniquechar.contains(b.charAt(i)) && !unique.contains(b.charAt(i))){
+//                    unique.add(b.charAt(i));
+//                }
+//
+//                uniquechar.add(a.charAt(i));
+//                uniquechar.add(b.charAt(i));
+//            }
+//        }
+//        System.out.println(unique.size()+" "+uniquechar);
+//
+//        if (unique.size()*2 == uniquechar.size() && unique.size()==2){
+//            return true;
+//        }
+//        return false;
+//    }
+    // Spoiler alert
+
+//    int spell = scan.nextInt();
+//    int spelltocast = scan.nextInt();
+//    int[] arr = new int[spell];
+//        for (int i = 0;i<spell;i++){
+//        arr[i] = scan.nextInt();
+//    }
+
+
+
+//    long[] ls = new long[n];
+//        Arrays.fill(ls,-1);
+//        for(int i = 0;i<n;i++){
+//        long num = scan.nextLong();
+//        if (num%2 == 0){
+//            ls[i] = num;
+//        }
+//    }
+//        Arrays.sort(ls);
+//        if (ls[ls.length-1] != -1){
+//        System.out.println("YES");
+//    }else {
+//        System.out.println("NO");
+//        return;
+//    }
+//
+//        for (int i  = ls.length-1;i>=0;i--){
+//        if (ls[i] == -1){
+//            return;
+//        }
+//        System.out.print(ls[i]+" ");
+//    }
+    public static void split(int n){
+        int count = 0;
+        int pow = 0;
+        LinkedList<Integer> ls = new LinkedList<Integer>();
+        while(n>0){
+            int rem = n%10;
+            if(rem !=0){
+                count++;
+                ls.add(rem* ((int)Math.pow(10,pow)) );
+            }
+            pow++;
+            n = n/10;
+        }
+        System.out.println(count);
+        for (int i = 0;i<ls.size();i++){
+            System.out.print(ls.get(i)+" ");
+        }
+        System.out.println();
     }
     public static boolean splitArray(int input[]) {
         LinkedList<Integer> mainls = new LinkedList<>();
@@ -62,6 +319,35 @@ public class Circle extends Vehicle {
         return max;
     }
 
+    public static int diagonalDifference(List<List<Integer>> arr) {
+        int d1 = 0;
+        int d2 = 0;
+        int j = arr.size()-1;
+        for (int i = 0;i<arr.size();i++){
+            d1 += arr.get(i).get(i);
+            d2 += arr.get(i).get(j);
+            j--;
+        }
+
+        return Math.abs(d1-d2);
+    }
+
+    void pushZerosToEnd(int[] arr, int n) {
+        int[] farr = new int[arr.length];
+        Arrays.fill(farr, 0);
+        int index = 0;
+        int j = 0;
+        while(index <arr.length){
+            if(arr[index] != 0){
+                farr[j] = arr[index];
+            }
+            index++;
+        }
+
+        for(int i = 0;i<arr.length;i++){
+            arr[i] = farr[i];
+        }
+    }
 
     public static int maximumProfit(int budget[]) {
         int maxprofit = Integer.MIN_VALUE;

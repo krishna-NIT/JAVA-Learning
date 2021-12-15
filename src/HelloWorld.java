@@ -1,37 +1,97 @@
-
+import java.util.Scanner;
 
 public class HelloWorld {
-
-    ////////////////////////   Main Method    ////////////////////////////
     public static void main(String[] args) {
-        double doublevar = 22.85;
-        double doublevar2 = 80.00;
-        double p = (doublevar+doublevar2)*100.00;
-        double rem = p % (40.00);
-
-        boolean val = (rem == 0) ? true : false;
-
-        System.out.println(val);
-        if(!val){
-            System.out.println("Got some Reminder");
+        Scanner scan = new Scanner(System.in);
+        int t;
+        t = scan.nextInt();
+        for (int i = 0 ;i<t;i++){
+            int ans = 0;
+            int n = scan.nextInt();
+            String s = scan.next();
+            String com = "antisocial";
+            System.out.println(ispossible(s,com));
         }
-
-        long pri = toMilesPerHour(-5.6);
-        System.out.println(pri);
-
-        printConversion(25.42);
-
-
-        boolean a = shouldWakeUp(false,2);
-        System.out.println(a);
-
-        printMegaBytesAndKiloBytes(5000);
-
-        boolean bhagwat = areEqualByThreeDecimalPlaces(-3.1756d,-3.175d);
-        System.out.println("3 Decical Output  :  " +bhagwat);
-
-        printYearsAndDays(561600);
     }
+
+
+    public static int ispossible(String s, String com){
+        int ans = 0;
+        for (int i = 0;i<s.length()-1 && i<com.length()-1;i++){
+            int a1 = (int) s.charAt(i);
+            int a2 = (int) s.charAt(i+1);
+            int b = (int) com.charAt(i);
+            int b2 = (int) com.charAt(i+1);
+            if (a1 > b){
+                return ans;
+            }else if (a2 > b){
+                return ans+1;
+            }
+            if (a1 > b2){
+                return ans+1;
+            }
+            if (a1 > a2){
+                //swap
+                s = charinterchage(s,i,i+1);
+                ans++;
+            }
+        }
+        if (ans == 0){
+            ans = -1;
+        }
+        return ans;
+    }
+    public static String charinterchage(String s, int i, int j){
+        String fin = "";
+        if (i != 0){
+            fin += s.substring(0,i);
+        }
+        fin += s.charAt(j);
+        fin += s.charAt(i);
+        if (j != s.length()-1){
+            fin += s.substring(j+1,s.length());
+        }
+        return fin;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    //        double doublevar = 22.85;
+//        double doublevar2 = 80.00;
+//        double p = (doublevar+doublevar2)*100.00;
+//        double rem = p % (40.00);
+//
+//        boolean val = (rem == 0) ? true : false;
+//
+//        System.out.println(val);
+//        if(!val){
+//            System.out.println("Got some Reminder");
+//        }
+//
+//        long pri = toMilesPerHour(-5.6);
+//        System.out.println(pri);
+//
+//        printConversion(25.42);
+//
+//
+//        boolean a = shouldWakeUp(false,2);
+//        System.out.println(a);
+//
+//        printMegaBytesAndKiloBytes(5000);
+//
+//        boolean bhagwat = areEqualByThreeDecimalPlaces(-3.1756d,-3.175d);
+//        System.out.println("3 Decical Output  :  " +bhagwat);
+//
+//        printYearsAndDays(561600);
 
 
     //Playing Cat

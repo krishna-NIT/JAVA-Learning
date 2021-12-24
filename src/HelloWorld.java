@@ -3,17 +3,110 @@ import java.util.Scanner;
 public class HelloWorld {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        int t;
-        t = scan.nextInt();
-        for (int i = 0 ;i<t;i++){
-            int ans = 0;
-            int n = scan.nextInt();
-            String s = scan.next();
-            String com = "antisocial";
-            System.out.println(ispossible(s,com));
+        int n = scan.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0;i<n;i++){
+            arr[i] = scan.nextInt();
         }
+        int[] brr = new int[n];
+
+        for (int i = 0;i<n;i++){
+            int index = 0;
+            int a = arr[i];
+            int b = Integer.MAX_VALUE;
+            for (int j = 0;j<n;j++){
+                if (a < arr[j] && b>arr[j]){
+                    b = arr[j];
+                }
+            }
+
+            if (){
+                b = a;
+            }
+            brr[i] = b;
+            arr[index] =
+        }
+
+
+        int count = 0;
+        for (int i = 0;i<n;i++){
+            if (arr[i] < brr[i]){
+                count++;
+            }
+            System.out.print(brr[i]+" ");
+        }
+
+        System.out.println();
+        System.out.println(count);
     }
 
+//    public static void main(String[] args) {
+//        Scanner scan = new Scanner(System.in);
+//        int N = scan.nextInt();
+//        int M = scan.nextInt();
+//        int K = scan.nextInt();
+//
+//        int[] a = new int[N];
+//        int[] b = new int[M];
+//
+//        for (int i= 0;i<N;i++){
+//            a[i] = scan.nextInt();
+//        }
+//        for (int i= 0;i<M;i++){
+//            b[i] = scan.nextInt();
+//        }
+//        int maxbook = 0;
+//        int ai = 0;
+//        int bi = 0;
+//
+//        while (K>0 && ai < N && bi < M) {
+//            int minus = a[ai];
+//            if (a[ai] > b[bi]) {
+//                minus = b[bi];
+//                bi++;
+//            }else {
+//                ai++;
+//            }
+//
+//            if (K-minus >= 0) {
+//                K -= minus;
+//                maxbook++;
+//            }else {
+//                System.out.println(maxbook);
+//                return;
+//            }
+//        }
+//        if (ai < N && bi >= M && K>0){
+//            if (K-a[ai] >= 0) {
+//                maxbook++;
+//                K -= a[ai];
+//            }else {
+//                System.out.println(maxbook);
+//                return;
+//            }
+//            ai++;
+//        }
+//        if (ai >= N && bi < M && K>0){
+//            if (K-b[bi] >= 0) {
+//                maxbook++;
+//                K -= b[bi];
+//            }else {
+//                System.out.println(maxbook);
+//                return;
+//            }
+//            bi++;
+//        }
+//        System.out.println(maxbook);
+//    }
+
+    public String addSpaces(String s, int[] spaces) {
+        String ans = "";
+        for (int i =0;i<spaces.length;i++){
+            int loc = spaces[i];
+            
+        }
+        return ans;
+    }
 
     public static int ispossible(String s, String com){
         int ans = 0;

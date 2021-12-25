@@ -5,40 +5,52 @@ public class HelloWorld {
         Scanner scan = new Scanner(System.in);
         int n = scan.nextInt();
         int[] arr = new int[n];
+        int[] diff = new int[n];
         for (int i = 0;i<n;i++){
             arr[i] = scan.nextInt();
+            diff[i] = scan.nextInt();
         }
-        int[] brr = new int[n];
 
-        for (int i = 0;i<n;i++){
-            int index = 0;
+        for (int i =0;i<n;i++){
             int a = arr[i];
-            int b = Integer.MAX_VALUE;
+            int d = Integer.MAX_VALUE;
             for (int j = 0;j<n;j++){
-                if (a < arr[j] && b>arr[j]){
-                    b = arr[j];
+                if (a < diff[j] && d>diff[j]){
+                    d = diff[j];
                 }
             }
-
-            if (){
-                b = a;
-            }
-            brr[i] = b;
-            arr[index] =
+            System.out.println(d+" "+(a+(4*d)));
         }
 
-
-        int count = 0;
-        for (int i = 0;i<n;i++){
-            if (arr[i] < brr[i]){
-                count++;
-            }
-            System.out.print(brr[i]+" ");
-        }
-
-        System.out.println();
-        System.out.println(count);
     }
+//    int[] brr = new int[n];
+//
+//        for (int i = 0;i<n;i++){
+//        int index = 0;
+//        int a = arr[i];
+//        int b = Integer.MAX_VALUE;
+//        for (int j = 0;j<n;j++){
+//            if (a < arr[j] && b>arr[j]){
+//                b = arr[j];
+//            }
+//        }
+//
+//
+//        brr[i] = b;
+//        arr[index] = a;
+//    }
+//
+//
+//    int count = 0;
+//        for (int i = 0;i<n;i++){
+//        if (arr[i] < brr[i]){
+//            count++;
+//        }
+//        System.out.print(brr[i]+" ");
+//    }
+//
+//        System.out.println();
+//        System.out.println(count);
 
 //    public static void main(String[] args) {
 //        Scanner scan = new Scanner(System.in);

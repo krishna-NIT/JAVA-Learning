@@ -4,25 +4,35 @@ public class HelloWorld {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         int n = scan.nextInt();
-        int[] arr = new int[n];
-        int[] diff = new int[n];
+        String lis[] = new String[n];
         for (int i = 0;i<n;i++){
-            arr[i] = scan.nextInt();
-            diff[i] = scan.nextInt();
+            lis[i] = scan.nextLine();
         }
+        System.out.println(mostWordsFound(lis));
+    }
 
-        for (int i =0;i<n;i++){
-            int a = arr[i];
-            int d = Integer.MAX_VALUE;
-            for (int j = 0;j<n;j++){
-                if (a < diff[j] && d>diff[j]){
-                    d = diff[j];
+    public static int mostWordsFound(String[] sentences) {
+        int ans = 0;
+        for (int i=0;i<sentences.length;i++){
+            int count = 1;
+            for (int j=0;j<sentences[i].length();j++){
+                if (sentences[i].charAt(j)==' '){
+                    count++;
                 }
             }
-            System.out.println(d+" "+(a+(4*d)));
+            if (sentences[i].charAt(sentences[i].length()-1) == ' '){
+                count--;
+            }
+            if (sentences[i].charAt(0) == ' '){
+                count--;
+            }
+            if (count>ans){
+                ans = count;
+            }
         }
-
+        return ans;
     }
+
 //    int[] brr = new int[n];
 //
 //        for (int i = 0;i<n;i++){

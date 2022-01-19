@@ -1,8 +1,9 @@
 package com;
 
+import java.util.*;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.HashMap;
+
 
 public class startagain {
     public static void main(String[] args){
@@ -49,19 +50,103 @@ public class startagain {
     }
 
     public static void printLevelWise(TreeNode<Integer> root){
-        System.out.print(root.data+" ");
-        int n = root.children.size();
-        if (n<=0){
+        if (root == null){
             return;
         }
-        for (int i =0;i<n;i++){
-            System.out.print(root.children.get(i).data+" ");
-            //printLevelWise(root.children.get(i));
-        }
-        System.out.println();
-        for (int i =0;i<n;i++){
-            printLevelWise(root.children.get(i));
-        }
+        Queue<TreeNode<Integer>> q = new Queue<TreeNode<Integer>>() {
+            @Override
+            public boolean add(TreeNode<Integer> integerTreeNode) {
+                return false;
+            }
+
+            @Override
+            public boolean offer(TreeNode<Integer> integerTreeNode) {
+                return false;
+            }
+
+            @Override
+            public TreeNode<Integer> remove() {
+                return null;
+            }
+
+            @Override
+            public TreeNode<Integer> poll() {
+                return null;
+            }
+
+            @Override
+            public TreeNode<Integer> element() {
+                return null;
+            }
+
+            @Override
+            public TreeNode<Integer> peek() {
+                return null;
+            }
+
+            @Override
+            public int size() {
+                return 0;
+            }
+
+            @Override
+            public boolean isEmpty() {
+                return false;
+            }
+
+            @Override
+            public boolean contains(Object o) {
+                return false;
+            }
+
+            @Override
+            public Iterator<TreeNode<Integer>> iterator() {
+                return null;
+            }
+
+            @Override
+            public Object[] toArray() {
+                return new Object[0];
+            }
+
+            @Override
+            public <T> T[] toArray(T[] a) {
+                return null;
+            }
+
+            @Override
+            public boolean remove(Object o) {
+                return false;
+            }
+
+            @Override
+            public boolean containsAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(Collection<? extends TreeNode<Integer>> c) {
+                return false;
+            }
+
+            @Override
+            public boolean removeAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean retainAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public void clear() {
+
+            }
+        };
+        TreeNode<Integer> NullNode = new TreeNode<Integer>(Integer.MAX_VALUE);
+
+
     }
 
     public static void reverseStack(Stack<Integer> input, Stack<Integer> extra) {
@@ -133,6 +218,75 @@ public class startagain {
             return true;
         }
         return false;
+    }
+
+    public static int maxFrequencyNumber(int[] arr){
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        ArrayList<Integer> arls = new ArrayList<>();
+        for (int i =0;i<arr.length;i++){
+            if (hm.containsKey(arr[i])){
+                int precount = hm.get(arr[i]);
+                hm.replace(arr[i],precount+1);
+            }else {
+                hm.put(arr[i],1);
+                arls.add(arr[i]);
+            }
+        }
+        int maxno = 0;
+        int maxrepeat = Integer.MIN_VALUE;
+        for (int i =0;i<arls.size();i++){
+            if (maxrepeat < hm.get(arls.get(i))){
+                maxrepeat = hm.get(arls.get(i));
+                maxno = arls.get(i);
+            }
+        }
+        return maxno;
+    }
+
+    public static void printIntersection(int[] arr1,int[] arr2){
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        for (int i =0;i<arr1.length;i++){
+            if (hm.containsKey(arr1[i])){
+                int precount = hm.get(arr1[i]);
+                hm.replace(arr1[i],precount+1);
+            }else {
+                hm.put(arr1[i],1);
+            }
+        }
+
+        HashMap<Integer,Integer> hm2 = new HashMap<>();
+        ArrayList<Integer> arls2 = new ArrayList<>();
+        for (int i =0;i<arr2.length;i++){
+            if (hm2.containsKey(arr2[i])){
+                int precount = hm2.get(arr2[i]);
+                hm2.replace(arr2[i],precount+1);
+            }else {
+                hm2.put(arr2[i],1);
+                arls2.add(arr2[i]);
+            }
+        }
+
+        System.out.println(hm);
+        System.out.println(hm2);
+        for (int i =0;i<arls2.size();i++){
+            if (hm.containsKey(arls2.get(i))) {
+                if (hm.get(arls2.get(i)) > 0 && hm2.get(arls2.get(i)) > 0) {
+                    int a =hm.get(arls2.get(i));
+                    int b = hm2.get(arls2.get(i));
+                    int loop = 0;
+                    if (a<b){
+                        loop = a;
+                    }else {
+                        loop = b;
+                    }
+                    for (int j =0;j<loop;j++){
+                        System.out.println(arls2.get(i));
+                    }
+                    hm.replace(arls2.get(i), hm.get(arls2.get(i))-loop);
+                    hm2.replace(arls2.get(i), hm2.get(arls2.get(i))-loop);
+                }
+            }
+        }
     }
 
 

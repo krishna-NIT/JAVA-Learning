@@ -8,21 +8,8 @@ import java.util.HashMap;
 public class startagain {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
-        String exp = sc.nextLine();
-        System.out.println(isBalanced(exp));
-//        TreeNode<Integer> root = new TreeNode<Integer>(4);
-//        TreeNode<Integer> node1 = new TreeNode<Integer>(2);
-//        TreeNode<Integer> node2 = new TreeNode<Integer>(3);
-//        TreeNode<Integer> node3 = new TreeNode<Integer>(5);
-//        TreeNode<Integer> node4 = new TreeNode<Integer>(6);
-//
-//        root.children.add(node1);
-//        root.children.add(node2);
-//        root.children.add(node3);
-//
-//        node2.children.add(node4);
-//
-//        System.out.println(root);
+        String str = "Hackker";
+        System.out.println(uniqueChar(str));
     }
     public static TreeNode<Integer> takeInput(Scanner sc){
         int n = sc.nextInt();
@@ -288,6 +275,49 @@ public class startagain {
             }
         }
     }
+
+    public static String uniqueChar(String str){
+        //HashMap<Character, Integer> hashmap = new HashMap<>();
+        String output = "";
+        output += str.charAt(0);
+        for (int i = 0;i<str.length();i++){
+            String temp = str.substring(i,i+1);
+            if (!output.contains(temp)){
+                output += temp;
+            }
+        }
+        return output;
+    }
+
+    public static int PairSum(int[] input, int size) {
+        HashMap<Integer,Integer> hashmap = new HashMap<>();
+        int ans = 0;
+        for (int i =0;i<input.length;i++){
+            if (hashmap.containsKey(-input[i])){
+                if (hashmap.containsKey(input[i])){
+                    hashmap.replace(input[i],hashmap.get(input[i])+1);
+                    ans += hashmap.get(input[i])*hashmap.get(-input[i]);
+                }else {
+                    hashmap.replace(input[i],1);
+                    ans += hashmap.get(input[i])*hashmap.get(-input[i]);
+                }
+            }else {
+                if (hashmap.containsKey(input[i])){
+                    hashmap.replace(input[i],hashmap.get(input[i])+1);
+                }else {
+                    hashmap.put(input[i],1);
+                }
+            }
+        }
+
+        if (hashmap.containsKey(0)){
+            int noofzero = hashmap.get(0);
+            int terms = noofzero*(noofzero-1)/2;
+            ans += terms;
+        }
+        return ans;
+    }
+
 
 
 }

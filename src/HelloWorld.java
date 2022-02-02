@@ -1,17 +1,66 @@
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class HelloWorld {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        int n = scan.nextInt();
-        String lis[] = new String[n];
-        for (int i = 0;i<n;i++){
-            lis[i] = scan.nextLine();
+        String[] ans = divideString("abcdef",3,'x');
+
+        for (int i=0;i<ans.length;i++){
+            System.out.println(ans[i]);
         }
-        System.out.println(mostWordsFound(lis));
     }
 
-    
+    LinkedList<Integer> ls = new LinkedList<Integer>();
+    int count = 0;
+    public int ArrayChallenge(int num){
+        num = Math.abs(num);
+
+        int no = num;
+        while (no >0){
+            int rem = num%10;
+
+            if (ls.getLast() == rem){
+                return count;
+            }
+
+            ls.add(rem);
+            no /= 10;
+        }
+        for (int i = 0;)
+        count++;
+    }
+
+    public int minMoves(int target, int maxDoubles) {
+        int start = 1;
+        int count = 0;
+
+        int d = (int) (target/Math.pow(2,maxDoubles));
+        
+
+        return count;
+    }
+
+    public static String[] divideString(String s, int k, char fill) {
+        int len = s.length()/k;
+        if (s.length()%k>0){
+            len++;
+        }
+        String[] arr = new String[len];
+        int startind = 0;
+        for (int i=0;i<len-1;i++){
+                arr[i] = s.substring(startind, startind + k);
+                startind += k;
+        }
+        arr[arr.length-1] = s.substring(startind,s.length());
+        int rem = s.length()%k;
+        if (rem>0) {
+            for (int i = 0; i < k-rem; i++) {
+                arr[arr.length - 1] += fill;
+            }
+        }
+        return arr;
+    }
 
     public static int mostWordsFound(String[] sentences) {
         int ans = 0;

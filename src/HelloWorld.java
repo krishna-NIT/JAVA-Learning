@@ -1,13 +1,39 @@
+import com.TreeNode;
+
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Scanner;
 
 public class HelloWorld {
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        String[] ans = divideString("abcdef",3,'x');
+        LinkedList list = new LinkedList();
+        list.add(2);
+        list.add(8);
+        list.add(5);
+        list.add(1);
 
-        for (int i=0;i<ans.length;i++){
-            System.out.println(ans[i]);
+        Iterator i = list.iterator();
+        Collections.reverse(list);
+        Collections.shuffle(list);
+        i.next();
+        i.remove();
+        while (i.hasNext()){
+            System.out.print(i.next()+" ");
+        }
+    }
+
+    public static void printLevelWise(TreeNode<Integer> root){
+        System.out.println(root.data);
+        int n = root.children.size();
+        if (n<=0){
+            return;
+        }
+        for (int i =0;i<n;i++){
+            System.out.print(root.children.get(i).data+" ");
+        }
+        System.out.println();
+        for (int i =0;i<n;i++){
+            printLevelWise(root.children.get(i));
         }
     }
 
@@ -27,8 +53,8 @@ public class HelloWorld {
             ls.add(rem);
             no /= 10;
         }
-        for (int i = 0;)
         count++;
+        return 0;
     }
 
     public int minMoves(int target, int maxDoubles) {

@@ -1,8 +1,6 @@
 import com.TreeNode;
 
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.*;
 
 public class HelloWorld {
     public static void main(String[] args) {
@@ -22,6 +20,31 @@ public class HelloWorld {
         }
     }
 
+    public static void reverseQueue(Queue<Integer> input) {
+        if (input.size()<=0){
+            return;
+        }
+        int temp = input.remove();
+        reverseQueue(input);
+        input.add(temp);
+    }
+
+
+    public static void reverseStack(Stack<Integer> input, Stack<Integer> extra) {
+        if (input.size()<=0){
+            return;
+        }
+        int temp = input.pop();
+        reverseStack(input,extra);
+        while (!input.isEmpty()){
+            extra.add(input.pop());
+        }
+        input.add(temp);
+        while (!extra.isEmpty()){
+            input.add(extra.pop());
+        }
+    }
+
     public static void printLevelWise(TreeNode<Integer> root){
         System.out.println(root.data);
         int n = root.children.size();
@@ -36,6 +59,8 @@ public class HelloWorld {
             printLevelWise(root.children.get(i));
         }
     }
+
+
 
     LinkedList<Integer> ls = new LinkedList<Integer>();
     int count = 0;

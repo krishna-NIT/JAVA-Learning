@@ -4,20 +4,49 @@ import java.util.*;
 
 public class HelloWorld {
     public static void main(String[] args) {
-        LinkedList list = new LinkedList();
-        list.add(2);
-        list.add(8);
-        list.add(5);
-        list.add(1);
+        Scanner scan = new Scanner(System.in);
+        String inp = scan.nextLine();
+        System.out.println(moveHyphen2(inp,inp.length()));
+    }
 
-        Iterator i = list.iterator();
-        Collections.reverse(list);
-        Collections.shuffle(list);
-        i.next();
-        i.remove();
-        while (i.hasNext()){
-            System.out.print(i.next()+" ");
+    public static boolean checkRedundantBrackets(String expression) {
+        //Your code goes here
+        Stack<Character> stack = new Stack<>();
+        Queue<Character> queue = new ArrayDeque<>();
+
+        for (int i =0;i<expression.length();i++){
+            
         }
+        return true;
+    }
+
+    public static String moveHyphen (String str, int n){
+        String st = "";
+        for (int i =0;i<str.length();i++){
+            if (Character.isAlphabetic(str.charAt(i))){
+                st += str.charAt(i);
+            }
+        }
+        int no_of_dash = n - st.length();
+        String fin = "";
+        for (int i = 0;i<no_of_dash;i++){
+            fin += "-";
+        }
+        fin += st;
+        return fin;
+    }
+
+    public static String moveHyphen2 (String str, int n)
+    {
+        String res = "";
+        for (int i = 0; i < n; i++)
+        {
+            if (str.charAt (i) == '-')
+                res = str.charAt (i) + res;
+            else
+                res = res + str.charAt (i);
+        }
+        return res;
     }
 
     public static void reverseQueue(Queue<Integer> input) {

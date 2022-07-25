@@ -8,6 +8,27 @@ public class HelloWorld {
         String inp = scan.nextLine();
         System.out.println(moveHyphen2(inp,inp.length()));
     }
+    public static int arcessium(List<Integer> ls, int target){
+        int start = 0;
+        int end = ls.size()-target;
+        int sum = 0;
+        for (int i = end;i<ls.size();i++){
+            sum += ls.get(i);
+        }
+        int maxsum = sum;
+        int i = 0;
+        while (end<ls.size()){
+            sum += ls.get(i);
+            sum -= ls.get(end);
+            if (maxsum < sum){
+                maxsum = sum
+            }
+            end++;
+            i++;
+        }
+        return maxsum;
+    }
+
 
     public static boolean checkRedundantBrackets(String expression) {
         //Your code goes here

@@ -7,7 +7,9 @@ public class HelloWorld {
         Scanner scan = new Scanner(System.in);
         String inp = scan.nextLine();
         System.out.println(moveHyphen2(inp,inp.length()));
+        
     }
+
     public static int arcessium(List<Integer> ls, int target){
         int start = 0;
         int end = ls.size()-target;
@@ -21,7 +23,7 @@ public class HelloWorld {
             sum += ls.get(i);
             sum -= ls.get(end);
             if (maxsum < sum){
-                maxsum = sum
+                maxsum = sum;
             }
             end++;
             i++;

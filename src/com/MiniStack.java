@@ -29,3 +29,47 @@ public class MiniStack {
         return min;
     }
 }
+
+
+
+//
+//    DELIMITER $$
+//    CREATE FUNCTION EMP_INFO(F_NAME VARCHAR(255), L_NAME VARCHAR(255)) RETURNS INTEGER
+//        DECLARE SALARY INTEGER;
+//        BEGIN
+//        SELECT
+//
+//
+//        RETURN SALARY;
+//        END$$
+//        DELIMITER;
+//
+//
+//        set @v_emp_no = 0;
+//        set @name1 = "Aruna";
+//        set @name2 = "Journel";
+//
+//        call db_name.procedure_name(@name1, @name2, @v_emp_no);
+//
+//        select @v_emp_no;
+//
+//
+//
+//
+//
+//DELIMITER $$
+//        CREATE PROCEDURE EMP_INFO(IN FIRST_NAME VARCHAR(255),
+//        IN LAST_NAME VARCHAR(255),
+//        OUT O_EMP_NO INTEGER)
+//        BEGIN
+//
+//        SELECT
+//        T1.EMP_NO INTO O_EMP_NO
+//        FROM
+//        TABLE T1
+//        WHERE
+//        T1.FIRSTNAME = FIRST_NAME AND T2.LASTNAME = LAST_NAME;
+//
+//        END$$
+//        DELIMITER;
+//

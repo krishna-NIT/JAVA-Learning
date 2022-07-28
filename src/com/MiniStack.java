@@ -73,3 +73,37 @@ public class MiniStack {
 //        END$$
 //        DELIMITER;
 //
+
+
+
+//    SELECT
+//            COUNTRY_NAMER
+//    FROM
+//            TABLE
+//    WHERE (GDP/POPULATION) > (SELECT GDP/POPULATION FROM TABLE WHERE NAME = "UNITED KINGDOM")
+//        AND CONTINENT = "EUROPE";
+//
+//
+//        SELECT
+//        MAX(SALARY)
+//        FROM
+//        TABLE
+//        WHERE SALARY NOT IN(SELECT MAX(SALARY) FROM TABLE);
+//
+//
+//
+//        SELECT * FROM EMPLOYEE
+//        WHERE UPPER(NAME) LIKE ("%JOE%");
+//
+//        SELECT EMPLOYEE, SUM(BONUS) AS BN
+//        FROM EMPLOYEE
+//        GROUP BY EMPLOYEE
+//        WHERE BN > 1000;
+//
+//
+//        CREATE TABLE TB_NAME AS SELECT * FROM EMP
+
+
+
+
+

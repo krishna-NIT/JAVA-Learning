@@ -5,14 +5,28 @@ import java.util.ArrayList;
 
 public class HelloWorld {
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        int n = scan.nextInt();
-        List<String> ls = new ArrayList<>();
-        for (int i = 0;i<n;i++){
-            String inp = scan.next();
-            ls.add(inp);
+        int[] array = {45, 630, 280, 190, 5};
+        System.out.println("UNSorted Array");
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i] + " ");
         }
-        System.out.println(max_greyness((ls)));
+//INSERTION SORT ALGORITHM
+
+
+//printing of sorted
+        System.out.println("\nSorted List");
+        for (int i = 0; i < array.length; i++) {
+                   }
+    }
+    public static void swap(int[] array, int i, int j) {
+        if (i == j) {
+            return;
+        }
+
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+
     }
 
     public static int get_min_trips(int[] arr){

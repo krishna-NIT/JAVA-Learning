@@ -7,12 +7,124 @@ public class HelloWorld {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         int n = scan.nextInt();
-        List<String> ls = new ArrayList<>();
+        int[] weight = new int[n];
         for (int i = 0;i<n;i++){
-            String inp = scan.next();
-            ls.add(inp);
+            weight[i] = scan.nextInt();
         }
-        System.out.println(max_greyness((ls)));
+        for (int i: weight){
+            System.out.println(i);
+        }
+    }
+
+    public String frequencySort(String s) {
+
+    }
+
+    public int fillCups(int[] amount) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        for (int i : amount){
+            if (i != 0){
+                pq.add(i);
+            }
+        }
+        int count = 0;
+
+        while (pq.size() > 1){
+            int big = pq.poll();
+            int small = pq.poll();
+            if (small-1 != 0){
+                pq.add(small-1);
+            }
+            if (big-1 != 0) {
+                pq.add(big - 1);
+            }
+            count++;
+        }
+
+        if (pq.size() == 1){
+            count += pq.poll();
+            return count;
+        }
+        return count;
+    }
+
+    public int largestInteger(int num) {
+        PriorityQueue<Integer> odd = new PriorityQueue<>();
+        PriorityQueue<Integer> even = new PriorityQueue<>();
+        List<Integer> even_status = new ArrayList<>();
+
+
+        while (num >0){
+            int digit = num%10;
+            num /= 10;
+
+            if (digit%2 == 0){
+                even.add(digit);
+                even_status.add(1);
+            }else {
+                odd.add(digit);
+                even_status.add(0);
+            }
+        }
+
+        int multiplier = 1;
+        int no = 0;
+        int i = 0;
+        while (multiplier < Math.pow(10,even_status.size()) && i < even_status.size()){
+            int ev_Status = even_status.get(i);
+            int mul;
+            if (ev_Status == 1){
+                mul = even.poll();
+            }else {
+                mul = odd.poll();
+            }
+            no += (multiplier * mul);
+            multiplier *= 10;
+            i++;
+        }
+        return no;
+    }
+
+    public String[] findRelativeRanks(int[] score) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for (int i : score) {
+            pq.add(i);
+        }
+        String[] rank = new String[score.length];
+        int rankh = score.length;
+
+        for (int i = 0;i<rank.length;i++){
+            int rk = pq.poll();
+
+        }
+
+
+        return rank;
+    }
+
+    public int lastStoneWeight(int[] stones) {
+
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        for (int i : stones){
+            pq.add(i);
+        }
+        while (pq.size() > 1){
+            int max1 = pq.poll();
+            int max2 = pq.poll();
+
+            if (max1 == max2){
+
+            }else {
+                pq.add(max1-max2);
+            }
+        }
+
+        if (pq.size() == 1){
+            return pq.poll();
+        }else if (pq.size() == 0){
+            return 0;
+        }
+        return 0;
     }
 
     public static int get_min_trips(int[] arr){
@@ -53,7 +165,6 @@ public class HelloWorld {
         int rem = count%3;
         int div = count/3;
         count += div;
-
 
         return no_of_trip(rem,count);
     }

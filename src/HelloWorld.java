@@ -14,10 +14,79 @@ public class HelloWorld {
         for (int i: weight){
             System.out.println(i);
         }
+
+    }
+
+    public String reorganizeString(String s) {
+        HashMap<Character,Integer> map = new HashMap<>();
+        LinkedList<Character> ls = new LinkedList<>();
+        for (int i =0;i<s.length();i++){
+            char ch = s.charAt(i);
+            if (map.containsKey(ch)){
+                map.replace(ch, map.get(ch)+1);
+            }else {
+                map.put(ch,1);
+                ls.add(ch);
+            }
+        }
+
+
+    }
+
+    public static List<Integer> sortedMatrix(int[][] mat, int n) {
+        // Write your code here.
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+
+        for (int i =0;i<n;i++){
+            for (int j = 0;j<n;j++){
+                pq.add(mat[i][j]);
+            }
+        }
+        ArrayList<Integer> ls = new ArrayList<>();
+
+        while (!pq.isEmpty()){
+            ls.add(pq.poll());
+        }
+        return ls;
+    }
+
+    public int kthSmallest(int[][] matrix, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for (int i =0;i<matrix.length;i++){
+            for (int j = 0;j<matrix[0].length;j++){
+                pq.add(matrix[i][j]);
+            }
+        }
+        while (k>1){
+            pq.poll();
+            k--;
+        }
+        return pq.poll();
+    }
+
+    public int[] rearrangeBarcodes(int[] barcodes) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i : barcodes) {
+            if (map.containsKey(i)) {
+                map.replace(i, map.get(i) + 1);
+            } else {
+                map.put(barcodes[i], 1);
+            }
+        }
+
     }
 
     public String frequencySort(String s) {
-
+        HashMap<Character, Integer> map = new HashMap();
+        for (int i = 0;i<s.length();i++){
+            char ch = s.charAt(i);
+            if (map.containsKey(ch)){
+                map.replace(ch, map.get(ch)+1);
+            }else {
+                map.put(ch, 1);
+            }
+        }
+        return "Ans Incomplete";
     }
 
     public int fillCups(int[] amount) {

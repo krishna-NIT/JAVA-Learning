@@ -7,15 +7,54 @@ public class HelloWorld {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         int n = scan.nextInt();
-        int[] weight = new int[n];
-        for (int i = 0;i<n;i++){
-            weight[i] = scan.nextInt();
-        }
-        for (int i: weight){
-            System.out.println(i);
-        }
+        HashMap<String,Integer> map = new HashMap<>();
+
+        map.put("Krishna", 10);
+        map.put("Sudeep", 20);
+        map.put("Guru", 5);
+
 
     }
+
+    public String frequencySortk(String s) {
+        HashMap<Character, Integer> hmap = new HashMap<>();
+        for (int i = 0;i<s.length();i++){
+            char ch = s.charAt(i);
+            if (hmap.containsKey(ch)){
+                hmap.put(ch, hmap.get(ch)+1);
+            }else {
+                hmap.put(ch, 1);
+            }
+        }
+        PriorityQueue<Character> pq = new PriorityQueue<>(
+                (a,b) -> {
+                    return hmap.get(b)-hmap.get(a);             // it means to store values such that greater frequency character comes first
+                }
+        );
+        PriorityQueue<Character> pq2 = new PriorityQueue<>(
+                (a,b) -> {
+                    return hmap.get(b)-hmap.get(a);
+                }
+        );
+
+        ArrayList<Character> arrch = new ArrayList<>(hmap.keySet());
+        for (int i = 0;i<arrch.size();i++){
+            pq.add(arrch.get(i));
+        }
+
+        String str = "";
+        while (hmap.size() >= 1){
+            char ch = pq.poll();
+            int count = hmap.get(ch);
+
+            for (int i = 0;i<count;i++){
+                str += ch;
+            }
+            hmap.remove(ch);
+        }
+        return str;
+    }
+
 
     public String reorganizeString(String s) {
         HashMap<Character,Integer> map = new HashMap<>();
@@ -30,7 +69,7 @@ public class HelloWorld {
             }
         }
 
-
+        return "S";
     }
 
     public static List<Integer> sortedMatrix(int[][] mat, int n) {

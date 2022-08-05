@@ -4,16 +4,161 @@ import java.util.*;
 import java.util.ArrayList;
 
 public class HelloWorld {
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        int n = scan.nextInt();
-        HashMap<String,Integer> map = new HashMap<>();
+    public static void main(String[] args){
+        int[] arr = new int[6];
+        arr[0] = 1;
+        arr[1] = 3;
+        arr[2] = 46;
+        arr[3] = 1;
+        arr[4] = 3;
+        arr[5] = 9;
+        System.out.println(numberOfPairs2(arr, 47));
+    }
 
-        map.put("Krishna", 10);
-        map.put("Sudeep", 20);
-        map.put("Guru", 5);
+    static int numberOfPairs2(int[] a, long k) {
+        int N = a.length;
+        int cntPairs = 0;
+        HashMap<Integer,Integer> cntFre = new HashMap<Integer,Integer>();
+        ArrayList<Integer> arrls = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            if(cntFre.containsKey(a[i]))
+                cntFre.put(a[i], cntFre.get(a[i]) + 1);
+            else
+                cntFre.put(a[i], 1);
+                arrls.add(a[i]);
+        }
+        System.out.println(cntFre.containsKey(46));
+        for (int j = 0;j<arrls.size();j++){
+            int i = arrls.get(j);
+            System.out.println(i);
+            System.out.println(k-i);
+            System.out.println(cntFre.containsKey(k-i));
+            int nu = (int) (k-i);
+            if (2 * i == k) {
+                if (cntFre.get(i) > 1)
+                    cntPairs += 2;
+            }else if (cntFre.containsKey(nu)){
+                cntPairs += 1;
+            }
+            System.out.println("Count ="+cntPairs);
+        }
+        cntPairs = cntPairs / 2;
+        return cntPairs;
+    }
+
+    static int numberOfPairs(int[] a, long k){
+        HashMap<Integer, Integer> hmap = new HashMap<>();
+        for (int i = 0;i<a.length-1;i++){
+            for (int j = i+1;j<a.length;j++){
+                if (a[i] + a[j] == k){
+                    if (!hmap.containsKey(a[i])){
+                        if (!hmap.containsKey(a[j])){
+                            hmap.put(a[i], a[j]);
+                        }
+                    }
+                }
+            }
+        }
+        return hmap.size();
+    }
+
+    static int collectGold(int[][] gold, int x, int y, int n, int m, int[][] dp){
+        // Base condition.
+        if ((x < 0) || (x == n) || (y == m)) {
+            return 0;
+        }
+
+        if (dp[x][y] != -1) {
+            return dp[x][y];
+        }
+
+        // Right upper diagonal
+        int rightUpperDiagonal
+                = collectGold(gold, x - 1, y + 1, n, m, dp);
+
+        // right
+        int right = collectGold(gold, x, y + 1, n, m, dp);
+
+        // Lower right diagonal
+        int rightLowerDiagonal
+                = collectGold(gold, x + 1, y + 1, n, m, dp);
+
+        // Return the maximum and store the value
+        return gold[x][y]
+                + Math.max(Math.max(rightUpperDiagonal,
+                rightLowerDiagonal),
+                right);
+    }
+
+    static int getMaxGold(int[][] gold)
+    {
+        int n = gold.length;
+        int m = gold[0].length;
+        int maxGold = 0;
+        int[][] dp = new int[n][m];
+        for (int row = 0; row < n; row++) {
+            Arrays.fill(dp[row], -1);
+        }
+        for (int i = 0; i < n; i++) {
+            int goldCollected
+                    = collectGold(gold, i, 0, n, m, dp);
+            maxGold = Math.max(maxGold, goldCollected);
+        }
+        return maxGold;
+    }
 
 
+
+    public int maximumSum(int[] nums) {
+        ArrayList<Integer> arrls = new ArrayList<>();
+        for (int value : nums){
+            int sumofdigit = 0;
+            int num = value;
+
+            while (value>0){
+                sumofdigit += (value%10);
+                value /= 10;
+            }
+            arrls.add(sumofdigit);
+        }
+        HashMap<Integer,Integer> hmap = new HashMap<>();
+        for (int i = 0;i<arrls.size();i++){
+            if (hmap.containsKey(arrls.get(i))){
+                hmap.replace(arrls.get(i),hmap.get(hmap)+1);
+            }else {
+                hmap.put(arrls.get(i),1);
+            }
+        }
+        int i = 0;
+        for (int value : arrls){
+            if (hmap.get(value) == 1){
+                hmap.remove(value);
+                arrls.remove(i);
+            }
+            i++;
+        }
+
+
+        return -1;
+    }
+
+    public int minStoneSum(int[] piles, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        for (int value : piles){
+            pq.add(value);
+        }
+        while (k>0){
+            int resp = pq.poll();
+            int value = resp/2;
+            resp -= value;
+            pq.add(resp);
+            k--;
+        }
+        int ans = 0;
+        while (!pq.isEmpty()){
+            ans += pq.poll();
+        }
+        return ans;
     }
 
     public String frequencySortk(String s) {
@@ -26,6 +171,8 @@ public class HelloWorld {
                 hmap.put(ch, 1);
             }
         }
+
+        // Priority Queue is awersome
         PriorityQueue<Character> pq = new PriorityQueue<>(
                 (a,b) -> {
                     return hmap.get(b)-hmap.get(a);             // it means to store values such that greater frequency character comes first
@@ -53,6 +200,36 @@ public class HelloWorld {
             hmap.remove(ch);
         }
         return str;
+    }
+
+
+
+    public int findKthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        for (int value : nums){
+            pq.add(value);
+        }
+
+        while (k > 0){
+            int eml = pq.poll();
+            if (k == 1){
+                return eml;
+            }
+            k--;
+        }
+        return -1;
+    }
+
+    public String get_rank_apl(int rank){
+        if (rank == 1){
+            return "Gold Medal";
+        }else if (rank == 2){
+            return "Silver Medal";
+        }else if (rank == 3){
+            return "Bronze Medal";
+        }else {
+            return Integer.toString(rank);
+        }
     }
 
 
@@ -103,17 +280,7 @@ public class HelloWorld {
         return pq.poll();
     }
 
-    public int[] rearrangeBarcodes(int[] barcodes) {
-        HashMap<Integer, Integer> map = new HashMap<>();
-        for (int i : barcodes) {
-            if (map.containsKey(i)) {
-                map.replace(i, map.get(i) + 1);
-            } else {
-                map.put(barcodes[i], 1);
-            }
-        }
 
-    }
 
     public String frequencySort(String s) {
         HashMap<Character, Integer> map = new HashMap();

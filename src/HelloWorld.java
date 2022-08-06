@@ -27,6 +27,7 @@ public class HelloWorld {
                 cntFre.put(a[i], 1);
                 arrls.add(a[i]);
         }
+
         System.out.println(cntFre.containsKey(46));
         for (int j = 0;j<arrls.size();j++){
             int i = arrls.get(j);

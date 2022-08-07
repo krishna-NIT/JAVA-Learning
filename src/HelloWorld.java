@@ -15,6 +15,54 @@ public class HelloWorld {
         System.out.println(numberOfPairs2(arr, 47));
     }
 
+    public int countLargestGroup(int n) {
+        HashMap<Integer, Integer> hmap = new HashMap<>();
+        LinkedList<Integer> keys = new LinkedList<>();
+
+        int max_count = 0;
+        for (int i = 1;i<=n;i++){
+            int sum_digit = sum_digit(i);
+            if (hmap.containsKey(sum_digit)){
+                hmap.replace(sum_digit,hmap.get(sum_digit)+1);
+            }else {
+                hmap.put(sum_digit,1);
+                keys.add(sum_digit);
+            }
+            if (max_count < hmap.get(sum_digit)){
+                max_count = hmap.get(sum_digit);
+            }
+        }
+        int max_count_group = 0;
+        for (int i = 0;i<keys.size();i++){
+            if (hmap.get(keys.get(i)) == max_count){
+                max_count_group++;
+            }
+        }
+        return max_count_group;
+    }
+    public static int sum_digit(int n){
+        int sum = 0;
+        while (n>0){
+            sum += (n%10);
+            n /= 10;
+        }
+        return sum;
+    }
+
+    public char repeatedCharacter(String s) {
+        HashMap<Character, Integer> hmap = new HashMap<>();
+        for (int i = 0;i<s.length();i++){
+            char ch = s.charAt(i);
+            if (hmap.containsKey(ch)){
+                return ch;
+            }else {
+                hmap.put(ch,2);
+            }
+        }
+        return 's';
+    }
+
+
     static int numberOfPairs2(int[] a, long k) {
         int N = a.length;
         int cntPairs = 0;

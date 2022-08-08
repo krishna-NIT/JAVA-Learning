@@ -5,14 +5,225 @@ import java.util.ArrayList;
 
 public class HelloWorld {
     public static void main(String[] args){
-        int[] arr = new int[6];
+        int[] arr = new int[4];
         arr[0] = 1;
-        arr[1] = 3;
-        arr[2] = 46;
-        arr[3] = 1;
-        arr[4] = 3;
-        arr[5] = 9;
-        System.out.println(numberOfPairs2(arr, 47));
+        arr[1] = 2;
+        arr[2] = 3;
+        arr[3] = 5;
+        int[] ans = kthSmallestPrimeFraction(arr,3);
+        System.out.println(arr[0]+" "+arr[1]);
+    }
+
+    public int distributeCandies(int[] candyType){
+
+        int m = candyType.length/2;
+        HashMap<Integer,Integer> hmap = new HashMap<>();
+        for (int value : candyType){
+            hmap.put(value, hmap.getOrDefault(value,0)+1);
+        }
+        int len = hmap.size();
+        if (len < m){
+            return len;
+        }else {
+            return m;
+        }
+    }
+
+    public static int[] kthSmallestPrimeFraction(int[] arr, int k) {
+        PriorityQueue<Double> pq = new PriorityQueue<>();
+        HashMap<Double, int[]> hmap = new HashMap<>();
+        for (int i = 0;i<arr.length-1;i++){
+            for (int j = i +1;j<arr.length;j++){
+                double fract = (double) arr[i]/arr[j];
+                pq.add(fract);
+                int[] nd = new int[2];
+                nd[0] = arr[i];
+                nd[1] = arr[j];
+                hmap.put(fract,nd);
+            }
+        }
+        while (k >1){
+            System.out.println(pq.poll());
+            //pq.poll();
+            k--;
+        }
+        return hmap.get(pq.poll());
+    }
+
+    public int minimumOperations(int[] nums) {
+        int count = 0;
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for (int n : nums){
+            if (n > 0){
+                pq.add(n);
+            }
+        }
+
+        while (pq.size() > 0){
+            int min = 0;
+            while (min == 0){
+                min = pq.poll();
+            }
+
+            LinkedList<Integer> ls = new LinkedList<>();
+            while (pq.size()>0){
+                int v = pq.poll() - min;
+                if (v > 0){
+                    ls.add(v);
+                }
+            }
+            for (int i = 0;i<ls.size();i++){
+                pq.add(ls.get(i));
+            }
+            count++;
+        }
+        return count;
+    }
+
+    public String[] findRestaurant(String[] list1, String[] list2) {
+        HashMap<String, Integer> hmap1 = new HashMap<>();
+        HashMap<String, Integer> hmap2 = new HashMap<>();
+
+        for (int i = 0;i<list1.length;i++){
+            hmap1.put(list1[i],i);
+
+        }
+        for (int i = 0;i<list2.length;i++){
+            hmap2.put(list2[i],i);
+        }
+
+        LinkedList<String> ls = new LinkedList<>();
+        int min_sum_count = Integer.MAX_VALUE;
+        for (int i = 0;i<list2.length;i++){
+            if (hmap1.containsKey(list2[i])){
+                hmap2.put(list2[i],hmap2.get(list2[i])+hmap1.get(list2[i]));
+                ls.add(list2[i]);
+
+                int sm = hmap2.get(list2[i]);
+                if (sm <min_sum_count){
+                    min_sum_count = sm;
+                }
+            }else {
+                hmap2.remove(list2[i]);
+            }
+        }
+
+        System.out.println(min_sum_count);
+
+        for (int i = 0;i<ls.size();i++){
+            if (hmap2.get(ls.get(i)) != min_sum_count){
+                hmap2.remove(ls.get(i));
+            }
+        }
+
+        ArrayList<String> arrls = new ArrayList<>();
+        for (String x : hmap2.keySet()){
+            if (hmap2.get(x) != min_sum_count){
+                hmap2.remove(x);
+            }
+        }
+
+
+        String[] str = new String[hmap2.size()];
+        int i = 0;
+        for (String st : hmap2.keySet()){
+            str[i] = st;
+            i++;
+        }
+        return str;
+    }
+
+    public boolean checkAlmostEquivalent(String word1, String word2) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        HashMap<Character, Integer> hmap1 = new HashMap<>();
+        HashMap<Character, Integer> hmap2 = new HashMap<>();
+        LinkedList<Character> ls = new LinkedList<>();
+        for (int i = 0;i<word1.length();i++){
+            hmap1.put(word1.charAt(i),hmap1.getOrDefault(word1.charAt(i), 0)+1);
+            if (!ls.contains(word1.charAt(i))){
+                ls.add(word1.charAt(i));
+            }
+            hmap2.put(word2.charAt(i),hmap2.getOrDefault(word2.charAt(i), 0)+1);
+            if (!ls.contains(word2.charAt(i))){
+                ls.add(word2.charAt(i));
+            }
+        }
+
+        for (int i = 0;i<ls.size();i++){
+            int a = 0,b = 0;
+            if (hmap1.containsKey(ls.get(i))) {
+                a = hmap1.get(ls.get(i));
+            }
+            if (hmap2.containsKey(ls.get(i))) {
+                b = hmap2.get(ls.get(i));
+            }
+            int diff = (a-b);
+            if (Math.abs(diff) > 3){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public String bestHand(int[] ranks, char[] suits) {
+        int status = 0;
+        for (int i = 0;i<suits.length-1;i++){
+            if (suits[i] != suits[i+1]){
+                status++;
+            }
+        }
+        if (status == 0){
+            return "Flush";
+        }
+        status = 0;
+        HashMap<Integer, Integer> hmap = new HashMap<>();
+        for (int rk : ranks){
+            hmap.put(rk, hmap.getOrDefault(rk,0)+1);
+            if (hmap.get(rk) == 3){
+                return "Three of a Kind";
+            }else if (hmap.get(rk) == 2){
+                status++;
+            }
+        }
+        if (status != 0){
+            return "Pair";
+        }
+        return "High Card";
+    }
+
+    public int[] findingUsersActiveMinutes(int[][] logs, int k) {
+        HashMap<Integer, LinkedList<Integer>> hmap = new HashMap<>();
+        int[] arr = new int[k];
+        for (int i = 0; i<logs.length;i++) {
+            int id = logs[i][0];
+            int min = logs[i][1];
+            if (hmap.containsKey(id)) {
+                LinkedList<Integer> lsget = hmap.get(id);
+                if (!lsget.contains(min)) {
+                    lsget.add(min);
+                }
+                hmap.replace(id, lsget);
+            } else {
+                LinkedList<Integer> lsi = new LinkedList<>();
+                lsi.add(min);
+            }
+        }
+        return arr;
+    }
+
+    public List<Integer> findDisappearedNumbers(int[] nums) {
+        ArrayList<Integer> arrls = new ArrayList<>();
+        for (int value : nums){
+            if (!arrls.contains(value)){
+                arrls.add(value);
+            }
+        }
+        for (int i =1; i<=nums.length ;i++) {
+            if (!arrls.contains(i)) {
+                arrls.add(i);
+            }
+        }
+        return arrls;
     }
 
     public int countLargestGroup(int n) {

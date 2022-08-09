@@ -14,6 +14,35 @@ public class HelloWorld {
         System.out.println(arr[0]+" "+arr[1]);
     }
 
+    public int[] findingUsersActiveMinute(int[][] logs, int k) {
+        HashMap<Integer, LinkedList<Integer>> hmap = new HashMap<>();
+        for (int i = 0;i<logs.length;i++){
+            if (hmap.containsKey(logs[i][0])){
+                LinkedList<Integer> ls = hmap.get(logs[i][0]);
+                if (!ls.contains(logs[i][1])){
+                    ls.add(logs[i][1]);
+                }
+            }else {
+                LinkedList<Integer> ls = new LinkedList<>();
+                if (!ls.contains(logs[i][1])){
+                    ls.add(logs[i][1]);
+                }
+                hmap.put(logs[i][0], ls);
+            }
+        }
+        int[] arr = new int[k];
+        HashMap<Integer, Integer> hf = new HashMap<>();
+        for (int id : hmap.keySet()){
+                int uam = hmap.get(id).size();
+                hf.put(uam, hf.getOrDefault(uam,0)+1);
+        }
+
+        for (int i =0;i<arr.length;i++){
+            arr[i] = hf.getOrDefault(i+1, 0);
+        }
+        return arr;
+    }
+
     public int distributeCandies(int[] candyType){
 
         int m = candyType.length/2;

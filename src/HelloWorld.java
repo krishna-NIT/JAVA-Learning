@@ -14,6 +14,60 @@ public class HelloWorld {
         System.out.println(arr[0]+" "+arr[1]);
     }
 
+    public int mostFrequent(int[] nums, int key) {
+        HashMap<Integer,Integer> hmap = new HashMap<>();
+
+        int prev = nums[0];
+        int count = 1;
+        for (int i = 1;i<nums.length;i++) {
+            if (prev == nums[i]){
+                count++;
+            }else {
+                int max  = hmap.getOrDefault(prev,0);
+                if (count < max){
+                    count = max;
+                }
+                hmap.put(prev,count);
+                count = 1;
+            }
+            prev = nums[i];
+        }
+
+        int max = Integer.MIN_VALUE;
+        for (int value : hmap.keySet()){
+            int gt = hmap.get(value);
+            if (gt>max){
+                max = gt;
+            }
+        }
+        return max;
+    }
+
+    public List<List<Integer>> findWinners(int[][] matches) {
+        HashMap<Integer, Integer> hmap = new HashMap<>();
+        for (int i = 0;i<matches.length;i++){
+            int w = matches[i][0];
+            int l = matches[i][1];
+
+            hmap.put(w,hmap.getOrDefault(w,0));
+            hmap.put(l,hmap.getOrDefault(l,0)+1);
+        }
+
+        List<List<Integer>> ls = new ArrayList<>();
+        List<Integer> ls0 = new ArrayList<>();
+        List<Integer> ls1 = new ArrayList<>();
+        for (int id: hmap.keySet()){
+            if (hmap.get(id) == 0){
+                ls0.add(id);
+            }else if (hmap.get(id) == 1){
+                ls1.add(id);
+            }
+        }
+        ls.add(ls0);
+        ls.add(ls1);
+        return ls;
+    }
+
     public int[] findingUsersActiveMinute(int[][] logs, int k) {
         HashMap<Integer, LinkedList<Integer>> hmap = new HashMap<>();
         for (int i = 0;i<logs.length;i++){

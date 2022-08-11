@@ -16,7 +16,7 @@ public class HelloWorld {
 
     public int mostFrequent(int[] nums, int key) {
         HashMap<Integer,Integer> hmap = new HashMap<>();
-
+        int temp = 0;
         int prev = nums[0];
         int count = 1;
         for (int i = 1;i<nums.length;i++) {

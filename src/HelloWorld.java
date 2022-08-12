@@ -14,6 +14,33 @@ public class HelloWorld {
         System.out.println(arr[0]+" "+arr[1]);
     }
 
+    public int[] countPoints(int[][] points, int[][] queries) {
+        int[] ans = new int[queries.length];
+
+        for (int i = 0;i<queries.length;i++){
+            int xa = queries[i][0];
+            int yb = queries[i][1];
+            int radius = queries[i][2];
+            int count = 0;
+            for (int j = 0;j<points.length;j++){
+                int x = points[j][0];
+                int y = points[j][1];
+
+                double dis = distancesquare(x,y,xa,yb);
+                if (dis <= radius){
+                    count++;
+                }
+            }
+            ans[i] = count;
+        }
+
+        return ans;
+    }
+    public static double distancesquare(int x, int y, int xa ,int yb){
+        double ans = Math.sqrt(Math.pow(xa-x,2)+Math.pow(yb-y,2));
+        return ans;
+    }
+
     public int mostFrequent(int[] nums, int key) {
         HashMap<Integer,Integer> hmap = new HashMap<>();
         int temp = 0;

@@ -14,6 +14,59 @@ public class HelloWorld {
         System.out.println(arr[0]+" "+arr[1]);
     }
 
+    public int countSquares(int[][] matrix) {
+        int count = 0;
+        int n = matrix.length;
+        int m = matrix[0].length;
+        int min = Integer.MAX_VALUE;
+        if (n < m){
+            min = n;
+        }else {
+            min = m;
+        }
+        for (int i = 1;i <= min ; i++){
+            count += noofsub(matrix, i);
+            System.out.println(count);
+        }
+        return count;
+    }
+    public static int noofsub(int[][] matrix, int size){
+        int count = 0;
+        for (int i = 0;i<matrix.length && matrix.length > (i+size-1);i++){
+            for (int j = 0;j<matrix[0].length && matrix[0].length > (j+size-1);j++){
+                if (isOneall(matrix,i,j,i+size-1,j+size-1)){
+                    count++;
+                }
+            }
+
+        }
+        return count;
+    }
+    public static boolean isOneall(int[][] arr, int xi, int yi, int xe, int ye){
+        for (int i = xi;i <= xe;i++){
+            for (int j = yi; j<= ye; j++){
+                if (arr[i][j] != 1){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public int[] getSumAbsoluteDifferences(int[] nums) {
+        int[] ans = new int[nums.length];
+        for (int i = 0;i<nums.length;i++){
+            int n = nums[i];
+            int sum = 0;
+            for (int j = 0;j<nums.length;j++){
+                sum += Math.abs(nums[j] - n);
+            }
+            ans[i] = sum;
+        }
+
+        return ans;
+    }
+
     public int[] countPoints(int[][] points, int[][] queries) {
         int[] ans = new int[queries.length];
 

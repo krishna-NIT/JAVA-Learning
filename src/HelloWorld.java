@@ -1,17 +1,364 @@
 import com.TreeNode;
 
-import java.util.*;
 import java.util.ArrayList;
+import java.util.*;
 
 public class HelloWorld {
     public static void main(String[] args){
-        int[] arr = new int[4];
-        arr[0] = 1;
-        arr[1] = 2;
-        arr[2] = 3;
-        arr[3] = 5;
-        int[] ans = kthSmallestPrimeFraction(arr,3);
-        System.out.println(arr[0]+" "+arr[1]);
+        String str = "a";
+        System.out.println(isPalin(str));
+    }
+
+    public List<List<String>> partition(String s) {
+        List<List<String>> ls = new ArrayList<>();
+        for (int i = 1;i<=s.length();i++){
+            List<String> fst = new ArrayList<>();
+            int j = 0;
+            while (j+i <= s.length()){
+                String short_str = s.substring(j,j+i);
+                System.out.print(short_str+" ");
+                if (isPalin(short_str)){
+                    fst.add(short_str);
+                }
+                j++;
+            }
+            if (fst.size() > 0){
+                ls.add(fst);
+            }
+            System.out.println();
+        }
+        return ls;
+    }
+    public static boolean isPalin(String str){
+        int end = str.length()-1;
+        for (int i = 0;i<=str.length()/2;i++){
+            if (str.charAt(i) != str.charAt(end)){
+                return false;
+            }
+            end--;
+        }
+        return true;
+    }
+
+    public int percentageLetter(String s, char letter) {
+        int sim_count = 0;
+        for (int i = 0;i<s.length();i++){
+            if (letter == s.charAt(i)){
+                sim_count++;
+            }
+        }
+        sim_count *= 100;
+        return (sim_count/s.length());
+    }
+
+    public String largestGoodInteger(String num) {
+        HashMap<String, Integer> hmap = new HashMap<>();
+        int max_ascii = Integer.MIN_VALUE;
+        for (int i = 0;i<=num.length()-3;i++){
+            if (num.charAt(i) == num.charAt(i+1) && num.charAt(i+1) == num.charAt(i+2)){
+                String str = num.substring(i,i+3);
+                int ascii = str.charAt(0);
+                hmap.put(str,ascii);
+                if (max_ascii < ascii){
+                    max_ascii = ascii;
+                }
+            }
+        }
+        for (String str : hmap.keySet()){
+            if (max_ascii == hmap.get(str)){
+                return str;
+            }
+        }
+        return "";
+     }
+
+    public String digitSum(String s, int k) {
+        if (s.length() <= k){
+            return s;
+        }
+        ArrayList<String> arrls = new ArrayList<>();
+        int i = 0;
+        while (i+k < s.length()-1){
+            String st = s.substring(i, i+k);
+            arrls.add(st);
+            i += k;
+        }
+        if (i != s.length()-1){
+            String st = s.substring(i,s.length());
+            arrls.add(st);
+        }
+        System.out.println(arrls);
+        return digitSum(sumConcaat(arrls),k);
+    }
+    public static String sumConcaat(ArrayList<String> arrls){
+        String conc = "";
+        for (int i = 0;i<arrls.size();i++){
+            conc += sum_digit_string(arrls.get(i));
+        }
+        return conc;
+    }
+    public static String sum_digit_string(String str){
+        int sum = 0;
+        for (int i = 0;i<str.length();i++){
+            int a = str.charAt(i)-48;
+            sum += a;
+        }
+        String ans = Integer.toString(sum);
+        return ans;
+    }
+
+    public int findClosestNumber(int[] nums) {
+        int min_dis = Integer.MAX_VALUE;
+        for (int i = 0;i<nums.length;i++){
+            int n = Math.abs(nums[i]);
+            if (n < min_dis){
+                min_dis = n;
+            }
+        }
+
+        int m_value_max = Integer.MIN_VALUE;
+        for (int i = 0;i<nums.length;i++){
+            if (min_dis == nums[i] || min_dis == (-nums[i])){
+                if (m_value_max < nums[i]){
+                    m_value_max = nums[i];
+                }
+            }
+        }
+        return m_value_max;
+    }
+
+    public int countEven(int num) {
+        int count = 0;
+        for (int i = 2;i <= num;i++){
+            if (isSumDigitEvent(i)){
+                count++;
+            }
+        }
+        return count;
+    }
+    public static boolean isSumDigitEvent(int n){
+        int sum = 0;
+
+        while (n>0){
+            int digit = n%10;
+            n /= 10;
+            sum += digit;
+        }
+
+        if (sum%2 ==0){
+            return true;
+        }
+        return false;
+    }
+    public double calculateTax(int[][] brackets, int income) {
+        double tax_paid = 0;
+        int i = 0;
+        while (income>0 && i < brackets.length){
+            int cap = brackets[0][0];
+            if (i != 0){
+                cap = brackets[i][0]-brackets[i-1][0];
+            }
+            System.out.print(cap+" "+income);
+            if (income<cap){
+                tax_paid += (income*brackets[i][1]/100);
+            }else {
+                tax_paid += (double) (cap*brackets[i][1]/100);
+            }
+            System.out.println(" "+tax_paid);
+            income -= cap;
+            i++;
+        }
+        return tax_paid;
+    }
+
+    public int findShortestSubArray(int[] nums) {
+        HashMap<Integer, Integer> hmap = new HashMap<>();
+        for (int value : nums){
+            hmap.put(value, hmap.getOrDefault(value,0)+1);
+        }
+        int degree = 0;
+        int max_value = Integer.MIN_VALUE;
+        for (int key : hmap.keySet()){
+            if (max_value < hmap.get(key)){
+                max_value = hmap.get(key);
+                degree = key;
+            }
+        }
+        System.out.println(degree);
+        int s = -1;
+        int l = -1;
+
+        int i = 0;
+        while (s == -1){
+            if (nums[i] == degree){
+                s = i;
+            }
+            i++;
+        }
+
+        i = nums.length-1;
+        while (l == -1){
+            if (nums[i] == degree){
+                l = i;
+            }
+            i--;
+        }
+
+        return (l-s+1);
+    }
+
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        HashMap<Integer, List<Integer>> hmap = new HashMap<>();
+        for (int i = 0;i<nums.length;i++){
+            if (hmap.containsKey(nums[i])){
+                List<Integer> ls = hmap.get(nums[i]);
+                ls.add(i);
+                hmap.put(nums[i], ls);
+            }else {
+                List<Integer> ls = new LinkedList<>();
+                ls.add(i);
+                hmap.put(nums[i], ls);
+            }
+        }
+        int count = 0;
+        for (int value : hmap.keySet()){
+            List<Integer> ls = hmap.get(value);
+            for (int i = 0;i<ls.size()-1;i++){
+                for (int j = i+1;j<ls.size();j++){
+                    int d = ls.get(i) - ls.get(j);
+                    d = Math.abs(d);
+                    if (d <= k){
+                        count++;
+                        System.out.println(value);
+                    }
+                }
+            }
+        }
+
+        if (count>=1){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public int singleNumber(int[] nums) {
+        HashMap<Integer, Integer> hmap = new HashMap<>();
+        for (int value : nums){
+            hmap.put(value,hmap.getOrDefault(value,0)+1);
+        }
+        for (int v : hmap.keySet()){
+            if (hmap.get(v) == 1){
+                return v;
+            }
+        }
+        return -1;
+    }
+
+    public int[] deckRevealedIncreasing(int[] deck) {
+        PriorityQueue<Integer> pq_min = new PriorityQueue<>();
+        PriorityQueue<Integer> pq_max = new PriorityQueue<>(Collections.reverseOrder());
+
+        for (int i = 0;i<deck.length;i++){
+            pq_max.add(deck[i]);
+            pq_min.add(deck[i]);
+        }
+        int[] ans = new int[deck.length];
+        for (int i = 0;i<deck.length;i++){
+        }
+
+        return ans;
+    }
+    public int[] deckRevealedIncreasing2(int[] deck) {
+        if (deck.length == 1){
+            return deck;
+        }
+        Queue<Integer> queue = new LinkedList<>();
+        for (int i = 0;i<deck.length;i++){
+            queue.add(deck[i]);
+        }
+        LinkedList<Integer> ls = new LinkedList<>();
+        while (queue.size() > 1){
+            int top = queue.poll();
+            if (!ls.contains(top)) {
+                ls.add(top);
+            }
+            if (queue.size() >= 1){
+                int temp = queue.poll();
+                if (!ls.contains(temp)) {
+                    ls.add(temp);
+                }
+                queue.add(temp);
+            }
+        }
+        System.out.println(ls);
+
+        int[] ans = new int[ls.size()];
+        for (int i = 0;i<ls.size();i++){
+            ans[i] = ls.get(i);
+        }
+        return ans;
+    }
+
+    public int triangularSum(int[] nums) {
+        if (nums.length == 1){
+            return nums[0];
+        }
+        int[] numnew = new int[nums.length-1];
+
+        for (int i = 0;i<nums.length-1;i++){
+            int nu = nums[i] + nums[i+1];
+            numnew[i] = nu%10;
+            System.out.print(numnew[i]+" ");
+        }
+        System.out.println();
+        return triangularSum(numnew);
+    }
+
+    public int maxCoins(int[] piles) {
+        int ln = piles.length/3;
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for (int i = 0;i<piles.length;i++){
+            pq.add(piles[i]);
+        }
+        int you = 0;
+        for (int i = 0;i<ln;i++){
+            pq.poll();
+        }
+
+        while (!pq.isEmpty()){
+            int a = pq.poll();
+            int b = pq.poll();
+
+            you += a;
+            System.out.println(a+" "+b);
+        }
+        return you;
+    }
+
+    public List<List<Integer>> queensAttacktheKing(int[][] queens, int[] king) {
+        List<List<Integer>> arrls = new ArrayList<>();
+        int kx = king[0];
+        int ky = king[1];
+        for (int i = 0;i<queens.length;i++){
+            int qx = queens[i][0];
+            int qy = queens[i][1];
+
+            if ((qx-kx) == (qy-ky)){
+                List<Integer> lstemp = new ArrayList<>();
+                lstemp.add(qx);
+                lstemp.add(qy);
+                arrls.add(lstemp);
+            }else if (kx == qx){
+
+            }else if (ky == qy){
+
+            }
+
+
+        }
+
+        return arrls;
     }
 
     public int countSquares(int[][] matrix) {

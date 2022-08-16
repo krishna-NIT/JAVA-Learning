@@ -5,8 +5,87 @@ import java.util.*;
 
 public class HelloWorld {
     public static void main(String[] args){
-        String str = "a";
-        System.out.println(isPalin(str));
+
+    }
+
+    public int maxTurbulenceSize(int[] arr) {
+        if (arr.length == 1 || arr.length == 2){
+            return 1;
+        }
+        int[] status = new int[arr.length];
+        for (int i = 0;i<status.length;i++){
+            status[i] = 0;
+        }
+        for (int i = 1;i<arr.length-1;i++){
+            if (arr[i-1] < arr[i] && arr[i] > arr[i+1]){
+                status[i] = 1;
+            }else if (arr[i-1] > arr[i] && arr[i] < arr[i+1]){
+                status[i] = -1;
+            }
+        }
+        for (int i = 0;i<status.length;i++){
+            System.out.print(status[i]+" ");
+        }
+        System.out.println();
+        int max_length = 0;
+        int c_count = 0;
+        for (int i = 0;i<status.length - 1;i++){
+            if (i%2 == 0){
+                if (status[i] == -1){
+                    c_count++;
+                }else {
+                    if (max_length < c_count){
+                        max_length = c_count;
+                    }
+                    c_count = 0;
+                }
+            }else {
+                if (status[i] == 1){
+                    c_count++;
+                }else {
+                    if (max_length < c_count){
+                        max_length = c_count;
+                    }
+                    c_count = 0;
+                }
+            }
+        }
+        return max_length+2;
+    }
+
+    public int maxDistToClosest(int[] seats) {
+
+    }
+
+    public static int countVowelSubstrings(String word) {
+        if (word.length()<5){
+            return -1;
+        }
+        int count = 0;
+        for (int i = 0;i<word.length()-5;i++){
+            for (int j = i+5;j<=word.length();j++){
+                if (isAllVowel(word.substring(i,j))){
+                    System.out.println(word.substring(i,j));
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+    public static boolean isAllVowel(String ans){
+        ans = ans.toLowerCase();
+        LinkedList<Character> ls = new LinkedList<>();
+        for (int i = 0;i<ans.length();i++){
+            if (ans.charAt(i) == 'a' || ans.charAt(i) == 'e' || ans.charAt(i) == 'i' || ans.charAt(i) == 'o' || ans.charAt(i) =='u') {
+                ls.add(ans.charAt(i));
+            }else {
+                return false;
+            }
+        }
+        if (ls.contains('a') && ls.contains('e') && ls.contains('i') && ls.contains('o') && ls.contains('u')){
+            return true;
+        }
+        return false;
     }
 
     public List<List<String>> partition(String s) {

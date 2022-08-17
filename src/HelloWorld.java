@@ -5,7 +5,15 @@ import java.util.*;
 
 public class HelloWorld {
     public static void main(String[] args){
+        int[] arr = new int[3];
+        arr[0] = 2;
+        arr[1] = 1;
+        arr[2] = 7;
+        System.out.println(Integer.max(10,18));
+    }
 
+    public int[] getStrongest(int[] arr, int k) {
+        
     }
 
     public int maxTurbulenceSize(int[] arr) {
@@ -54,7 +62,66 @@ public class HelloWorld {
     }
 
     public int maxDistToClosest(int[] seats) {
+        LinkedList<Integer> ls = new LinkedList<>();
+        ls.add(1);
+        for (int i = 0;i<seats.length;i++){
+            if (seats[i] == 1){
+                ls.add(i);
+            }
+        }
+        ls.add(1);
+        int max_d = Integer.MIN_VALUE;
+        int max_Ans = 0;
+        for (int i = 0;i<seats.length+2;i++){
+            if (!ls.contains(i)){
+                int first_i = 0;
+                int last_i = 0;
 
+                int f_status = 0;
+                int e_status = 0;
+
+                for (int j = 0;j<ls.size();j++){
+                    if (ls.get(j)<= i){
+                        first_i = ls.get(j);
+                    }
+                    if (ls.get(j) >= i && e_status == 0){
+                        last_i = ls.get(j);
+                        e_status++;
+                    }
+                }
+
+                int d1 = last_i - i-1;
+                int d2 = i - first_i-1;
+                System.out.println(i+" -> "+d1+" "+d2+"   "+first_i);
+                if ((d1+d2) > max_d){
+                    max_d = d1 + d2;
+                    max_Ans = Integer.max(d1,d2);
+                }
+            }
+        }
+        return max_Ans;
+    }
+
+    public boolean isSucess(int[][] matrix, int x, int y, int count){
+        if (x == matrix.length-1 && y<=matrix[0].length-1){
+            return true;
+        }
+        if (x < matrix.length-1){
+            if (isSucess(matrix,x+1,y,count+1)){
+                return true;
+            }
+        }
+        if (y < matrix[0].length-1){
+            if (isSucess(matrix,x,y+1,count+1)){
+                return true;
+            }
+        }
+        if (x< matrix.length-1 && y<matrix[0].length-1){
+            if (isSucess(matrix,x+1,y+1,count+1)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public static int countVowelSubstrings(String word) {

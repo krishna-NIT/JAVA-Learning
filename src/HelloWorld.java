@@ -12,9 +12,41 @@ public class HelloWorld {
         System.out.println(Integer.max(10,18));
     }
 
-    public int[] getStrongest(int[] arr, int k) {
-        
+    public int compareVersion(String version1, String version2) {
+
     }
+
+    public boolean searchMatrix(int[][] matrix, int target) {
+        for (int i = 0;i<matrix.length;i++){
+            if (target <= matrix[i][matrix[0].length-1]){
+                for (int j = 0;j<matrix[0].length;j++){
+                    if (matrix[i][j] == target){
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public double myPow(double x, int n) {
+        if (n == 0){
+            return 1;
+        }
+        double ans = myPow1(x,Math.abs(n));
+        if (n < 0){
+            return (1/ans);
+        }
+        return ans;
+    }
+    public double myPow1(double x, int n) {
+        if (n <= 1){
+            return x;
+        }
+        return x*myPow1(x,n-1);
+    }
+
 
     public int maxTurbulenceSize(int[] arr) {
         if (arr.length == 1 || arr.length == 2){

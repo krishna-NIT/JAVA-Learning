@@ -12,6 +12,36 @@ public class HelloWorld {
         System.out.println(Integer.max(10, 18));
     }
 
+    public void nextPermutation(int[] nums) {
+
+    }
+
+    public void sortColors(int[] nums) {
+        int c0 = 0;
+        int c1 = 0;
+        int c2 = 0;
+
+        for (int i = 0;i<nums.length;i++) {
+            if (nums[i] == 0) {
+                c0++;
+            }else if (nums[i] == 1) {
+                c1++;
+            }else {
+                c2++;
+            }
+        }
+
+        for (int i = 0;i<nums.length;i++) {
+            if (i < c0) {
+                nums[i] = 0;
+            }else if (i < c1+c0 && i>=c0) {
+                nums[i] = 1;
+            }else {
+                nums[i] = 2;
+            }
+        }
+    }
+
     public int compareVersion(String version1, String version2, int s1i, int s2i) {
         return compareVersionwithstarrtindex(version1, version2, 0, 0);
     }
@@ -55,6 +85,7 @@ public class HelloWorld {
             }
             return compareVersionwithstarrtindex(version1, version2,s1+1,s2+1);
         }
+        return 0;
     }
 
         public static boolean searchMatrix ( int[][] matrix, int target){
@@ -2060,7 +2091,6 @@ public class HelloWorld {
             }
         }
 
-
         //Entity Printer
         public static void printEqual ( int a, int b, int c){
             if (a < 0 || b < 0 || c < 0) {
@@ -2230,7 +2260,6 @@ public class HelloWorld {
             boolean bol = (no >= 13 && no <= 19) ? true : false;
             return bol;
         }
-    }
 }
 
 

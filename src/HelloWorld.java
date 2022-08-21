@@ -10,10 +10,116 @@ public class HelloWorld {
         arr[1] = 1;
         arr[2] = 7;
         System.out.println(Integer.max(10, 18));
+
+        HashMap<Integer, Integer> hmap = new HashMap<>();
+        PriorityQueue<Integer> pq_count = new PriorityQueue<>(
+                (a,b) -> {
+                    return hmap.get(a) - hmap.get(b);
+                }
+        );
     }
 
-    public void nextPermutation(int[] nums) {
+    public int[] findEvenNumbers(int[] digits) {
 
+    }
+
+    public boolean isAnagram(String s, String t) {
+        if (s.length() != t.length()){
+            return false;
+        }
+        HashMap<Character,Integer> hmap1 = new HashMap<>();
+        for (int i = 0;i<s.length();i++){
+            char ch = s.charAt(i);
+            hmap1.put(ch,hmap1.getOrDefault(ch,0)+1);
+        }
+
+        for (int i = 0;i<t.length();i++){
+            char ch = t.charAt(i);
+            if (!s.contains(Character.toString(ch))){
+                return false;
+            }
+            hmap1.put(ch,hmap1.getOrDefault(ch,0)-1);
+        }
+
+        for (char key : hmap1.keySet()){
+            if (hmap1.get(key) != 0){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public int[] relativeSortArray(int[] arr1, int[] arr2) {
+        HashMap<Integer, Integer> hmap = new HashMap<>();
+        for (int value : arr1){
+            hmap.put(value,hmap.getOrDefault(value,0)+1);
+        }
+
+        int j = 0;
+        for (int i = 0;i<arr2.length;i++){
+            int value = arr2[i];
+            int count = hmap.get(value);
+            hmap.remove(value);
+
+            while (count>0){
+                System.out.print(value+" ");
+                arr1[j] = value;
+                j++;
+                count--;
+            }
+        }
+
+        if (!hmap.isEmpty()){
+            PriorityQueue<Integer> pq = new PriorityQueue<>();
+            for (int key : hmap.keySet()) {
+                pq.add(key);
+            }
+            while (!pq.isEmpty()){
+                int key = pq.poll();
+                int count = hmap.get(key);
+                //hmap.remove(key);
+
+                while (count>0){
+                    arr1[j] = key;
+                    count--;
+                    j++;
+                }
+            }
+        }
+        return arr1;
+    }
+
+    public int [] frequencySort(int[] nums) {
+        HashMap<Integer, Integer> hmap = new HashMap<>();
+        for (int value : nums){
+            hmap.put(value, hmap.getOrDefault(value,0)+1);
+        }
+
+        PriorityQueue<Integer> pq = new PriorityQueue<>(
+                (a,b) ->
+                {
+                    if (hmap.get(a) == hmap.get(b)){
+                        return b-a;
+                    }
+                    return hmap.get(a) - hmap.get(b);
+                }
+        );
+
+        for (int key : hmap.keySet()){
+            pq.add(key);
+        }
+        int i = 0;
+        while (!pq.isEmpty()){
+            int key = pq.poll();
+            int times = hmap.get(key);
+
+            while (times > 0){
+                nums[i] = key;
+                times--;
+                i++;
+            }
+        }
+        return nums;
     }
 
     public void sortColors(int[] nums) {

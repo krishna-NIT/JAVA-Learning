@@ -5,22 +5,86 @@ import java.util.*;
 
 public class HelloWorld {
     public static void main(String[] args) {
-        int[] arr = new int[3];
-        arr[0] = 2;
-        arr[1] = 1;
-        arr[2] = 7;
-        System.out.println(Integer.max(10, 18));
-
-        HashMap<Integer, Integer> hmap = new HashMap<>();
-        PriorityQueue<Integer> pq_count = new PriorityQueue<>(
-                (a,b) -> {
-                    return hmap.get(a) - hmap.get(b);
-                }
-        );
+        ArrayList<Integer> arrls = new ArrayList<>();
+        arrls.add(5);
+        arrls.add(2);
+        arrls.add(1);
+        ArrayList<Integer> output = subsetSumsk(arrls,arrls.size());
+        for (int i = 0;i<output.size();i++){
+            System.out.print(output.get(i)+" ");
+        }
     }
 
-    public int[] findEvenNumbers(int[] digits) {
+    public boolean isValid(String s) {
+        Stack<Character> open = new Stack<>();
+        Queue<Character> close = new Queue<>();
+        for (int i = 0;i<s.length();i++){
+            char sym = s.charAt(i);
+            if (sym == '(' || sym== '[' || sym== '{'){
+                open.add(sym);
+            }else {
+                close.add(sym);
+            }
+        }
+        return false;
+    }
 
+    public boolean canbalan(char o, char c){
+        if (c == '(' && c ==')'){
+            return true;
+        }
+
+    }
+
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int[] arr = new int[nums1.length];
+        int ii = 0;
+        int status = 0;
+        for (int i = 0;i<nums1.length;i++){
+            status = 0;
+            int n = nums1[i];
+            int index = -1;
+            for (int j = 0;j<nums2.length && index == -1;j++){
+                if (n == nums2[j]){
+                    index = j;
+                }
+            }
+            for (int k = index+1 ; k<nums2.length && status == 0; k++){
+                if (nums2[k] > n){
+                   arr[ii] = nums2[k];
+                   status++;
+                   ii++;
+                }
+            }
+            if (status == 0){
+                arr[ii] = -1;
+                ii++;
+            }
+        }
+        return arr;
+    }
+
+
+    public static ArrayList<Integer> subsetSumsk(ArrayList<Integer> arr, int N){
+        if (arr.size() <= 1){
+            return arr;
+        }
+        int n = arr.get(0);
+        System.out.println(n);
+        arr.remove(0);
+        ArrayList<Integer> output = subsetSumsk(arr,arr.size());
+        for (int i = 0;i<output.size();i++){
+            System.out.print(output.get(i)+"-");
+        }
+        for (int i = 0;i<output.size();i++){
+            int d = n + output.get(i);
+            output.add(d);
+        }
+        output.add(n);
+        for (int i = 0;i<output.size();i++){
+            System.out.print(output.get(i)+" ");
+        }
+        return output;
     }
 
     public boolean isAnagram(String s, String t) {

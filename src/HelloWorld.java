@@ -14,26 +14,13 @@ public class HelloWorld {
             System.out.print(output.get(i)+" ");
         }
     }
-
-    public boolean isValid(String s) {
-        Stack<Character> open = new Stack<>();
-        Queue<Character> close = new Queue<>();
-        for (int i = 0;i<s.length();i++){
-            char sym = s.charAt(i);
-            if (sym == '(' || sym== '[' || sym== '{'){
-                open.add(sym);
-            }else {
-                close.add(sym);
-            }
-        }
-        return false;
-    }
+    
 
     public boolean canbalan(char o, char c){
         if (c == '(' && c ==')'){
             return true;
         }
-
+        return false;
     }
 
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
@@ -689,6 +676,8 @@ public class HelloWorld {
 
             return ans;
         }
+
+
         public int[] deckRevealedIncreasing2 ( int[] deck){
             if (deck.length == 1) {
                 return deck;

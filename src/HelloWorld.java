@@ -14,7 +14,38 @@ public class HelloWorld {
             System.out.print(output.get(i)+" ");
         }
     }
-    
+
+    public int coinChange(int[] coins, int amount) {
+        if (amount == 0){
+            return 0;
+        }
+        int min_count = Integer.MAX_VALUE;
+        for (int i = 0;i < coins.length;i++){
+            if (amount-coins[i] > 0) {
+                int sub_ans = coinChange(coins, amount - coins[i]);
+                if (sub_ans + 1> min_count){
+                    min_count = sub_ans;
+                }
+            }
+        }
+        return min_count;
+    }
+
+    public int maxProfit2(int[] prices) {
+        int maxprofit = 0;
+        for (int i = 0;i<prices.length-1;i++){
+            int buy = prices[i];
+            for (int j = i+1;j<prices.length;j++){
+                if (prices[j] > buy){
+                    int temp_profit = prices[j] - buy;
+                    if (temp_profit > maxprofit){
+                        maxprofit = temp_profit;
+                    }
+                }
+            }
+        }
+        return maxprofit;
+    }
 
     public boolean canbalan(char o, char c){
         if (c == '(' && c ==')'){

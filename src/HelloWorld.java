@@ -5,15 +5,55 @@ import java.util.*;
 
 public class HelloWorld {
     public static void main(String[] args) {
-        ArrayList<Integer> arrls = new ArrayList<>();
-        arrls.add(5);
-        arrls.add(2);
-        arrls.add(1);
-        ArrayList<Integer> output = subsetSumsk(arrls,arrls.size());
-        for (int i = 0;i<output.size();i++){
-            System.out.print(output.get(i)+" ");
-        }
+        System.out.println(getbin(4));
+        String s = '';
+        List<List<Integer>> ls = new ArrayList<>();
+        List<Integer> temp = new ArrayList<>();
+        ls.add(temp);
     }
+
+    
+
+    public int longestPalindrome(String s) {
+        int sz = s.length();
+        while(sz > 0){
+            int start = 0;
+            int last = start + sz;
+            while(last <= s.length()){
+                System.out.print(s.substring(start,last)+" ");
+                if(isPalindrome(s.substring(start,last))){
+                    return sz;
+                }
+                start++;
+                last++;
+            }
+            sz--;
+            System.out.println();
+        }
+        return -1;
+    }
+
+    public boolean isPalindrome(String s){
+        for(int i = 0;i<s.length();i++){
+            if(s.charAt(i) != s.charAt(s.length()-i-1)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static int getbin(int num){
+        int ans = 0;
+        int j = 0;
+        while (num > 0){
+            int rem = num % 2;
+            ans += rem*((int)(Math.pow(10,j)));
+            num /= 2;
+            j++;
+        }
+        return ans;
+    }
+
 
     public int coinChange(int[] coins, int amount) {
         if (amount == 0){

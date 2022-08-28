@@ -5,14 +5,17 @@ import java.util.*;
 
 public class HelloWorld {
     public static void main(String[] args) {
-        System.out.println(getbin(4));
-        String s = '';
-        List<List<Integer>> ls = new ArrayList<>();
-        List<Integer> temp = new ArrayList<>();
-        ls.add(temp);
+        int[] arr = new int[5];
+        arr[0] = 8;
+        arr[1] = 4;
+        arr[2] = 10;
+        arr[3] = 0;
+        arr[4] = 1;
+        Arrays.sort(arr);
+        for(int i = 0;i<arr.length;i++){
+            System.out.println(arr[i]);
+        }
     }
-
-    
 
     public int longestPalindrome(String s) {
         int sz = s.length();
@@ -42,7 +45,7 @@ public class HelloWorld {
         return true;
     }
 
-    public static int getbin(int num){
+    public static int getbinary(int num){
         int ans = 0;
         int j = 0;
         while (num > 0){
